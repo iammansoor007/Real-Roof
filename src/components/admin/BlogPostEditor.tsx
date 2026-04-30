@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { motion, AnimatePresence } from "framer-motion";
 import MediaSelector from "./MediaSelector";
 import SeoEditor from "./SeoEditor";
 
@@ -52,6 +53,7 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
   const [categories, setCategories] = useState<any[]>([]);
   const [tags, setTags] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState<'content' | 'seo'>('content');
+  const [showMediaSelector, setShowMediaSelector] = useState(false);
 
   useEffect(() => {
     if (id && !initialData) {
@@ -98,7 +100,10 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
       const data = await res.json();
       if (res.ok) {
         setMessage("Post saved successfully!");
-        if (!id) router.push(`/admin/blog/${data._id}`);
+        if (!id && data._id) {
+          const newId = String(data._id);
+          router.push(`/admin/blog/${newId}`);
+        }
         setTimeout(() => setMessage(""), 3000);
       } else {
         setMessage("Error: " + data.error);
@@ -289,14 +294,24 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
                    <p className="text-[11px] text-[#646970]">Set featured image</p>
                 </div>
               )}
-              <MediaSelector 
-                onSelect={(url) => setPost({ ...post, featuredImage: url })}
-                label={post.featuredImage ? "Replace image" : "Set featured image"}
-              />
+              <button 
+                onClick={() => setShowMediaSelector(true)}
+                className="bg-[#f6f7f7] border border-[#2271b1] text-[#2271b1] text-[12px] font-semibold px-4 py-1.5 rounded-[3px] hover:bg-[#f0f6fb]"
+              >
+                {post.featuredImage ? "Replace image" : "Set featured image"}
+              </button>
             </div>
           </div>
         </div>
       </div>
+
+      {showMediaSelector && (
+        <MediaSelector 
+          onSelect={(item) => setPost({ ...post, featuredImage: item.url })}
+          onClose={() => setShowMediaSelector(false)}
+          title="Select Featured Image"
+        />
+      )}
 
       {/* Toast Notification */}
       <AnimatePresence>

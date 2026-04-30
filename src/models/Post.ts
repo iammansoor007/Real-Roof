@@ -1,4 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
+import './User';
+import './Category';
+import './Tag';
 
 const PostSchema = new Schema({
   title: { type: String, required: true },
