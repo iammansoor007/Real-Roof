@@ -7,7 +7,7 @@ import { recordActivity } from '@/lib/logger';
 
 export async function PATCH(
   req: NextRequest,
-  context: any
+  { params }: { params: Promise<{ id: string }> }
 ) {
   if (!await hasPermission(req, 'users', 'update')) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
@@ -16,7 +16,7 @@ export async function PATCH(
   const session = await getAuthSession(req);
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-  const { id } = await context.params;
+  const { id } = await params;
 
   try {
     const body = await req.json();
@@ -48,7 +48,7 @@ export async function PATCH(
 
 export async function DELETE(
   req: NextRequest,
-  context: any
+  { params }: { params: Promise<{ id: string }> }
 ) {
   if (!await hasPermission(req, 'users', 'delete')) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
@@ -57,7 +57,7 @@ export async function DELETE(
   const session = await getAuthSession(req);
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-  const { id } = await context.params;
+  const { id } = await params;
 
   try {
     await connectToDatabase();
