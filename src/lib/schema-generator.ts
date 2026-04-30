@@ -14,7 +14,8 @@ interface SchemaOptions {
 
 export function generateSchema(options: SchemaOptions) {
   const { title, description, slug = "", type = "WebPage", faqs, breadcrumbTitle, isService, image } = options;
-  const normalizedSlug = slug.startsWith('/') ? slug : `/${slug}`;
+  const safeSlug = String(slug || "");
+  const normalizedSlug = safeSlug.startsWith('/') ? safeSlug : `/${safeSlug}`;
   const pageUrl = `${BASE_URL}${normalizedSlug === '/' ? '' : normalizedSlug}`;
 
   // 1. Organization Schema
@@ -81,7 +82,7 @@ export function generateSchema(options: SchemaOptions) {
   };
 
   // 4. BreadcrumbList Schema
-  const pathSegments = slug.split('/').filter(Boolean);
+  const pathSegments = safeSlug.split('/').filter(Boolean);
   const breadcrumbList = {
     "@type": "BreadcrumbList",
     "@id": `${pageUrl}/#breadcrumb`,

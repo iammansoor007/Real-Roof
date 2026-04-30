@@ -142,9 +142,11 @@ export async function generateStaticParams() {
     await connectToDatabase();
     const pages = await Page.find({ status: 'published' }).select('slug');
 
-    return pages.map((page: any) => ({
-      slug: page.slug.split('/'),
-    }));
+    return pages
+      .filter((page: any) => page.slug)
+      .map((page: any) => ({
+        slug: page.slug.split('/'),
+      }));
   } catch (error) {
     console.error("Error generating static params:", error);
     return [];

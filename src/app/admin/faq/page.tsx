@@ -15,30 +15,50 @@ export default function FAQAdminPage() {
   const [toast, setToast] = useState<{ type: "ok" | "err"; msg: string } | null>(null);
   const [newCategory, setNewCategory] = useState("");
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<any>({
     question: "",
     answer: "",
     category: "",
     visibility: "global",
-    targetPages: [] as string[]
+    targetPages: []
   });
 
-  const availablePages = [
-    { id: "home", label: "Homepage" },
-    { id: "about", label: "About" },
-    { id: "services", label: "Services" },
-    { id: "gallery", label: "Gallery" },
-    { id: "reviews", label: "Reviews" },
-    { id: "faq", label: "FAQ" },
-    { id: "contact", label: "Contact" }
-  ];
+  const [availablePages, setAvailablePages] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch("/api/content").then(res => res.json()).then(json => {
-        setData(json);
-        setFaqs(json.faq?.items || []);
-        const rawCats = json.faq?.categories || ["General", "Services", "Pricing"];
+    Promise.all([
+      fetch("/api/content").then(res => res.json()),
+      fetch("/api/admin/pages").then(res => res.json())
+    ]).then(([contentJson, pagesJson]) => {
+        setData(contentJson);
+        setFaqs(contentJson.faq?.items || []);
+        const rawCats = contentJson.faq?.categories || ["General", "Services", "Pricing"];
         setCategories(rawCats.map((cat: any) => typeof cat === 'string' ? cat : (cat.label || cat.id)));
+
+        // Process pages and services
+        const staticPages = [
+          { id: "home", label: "Homepage" },
+          { id: "about", label: "About" },
+          { id: "services", label: "Services" },
+          { id: "gallery", label: "Gallery" },
+          { id: "reviews", label: "Reviews" },
+          { id: "faq", label: "FAQ" },
+          { id: "contact", label: "Contact" }
+        ];
+
+        const dbPages = (pagesJson || []).filter((p: any) => p.status === 'published').map((p: any) => ({
+          id: p.slug,
+          label: p.title
+        }));
+
+        const services = (contentJson.services?.services || contentJson.services || [])
+          .filter((s: any) => s.published !== false)
+          .map((s: any) => ({
+            id: `services/${s.slug}`,
+            label: `Service: ${s.title}`
+          }));
+
+        setAvailablePages([...staticPages, ...dbPages, ...services]);
       });
   }, []);
 
@@ -70,7 +90,11 @@ export default function FAQAdminPage() {
 
   const handleEdit = (idx: number) => {
     setIsEditing(idx);
-    setForm(faqs[idx]);
+    const item = faqs[idx];
+    setForm({
+      ...item,
+      targetPages: Array.isArray(item.targetPages) ? item.targetPages : []
+    });
   };
 
   if (!data) return <div className="flex h-screen items-center justify-center text-[#646970] font-serif">Loading...</div>;
@@ -140,15 +164,19 @@ export default function FAQAdminPage() {
                        </div>
                     </div>
                     {form.visibility === 'specific' && (
-                       <div className="pt-2 border-t border-[#f0f0f1] space-y-1">
-                          {availablePages.map(p => (
-                             <label key={p.id} className="flex items-center gap-2 text-[12px]">
-                                <input type="checkbox" checked={form.targetPages.includes(p.id)} onChange={() => {
-                                   const nt = form.targetPages.includes(p.id) ? form.targetPages.filter(x => x !== p.id) : [...form.targetPages, p.id];
-                                   setForm({...form, targetPages: nt});
-                                }} /> {p.label}
-                             </label>
-                          ))}
+                       <div className="pt-2 border-t border-[#f0f0f1] space-y-1 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+                          {availablePages.map(p => {
+                             const isChecked = Array.isArray(form.targetPages) && form.targetPages.includes(p.id);
+                             return (
+                               <label key={p.id} className="flex items-center gap-2 text-[12px] hover:text-[#2271b1] cursor-pointer py-0.5">
+                                  <input type="checkbox" checked={isChecked} onChange={() => {
+                                     const currentPages = Array.isArray(form.targetPages) ? form.targetPages : [];
+                                     const nt = currentPages.includes(p.id) ? currentPages.filter((x: string) => x !== p.id) : [...currentPages, p.id];
+                                     setForm({...form, targetPages: nt});
+                                  }} /> {p.label}
+                               </label>
+                             );
+                          })}
                        </div>
                     )}
                  </div>

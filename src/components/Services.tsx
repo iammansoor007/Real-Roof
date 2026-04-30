@@ -409,9 +409,11 @@ const Services = () => {
                 ))}
               </div>
 
-              <div className="mt-8">
-                <CompactServiceCard service={featuredService} />
-              </div>
+              {featuredService && (
+                <div className="mt-8">
+                  <CompactServiceCard service={featuredService} />
+                </div>
+              )}
             </motion.div>
           </div>
 

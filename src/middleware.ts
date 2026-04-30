@@ -1,9 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { verifyToken } from '@/lib/auth';
 
 const ADMIN_COOKIE = 'admin_session';
-const PUBLIC_PATHS = ['/admin/login'];
+const PUBLIC_PATHS = [
+  '/admin/login',
+  '/admin/forgot-password',
+  '/admin/reset-password'
+];
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Only run on /admin routes
@@ -20,16 +25,19 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // Validate session value matches the secret
-  const secret = process.env.ADMIN_SESSION_SECRET || '';
-  if (session.value !== secret) {
+  // Validate JWT session
+  try {
+    const payload = await verifyToken(session.value);
+    if (!payload) {
+      throw new Error('Invalid token');
+    }
+    return NextResponse.next();
+  } catch (error) {
     const loginUrl = new URL('/admin/login', req.url);
     const res = NextResponse.redirect(loginUrl);
     res.cookies.delete(ADMIN_COOKIE);
     return res;
   }
-
-  return NextResponse.next();
 }
 
 export const config = {

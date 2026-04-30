@@ -1,6 +1,8 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import SiteContent from '@/models/Content';
+import { hasPermission, getSessionUser } from '@/lib/rbac';
+import { recordActivity } from '@/lib/logger';
 
 export async function GET() {
   try {
@@ -21,10 +23,17 @@ export async function GET() {
   }
 }
 
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
+  const session = await getSessionUser(req);
+  if (!(await hasPermission(req, 'settings', 'update'))) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+  }
+
   try {
     await connectToDatabase();
     const body = await req.json();
+
+    const oldContent = await SiteContent.findOne({ key: 'complete_data' });
 
     const result = await SiteContent.updateOne(
       { key: 'complete_data' },
@@ -36,6 +45,19 @@ export async function PUT(req: Request) {
       },
       { upsert: true }
     );
+
+    await recordActivity({
+      user: (session as any).userId,
+      userName: (session as any).username,
+      action: 'UPDATE_SETTINGS',
+      entity: 'Settings',
+      details: {
+        before: { siteTitle: oldContent?.data?.settings?.siteTitle },
+        after: { siteTitle: body?.settings?.siteTitle },
+        message: 'Updated site settings and global content'
+      },
+      ip: req.headers.get('x-forwarded-for') || (req as any).ip || 'unknown'
+    });
 
     return NextResponse.json({ success: true, result });
   } catch (error: any) {
