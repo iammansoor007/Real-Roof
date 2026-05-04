@@ -26,7 +26,7 @@ const navItems = [
   { label: "Services",    href: "/admin/services",   icon: Briefcase, module: 'pages' },
   { label: "Submissions", href: "/admin/submissions", icon: Phone, module: 'submissions' },
   { label: "Users",       href: "/admin/users",       icon: User, module: 'users', sub: [{label: "All Users", href: "/admin/users"}, {label: "Add User", href: "/admin/users"}, {label: "Roles", href: "/admin/roles"}] },
-  { label: "Activity Logs", href: "/admin/logs",      icon: FileText, module: 'logs' },
+  { label: "Activity Logs", href: "/admin/activity-logs",      icon: FileText, module: 'logs' },
   { label: "Scripts",     href: "/admin/scripts",    icon: Code2, module: 'settings' },
   { label: "Settings",    href: "/admin/settings",   icon: Settings, module: 'settings' },
 ];
