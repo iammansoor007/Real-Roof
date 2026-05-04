@@ -23,6 +23,7 @@ import { notFound } from 'next/navigation';
 import breakcrumb from '@/assets/Breadcrumb-Image.jpeg';
 import { useContent } from "../../hooks/useContent";
 import RichTextRenderer from "../ui/RichTextRenderer";
+import BlogSection from "../sections/BlogSection";
 
 import roofingImg from '@/assets/roof1.jpg.jpeg';
 import windowsImg from '@/assets/window5.jpeg';
@@ -228,7 +229,7 @@ const FAQItem = ({ faq, index, isOpen, onToggle }: { faq: any, index: number, is
 };
 
 export default function ServiceDetailTemplate({ pageData, params: syncParams }: { pageData?: any, params?: any }) {
-  const { services: servicesData } = useContent();
+  const { services: servicesData, allBlogs } = useContent();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [slug, setSlug] = useState<string | null>(null);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -373,6 +374,13 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
           </div>
         </div>
       </section>
+
+      <BlogSection 
+        title={service.blogSection?.title}
+        subtitle={service.blogSection?.subtitle}
+        description={service.blogSection?.description}
+        posts={allBlogs.filter((p: any) => service.blogSection?.selectedPosts?.includes(p._id))}
+      />
     </main>
   );
 }

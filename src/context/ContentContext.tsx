@@ -33,6 +33,7 @@ export const ContentProvider = ({ children, initialData }: { children: React.Rea
   // Merge initialData with staticData immediately to ensure global sections (navbar/footer) 
   // are available even if the page-specific data is limited.
   const [content, setContent] = useState<any>(initialData ? deepMerge(staticData, initialData) : staticData);
+  const [blogs, setBlogs] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(!initialData);
 
   useEffect(() => {
@@ -43,6 +44,13 @@ export const ContentProvider = ({ children, initialData }: { children: React.Rea
           const globalData = await response.json();
           // Merge logic: local data takes precedence via deepMerge
           setContent(initialData ? deepMerge(globalData, initialData) : globalData);
+        }
+
+        // Fetch blogs
+        const blogRes = await fetch('/api/blog');
+        if (blogRes.ok) {
+          const blogData = await blogRes.json();
+          setBlogs(blogData);
         }
       } catch (error) {
         console.error('Failed to fetch content from DB, falling back to static data:', error);
@@ -55,7 +63,7 @@ export const ContentProvider = ({ children, initialData }: { children: React.Rea
   }, [initialData]);
 
   return (
-    <ContentContext.Provider value={content}>
+    <ContentContext.Provider value={{ ...content, allBlogs: blogs }}>
       {children}
     </ContentContext.Provider>
   );

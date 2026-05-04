@@ -177,6 +177,20 @@ export default function SubmissionsPage() {
                          <p className="text-[14px] text-[#1d2327] font-medium">{selectedSubmission.phone || "N/A"}</p>
                       </div>
                    </div>
+ 
+                   {selectedSubmission.extraData && Object.keys(selectedSubmission.extraData).length > 0 && (
+                     <div className="space-y-3 pt-4 border-t border-[#c3c4c7]">
+                       <label className="text-[11px] font-bold text-[#646970] uppercase">Additional Information</label>
+                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                         {Object.entries(selectedSubmission.extraData).map(([key, value]) => (
+                           <div key={key} className="bg-white border border-[#c3c4c7] p-2 rounded-[3px]">
+                             <label className="block text-[10px] text-[#8c8f94] font-bold uppercase mb-0.5">{key.replace(/_/g, ' ')}</label>
+                             <p className="text-[13px] text-[#2c3338]">{String(value)}</p>
+                           </div>
+                         ))}
+                       </div>
+                     </div>
+                   )}
 
                    <div className="space-y-1 pt-4 border-t border-[#c3c4c7]">
                       <label className="text-[11px] font-bold text-[#646970] uppercase">Message</label>

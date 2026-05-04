@@ -48,6 +48,7 @@ import {
 } from 'lucide-react';
 import React from 'react';
 import RichTextRenderer from "../ui/RichTextRenderer";
+import BlogSection from "../sections/BlogSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -832,6 +833,7 @@ const ValuesGrid = ({ content: passedContent }: { content?: any }) => {
 // ==================== MAIN PAGE COMPONENT ====================
 export default function AboutTemplate({ pageData, params }: { pageData?: any, params?: any }) {
   const content = pageData?.content || {};
+  const { allBlogs, blogSection } = useContent();
 
   return (
     <main className="bg-background">
@@ -845,6 +847,13 @@ export default function AboutTemplate({ pageData, params }: { pageData?: any, pa
       <div className="max-w-7xl mx-auto px-4 relative z-20">
         <AwardCTABanner content={content.ctaBanner} />
       </div>
+      
+      <BlogSection 
+        title={blogSection?.title}
+        subtitle={blogSection?.subtitle}
+        description={blogSection?.description}
+        posts={allBlogs.filter((p: any) => blogSection?.selectedPosts?.includes(p._id))}
+      />
     </main>
   );
 }

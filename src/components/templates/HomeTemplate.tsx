@@ -13,8 +13,12 @@ const HowWeWork = dynamic(() => import("@/components/HowWeWork"), { ssr: false }
 const QAForm = dynamic(() => import("@/components/QAForm"), { ssr: false });
 const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: false });
 const QuickQuote = dynamic(() => import("@/components/QuickQuote"), { ssr: false });
+const BlogSection = dynamic(() => import("@/components/sections/BlogSection"), { ssr: false });
+
+import { useContent } from "@/hooks/useContent";
 
 export default function HomeTemplate({ pageData, params }: { pageData?: any, params?: any }) {
+  const { allBlogs, blogSection } = useContent();
   return (
     <div className="relative">
       <Hero />
@@ -39,6 +43,14 @@ export default function HomeTemplate({ pageData, params }: { pageData?: any, par
       <section id="faq">
         <FAQ />
       </section>
+      
+      <BlogSection 
+        title={blogSection?.title}
+        subtitle={blogSection?.subtitle}
+        description={blogSection?.description}
+        posts={allBlogs.filter((p: any) => blogSection?.selectedPosts?.includes(p._id))}
+      />
+
       <QuickQuote />
     </div>
   );

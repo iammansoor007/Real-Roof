@@ -33,9 +33,9 @@ export default async function BlogIndexPage() {
         </div>
         
         <div className="container mx-auto px-4 relative z-10 text-center">
-          <div className="flex items-center justify-center gap-2 text-blue-400 text-xs font-bold uppercase tracking-[0.3em] mb-4">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <span>/</span>
+          <div className="flex items-center justify-center gap-2 text-white/60 text-xs font-bold uppercase tracking-[0.3em] mb-4">
+            <Link href="/" className="text-white/60 hover:text-white transition-colors">Home</Link>
+            <span className="opacity-30">/</span>
             <span className="text-white">Blog</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight">Our Insights</h1>

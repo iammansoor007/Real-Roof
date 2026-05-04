@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { Home, Layout, TreePine, Building2, Building, Droplets, ArrowRight, Shield, Clock, Award, Users, TrendingUp, BadgeCheck, Star } from 'lucide-react';
 import { useContent } from "../../hooks/useContent";
 import RichTextRenderer from "../ui/RichTextRenderer";
+import BlogSection from "../sections/BlogSection";
 
 const iconMap: Record<string, any> = { Home, Layout, TreePine, Building2, Building, Droplets, Shield, Award, Clock, BadgeCheck, TrendingUp, Star };
 
@@ -42,7 +43,7 @@ const ServiceCard = ({ service, index }: any) => {
 };
 
 export default function ServicesTemplate({ pageData, params }: { pageData?: any, params?: any }) {
-    const { services: dataRaw } = useContent();
+    const { services: dataRaw, allBlogs, blogSection } = useContent();
     const data = dataRaw as any;
     const services = (data?.services || []).filter((s: any) => s.status === 'published' || s.status === undefined);
 
@@ -90,6 +91,13 @@ export default function ServicesTemplate({ pageData, params }: { pageData?: any,
                     <ServiceCard key={index} service={service} index={index} />
                 ))}
             </div>
+
+            <BlogSection 
+                title={blogSection?.title}
+                subtitle={blogSection?.subtitle}
+                description={blogSection?.description}
+                posts={allBlogs.filter((p: any) => blogSection?.selectedPosts?.includes(p._id))}
+            />
         </main>
     );
 }

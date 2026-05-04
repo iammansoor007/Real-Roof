@@ -19,7 +19,7 @@ const SubmissionSchema = new Schema<ISubmission>(
     email: { type: String, required: true },
     phone: { type: String },
     subject: { type: String },
-    message: { type: String, required: true },
+    message: { type: String, required: false, default: "" },
     type: { type: String, default: "Contact Form" },
     source: { type: String, default: "Website" },
     attachmentUrl: { type: String },

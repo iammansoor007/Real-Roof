@@ -63,6 +63,11 @@ export async function POST(request: Request) {
       ({ name, email, phone, message, subject, type, ...extraData } = body);
     }
 
+    // Resilience: ensure required fields for DB save
+    name = name || extraData.name || extraData.fullname || extraData.fullName || extraData.contact_name || 'Anonymous';
+    email = email || extraData.email || extraData.user_email || extraData.contact_email || 'no-email@provided.com';
+    message = message || extraData.message || extraData.comments || extraData.inquiry || 'No message content provided.';
+
     // Save to Database
     console.log('Saving submission with data:', { name, email, type, attachmentUrl });
     let submission;

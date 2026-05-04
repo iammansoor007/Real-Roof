@@ -334,7 +334,6 @@ export default function PagesDashboard() {
                         <option value="home">Home Page</option>
                         <option value="about">About Us</option>
                         <option value="services">Services Index</option>
-                        <option value="service-detail">Service Detail (Single)</option>
                         <option value="team">Team / Staff</option>
                         <option value="careers">Careers / Jobs</option>
                         <option value="gallery">Gallery Showcase</option>

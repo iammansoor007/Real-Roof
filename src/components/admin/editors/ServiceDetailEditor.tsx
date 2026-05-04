@@ -12,6 +12,7 @@ import dynamic from "next/dynamic";
 import ContentSelector from "@/components/admin/ContentSelector";
 import IconSelector from "@/components/admin/IconSelector";
 import ImageField from "@/components/admin/ImageField";
+import BlogSelector from "@/components/admin/BlogSelector";
 const RichTextEditor = dynamic(() => import("@/components/admin/RichTextEditor"), { 
   ssr: false,
   loading: () => <div className="h-64 bg-[#f6f7f7] animate-pulse border border-[#c3c4c7] rounded-sm flex items-center justify-center text-[#8c8f94] text-xs">Loading Rich Text Editor...</div>
@@ -56,6 +57,7 @@ export default function ServiceDetailEditor({ pageId, data, setData }: { pageId:
     { id: "process", label: "Methodology", title: "Workflow Process" },
     { id: "faq", label: "Support", title: "Service FAQ" },
     { id: "cta", label: "Conversion", title: "Action Logic" },
+    { id: "blog", label: "Insights", title: "Related Blog Posts" },
   ];
 
   const activeTabTitle = tabs.find(t => t.id === activeTab)?.title;
@@ -322,6 +324,28 @@ export default function ServiceDetailEditor({ pageId, data, setData }: { pageId:
               </div>
             )}
 
+            {/* BLOG SECTION */}
+            {activeTab === "blog" && (
+              <div className="space-y-12">
+                 <div className="space-y-6">
+                    <h3 className={UI.sectionHeader}>1. Header</h3>
+                    <div className="space-y-1.5"><label className={UI.label}>Badge</label><input type="text" value={data.blogSection?.subtitle || ""} onChange={(e) => updateField("blogSection", { ...(data.blogSection || {}), subtitle: e.target.value })} className={UI.input} /></div>
+                    <div className="space-y-1.5"><label className={UI.label}>Headline</label><input type="text" value={data.blogSection?.title || ""} onChange={(e) => updateField("blogSection", { ...(data.blogSection || {}), title: e.target.value })} className={UI.inputLarge} /></div>
+                    <RichTextEditor 
+                       label="Description Narrative" 
+                       content={data.blogSection?.description || ""} 
+                       onChange={(html) => updateField("blogSection", { ...(data.blogSection || {}), description: html })} 
+                    />
+                 </div>
+                 <div className="space-y-6">
+                    <h3 className={UI.sectionHeader}>2. Selected Posts</h3>
+                    <BlogSelector 
+                     selectedIds={data.blogSection?.selectedPosts || []} 
+                     onChange={(ids) => updateField("blogSection", { ...(data.blogSection || {}), selectedPosts: ids })} 
+                    />
+                 </div>
+              </div>
+            )}
           </motion.div>
         </AnimatePresence>
       </div>

@@ -32,8 +32,11 @@ const HolographicInput = ({ icon: IconName, label, type = "text", ...props }: an
     );
 };
 
-export default function ContactTemplate() {
-    const { contactPage: contactData } = useContent();
+export default function ContactTemplate({ pageData }: { pageData?: any }) {
+    const { contactPage: globalContactData } = useContent();
+    
+    // Prioritize page-specific content over global content
+    const contactData = pageData?.content?.contactPage || globalContactData;
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [formData, setFormData] = useState<Record<string, string>>({});

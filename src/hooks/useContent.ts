@@ -112,5 +112,12 @@ export const useContent = () => {
         serviceDetailPage: getSafe(completeData, 'serviceDetailPage'),
         settings: completeData?.settings || { siteTitle: "Eagle Revolution", siteTemplate: "%s | Eagle Revolution", favicon: "/eagle-logo.png" },
         faqPage: getSafe(completeData, 'faqPage'),
+        blogSection: getSafe(completeData, 'blogSection', {
+            title: "Latest from the Blog",
+            subtitle: "Insights & News",
+            description: "Stay updated with the latest trends, tips, and news from the roofing and construction industry.",
+            selectedPosts: []
+        }),
+        allBlogs: Array.isArray(completeData?.allBlogs) ? completeData.allBlogs : [],
     };
 };

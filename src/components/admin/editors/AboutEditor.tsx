@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Trash2, Loader2 } from "lucide-react";
 import dynamic from "next/dynamic";
 import IconSelector from "@/components/admin/IconSelector";
+import BlogSelector from "@/components/admin/BlogSelector";
 const RichTextEditor = dynamic(() => import("@/components/admin/RichTextEditor"), { 
   ssr: false,
   loading: () => <div className="h-64 bg-[#f6f7f7] animate-pulse border border-[#c3c4c7] rounded-sm flex items-center justify-center text-[#8c8f94] text-xs">Loading Rich Text Editor...</div>
@@ -45,6 +46,7 @@ export default function AboutEditor({ pageId, data, setData }: { pageId: string,
     { id: "values", label: "Values" },
     { id: "capabilities", label: "Capabilities" },
     { id: "stats", label: "Stats" },
+    { id: "blog", label: "Blog" },
     { id: "ctaBanner", label: "CTA Banner" }
   ];
 
@@ -371,6 +373,29 @@ export default function AboutEditor({ pageId, data, setData }: { pageId: string,
                      ))}
                      <button onClick={() => updateSection("ctaBanner", "features", [...(data.ctaBanner?.features || []), ""])} className={UI.buttonAdd}>+ Add Feature</button>
                   </div>
+               </div>
+            </div>
+          )}
+
+          {/* BLOG SECTION */}
+          {activeTab === "blog" && (
+            <div className="space-y-12">
+               <div className="space-y-6">
+                  <h3 className={UI.sectionHeader}>1. Header</h3>
+                  <div className="space-y-1.5"><label className={UI.label}>Badge</label><input type="text" value={data.blogSection?.subtitle || ""} onChange={(e) => updateSection("blogSection", "subtitle", e.target.value)} className={UI.input} /></div>
+                  <div className="space-y-1.5"><label className={UI.label}>Headline</label><input type="text" value={data.blogSection?.title || ""} onChange={(e) => updateSection("blogSection", "title", e.target.value)} className={UI.inputLarge} /></div>
+                  <RichTextEditor 
+                     label="Description Narrative" 
+                     content={data.blogSection?.description || ""} 
+                     onChange={(html) => updateSection("blogSection", "description", html)} 
+                  />
+               </div>
+               <div className="space-y-6">
+                  <h3 className={UI.sectionHeader}>2. Selected Posts</h3>
+                  <BlogSelector 
+                   selectedIds={data.blogSection?.selectedPosts || []} 
+                   onChange={(ids) => updateSection("blogSection", "selectedPosts", ids)} 
+                  />
                </div>
             </div>
           )}

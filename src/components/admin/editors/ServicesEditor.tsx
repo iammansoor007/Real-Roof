@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import dynamic from "next/dynamic";
 import ContentSelector from "@/components/admin/ContentSelector";
+import BlogSelector from "@/components/admin/BlogSelector";
 const RichTextEditor = dynamic(() => import("@/components/admin/RichTextEditor"), { 
   ssr: false,
   loading: () => <div className="h-64 bg-[#f6f7f7] animate-pulse border border-[#c3c4c7] rounded-sm flex items-center justify-center text-[#8c8f94] text-xs">Loading Rich Text Editor...</div>
@@ -65,6 +66,7 @@ export default function ServicesEditor({ pageId, data, setData }: { pageId: stri
   const tabs = [
     { id: "header", label: "Page Introduction", icon: Type, title: "Services Hero Narrative" },
     { id: "catalog", label: "Service Catalog", icon: List, title: "Individual Service Management" },
+    { id: "blog", label: "Featured Blog Posts", icon: Star, title: "Curate Blog Content" },
   ];
 
   const activeTabTitle = tabs.find(t => t.id === activeTab)?.title;
@@ -138,6 +140,24 @@ export default function ServicesEditor({ pageId, data, setData }: { pageId: stri
               </div>
             )}
 
+            {/* BLOG SECTION */}
+            {activeTab === "blog" && (
+              <div className="max-w-3xl space-y-6">
+                <div className={UI.card + " space-y-5"}>
+                   <div className="space-y-1.5"><label className={UI.label}>Badge</label><input type="text" value={data.blogSection?.subtitle || ""} onChange={(e) => setData({ ...data, blogSection: { ...(data.blogSection || {}), subtitle: e.target.value } })} className={UI.input} /></div>
+                   <div className="space-y-1.5"><label className={UI.label}>Headline</label><input type="text" value={data.blogSection?.title || ""} onChange={(e) => setData({ ...data, blogSection: { ...(data.blogSection || {}), title: e.target.value } })} className={UI.inputLarge} /></div>
+                   <RichTextEditor 
+                      label="Description Narrative" 
+                      content={data.blogSection?.description || ""} 
+                      onChange={(html) => setData({ ...data, blogSection: { ...(data.blogSection || {}), description: html } })} 
+                   />
+                </div>
+                <BlogSelector 
+                  selectedIds={data.blogSection?.selectedPosts || []} 
+                  onChange={(ids) => setData({ ...data, blogSection: { ...(data.blogSection || {}), selectedPosts: ids } })} 
+                />
+              </div>
+            )}
           </motion.div>
         </AnimatePresence>
       </div>
