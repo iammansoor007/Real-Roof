@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import Post from '@/models/Post';
-import { getSessionUser } from '@/lib/auth';
+import { getSessionUser } from '@/lib/rbac';
 import { recordActivity } from '@/lib/logger';
 
 export async function POST(req: NextRequest) {
