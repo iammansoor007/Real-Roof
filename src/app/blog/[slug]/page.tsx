@@ -1,5 +1,36 @@
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import connectToDatabase from '@/lib/mongodb';
+import Post from '@/models/Post';
+import { Calendar, User, Tag as TagIcon, Clock, BookOpen } from 'lucide-react';
+import Link from 'next/link';
 import ReadingProgress from '@/components/blog/ReadingProgress';
 import ShareButton from '@/components/blog/ShareButton';
+
+interface Props {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  await connectToDatabase();
+  const post = await Post.findOne({ slug, status: 'published' });
+
+  if (!post) return { title: 'Post Not Found' };
+
+  return {
+    title: post.seo?.metaTitle || post.title,
+    description: post.seo?.metaDescription,
+    openGraph: {
+      title: post.seo?.ogTitle || post.title,
+      description: post.seo?.ogDescription,
+      images: [post.seo?.ogImage || post.featuredImage].filter(Boolean) as string[],
+    },
+    alternates: {
+      canonical: post.seo?.canonicalUrl,
+    }
+  };
+}
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;

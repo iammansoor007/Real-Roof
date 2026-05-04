@@ -16,6 +16,7 @@ export default function BlogPosts() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedPosts, setSelectedPosts] = useState<string[]>([]);
   const [bulkAction, setBulkAction] = useState("");
+  const [editingPost, setEditingPost] = useState<any>(null);
 
   useEffect(() => {
     fetchPosts();

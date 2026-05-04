@@ -251,7 +251,7 @@ const Testimonials = () => {
           >
             <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-primary">
-              {section.badge}
+              {section?.badge}
             </span>
           </motion.div>
 

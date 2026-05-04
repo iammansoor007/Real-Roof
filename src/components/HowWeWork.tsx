@@ -553,7 +553,7 @@ const AwardCTABanner = () => {
                         >
                             <span className="w-8 h-[2px] bg-primary" />
                             <span className="text-lg font-bold tracking-[0.3em] uppercase text-primary">
-                                {cta.badge}
+                                {cta?.badge}
                             </span>
                         </motion.div>
 
@@ -663,7 +663,7 @@ const WhyChooseUs = () => {
                         <div className="flex items-center justify-center gap-3 mb-6">
                             <div className="w-16 h-[2px] bg-primary" />
                             <span className="text-xs font-bold tracking-[0.3em] uppercase text-primary">
-                                {section.badge}
+                                {section?.badge}
                             </span>
                             <div className="w-16 h-[2px] bg-primary" />
                         </div>

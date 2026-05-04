@@ -590,7 +590,7 @@ const FAQ = ({ currentPage = "home", hideHeader = false }: { currentPage?: strin
         {!hideHeader && (
           <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16 faq-reveal">
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">
-              {section.badge}
+              {section?.badge}
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-foreground mb-4">
               {section.title || section.headline}

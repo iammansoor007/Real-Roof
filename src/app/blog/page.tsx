@@ -1,22 +1,23 @@
 import connectToDatabase from '@/lib/mongodb';
 import Post from '@/models/Post';
-import { Calendar, User, ArrowRight, BookOpen } from 'lucide-react';
+import Category from '@/models/Category';
+import { Calendar, User, ArrowRight, BookOpen, Search } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Blog - Eagle Revolution',
-  description: 'Stay updated with the latest news, tutorials, and insights from Eagle Revolution.',
+  title: 'Insights & Stories - Eagle Revolution',
+  description: 'Deep dives into industry trends, professional guides, and the stories shaping the future of digital excellence.',
 };
 
 export default async function BlogIndexPage() {
   await connectToDatabase();
-  const posts = await Post.find({ status: 'published' })
-    .populate('categories author')
-    .sort({ publishedAt: -1 });
-
-  const categories = await connectToDatabase().then(() => 
-    import('@/models/Category').then(m => m.default.find({}))
-  );
+  
+  const [posts, categories] = await Promise.all([
+    Post.find({ status: 'published' })
+      .populate('categories author')
+      .sort({ publishedAt: -1 }),
+    Category.find({}).lean()
+  ]);
 
   return (
     <div className="min-h-screen bg-slate-50/50 selection:bg-blue-600 selection:text-white">

@@ -6,7 +6,7 @@ import { recordActivity } from '@/lib/logger';
 
 export async function POST(req: NextRequest) {
   try {
-    const user = await getSessionUser(req);
+    const user = await getSessionUser(req) as any;
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const { ids, action, value } = await req.json();
