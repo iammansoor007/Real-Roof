@@ -1,5 +1,6 @@
 import ServiceDetailTemplate from "@/components/templates/ServiceDetailTemplate";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import connectToDatabase from "@/lib/mongodb";
 import SiteContent from "@/models/Content";
 import Script from "next/script";
