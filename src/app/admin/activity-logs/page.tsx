@@ -26,7 +26,7 @@ export default function LogsPage() {
         action: filters.action,
         status: filters.status
       });
-      const res = await fetch(`/api/admin/logs?${query}`);
+      const res = await fetch(`/api/admin/activity-logs?${query}`);
       const data = await res.json();
       setLogs(data.logs);
       setPagination({ page: data.page, totalPages: data.totalPages });
