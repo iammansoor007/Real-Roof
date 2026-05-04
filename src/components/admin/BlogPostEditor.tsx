@@ -250,6 +250,23 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
             </div>
           </div>
 
+          {/* Excerpt Box */}
+          <div className="bg-white border border-[#c3c4c7] shadow-sm rounded-sm">
+            <div className="px-3 py-2 border-b border-[#c3c4c7] bg-[#f6f7f7]">
+              <h2 className="text-[13px] font-semibold text-[#1d2327]">Excerpt</h2>
+            </div>
+            <div className="p-3">
+              <textarea 
+                value={post.excerpt}
+                onChange={(e) => setPost({ ...post, excerpt: e.target.value })}
+                rows={3}
+                placeholder="Write a brief summary..."
+                className="w-full border border-[#c3c4c7] p-2 text-[12px] outline-none focus:border-[#2271b1] resize-none"
+              />
+              <p className="text-[10px] text-[#646970] mt-1">Excerpts are optional hand-crafted summaries of your content.</p>
+            </div>
+          </div>
+
           {/* Categories Box */}
           <div className="bg-white border border-[#c3c4c7] shadow-sm rounded-sm">
             <div className="px-3 py-2 border-b border-[#c3c4c7] bg-[#f6f7f7]">
@@ -272,6 +289,44 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
                 </label>
               ))}
               <button onClick={() => router.push('/admin/blog/categories')} className="text-[#2271b1] underline text-[11px] block mt-2">+ Add New Category</button>
+            </div>
+          </div>
+
+          {/* Tags Box */}
+          <div className="bg-white border border-[#c3c4c7] shadow-sm rounded-sm">
+            <div className="px-3 py-2 border-b border-[#c3c4c7] bg-[#f6f7f7]">
+              <h2 className="text-[13px] font-semibold text-[#1d2327]">Tags</h2>
+            </div>
+            <div className="p-3 space-y-3">
+              <div className="flex flex-wrap gap-1.5 min-h-6 border border-[#c3c4c7] p-2 rounded-sm bg-slate-50/30">
+                {post.tags?.map((tagId: string) => {
+                  const tag = tags.find(t => t._id === tagId);
+                  if (!tag) return null;
+                  return (
+                    <span key={tagId} className="inline-flex items-center gap-1 bg-[#f0f0f1] px-2 py-0.5 rounded-full text-[11px] text-[#2c3338] border border-[#dcdcde]">
+                      {tag.name}
+                      <button onClick={() => setPost({...post, tags: post.tags.filter((t: string) => t !== tagId)})} className="hover:text-red-500 font-bold">×</button>
+                    </span>
+                  );
+                })}
+              </div>
+              <div className="flex gap-1">
+                <select 
+                  onChange={(e) => {
+                    if (e.target.value && !post.tags.includes(e.target.value)) {
+                      setPost({...post, tags: [...post.tags, e.target.value]});
+                    }
+                    e.target.value = "";
+                  }}
+                  className="flex-1 bg-white border border-[#c3c4c7] px-2 py-1 text-[11px] outline-none"
+                >
+                  <option value="">Select Tag...</option>
+                  {tags.filter(t => !post.tags.includes(t._id)).map(tag => (
+                    <option key={tag._id} value={tag._id}>{tag.name}</option>
+                  ))}
+                </select>
+              </div>
+              <button onClick={() => router.push('/admin/blog/tags')} className="text-[#2271b1] underline text-[11px]">+ Manage Tags</button>
             </div>
           </div>
 

@@ -14,6 +14,8 @@ export default function BlogPosts() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [selectedPosts, setSelectedPosts] = useState<string[]>([]);
+  const [bulkAction, setBulkAction] = useState("");
 
   useEffect(() => {
     fetchPosts();
@@ -25,6 +27,7 @@ export default function BlogPosts() {
       const res = await fetch(url);
       const data = await res.json();
       setPosts(data);
+      setSelectedPosts([]);
     } catch (err) {
       console.error("Failed to fetch posts:", err);
     } finally {
@@ -36,22 +39,98 @@ export default function BlogPosts() {
     post.title.toLowerCase().includes(search.toLowerCase())
   );
 
+  const toggleSelectAll = () => {
+    if (selectedPosts.length === filteredPosts.length) {
+      setSelectedPosts([]);
+    } else {
+      setSelectedPosts(filteredPosts.map(p => p._id));
+    }
+  };
+
+  const toggleSelectPost = (id: string) => {
+    setSelectedPosts(prev => 
+      prev.includes(id) ? prev.filter(p => p !== id) : [...prev, id]
+    );
+  };
+
+  const handleBulkAction = async () => {
+    if (!bulkAction || selectedPosts.length === 0) return;
+    
+    let action = bulkAction;
+    let value = "";
+    
+    if (bulkAction.startsWith('status-')) {
+      action = 'status';
+      value = bulkAction.replace('status-', '');
+    }
+
+    if (action === 'delete' && !confirm(`Are you sure you want to delete ${selectedPosts.length} posts?`)) return;
+
+    try {
+      const res = await fetch('/api/admin/blog/posts/bulk', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids: selectedPosts, action, value })
+      });
+      if (res.ok) {
+        setBulkAction("");
+        fetchPosts();
+      }
+    } catch (err) {
+      alert("Bulk action failed");
+    }
+  };
+
   const deletePost = async (id: string) => {
     if (!confirm("Are you sure you want to delete this post?")) return;
     try {
       const res = await fetch(`/api/admin/blog/posts/${id}`, { method: "DELETE" });
-      if (res.ok) fetchPosts();
+      if (res.ok) {
+        fetchPosts();
+      } else {
+        const error = await res.json();
+        alert("Delete failed: " + (error.error || "Unknown error"));
+      }
     } catch (err) {
-      alert("Delete failed");
+      alert("Delete failed due to network error");
     }
   };
 
   const duplicatePost = async (id: string) => {
     try {
       const res = await fetch(`/api/admin/blog/posts/duplicate/${id}`, { method: "POST" });
-      if (res.ok) fetchPosts();
+      if (res.ok) {
+        fetchPosts();
+      } else {
+        const error = await res.json();
+        alert("Duplication failed: " + (error.error || "Unknown error"));
+      }
     } catch (err) {
-      alert("Duplication failed");
+      alert("Duplication failed due to network error");
+    }
+  };
+
+  const handleQuickEditSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`/api/admin/blog/posts/${editingPost._id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: editingPost.title,
+          slug: editingPost.slug,
+          status: editingPost.status
+        })
+      });
+      if (res.ok) {
+        setEditingPost(null);
+        fetchPosts();
+      } else {
+        const error = await res.json();
+        alert("Update failed: " + (error.error || "Unknown error"));
+      }
+    } catch (err) {
+      alert("Update failed");
     }
   };
 
@@ -86,11 +165,37 @@ export default function BlogPosts() {
         </div>
       </div>
 
+      <div className="flex items-center gap-2 mb-4">
+        <select 
+          value={bulkAction} 
+          onChange={(e) => setBulkAction(e.target.value)}
+          className="bg-white border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px] outline-none"
+        >
+          <option value="">Bulk Actions</option>
+          <option value="status-published">Move to Published</option>
+          <option value="status-draft">Move to Draft</option>
+          <option value="delete">Move to Trash</option>
+        </select>
+        <button 
+          onClick={handleBulkAction}
+          disabled={!bulkAction || selectedPosts.length === 0}
+          className="bg-white border border-[#8c8f94] px-3 py-1 text-[13px] rounded-[3px] hover:bg-[#f6f7f7] disabled:opacity-50"
+        >
+          Apply
+        </button>
+      </div>
+
       <div className="bg-white border border-[#c3c4c7] shadow-sm overflow-hidden">
         <table className="w-full text-left border-collapse min-w-[800px]">
           <thead>
             <tr className="bg-white border-b border-[#c3c4c7] text-[13px] font-bold text-[#1d2327]">
-              <th className="px-3 py-2 w-10 text-center"><input type="checkbox" /></th>
+              <th className="px-3 py-2 w-10 text-center">
+                <input 
+                  type="checkbox" 
+                  checked={selectedPosts.length > 0 && selectedPosts.length === filteredPosts.length}
+                  onChange={toggleSelectAll}
+                />
+              </th>
               <th className="px-3 py-2">Title</th>
               <th className="px-3 py-2">Author</th>
               <th className="px-3 py-2">Categories</th>
@@ -104,8 +209,14 @@ export default function BlogPosts() {
             ) : filteredPosts.length === 0 ? (
               <tr><td colSpan={6} className="p-10 text-center text-[#646970]">No posts found.</td></tr>
             ) : filteredPosts.map((post) => (
-              <tr key={post._id} className="border-b border-[#f0f0f1] hover:bg-[#f6f7f7] group text-[13px] text-[#2c3338]">
-                <td className="px-3 py-4 text-center"><input type="checkbox" /></td>
+              <tr key={post._id} className={`border-b border-[#f0f0f1] hover:bg-[#f6f7f7] group text-[13px] text-[#2c3338] ${selectedPosts.includes(post._id) ? "bg-[#f0f6fb]" : ""}`}>
+                <td className="px-3 py-4 text-center">
+                  <input 
+                    type="checkbox" 
+                    checked={selectedPosts.includes(post._id)}
+                    onChange={() => toggleSelectPost(post._id)}
+                  />
+                </td>
                 <td className="px-3 py-4">
                   <div className="flex items-start gap-3">
                     {post.featuredImage && (
@@ -120,7 +231,7 @@ export default function BlogPosts() {
                       <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                         <Link href={`/admin/blog/${post._id}`} className="text-[#2271b1] hover:text-[#135e96]">Edit</Link>
                         <span className="text-[#c3c4c7]">|</span>
-                        <button className="text-[#2271b1] hover:text-[#135e96]">Quick Edit</button>
+                        <button onClick={() => setEditingPost(post)} className="text-[#2271b1] hover:text-[#135e96]">Quick Edit</button>
                         <span className="text-[#c3c4c7]">|</span>
                         <button onClick={() => deletePost(post._id)} className="text-[#d63638] hover:text-[#b32d2e]">Trash</button>
                         <span className="text-[#c3c4c7]">|</span>
@@ -149,6 +260,57 @@ export default function BlogPosts() {
           </tbody>
         </table>
       </div>
+
+      {/* Quick Edit Modal */}
+      {editingPost && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="bg-white border border-[#c3c4c7] shadow-xl w-full max-w-2xl overflow-hidden">
+            <div className="bg-[#f6f7f7] border-b border-[#c3c4c7] px-4 py-3 flex items-center justify-between">
+              <h2 className="text-[14px] font-bold">Quick Edit</h2>
+              <button onClick={() => setEditingPost(null)} className="text-[#646970] hover:text-[#d63638]">×</button>
+            </div>
+            <form onSubmit={handleQuickEditSave} className="p-4 space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="block text-[12px] font-semibold text-[#1d2327]">Title</label>
+                  <input 
+                    type="text" 
+                    value={editingPost.title}
+                    onChange={(e) => setEditingPost({ ...editingPost, title: e.target.value })}
+                    className="w-full border border-[#8c8f94] px-3 py-1.5 text-[13px] outline-none focus:border-[#2271b1]"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="block text-[12px] font-semibold text-[#1d2327]">Slug</label>
+                  <input 
+                    type="text" 
+                    value={editingPost.slug}
+                    onChange={(e) => setEditingPost({ ...editingPost, slug: e.target.value })}
+                    className="w-full border border-[#8c8f94] px-3 py-1.5 text-[13px] outline-none focus:border-[#2271b1]"
+                  />
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="space-y-1 w-48">
+                  <label className="block text-[12px] font-semibold text-[#1d2327]">Status</label>
+                  <select 
+                    value={editingPost.status}
+                    onChange={(e) => setEditingPost({ ...editingPost, status: e.target.value })}
+                    className="w-full bg-white border border-[#8c8f94] px-3 py-1.5 text-[13px] outline-none focus:border-[#2271b1]"
+                  >
+                    <option value="draft">Draft</option>
+                    <option value="published">Published</option>
+                  </select>
+                </div>
+              </div>
+              <div className="bg-[#f6f7f7] -mx-4 -mb-4 px-4 py-3 flex items-center justify-end gap-3 border-t border-[#c3c4c7]">
+                <button type="button" onClick={() => setEditingPost(null)} className="text-[#2271b1] text-[13px] hover:text-[#135e96]">Cancel</button>
+                <button type="submit" className="bg-[#2271b1] text-white text-[13px] font-bold px-4 py-1.5 rounded-[3px] border border-[#135e96] hover:bg-[#135e96]">Update</button>
+              </div>
+            </form>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 }
