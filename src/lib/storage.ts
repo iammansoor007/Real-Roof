@@ -52,14 +52,19 @@ export async function uploadFile(file: File, buffer: Buffer): Promise<{ url: str
       });
 
       const data = await res.json();
-      if (data.error) throw new Error(data.error.message);
+      
+      if (!res.ok || data.error) {
+        const errorMsg = data.error?.message || 'Unknown Cloudinary error';
+        console.error('Cloudinary API Error:', data.error);
+        throw new Error(`Cloudinary Upload Failed: ${errorMsg}`);
+      }
 
       return {
         url: data.secure_url,
         publicId: data.public_id
       };
     } catch (error: any) {
-      console.error('Cloudinary upload failed:', error);
+      console.error('Upload Process Error:', error.message);
       throw error;
     }
   }
