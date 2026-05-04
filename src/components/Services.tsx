@@ -318,7 +318,7 @@ const Services = () => {
       ? [rawDescription] 
       : [];
 
-  const servicesListRaw = (servicesData as any).services || [];
+  const servicesListRaw = ((servicesData as any).services || []).filter((s: any) => s.status === 'published');
   const servicesList = servicesListRaw.map((s: any, idx: number) => ({
     ...s,
     number: String(idx + 1).padStart(2, '0')

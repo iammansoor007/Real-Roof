@@ -63,7 +63,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   // Fetch service for schema injection
   await connectToDatabase();
   const content = await SiteContent.findOne({ key: "complete_data" }).lean() as any;
-  const serviceDoc = content?.data?.services?.services?.find((s: any) => s.slug === resolvedParams.slug);
+  const serviceDoc = content?.data?.services?.services?.find((s: any) => s.slug === resolvedParams.slug && s.status === 'published');
+  if (!serviceDoc) return notFound();
   const service = JSON.parse(JSON.stringify(serviceDoc));
   const globalData = content?.data || {};
   const allFaqs = globalData.faq?.items || [];

@@ -172,7 +172,7 @@ const NewsletterForm = () => {
 
 const ServiceLinks = () => {
   const { services: servicesData, footer } = useContent();
-  const dynamicServices = (servicesData as any).services || [];
+  const dynamicServices = ((servicesData as any).services || []).filter((s: any) => s.status === 'published');
   const { services: footerServices } = footer;
 
   return (

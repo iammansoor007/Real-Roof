@@ -233,6 +233,13 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
                 <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5 text-[#82878c]" /> Visibility:</span>
                 <strong>Public</strong>
               </div>
+              {post.slug && (
+                <div className="pt-1">
+                  <Link href={`/blog/${post.slug}`} target="_blank" className="text-[#2271b1] hover:underline flex items-center gap-1">
+                    <ExternalLink className="w-3 h-3" /> View Post
+                  </Link>
+                </div>
+              )}
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5 text-[#82878c]" /> {post.status === 'published' ? 'Published on:' : 'Publish immediately'}</span>
                 <strong>{new Date(post.publishedAt || Date.now()).toLocaleDateString()}</strong>

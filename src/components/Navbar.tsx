@@ -24,7 +24,7 @@ const Navbar = () => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const { companyLinks } = navbar;
-  const services = (useContent().services as any).services || [];
+  const services = ((useContent().services as any).services || []).filter((s: any) => s.status === 'published');
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);

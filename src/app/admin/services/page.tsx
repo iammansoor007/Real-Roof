@@ -10,7 +10,8 @@ import {
   Droplets, ShieldCheck, Clock, Award, Users, TrendingUp, 
   BadgeCheck, Star, Zap, Sparkles, Palette, Sun, Snowflake,
   Trophy, Hammer, Truck, ClipboardCheck, FileText, ArrowRight,
-  Wrench, HardHat, Ruler, Paintbrush, Wind, Flame, Thermometer
+  Wrench, HardHat, Ruler, Paintbrush, Wind, Flame, Thermometer,
+  Copy
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -152,6 +153,19 @@ export default function ServicesAdminPage() {
     setSeo(s.seo || {});
     setIsEditing(originalIdx);
     setActiveTab("general");
+  };
+
+  const handleDuplicate = (idx: number) => {
+    const s = filteredServices[idx];
+    const newService = {
+      ...s,
+      id: Date.now().toString(),
+      title: `${s.title} (Copy)`,
+      slug: `${s.slug}-copy`,
+      status: 'draft'
+    };
+    const newServices = [...services, newService];
+    saveToDb(newServices);
   };
 
   const handleBulkAction = async (action: string) => {
@@ -365,8 +379,16 @@ export default function ServicesAdminPage() {
                  </div>
                  <div className="p-4 space-y-4 text-[13px] text-[#2c3338]">
                     <div className="flex flex-col gap-2">
-                       <p><strong>Status:</strong> Draft <Link href="#" className="text-[#2271b1] underline ml-1">Edit</Link></p>
+                       <p><strong>Status:</strong> {form.status === 'published' ? 'Published' : 'Draft'} <Link href="#" className="text-[#2271b1] underline ml-1">Edit</Link></p>
                        <p><strong>Visibility:</strong> Public <Link href="#" className="text-[#2271b1] underline ml-1">Edit</Link></p>
+                       {form.slug && (
+                         <p className="flex items-center gap-1">
+                           <strong>Permalink:</strong> 
+                           <Link href={`/services/${form.slug}`} target="_blank" className="text-[#2271b1] hover:underline truncate max-w-[150px] inline-flex items-center gap-1">
+                             View Service <ExternalLink className="w-3 h-3" />
+                           </Link>
+                         </p>
+                       )}
                     </div>
                  </div>
                  <div className="px-3 py-2 bg-[#f6f7f7] border-t border-[#c3c4c7] flex justify-between items-center">
@@ -464,6 +486,8 @@ export default function ServicesAdminPage() {
                                          </button>
                                          <span className="text-[#a7aaad]">|</span>
                                          <Link href={`/services/${service.slug}`} target="_blank" className="text-[#2271b1] hover:underline text-[12px]">View</Link>
+                                         <span className="text-[#a7aaad]">|</span>
+                                         <button onClick={() => handleDuplicate(idx)} className="text-[#2271b1] hover:underline text-[12px]">Duplicate</button>
                                          <span className="text-[#a7aaad]">|</span>
                                          <button onClick={() => { if(confirm("Delete this service?")) saveToDb(services.filter((_,i)=>i!==idx)); }} className="text-[#d63638] hover:underline text-[12px]">Trash</button>
                                       </div>
