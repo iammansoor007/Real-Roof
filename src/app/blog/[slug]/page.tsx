@@ -4,6 +4,7 @@ import connectToDatabase from '@/lib/mongodb';
 import Post from '@/models/Post';
 import { Calendar, User, Tag as TagIcon, Clock, BookOpen } from 'lucide-react';
 import Link from 'next/link';
+import Script from 'next/script';
 import ReadingProgress from '@/components/blog/ReadingProgress';
 import ShareButton from '@/components/blog/ShareButton';
 
@@ -18,16 +19,49 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) return { title: 'Post Not Found' };
 
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.eaglerevolution.com";
+  const url = `${BASE_URL}/blog/${slug}`;
+
   return {
-    title: post.seo?.metaTitle || post.title,
-    description: post.seo?.metaDescription,
+    title: {
+      absolute: post.seo?.metaTitle || `${post.title}`
+    },
+    description: post.seo?.metaDescription || post.excerpt,
     openGraph: {
       title: post.seo?.ogTitle || post.title,
-      description: post.seo?.ogDescription,
-      images: [post.seo?.ogImage || post.featuredImage].filter(Boolean) as string[],
+      description: post.seo?.ogDescription || post.excerpt,
+      url: url,
+      type: 'article',
+      publishedTime: post.publishedAt?.toISOString(),
+      modifiedTime: (post.updatedAt || post.publishedAt)?.toISOString(),
+      images: [
+        {
+          url: post.seo?.ogImage || post.featuredImage || `${BASE_URL}/eagle-logo.png`,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        }
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.seo?.ogTitle || post.title,
+      description: post.seo?.ogDescription || post.excerpt,
+      images: [post.seo?.ogImage || post.featuredImage || `${BASE_URL}/eagle-logo.png`],
+      site: "@EagleRevolution",
+      creator: "@EagleRevolution",
+    },
+    robots: {
+      index: post.seo?.metaRobotsIndex !== 'noindex',
+      follow: post.seo?.metaRobotsIndex === 'noindex' ? false : (post.seo?.metaRobotsFollow !== 'nofollow'),
+      ...(post.seo?.metaRobotsIndex !== 'noindex' && {
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      })
     },
     alternates: {
-      canonical: post.seo?.canonicalUrl,
+      canonical: post.seo?.canonicalUrl || url,
     }
   };
 }
@@ -40,6 +74,138 @@ export default async function BlogPostPage({ params }: Props) {
     .populate('categories tags author');
 
   if (!post) notFound();
+
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.eaglerevolution.com";
+  const url = `${BASE_URL}/blog/${slug}`;
+  const wordCount = post.content ? post.content.split(/\s+/).length : 0;
+  const publishDate = post.publishedAt?.toISOString();
+  const modifiedDate = (post.updatedAt || post.publishedAt)?.toISOString();
+  const featuredImage = post.featuredImage || `${BASE_URL}/eagle-logo.png`;
+
+  // Advanced Schema.org Graph JSON-LD (Yoast/RankMath style)
+  const schemaGraph = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Article',
+        '@id': `${url}/#article`,
+        'isPartOf': { '@id': url },
+        'author': {
+          '@id': `${BASE_URL}/#/schema/person/${post.author?._id || 'admin'}`
+        },
+        'headline': post.title,
+        'datePublished': publishDate,
+        'dateModified': modifiedDate,
+        'mainEntityOfPage': { '@id': url },
+        'wordCount': wordCount,
+        'publisher': { '@id': `${BASE_URL}/#organization` },
+        'image': { '@id': `${url}/#primaryimage` },
+        'thumbnailUrl': featuredImage,
+        'keywords': post.tags?.map((t: any) => t.name).join(', '),
+        'inLanguage': 'en-US'
+      },
+      {
+        '@type': 'WebPage',
+        '@id': url,
+        'url': url,
+        'name': post.seo?.metaTitle || post.title,
+        'isPartOf': { '@id': `${BASE_URL}/#website` },
+        'primaryImageOfPage': { '@id': `${url}/#primaryimage` },
+        'datePublished': publishDate,
+        'dateModified': modifiedDate,
+        'description': post.seo?.metaDescription || post.excerpt,
+        'breadcrumb': { '@id': `${url}/#breadcrumb` },
+        'inLanguage': 'en-US',
+        'potentialAction': [
+          {
+            '@type': 'ReadAction',
+            'target': [url]
+          }
+        ]
+      },
+      {
+        '@type': 'ImageObject',
+        '@id': `${url}/#primaryimage`,
+        'isPartOf': { '@id': url },
+        'url': featuredImage,
+        'contentUrl': featuredImage,
+        'width': 1200,
+        'height': 630,
+        'inLanguage': 'en-US'
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${url}/#breadcrumb`,
+        'itemListElement': [
+          {
+            '@type': 'ListItem',
+            'position': 1,
+            'item': {
+              '@type': 'WebPage',
+              '@id': BASE_URL,
+              'url': BASE_URL,
+              'name': 'Home'
+            }
+          },
+          {
+            '@type': 'ListItem',
+            'position': 2,
+            'item': {
+              '@type': 'WebPage',
+              '@id': `${BASE_URL}/blog`,
+              'url': `${BASE_URL}/blog`,
+              'name': 'Blog'
+            }
+          },
+          {
+            '@type': 'ListItem',
+            'position': 3,
+            'item': {
+              'name': post.title
+            }
+          }
+        ]
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `${BASE_URL}/#website`,
+        'url': BASE_URL,
+        'name': 'Eagle Revolution',
+        'description': 'Veteran-Owned Roofing & Home Improvement',
+        'publisher': { '@id': `${BASE_URL}/#organization` },
+        'inLanguage': 'en-US'
+      },
+      {
+        '@type': 'Organization',
+        '@id': `${BASE_URL}/#organization`,
+        'name': 'Eagle Revolution',
+        'url': BASE_URL,
+        'logo': {
+          '@type': 'ImageObject',
+          '@id': `${BASE_URL}/#logo`,
+          'url': `${BASE_URL}/eagle-logo.png`,
+          'contentUrl': `${BASE_URL}/eagle-logo.png`,
+          'width': 240,
+          'height': 194,
+          'caption': 'Eagle Revolution'
+        },
+        'image': { '@id': `${BASE_URL}/#logo` }
+      },
+      {
+        '@type': 'Person',
+        '@id': `${BASE_URL}/#/schema/person/${post.author?._id || 'admin'}`,
+        'name': post.author?.name || 'Eagle Revolution',
+        'image': {
+          '@type': 'ImageObject',
+          '@id': `${BASE_URL}/#person-logo`,
+          'url': post.author?.image || `${BASE_URL}/eagle-logo.png`,
+          'contentUrl': post.author?.image || `${BASE_URL}/eagle-logo.png`,
+          'caption': post.author?.name || 'Eagle Revolution'
+        },
+        'url': `${BASE_URL}/blog`
+      }
+    ]
+  };
 
   // Automated Table of Contents Logic
   let tableOfContents: { id: string; text: string; level: number }[] = [];
@@ -62,6 +228,11 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <article className="min-h-screen bg-white">
+      <Script
+        id="blog-post-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaGraph) }}
+      />
       <ReadingProgress />
 
       {/* Clean Hero Section */}

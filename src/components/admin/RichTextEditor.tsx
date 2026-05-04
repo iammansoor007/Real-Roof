@@ -20,6 +20,7 @@ interface RichTextEditorProps {
   onChange: (html: string) => void;
   placeholder?: string;
   label?: string;
+  showStatusBar?: boolean;
 }
 
 const MenuButton = ({ 
@@ -50,7 +51,7 @@ const MenuButton = ({
   </button>
 );
 
-export default function RichTextEditor({ content, onChange, placeholder, label }: RichTextEditorProps) {
+export default function RichTextEditor({ content, onChange, placeholder, label, showStatusBar }: RichTextEditorProps) {
   const [isMediaOpen, setIsMediaOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -251,6 +252,60 @@ export default function RichTextEditor({ content, onChange, placeholder, label }
             </div>
           )}
         </div>
+
+        {/* Status Bar / Tag Timeline */}
+        {showStatusBar && editor && (
+          <div className="sticky bottom-0 z-[40] flex items-center gap-1.5 px-3 py-1.5 bg-[#f6f7f7] border-t border-[#c3c4c7] overflow-x-auto no-scrollbar shadow-[0_-2px_5px_rgba(0,0,0,0.02)]">
+            <span className="text-[10px] font-bold text-[#646970] uppercase shrink-0 border-r border-[#c3c4c7] pr-2 mr-0.5">Path</span>
+            <div className="flex items-center gap-1">
+              {(() => {
+                const tags: { name: string, pos: number, id: string, level?: number }[] = [];
+                editor.state.doc.forEach((node, pos) => {
+                  tags.push({ 
+                    name: node.type.name, 
+                    pos, 
+                    id: `${node.type.name}-${pos}`,
+                    level: node.type.name === 'heading' ? node.attrs.level : undefined
+                  });
+                });
+
+                // Find active node index
+                const { from } = editor.state.selection;
+                let activeIndex = -1;
+                for (let i = 0; i < tags.length; i++) {
+                  const nextPos = (i < tags.length - 1) ? tags[i+1].pos : editor.state.doc.content.size;
+                  if (from >= tags[i].pos && from < nextPos) {
+                    activeIndex = i;
+                    break;
+                  }
+                }
+
+                return tags.map((tag, idx) => (
+                  <React.Fragment key={tag.id}>
+                    {idx > 0 && <span className="text-[#c3c4c7] text-[10px]">»</span>}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        editor.chain().focus().setTextSelection(tag.pos).run();
+                        const element = editor.view.nodeDOM(tag.pos) as HTMLElement;
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                      }}
+                      className={`text-[11px] whitespace-nowrap px-1 rounded transition-colors ${
+                        idx === activeIndex 
+                          ? "bg-[#2271b1] text-white font-bold" 
+                          : "text-[#2271b1] hover:underline hover:bg-[#2271b1]/5"
+                      }`}
+                    >
+                      {tag.name === 'heading' ? `H${tag.level}` : tag.name.toUpperCase()}
+                    </button>
+                  </React.Fragment>
+                ));
+              })()}
+            </div>
+          </div>
+        )}
       </div>
 
       {isMediaOpen && (
@@ -275,7 +330,47 @@ export default function RichTextEditor({ content, onChange, placeholder, label }
         }
         .ProseMirror {
           outline: none !important;
+          padding-bottom: 50px !important; /* Space for sticky bar */
         }
+        .ProseMirror h1, .ProseMirror h2, .ProseMirror h3, 
+        .ProseMirror h4, .ProseMirror h5, .ProseMirror h6 { 
+          position: relative;
+        }
+
+        /* Heading Indicators */
+        .ProseMirror h1:hover::before, .ProseMirror h1.ProseMirror-selectednode::before, .ProseMirror h1:focus-within::before { content: 'H1'; }
+        .ProseMirror h2:hover::before, .ProseMirror h2.ProseMirror-selectednode::before, .ProseMirror h2:focus-within::before { content: 'H2'; }
+        .ProseMirror h3:hover::before, .ProseMirror h3.ProseMirror-selectednode::before, .ProseMirror h3:focus-within::before { content: 'H3'; }
+        .ProseMirror h4:hover::before, .ProseMirror h4.ProseMirror-selectednode::before, .ProseMirror h4:focus-within::before { content: 'H4'; }
+        .ProseMirror h5:hover::before, .ProseMirror h5.ProseMirror-selectednode::before, .ProseMirror h5:focus-within::before { content: 'H5'; }
+        .ProseMirror h6:hover::before, .ProseMirror h6.ProseMirror-selectednode::before, .ProseMirror h6:focus-within::before { content: 'H6'; }
+
+        .ProseMirror h1::before, .ProseMirror h2::before, .ProseMirror h3::before,
+        .ProseMirror h4::before, .ProseMirror h5::before, .ProseMirror h6::before {
+          position: absolute;
+          left: -45px;
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 10px;
+          font-family: monospace;
+          font-weight: bold;
+          color: #2271b1;
+          background: #f0f6fb;
+          padding: 2px 6px;
+          border-radius: 4px;
+          border: 1px solid #d2e3f7;
+          opacity: 0;
+          transition: opacity 0.2s;
+          pointer-events: none;
+        }
+
+        .ProseMirror h1:hover::before, .ProseMirror h2:hover::before, .ProseMirror h3:hover::before,
+        .ProseMirror h4:hover::before, .ProseMirror h5:hover::before, .ProseMirror h6:hover::before,
+        .ProseMirror h1:focus-within::before, .ProseMirror h2:focus-within::before, .ProseMirror h3:focus-within::before,
+        .ProseMirror h4:focus-within::before, .ProseMirror h5:focus-within::before, .ProseMirror h6:focus-within::before {
+          opacity: 1;
+        }
+
         .ProseMirror h1 { font-size: 2em; font-weight: bold; margin-bottom: 0.5em; }
         .ProseMirror h2 { font-size: 1.5em; font-weight: bold; margin-bottom: 0.5em; }
         .ProseMirror h3 { font-size: 1.25em; font-weight: bold; margin-bottom: 0.5em; }

@@ -34,14 +34,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const pageUrl = `${BASE_URL}/${slug}`;
 
   return {
-    title: seo.metaTitle || page.title,
+    title: {
+      absolute: seo.metaTitle || `${page.title}`
+    },
     description: seo.metaDescription,
     alternates: {
       canonical: seo.canonicalUrl || pageUrl,
     },
     robots: {
-      index: seo.metaRobotsIndex === 'index',
-      follow: seo.metaRobotsFollow === 'follow',
+      index: seo.metaRobotsIndex !== 'noindex',
+      follow: seo.metaRobotsIndex === 'noindex' ? false : (seo.metaRobotsFollow !== 'nofollow'),
+      ...(seo.metaRobotsIndex !== 'noindex' && {
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      })
     },
     openGraph: {
       title: seo.ogTitle || seo.metaTitle || page.title,
@@ -49,14 +56,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: pageUrl,
       siteName: "Eagle Revolution",
       type: "website",
-      images: seo.featuredImage ? [{ url: getAbsoluteUrl(seo.featuredImage) || "" }] : (seo.ogImage ? [{ url: getAbsoluteUrl(seo.ogImage) || "" }] : []),
+      images: [
+        {
+          url: getAbsoluteUrl(seo.featuredImage || seo.ogImage) || `${BASE_URL}/eagle-logo.png`,
+          width: 1200,
+          height: 630,
+          alt: page.title,
+        }
+      ],
     },
     twitter: {
-      card: (seo.twitterCard as any) || 'summary_large_image',
+      card: "summary_large_image",
       title: seo.twitterTitle || seo.ogTitle || seo.metaTitle || page.title,
-      description: seo.twitterDescription || seo.ogDescription || seo.metaDescription,
-      images: seo.featuredImage ? [getAbsoluteUrl(seo.featuredImage) || ""] : (seo.twitterImage ? [getAbsoluteUrl(seo.twitterImage) || ""] : (seo.ogImage ? [getAbsoluteUrl(seo.ogImage) || ""] : [])),
-      site: "@EagleRevolution",
     },
   };
 }
@@ -92,8 +103,8 @@ export default async function DynamicPage({ params }: PageProps) {
   let faqs = undefined;
   if (page.template === 'faq') {
     const allFaqs = globalData.faq?.items || [];
-    faqs = allFaqs.filter((item: any) => 
-      item.visibility === 'global' || 
+    faqs = allFaqs.filter((item: any) =>
+      item.visibility === 'global' ||
       (item.visibility === 'specific' && item.targetPages?.includes(slug))
     );
   }

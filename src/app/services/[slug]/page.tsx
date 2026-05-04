@@ -31,29 +31,42 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const pageUrl = `${BASE_URL}/services/${slug}`;
 
   return {
-    title: seo.metaTitle || service.title,
+    title: {
+      absolute: seo.metaTitle || `${service.title}`
+    },
     description: seo.metaDescription || service.description,
     alternates: {
       canonical: seo.canonicalUrl || pageUrl,
     },
     robots: {
-      index: seo.metaRobotsIndex === 'index',
-      follow: seo.metaRobotsFollow === 'follow',
+      index: seo.metaRobotsIndex !== 'noindex',
+      follow: seo.metaRobotsIndex === 'noindex' ? false : (seo.metaRobotsFollow !== 'nofollow'),
+      ...(seo.metaRobotsIndex !== 'noindex' && {
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      })
     },
     openGraph: {
       title: seo.ogTitle || seo.metaTitle || service.title,
       description: seo.ogDescription || seo.metaDescription || service.description,
       url: pageUrl,
       siteName: "Eagle Revolution",
-      type: "article",
-      images: seo.featuredImage ? [{ url: getAbsoluteUrl(seo.featuredImage) || "" }] : (seo.ogImage ? [{ url: getAbsoluteUrl(seo.ogImage) || "" }] : []),
+      type: "website",
+      images: [
+        {
+          url: getAbsoluteUrl(seo.featuredImage || seo.ogImage || service.image) || `${BASE_URL}/eagle-logo.png`,
+          width: 1200,
+          height: 630,
+          alt: service.title,
+        }
+      ],
     },
     twitter: {
-      card: (seo.twitterCard as any) || 'summary_large_image',
+      card: "summary_large_image",
       title: seo.twitterTitle || seo.ogTitle || seo.metaTitle || service.title,
       description: seo.twitterDescription || seo.ogDescription || seo.metaDescription || service.description,
-      images: seo.featuredImage ? [getAbsoluteUrl(seo.featuredImage) || ""] : (seo.twitterImage ? [getAbsoluteUrl(seo.twitterImage) || ""] : (seo.ogImage ? [getAbsoluteUrl(seo.ogImage) || ""] : [])),
-      site: "@EagleRevolution",
+      images: [getAbsoluteUrl(seo.featuredImage || seo.twitterImage || seo.ogImage || service.image) || `${BASE_URL}/eagle-logo.png`],
     },
   };
 }

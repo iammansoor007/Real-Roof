@@ -14,9 +14,30 @@ export async function generateMetadata(): Promise<Metadata> {
   const settings = content?.data?.settings;
 
   return {
-    title: homeData?.hero?.headline || settings?.siteTitle || "Eagle Revolution",
+    title: {
+      absolute: homeData?.hero?.headline || settings?.siteTitle || "Eagle Revolution | #1 Roofing & Home Improvement"
+    },
     description: homeData?.hero?.subheadline || "Veteran-owned roofing & home improvement in St. Louis, MO.",
+    openGraph: {
+      title: homeData?.hero?.headline || settings?.siteTitle || "Eagle Revolution",
+      description: homeData?.hero?.subheadline || "Veteran-owned roofing & home improvement in St. Louis, MO.",
+      url: BASE_URL,
+      siteName: "Eagle Revolution",
+      type: "website",
+      images: [
+        {
+          url: `${BASE_URL}/eagle-logo.png`,
+          width: 1200,
+          height: 630,
+          alt: "Eagle Revolution",
+        }
+      ],
+    },
     twitter: {
+      card: "summary_large_image",
+      title: homeData?.hero?.headline || settings?.siteTitle || "Eagle Revolution",
+      description: homeData?.hero?.subheadline || "Veteran-owned roofing & home improvement in St. Louis, MO.",
+      images: [`${BASE_URL}/eagle-logo.png`],
       site: "@EagleRevolution",
     }
   };

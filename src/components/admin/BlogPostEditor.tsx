@@ -194,6 +194,7 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
                     <RichTextEditor 
                       content={post.content} 
                       onChange={(html) => setPost({ ...post, content: html })} 
+                      showStatusBar={true}
                     />
                   </div>
                 ) : (
