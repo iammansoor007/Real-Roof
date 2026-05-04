@@ -39,6 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: homeData?.hero?.subheadline || "Veteran-owned roofing & home improvement in St. Louis, MO.",
       images: [`${BASE_URL}/eagle-logo.png`],
       site: "@EagleRevolution",
+      creator: "@EagleRevolution",
     }
   };
 }

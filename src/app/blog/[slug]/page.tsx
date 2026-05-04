@@ -1,4 +1,8 @@
 import { Metadata } from 'next';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import { notFound } from 'next/navigation';
 import connectToDatabase from '@/lib/mongodb';
 import Post from '@/models/Post';
@@ -98,6 +102,7 @@ export default async function BlogPostPage({ params }: Props) {
         'dateModified': modifiedDate,
         'mainEntityOfPage': { '@id': url },
         'wordCount': wordCount,
+        'commentCount': 0,
         'publisher': { '@id': `${BASE_URL}/#organization` },
         'image': { '@id': `${url}/#primaryimage` },
         'thumbnailUrl': featuredImage,

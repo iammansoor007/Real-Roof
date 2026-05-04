@@ -44,7 +44,7 @@ const ServiceCard = ({ service, index }: any) => {
 export default function ServicesTemplate({ pageData, params }: { pageData?: any, params?: any }) {
     const { services: dataRaw } = useContent();
     const data = dataRaw as any;
-    const services = (data?.services || []).filter((s: any) => s.status === 'published');
+    const services = (data?.services || []).filter((s: any) => s.status === 'published' || s.status === undefined);
 
     // Use services.headline if available
     const headline = data?.headline;

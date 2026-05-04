@@ -168,7 +168,7 @@ const FeatureCard = ({ feature, index }: { feature: any; index: number }) => {
     };
 
     // Get the correct icon component
-    const FeatureIcon = getFeatureIcon(feature.icon);
+    const FeatureIcon = getFeatureIcon(feature?.icon || "CheckCircle");
 
     return (
         <motion.article
@@ -346,7 +346,7 @@ const FeatureCard = ({ feature, index }: { feature: any; index: number }) => {
                     </div>
 
                     <RichTextRenderer 
-                        content={feature.description} 
+                        content={feature?.description || ""} 
                         className="text-sm md:text-base text-muted-foreground leading-relaxed flex-1"
                     />
 
@@ -503,7 +503,7 @@ const StatCounter = ({ value, label, suffix = "", delay = 0 }: { value: string |
 };
 
 const AwardCTABanner = () => {
-    const { cta } = useContent().whyChooseUs;
+    const { cta } = useContent().whyChooseUs || {};
 
     return (
         <motion.div
@@ -559,16 +559,16 @@ const AwardCTABanner = () => {
 
                         <h3
                             className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 leading-tight"
-                            dangerouslySetInnerHTML={{ __html: cta.title }}
+                            dangerouslySetInnerHTML={{ __html: cta?.title || "" }}
                         />
 
                         <RichTextRenderer 
-                            content={cta.description} 
+                            content={cta?.description || ""} 
                             className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-lg"
                         />
 
                         <div className="flex items-center gap-6 mt-6">
-                            {cta.trustBadges.map((badge: string, i: number) => (
+                            {(cta?.trustBadges || []).map((badge: string, i: number) => (
                                 <div key={i} className="flex items-center gap-2">
                                     <div className="w-1.5 h-1.5 bg-primary rounded-full" />
                                     <span className="text-xs text-muted-foreground">{badge}</span>
@@ -578,8 +578,8 @@ const AwardCTABanner = () => {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4">
-                        {cta.buttons.map((button: any, idx: number) => (
-                            <Link key={idx} href={button.href}>
+                        {(cta?.buttons || []).map((button: any, idx: number) => (
+                            <Link key={idx} href={button.href || "#"}>
                                 <motion.div
                                     whileHover={{ scale: 1.03 }}
                                     whileTap={{ scale: 0.98 }}
@@ -611,7 +611,7 @@ const WhyChooseUs = () => {
     const sectionRef = useRef(null);
     const [isClient, setIsClient] = useState(false);
 
-    const { section, features, stats } = whyChooseUs;
+    const { section, features, stats } = whyChooseUs || {};
 
     useEffect(() => {
         setIsClient(true);
@@ -670,29 +670,29 @@ const WhyChooseUs = () => {
 
                         <h1
                             className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight"
-                            dangerouslySetInnerHTML={{ __html: section.headline }}
+                            dangerouslySetInnerHTML={{ __html: section?.headline || "" }}
                         />
 
                         <RichTextRenderer 
-                            content={section.description} 
+                            content={section?.description || ""} 
                             className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto"
                         />
                     </motion.div>
                 </header>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
-                    {features.map((feature: any, index: number) => (
+                    {(features || []).map((feature: any, index: number) => (
                         <FeatureCard key={`feature-${index}`} feature={feature} index={index} />
                     ))}
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-24">
-                    {stats.map((stat: any, index: number) => (
+                    {(stats || []).map((stat: any, index: number) => (
                         <StatCounter
                             key={`stat-${index}`}
-                            value={stat.value}
-                            label={stat.label}
-                            suffix={stat.suffix}
+                            value={stat?.value || 0}
+                            label={stat?.label || ""}
+                            suffix={stat?.suffix || ""}
                             delay={0.1 + (index * 0.1)}
                         />
                     ))}

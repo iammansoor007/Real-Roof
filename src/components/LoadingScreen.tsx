@@ -119,13 +119,11 @@ const PremiumLoader = ({ onComplete }: LoaderProps) => {
     const t1 = setTimeout(() => setPhase(2), phases.simpleDark);
     const t2 = setTimeout(() => setPhase(3), phases.simpleDark + phases.roofDraw);
     const t3 = setTimeout(() => setPhase(4), phases.simpleDark + phases.roofDraw + phases.logoText);
-    const t4 = setTimeout(() => onComplete(), phases.simpleDark + phases.roofDraw + phases.logoText + phases.ready);
 
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
       clearTimeout(t3);
-      clearTimeout(t4);
     };
   }, [onComplete, phases]);
 

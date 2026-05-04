@@ -5,22 +5,44 @@ import staticData from '../src/data/completeData.json';
 
 const ContentContext = createContext<any>(staticData);
 
+const deepMerge = (target: any, source: any) => {
+  if (!source) return target;
+  if (!target) return source;
+  
+  const output = { ...target };
+  Object.keys(source).forEach(key => {
+    if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+      if (!(key in target)) {
+        output[key] = source[key];
+      } else {
+        output[key] = deepMerge(target[key], source[key]);
+      }
+    } else {
+      // If it's an array and it's empty in source, but has data in target, keep target (for collections)
+      if (Array.isArray(source[key]) && source[key].length === 0 && Array.isArray(target[key]) && target[key].length > 0) {
+        output[key] = target[key];
+      } else {
+        output[key] = source[key];
+      }
+    }
+  });
+  return output;
+};
+
 export const ContentProvider = ({ children, initialData }: { children: React.ReactNode, initialData?: any }) => {
-  const [content, setContent] = useState<any>(initialData || staticData);
+  // Merge initialData with staticData immediately to ensure global sections (navbar/footer) 
+  // are available even if the page-specific data is limited.
+  const [content, setContent] = useState<any>(initialData ? deepMerge(staticData, initialData) : staticData);
   const [isLoading, setIsLoading] = useState(!initialData);
 
   useEffect(() => {
-    // If we already have initialData (e.g. from a page override), we don't necessarily need to fetch global
-    // But usually we want to merge them. For now, let's just fetch if no initialData is provided
-    // or if we want to ensure global defaults are always available.
-    
     const fetchContent = async () => {
       try {
         const response = await fetch('/api/content');
         if (response.ok) {
           const globalData = await response.json();
-          // Merge logic: local data takes precedence
-          setContent(initialData ? { ...globalData, ...initialData } : globalData);
+          // Merge logic: local data takes precedence via deepMerge
+          setContent(initialData ? deepMerge(globalData, initialData) : globalData);
         }
       } catch (error) {
         console.error('Failed to fetch content from DB, falling back to static data:', error);

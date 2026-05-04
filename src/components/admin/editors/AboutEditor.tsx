@@ -77,9 +77,9 @@ export default function AboutEditor({ pageId, data, setData }: { pageId: string,
                <div className="space-y-6">
                   <h3 className={UI.sectionHeader}>1. Headline</h3>
                   <div className="space-y-2">
-                     <input type="text" value={data.hero?.headline?.line1 || ""} onChange={(e) => updateSection("hero", "headline", { ...data.hero.headline, line1: e.target.value })} className={UI.input} placeholder="Line 1" />
-                     <input type="text" value={data.hero?.headline?.line2 || ""} onChange={(e) => updateSection("hero", "headline", { ...data.hero.headline, line2: e.target.value })} className={UI.input} placeholder="Line 2" />
-                     <input type="text" value={data.hero?.headline?.line3 || ""} onChange={(e) => updateSection("hero", "headline", { ...data.hero.headline, line3: e.target.value })} className={UI.input} placeholder="Line 3" />
+                     <input type="text" value={data.hero?.headline?.line1 || ""} onChange={(e) => updateSection("hero", "headline", { ...(data.hero?.headline || {}), line1: e.target.value })} className={UI.input} placeholder="Line 1" />
+                     <input type="text" value={data.hero?.headline?.line2 || ""} onChange={(e) => updateSection("hero", "headline", { ...(data.hero?.headline || {}), line2: e.target.value })} className={UI.input} placeholder="Line 2" />
+                     <input type="text" value={data.hero?.headline?.line3 || ""} onChange={(e) => updateSection("hero", "headline", { ...(data.hero?.headline || {}), line3: e.target.value })} className={UI.input} placeholder="Line 3" />
                   </div>
                   <RichTextEditor 
                     label="Description" 
@@ -189,34 +189,34 @@ export default function AboutEditor({ pageId, data, setData }: { pageId: string,
                <div className="space-y-6">
                   <h3 className={UI.sectionHeader}>2. Portrait Badges</h3>
                   <div className="grid grid-cols-2 gap-4">
-                     <div className="space-y-1.5"><label className={UI.label}>Left Badge</label><input type="text" value={data.story?.portrait?.badgeLeft || ""} onChange={(e) => updateSection("story", "portrait", { ...data.story.portrait, badgeLeft: e.target.value })} className={UI.input} /></div>
-                     <div className="space-y-1.5"><label className={UI.label}>Right Badge</label><input type="text" value={data.story?.portrait?.badgeRight || ""} onChange={(e) => updateSection("story", "portrait", { ...data.story.portrait, badgeRight: e.target.value })} className={UI.input} /></div>
+                     <div className="space-y-1.5"><label className={UI.label}>Left Badge</label><input type="text" value={data.story?.portrait?.badgeLeft || ""} onChange={(e) => updateSection("story", "portrait", { ...(data.story?.portrait || {}), badgeLeft: e.target.value })} className={UI.input} /></div>
+                     <div className="space-y-1.5"><label className={UI.label}>Right Badge</label><input type="text" value={data.story?.portrait?.badgeRight || ""} onChange={(e) => updateSection("story", "portrait", { ...(data.story?.portrait || {}), badgeRight: e.target.value })} className={UI.input} /></div>
                   </div>
                </div>
                <div className="space-y-6">
                   <h3 className={UI.sectionHeader}>3. Founder Info</h3>
                   <div className="space-y-4">
-                     <div className="space-y-1.5"><label className={UI.label}>Name</label><input type="text" value={data.story?.founder?.name || ""} onChange={(e) => updateSection("story", "founder", { ...data.story.founder, name: e.target.value })} className={UI.input} /></div>
-                     <div className="space-y-1.5"><label className={UI.label}>Title</label><input type="text" value={data.story?.founder?.title || ""} onChange={(e) => updateSection("story", "founder", { ...data.story.founder, title: e.target.value })} className={UI.input} /></div>
+                     <div className="space-y-1.5"><label className={UI.label}>Name</label><input type="text" value={data.story?.founder?.name || ""} onChange={(e) => updateSection("story", "founder", { ...(data.story?.founder || {}), name: e.target.value })} className={UI.input} /></div>
+                     <div className="space-y-1.5"><label className={UI.label}>Title</label><input type="text" value={data.story?.founder?.title || ""} onChange={(e) => updateSection("story", "founder", { ...(data.story?.founder || {}), title: e.target.value })} className={UI.input} /></div>
                      <RichTextEditor 
                         label="Primary Quote" 
                         content={data.story?.founder?.quote || ""} 
-                        onChange={(html) => updateSection("story", "founder", { ...data.story.founder, quote: html })} 
+                        onChange={(html) => updateSection("story", "founder", { ...(data.story?.founder || {}), quote: html })} 
                      />
                      <RichTextEditor 
                         label="Secondary Quote" 
                         content={data.story?.founder?.secondaryQuote || ""} 
-                        onChange={(html) => updateSection("story", "founder", { ...data.story.founder, secondaryQuote: html })} 
+                        onChange={(html) => updateSection("story", "founder", { ...(data.story?.founder || {}), secondaryQuote: html })} 
                      />
-                     <div className="space-y-1.5"><label className={UI.label}>Quote Footer</label><input type="text" value={data.story?.founder?.footer || ""} onChange={(e) => updateSection("story", "founder", { ...data.story.founder, footer: e.target.value })} className={UI.input} /></div>
-                     <div className="space-y-1.5"><label className={UI.label}>Email</label><input type="text" value={data.story?.founder?.email || ""} onChange={(e) => updateSection("story", "founder", { ...data.story.founder, email: e.target.value })} className={UI.input} /></div>
-                     <div className="space-y-1.5"><label className={UI.label}>LinkedIn</label><input type="text" value={data.story?.founder?.social?.linkedin || ""} onChange={(e) => updateSection("story", "founder", { ...data.story.founder, social: { linkedin: e.target.value } })} className={UI.input} /></div>
+                     <div className="space-y-1.5"><label className={UI.label}>Quote Footer</label><input type="text" value={data.story?.founder?.footer || ""} onChange={(e) => updateSection("story", "founder", { ...(data.story?.founder || {}), footer: e.target.value })} className={UI.input} /></div>
+                     <div className="space-y-1.5"><label className={UI.label}>Email</label><input type="text" value={data.story?.founder?.email || ""} onChange={(e) => updateSection("story", "founder", { ...(data.story?.founder || {}), email: e.target.value })} className={UI.input} /></div>
+                     <div className="space-y-1.5"><label className={UI.label}>LinkedIn</label><input type="text" value={data.story?.founder?.social?.linkedin || ""} onChange={(e) => updateSection("story", "founder", { ...(data.story?.founder || {}), social: { ...(data.story?.founder?.social || {}), linkedin: e.target.value } })} className={UI.input} /></div>
                   </div>
                </div>
                   <RichTextEditor 
                     label="Biography" 
                     content={typeof data.story?.founder?.bio === 'string' ? data.story.founder.bio : (data.story?.founder?.bio || []).join("")} 
-                    onChange={(html) => updateSection("story", "founder", { ...data.story.founder, bio: html })} 
+                    onChange={(html) => updateSection("story", "founder", { ...(data.story?.founder || {}), bio: html })} 
                   />
             </div>
           )}

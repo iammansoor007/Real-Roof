@@ -172,8 +172,8 @@ const NewsletterForm = () => {
 
 const ServiceLinks = () => {
   const { services: servicesData, footer } = useContent();
-  const dynamicServices = ((servicesData as any).services || []).filter((s: any) => s.status === 'published');
-  const { services: footerServices } = footer;
+  const dynamicServices = ((servicesData as any).services || []).filter((s: any) => s.status === 'published' || s.status === undefined);
+  const footerServices = footer?.services || { title: "Our Services" };
 
   return (
     <div className="space-y-4">
@@ -201,15 +201,16 @@ const ServiceLinks = () => {
 
 const MaterialsSection = () => {
   const { footer } = useContent();
-  const { services } = footer;
+  const services = footer?.services || { materials: { title: "Materials", items: [] } };
+  const materials = services.materials || { title: "Materials", items: [] };
 
   return (
     <div className="space-y-3 mt-4">
       <h5 className="text-[10px] font-mono tracking-[0.2em] uppercase text-primary/60">
-        {services.materials.title}
+        {materials.title}
       </h5>
       <div className="space-y-2">
-        {services.materials.items.map((material: any) => (
+        {(materials.items || []).map((material: any) => (
           <Link
             key={material.label}
             href={material.href}
@@ -226,7 +227,7 @@ const MaterialsSection = () => {
 
 const ContactInfo = () => {
   const { footer, hours } = useContent();
-  const { contact } = footer;
+  const contact = footer?.contact || { title: "Contact Us", email: "", phone: "", address: "", emergency: "", areas: "" };
 
   return (
     <div className="space-y-6">
@@ -299,7 +300,7 @@ const ContactInfo = () => {
 
 const CertificationsGrid = () => {
   const { footer } = useContent();
-  const { certifications } = footer;
+  const certifications = footer?.certifications || [];
 
   return (
     <div className="grid grid-cols-2 gap-3 mt-4">
@@ -329,7 +330,7 @@ const CertificationsGrid = () => {
 
 const SocialLinks = () => {
   const { footer } = useContent();
-  const { social } = footer;
+  const social = footer?.social || [];
 
   // Map platform names to ensure proper icon mapping
   const getIconName = (item: any) => {
@@ -365,7 +366,7 @@ const SocialLinks = () => {
 
 const LegacyMarquee = () => {
   const { footer } = useContent();
-  const { marquee } = footer;
+  const marquee = footer?.marquee || { texts: [], speed: 30, repeats: 8 };
 
   return (
     <div className="relative overflow-hidden py-8 border-t border-border">
@@ -406,7 +407,9 @@ const Footer = () => {
   const sectionRef = useRef(null);
   const [isClient, setIsClient] = useState(false);
 
-  const { company, quickLinks, bottom } = footer;
+  const company = footer?.company || { name: "Eagle Revolution", tagline: "", description: "" };
+  const quickLinks = footer?.quickLinks || [];
+  const bottom = footer?.bottom || { copyright: "", rights: "", links: [], tagline: "" };
 
   useEffect(() => {
     setIsClient(true);

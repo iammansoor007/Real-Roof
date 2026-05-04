@@ -282,6 +282,6 @@
     @apply mb-2 last:mb-0;
   }
   .rich-text-content a {
-    @apply text-primary underline underline-offset-4 hover:text-primary/80 transition-colors;
+    @apply text-primary hover:underline underline-offset-4 transition-colors;
   }
 }

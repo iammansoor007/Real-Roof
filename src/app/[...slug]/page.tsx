@@ -1,4 +1,8 @@
 import { notFound } from 'next/navigation';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import connectToDatabase from '@/lib/mongodb';
 import Page from '@/models/Page';
 import SiteContent from '@/models/Content';
@@ -43,7 +47,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     robots: {
       index: seo.metaRobotsIndex !== 'noindex',
-      follow: seo.metaRobotsIndex === 'noindex' ? false : (seo.metaRobotsFollow !== 'nofollow'),
+      follow: seo.metaRobotsIndex !== 'noindex' && seo.metaRobotsFollow !== 'nofollow',
       ...(seo.metaRobotsIndex !== 'noindex' && {
         'max-video-preview': -1,
         'max-image-preview': 'large',
@@ -68,6 +72,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     twitter: {
       card: "summary_large_image",
       title: seo.twitterTitle || seo.ogTitle || seo.metaTitle || page.title,
+      description: seo.twitterDescription || seo.ogDescription || seo.metaDescription,
+      images: [getAbsoluteUrl(seo.featuredImage || seo.twitterImage || seo.ogImage) || `${BASE_URL}/eagle-logo.png`],
+      site: "@EagleRevolution",
+      creator: "@EagleRevolution",
     },
   };
 }
@@ -147,19 +155,3 @@ export default async function DynamicPage({ params }: PageProps) {
   );
 }
 
-// Generate static params for ISR/SSG optimization
-export async function generateStaticParams() {
-  try {
-    await connectToDatabase();
-    const pages = await Page.find({ status: 'published' }).select('slug');
-
-    return pages
-      .filter((page: any) => page.slug)
-      .map((page: any) => ({
-        slug: page.slug.split('/'),
-      }));
-  } catch (error) {
-    console.error("Error generating static params:", error);
-    return [];
-  }
-}

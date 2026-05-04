@@ -165,8 +165,8 @@ export default function SettingsEditor({ pageId, data, setData }: { pageId: stri
                             <div className="grid grid-cols-2 gap-4">
                                <div className="space-y-1.5">
                                   <label className={UI.label}>Link Label</label>
-                                  <input type="text" value={link.label} onChange={(e) => {
-                                    const newL = [...data.navbar.companyLinks]; newL[i].label = e.target.value; updateNested(["navbar", "companyLinks"], newL);
+                                  <input type="text" value={link.label || ""} onChange={(e) => {
+                                    const newL = [...(data.navbar?.companyLinks || [])]; newL[i].label = e.target.value; updateNested(["navbar", "companyLinks"], newL);
                                   }} className={UI.input + " font-bold"} placeholder="Link Label" />
                                </div>
                                <div className="space-y-1.5">
@@ -174,7 +174,7 @@ export default function SettingsEditor({ pageId, data, setData }: { pageId: stri
                                   <select 
                                     value={link.href} 
                                     onChange={(e) => {
-                                      const newL = [...data.navbar.companyLinks]; 
+                                      const newL = [...(data.navbar?.companyLinks || [])]; 
                                       newL[i].href = e.target.value; 
                                       updateNested(["navbar", "companyLinks"], newL);
                                     }} 
@@ -196,13 +196,13 @@ export default function SettingsEditor({ pageId, data, setData }: { pageId: stri
                             <div className="pl-6 border-l border-[#dcdcde] space-y-3">
                                {(link.subLinks || []).map((sub: any, j: number) => (
                                  <div key={j} className="flex items-center gap-3">
-                                    <input type="text" value={sub.label} onChange={(e) => {
-                                      const newL = [...data.navbar.companyLinks]; newL[i].subLinks[j].label = e.target.value; updateNested(["navbar", "companyLinks"], newL);
+                                    <input type="text" value={sub.label || ""} onChange={(e) => {
+                                      const newL = [...(data.navbar?.companyLinks || [])]; newL[i].subLinks[j].label = e.target.value; updateNested(["navbar", "companyLinks"], newL);
                                     }} className={UI.input + " py-1 text-[11px]"} placeholder="Sub-link Label" />
                                     <select 
                                       value={sub.href} 
                                       onChange={(e) => {
-                                        const newL = [...data.navbar.companyLinks]; 
+                                        const newL = [...(data.navbar?.companyLinks || [])]; 
                                         newL[i].subLinks[j].href = e.target.value; 
                                         updateNested(["navbar", "companyLinks"], newL);
                                       }} 
@@ -214,18 +214,18 @@ export default function SettingsEditor({ pageId, data, setData }: { pageId: stri
                                        ))}
                                     </select>
                                     <button onClick={() => {
-                                      const newL = [...data.navbar.companyLinks]; newL[i].subLinks = link.subLinks.filter((_: any, idx: number) => idx !== j); updateNested(["navbar", "companyLinks"], newL);
+                                      const newL = [...(data.navbar?.companyLinks || [])]; newL[i].subLinks = (link.subLinks || []).filter((_: any, idx: number) => idx !== j); updateNested(["navbar", "companyLinks"], newL);
                                     }} className="text-slate-400 hover:text-[#d63638]"><X className="w-4 h-4" /></button>
                                  </div>
                                ))}
                                <button onClick={() => {
-                                 const newL = [...data.navbar.companyLinks]; if (!newL[i].subLinks) newL[i].subLinks = [];
+                                 const newL = [...(data.navbar?.companyLinks || [])]; if (!newL[i].subLinks) newL[i].subLinks = [];
                                  newL[i].subLinks.push({ label: "New Sub-link", href: "/" }); updateNested(["navbar", "companyLinks"], newL);
                                }} className="text-[10px] font-bold text-[#2271b1] uppercase hover:underline">+ Add Sub-Menu Link</button>
                             </div>
 
                             <button onClick={() => {
-                               const newL = data.navbar.companyLinks.filter((_: any, idx: number) => idx !== i); updateNested(["navbar", "companyLinks"], newL);
+                               const newL = (data.navbar?.companyLinks || []).filter((_: any, idx: number) => idx !== i); updateNested(["navbar", "companyLinks"], newL);
                             }} className="absolute top-6 right-6 text-slate-400 hover:text-[#d63638]"><Trash2 className="w-4 h-4" /></button>
                          </div>
                        ))}
@@ -260,11 +260,11 @@ export default function SettingsEditor({ pageId, data, setData }: { pageId: stri
                        <div className={UI.card + " space-y-3"}>
                           {(data.footer?.marquee?.texts || []).map((text: string, idx: number) => (
                             <div key={idx} className="flex gap-2">
-                               <input type="text" value={text} onChange={(e) => {
-                                  const newT = [...data.footer.marquee.texts]; newT[idx] = e.target.value; updateNested(["footer", "marquee", "texts"], newT);
+                               <input type="text" value={text || ""} onChange={(e) => {
+                                  const newT = [...(data.footer?.marquee?.texts || [])]; newT[idx] = e.target.value; updateNested(["footer", "marquee", "texts"], newT);
                                }} className={UI.input + " font-bold uppercase tracking-widest text-[11px]"} />
                                <button onClick={() => {
-                                 const newT = data.footer.marquee.texts.filter((_: any, i: number) => i !== idx); updateNested(["footer", "marquee", "texts"], newT);
+                                 const newT = (data.footer?.marquee?.texts || []).filter((_: any, i: number) => i !== idx); updateNested(["footer", "marquee", "texts"], newT);
                                }} className="text-slate-400 hover:text-[#d63638]"><Trash2 className="w-4 h-4" /></button>
                             </div>
                           ))}
@@ -286,13 +286,13 @@ export default function SettingsEditor({ pageId, data, setData }: { pageId: stri
                              <div className="space-y-2">
                                 {(data.footer?.bottom?.links || []).map((link: any, idx: number) => (
                                    <div key={idx} className="flex gap-2 items-center">
-                                      <input type="text" value={link.label} onChange={(e) => {
-                                         const newL = [...data.footer.bottom.links]; newL[idx].label = e.target.value; updateNested(["footer", "bottom", "links"], newL);
+                                      <input type="text" value={link.label || ""} onChange={(e) => {
+                                         const newL = [...(data.footer?.bottom?.links || [])]; newL[idx].label = e.target.value; updateNested(["footer", "bottom", "links"], newL);
                                       }} className={UI.input + " py-1 text-[11px]"} placeholder="Label" />
                                       <select 
                                         value={link.href} 
                                         onChange={(e) => {
-                                           const newL = [...data.footer.bottom.links]; newL[idx].href = e.target.value; updateNested(["footer", "bottom", "links"], newL);
+                                           const newL = [...(data.footer?.bottom?.links || [])]; newL[idx].href = e.target.value; updateNested(["footer", "bottom", "links"], newL);
                                         }} 
                                         className={UI.input + " py-1 text-[11px]"}
                                       >
@@ -306,7 +306,7 @@ export default function SettingsEditor({ pageId, data, setData }: { pageId: stri
                                          </optgroup>
                                       </select>
                                       <button onClick={() => {
-                                         const newL = data.footer.bottom.links.filter((_: any, i: number) => i !== idx); updateNested(["footer", "bottom", "links"], newL);
+                                         const newL = (data.footer?.bottom?.links || []).filter((_: any, i: number) => i !== idx); updateNested(["footer", "bottom", "links"], newL);
                                       }} className="text-slate-400 hover:text-[#d63638]"><X className="w-4 h-4" /></button>
                                    </div>
                                  ))}
@@ -342,7 +342,7 @@ export default function SettingsEditor({ pageId, data, setData }: { pageId: stri
                        {Object.entries(data.hours || {}).map(([day, val]: [string, any]) => (
                          <div key={day} className="flex items-center justify-between">
                             <label className={UI.label + " mb-0 capitalize"}>{day}</label>
-                            <input type="text" value={val} onChange={(e) => updateNested(["hours", day], e.target.value)} className={UI.input + " w-40 text-right font-bold"} />
+                            <input type="text" value={val || ""} onChange={(e) => updateNested(["hours", day], e.target.value)} className={UI.input + " w-40 text-right font-bold"} />
                          </div>
                        ))}
                     </div>

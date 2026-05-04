@@ -11,7 +11,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Navbar = () => {
-  const { navbar, settings } = useContent();
+  const content = useContent();
+  const { navbar, settings, services: servicesData } = content;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -24,7 +25,7 @@ const Navbar = () => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const { companyLinks } = navbar;
-  const services = ((useContent().services as any).services || []).filter((s: any) => s.status === 'published');
+  const services = (servicesData.services || []).filter((s: any) => s.status === 'published' || s.status === undefined);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);

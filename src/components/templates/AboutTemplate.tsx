@@ -143,9 +143,9 @@ const StatCounter = ({ value, label, suffix = "", delay = 0, icon: Icon, descrip
 };
 
 // ==================== STATS SECTION ====================
-const StatsSection = () => {
+const StatsSection = ({ content: passedContent }: { content?: any }) => {
   const { aboutPage } = useContent();
-  const statsData = aboutPage?.stats || { items: [], trustBadges: [] };
+  const statsData = passedContent || aboutPage?.stats || { items: [], trustBadges: [] };
 
   return (
     <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-muted/30 to-background">
@@ -196,12 +196,12 @@ const StatsSection = () => {
 };
 
 // ==================== HERO WITH BACKGROUND IMAGE ====================
-const Hero = () => {
+const Hero = ({ content: passedContent }: { content?: any }) => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 150]);
   const textY = useTransform(scrollY, [0, 500], [0, -50]);
   const { aboutPage } = useContent();
-  const hero = aboutPage?.hero || { headline: {}, stats: [], phone: "" };
+  const hero = passedContent || aboutPage?.hero || { headline: {}, stats: [], phone: "" };
 
   return (
     <section className="relative min-h-[85vh] sm:min-h-screen w-full bg-background overflow-hidden flex items-center justify-center py-16 sm:py-12">
@@ -407,11 +407,11 @@ const FounderPortrait = () => {
 };
 
 // ==================== FOUNDER STORY ====================
-const FounderStory = () => {
+const FounderStory = ({ content: passedContent }: { content?: any }) => {
   const sectionRef = useRef(null);
   const [isClient, setIsClient] = useState(false);
   const { aboutPage } = useContent();
-  const story = aboutPage?.story || { headline: "", highlight: "", description: "", founder: { bio: [], social: {} } };
+  const story = passedContent || aboutPage?.story || { headline: "", highlight: "", description: "", founder: { bio: [], social: {} } };
 
   useEffect(() => {
     setIsClient(true);
@@ -557,11 +557,11 @@ const FounderStory = () => {
 };
 
 // ==================== MISSION SECTION ====================
-const MissionSection = () => {
+const MissionSection = ({ content: passedContent }: { content?: any }) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-20px", amount: 0.1 });
   const { aboutPage } = useContent();
-  const mission = aboutPage?.mission || { principles: [], stats: [] };
+  const mission = passedContent || aboutPage?.mission || { principles: [], stats: [] };
 
   return (
     <section ref={ref} className="relative py-8 sm:py-10 lg:py-12 overflow-hidden bg-background">
@@ -623,10 +623,10 @@ const MissionSection = () => {
 };
 
 // ==================== PREMIUM MARQUEE ====================
-const RecognitionMarquee = () => {
+const RecognitionMarquee = ({ content: passedContent }: { content?: any }) => {
   const { aboutPage } = useContent();
-  const certs = aboutPage?.recognition || [];
-  if (certs.length === 0) return null;
+  const certs = passedContent || aboutPage?.recognition || [];
+  if (!certs || certs.length === 0) return null;
 
   return (
     <section className="py-6 sm:py-8 md:py-12 mt-2 overflow-hidden relative bg-background">
@@ -653,6 +653,7 @@ const RecognitionMarquee = () => {
 // ==================== SERVICE CARD ====================
 const ServiceCard = ({ service, index }: { service: any; index: number }) => {
   const [isHovered, setIsHovered] = useState(false);
+  if (!service) return null;
   const serviceImage = service.overviewImage || service.image || imageMap[service.title] || roofingImg;
   return (
     <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }} className="group" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
@@ -691,15 +692,29 @@ const ServiceCard = ({ service, index }: { service: any; index: number }) => {
 };
 
 // ==================== SERVICES SECTION ====================
-const ServicesSection = () => {
+const ServicesSection = ({ content: passedContent, featuredServices: passedFeatured }: { content?: any, featuredServices?: any[] }) => {
   const { aboutPage, services } = useContent();
-  const capabilities = aboutPage?.capabilities || {};
+  const capabilities = passedContent || aboutPage?.capabilities || {};
   
-  // Use the selected services from CMS if available, otherwise fallback to first 6
-  const featuredServices = aboutPage?.services || [];
-  const servicesList = featuredServices.length > 0 
-    ? featuredServices 
-    : (Array.isArray(services) ? services : services?.services || []).slice(0, 6);
+  // Robust normalization: Ensure featuredServicesRaw is an array
+  const rawData = passedFeatured || aboutPage?.services || [];
+  const featuredServicesRaw = Array.isArray(rawData) ? rawData : (rawData?.services || []);
+  
+  // Resolve IDs to objects if necessary
+  const resolvedFeatured = (Array.isArray(featuredServicesRaw) ? featuredServicesRaw : []).map((s: any) => {
+    if (typeof s === 'string') {
+        const fullServiceList = Array.isArray(services) ? services : (services as any)?.services || [];
+        const fullService = fullServiceList.find((ps: any) => ps._id === s || ps.id === s || ps.slug === s);
+        return fullService || null;
+    }
+    return s;
+  }).filter(Boolean);
+
+  const servicesList = resolvedFeatured.length > 0 
+    ? resolvedFeatured 
+    : (Array.isArray(services) ? services : (services as any)?.services || [])
+        .filter((s: any) => s.status === 'published' || s.status === undefined)
+        .slice(0, 6);
 
   return (
     <section className="py-16 md:py-24 px-6 lg:px-12 bg-transparent relative z-30">
@@ -733,9 +748,9 @@ const ServicesSection = () => {
 };
 
 // ==================== CTA BANNER ====================
-const AwardCTABanner = () => {
+const AwardCTABanner = ({ content: passedContent }: { content?: any }) => {
   const { aboutPage } = useContent();
-  const ctaBanner = aboutPage?.ctaBanner || { features: [] };
+  const ctaBanner = passedContent || aboutPage?.ctaBanner || { features: [] };
 
   return (
     <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.3 }} className="relative mt-20 mb-20 overflow-hidden bg-card border border-border rounded-3xl p-12">
@@ -771,9 +786,9 @@ const AwardCTABanner = () => {
 };
 
 // ==================== CORE VALUES GRID ====================
-const ValuesGrid = () => {
+const ValuesGrid = ({ content: passedContent }: { content?: any }) => {
   const { aboutPage } = useContent();
-  const valuesData = aboutPage?.values || { items: [] };
+  const valuesData = passedContent || aboutPage?.values || { items: [] };
 
   return (
     <section className="relative py-24 bg-gradient-to-b from-background via-muted/30 to-background overflow-hidden">
@@ -816,17 +831,19 @@ const ValuesGrid = () => {
 
 // ==================== MAIN PAGE COMPONENT ====================
 export default function AboutTemplate({ pageData, params }: { pageData?: any, params?: any }) {
+  const content = pageData?.content || {};
+
   return (
     <main className="bg-background">
-      <Hero />
-      <RecognitionMarquee />
-      <FounderStory />
-      <StatsSection />
-      <MissionSection />
-      <ServicesSection />
-      <ValuesGrid />
+      <Hero content={content.hero} />
+      <RecognitionMarquee content={content.recognition} />
+      <FounderStory content={content.story} />
+      <StatsSection content={content.stats} />
+      <MissionSection content={content.mission} />
+      <ServicesSection content={content.capabilities} featuredServices={content.services} />
+      <ValuesGrid content={content.values} />
       <div className="max-w-7xl mx-auto px-4 relative z-20">
-        <AwardCTABanner />
+        <AwardCTABanner content={content.ctaBanner} />
       </div>
     </main>
   );

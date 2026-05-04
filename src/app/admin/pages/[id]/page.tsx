@@ -23,7 +23,6 @@ const EDITOR_TEMPLATES = [
   { id: 'reviews', label: 'Client Reviews', icon: Star },
   { id: 'faq', label: 'Support FAQ', icon: HelpCircle },
   { id: 'contact', label: 'Contact Center', icon: Phone },
-  { id: 'service-detail', label: 'Service Detail', icon: Settings },
 ];
 
 export default function DynamicPageEditor({ params }: { params: Promise<{ id: string }> }) {
@@ -105,6 +104,15 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
         <div className="flex items-center gap-2">
           <h1 className="text-[20px] font-normal text-[#1d2327] font-serif">Edit Page</h1>
           <Link href="/admin/pages" className="bg-white border border-[#2271b1] text-[#2271b1] text-[12px] px-1.5 py-0.5 rounded-[3px] hover:bg-[#f0f6fb] transition-colors">Add New</Link>
+          {page?.slug && (
+            <Link 
+              href={page.slug === 'home' ? '/' : `/${page.slug}`} 
+              target="_blank" 
+              className="bg-white border border-[#c3c4c7] text-[#2c3338] text-[12px] px-1.5 py-0.5 rounded-[3px] hover:bg-[#f6f7f7] transition-colors flex items-center gap-1"
+            >
+              View Page <ExternalLink className="w-3 h-3" />
+            </Link>
+          )}
         </div>
       </div>
 
@@ -115,7 +123,7 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
           <div className="bg-white">
             <input
               type="text"
-              value={page.title}
+              value={page.title || ""}
               onChange={(e) => setPage({ ...page, title: e.target.value })}
               className="w-full border border-[#c3c4c7] px-3 py-1.5 text-[16px] font-medium text-[#1d2327] focus:border-[#2271b1] focus:ring-0 outline-none placeholder:text-[#c3c4c7]"
               placeholder="Enter title here"
@@ -211,6 +219,17 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
                 <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5 text-[#82878c]" /> Date:</span>
                 <strong>{new Date().toLocaleDateString()}</strong>
               </div>
+              {page?.slug && (
+                <div className="pt-2 border-t border-[#f0f0f1] mt-2">
+                   <Link 
+                    href={page.slug === 'home' ? '/' : `/${page.slug}`} 
+                    target="_blank" 
+                    className="text-[#2271b1] hover:underline flex items-center gap-1"
+                  >
+                    View Page <ExternalLink className="w-3 h-3" />
+                  </Link>
+                </div>
+              )}
             </div>
             <div className="bg-[#f6f7f7] border-t border-[#c3c4c7] px-3 py-2 flex items-center justify-between">
               <button onClick={handleDelete} className="text-[#d63638] underline text-[12px] hover:text-[#b32d2e]">Trash</button>

@@ -135,7 +135,7 @@ export default function CareersEditor({ pageId, data, setData }: { pageId: strin
                           <div className="flex-1 space-y-1">
                              <label className={UI.label + " mb-0"}>Job Title</label>
                              <input type="text" value={role.label} onChange={(e) => {
-                                  const newR = [...data.careers.roles];
+                                  const newR = [...(data.careers?.roles || [])];
                                   newR[i].label = e.target.value;
                                   newR[i].value = e.target.value.toLowerCase().replace(/\s+/g, '-');
                                   updateCareers("roles", null, newR);
@@ -183,7 +183,7 @@ export default function CareersEditor({ pageId, data, setData }: { pageId: strin
                          <div key={key} className="space-y-1.5">
                             <label className={UI.label}>{key.charAt(0).toUpperCase() + key.slice(1)} Field Label</label>
                             <input type="text" value={val} onChange={(e) => {
-                              const newLabels = { ...data.careers.labels, [key]: e.target.value };
+                              const newLabels = { ...(data.careers?.labels || {}), [key]: e.target.value };
                               updateCareers("labels", null, newLabels);
                             }} className={UI.input} />
                          </div>

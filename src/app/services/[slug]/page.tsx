@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     robots: {
       index: seo.metaRobotsIndex !== 'noindex',
-      follow: seo.metaRobotsIndex === 'noindex' ? false : (seo.metaRobotsFollow !== 'nofollow'),
+      follow: seo.metaRobotsIndex !== 'noindex' && seo.metaRobotsFollow !== 'nofollow',
       ...(seo.metaRobotsIndex !== 'noindex' && {
         'max-video-preview': -1,
         'max-image-preview': 'large',
@@ -67,6 +67,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: seo.twitterTitle || seo.ogTitle || seo.metaTitle || service.title,
       description: seo.twitterDescription || seo.ogDescription || seo.metaDescription || service.description,
       images: [getAbsoluteUrl(seo.featuredImage || seo.twitterImage || seo.ogImage || service.image) || `${BASE_URL}/eagle-logo.png`],
+      site: "@EagleRevolution",
+      creator: "@EagleRevolution",
     },
   };
 }
@@ -77,7 +79,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   // Fetch service for schema injection
   await connectToDatabase();
   const content = await SiteContent.findOne({ key: "complete_data" }).lean() as any;
-  const serviceDoc = content?.data?.services?.services?.find((s: any) => s.slug === resolvedParams.slug && s.status === 'published');
+  const serviceDoc = content?.data?.services?.services?.find((s: any) => 
+    s.slug === resolvedParams.slug && (s.status === 'published' || s.status === undefined)
+  );
   if (!serviceDoc) return notFound();
   const service = JSON.parse(JSON.stringify(serviceDoc));
   const globalData = content?.data || {};

@@ -135,7 +135,7 @@ export default function ContactEditor({ pageId, data, setData }: { pageId: strin
                     {(data.contactPage?.formFields || []).map((field: any, i: number) => (
                       <div key={i} className={UI.card + " space-y-4 relative group"}>
                         <button onClick={() => {
-                          const newF = data.contactPage.formFields.filter((_: any, idx: number) => idx !== i);
+                          const newF = (data.contactPage?.formFields || []).filter((_: any, idx: number) => idx !== i);
                           updateContact("formFields", null, newF);
                         }} className="absolute top-6 right-6 text-slate-400 hover:text-[#d63638] transition-colors"><Trash2 className="w-4 h-4" /></button>
                         
@@ -144,7 +144,7 @@ export default function ContactEditor({ pageId, data, setData }: { pageId: strin
                               <div className="space-y-1.5">
                                  <label className={UI.label}>Field Label</label>
                                  <input type="text" value={field.label} onChange={(e) => {
-                                   const newF = [...data.contactPage.formFields]; newF[i].label = e.target.value; updateContact("formFields", null, newF);
+                                   const newF = [...(data.contactPage?.formFields || [])]; newF[i].label = e.target.value; updateContact("formFields", null, newF);
                                  }} className={UI.input} />
                               </div>
                               <div className="space-y-1.5">

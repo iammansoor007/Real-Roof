@@ -136,19 +136,19 @@ export default function ServiceDetailEditor({ pageId, data, setData }: { pageId:
                  <div className="space-y-6">
                     <h3 className={UI.sectionHeader}>1. Technical Features</h3>
                     <div className="space-y-4">
-                       {(data.features || []).map((f: any, i: number) => (
+                       {(Array.isArray(data.features) ? data.features : []).map((f: any, i: number) => (
                          <div key={i} className={UI.card + " space-y-4 relative group"}>
                             <div className="flex items-center justify-between border-b border-[#f0f0f1] pb-2">
                                <span className="text-[10px] font-bold text-[#646970] uppercase">Feature #{i+1}</span>
                                <button onClick={() => {
-                                 const newF = data.features.filter((_: any, idx: number) => idx !== i); updateField("features", newF);
+                                 const newF = (data.features || []).filter((_: any, idx: number) => idx !== i); updateField("features", newF);
                                }} className="text-[#d63638]"><Trash2 className="w-4 h-4" /></button>
                             </div>
                             <div className="space-y-4">
                                <div className="space-y-1.5">
                                   <label className={UI.label}>Label</label>
                                   <input type="text" value={typeof f === 'string' ? f : f.text} onChange={(e) => {
-                                    const newF = [...data.features]; 
+                                    const newF = [...(data.features || [])]; 
                                     if (typeof f === 'string') newF[i] = { text: e.target.value, icon: "CheckCircle" };
                                     else newF[i].text = e.target.value;
                                     updateField("features", newF);
@@ -158,7 +158,7 @@ export default function ServiceDetailEditor({ pageId, data, setData }: { pageId:
                                   label="Icon Representation"
                                   value={f.icon || "CheckCircle"} 
                                   onChange={(val) => {
-                                    const newF = [...data.features]; 
+                                    const newF = [...(data.features || [])]; 
                                     if (typeof f === 'string') newF[i] = { text: f, icon: val };
                                     else newF[i].icon = val;
                                     updateField("features", newF);
@@ -174,32 +174,32 @@ export default function ServiceDetailEditor({ pageId, data, setData }: { pageId:
                  <div className="space-y-6 border-t border-[#f0f0f1] pt-10">
                     <h3 className={UI.sectionHeader}>2. Impact Metrics</h3>
                     <div className="space-y-4">
-                       {(data.stats || []).map((s: any, i: number) => (
+                       {(Array.isArray(data.stats) ? data.stats : []).map((s: any, i: number) => (
                          <div key={i} className={UI.card + " space-y-4"}>
                             <div className="flex justify-between items-center border-b border-[#f0f0f1] pb-2">
                                <span className="text-[10px] font-bold text-[#646970] uppercase">Metric #{i+1}</span>
                                <button onClick={() => {
-                                 const newS = data.stats.filter((_: any, idx: number) => idx !== i); updateField("stats", newS);
+                                 const newS = (data.stats || []).filter((_: any, idx: number) => idx !== i); updateField("stats", newS);
                                }} className="text-[#d63638]"><Trash2 className="w-4 h-4" /></button>
                             </div>
                             <div className="space-y-4">
                                <div className="space-y-1.5">
                                   <label className={UI.label}>Metric Value</label>
                                   <input type="text" value={s.value} onChange={(e) => {
-                                    const newS = [...data.stats]; newS[i].value = e.target.value; updateField("stats", newS);
+                                    const newS = [...(data.stats || [])]; newS[i].value = e.target.value; updateField("stats", newS);
                                   }} className={UI.inputLarge} placeholder="500+" />
                                </div>
                                <div className="space-y-1.5">
                                   <label className={UI.label}>Label</label>
                                   <input type="text" value={s.label} onChange={(e) => {
-                                    const newS = [...data.stats]; newS[i].label = e.target.value; updateField("stats", newS);
+                                    const newS = [...(data.stats || [])]; newS[i].label = e.target.value; updateField("stats", newS);
                                   }} className={UI.input} />
                                </div>
                                <IconSelector 
                                  label="Icon"
                                  value={s.icon || "Shield"} 
                                  onChange={(val) => {
-                                   const newS = [...data.stats]; newS[i].icon = val; updateField("stats", newS);
+                                   const newS = [...(data.stats || [])]; newS[i].icon = val; updateField("stats", newS);
                                  }} 
                                />
                             </div>
@@ -216,28 +216,28 @@ export default function ServiceDetailEditor({ pageId, data, setData }: { pageId:
               <div className="space-y-8">
                  <h3 className={UI.sectionHeader}>Key Value Propositions</h3>
                  <div className="space-y-6">
-                    {(data.benefits || []).map((b: any, i: number) => (
+                    {(Array.isArray(data.benefits) ? data.benefits : []).map((b: any, i: number) => (
                       <div key={i} className={UI.card + " space-y-6"}>
                          <div className="flex items-center justify-between border-b border-[#f0f0f1] pb-2">
                             <span className="text-[10px] font-bold text-[#646970] uppercase">Benefit #{i+1}</span>
                             <button onClick={() => {
-                              const newB = data.benefits.filter((_: any, idx: number) => idx !== i); updateField("benefits", newB);
+                              const newB = (data.benefits || []).filter((_: any, idx: number) => idx !== i); updateField("benefits", newB);
                             }} className="text-[#d63638]"><Trash2 className="w-4 h-4" /></button>
                          </div>
                          <div className="space-y-6">
                             <IconSelector label="Visual Icon" value={b.icon || "Zap"} onChange={(val) => {
-                               const newB = [...data.benefits]; newB[i].icon = val; updateField("benefits", newB);
+                               const newB = [...(data.benefits || [])]; newB[i].icon = val; updateField("benefits", newB);
                             }} />
                             <div className="space-y-1.5">
                                <label className={UI.label}>Headline</label>
                                <input type="text" value={b.title} onChange={(e) => {
-                                  const newB = [...data.benefits]; newB[i].title = e.target.value; updateField("benefits", newB);
+                                  const newB = [...(data.benefits || [])]; newB[i].title = e.target.value; updateField("benefits", newB);
                                }} className={UI.inputLarge} />
                             </div>
                              <RichTextEditor 
                                 label="Narrative" 
                                 content={b.description} 
-                                onChange={(html) => { const newB = [...data.benefits]; newB[i].description = html; updateField("benefits", newB); }} 
+                                onChange={(html) => { const newB = [...(data.benefits || [])]; newB[i].description = html; updateField("benefits", newB); }} 
                              />
                          </div>
                       </div>
@@ -252,7 +252,7 @@ export default function ServiceDetailEditor({ pageId, data, setData }: { pageId:
               <div className="space-y-8">
                  <h3 className={UI.sectionHeader}>Project Methodology</h3>
                  <div className="space-y-6">
-                    {(data.process || []).map((p: any, i: number) => (
+                    {(Array.isArray(data.process) ? data.process : []).map((p: any, i: number) => (
                       <div key={i} className={UI.card + " space-y-6 relative"}>
                          <div className="flex items-center justify-between border-b border-[#f0f0f1] pb-2">
                             <div className="flex items-center gap-3">
@@ -260,23 +260,23 @@ export default function ServiceDetailEditor({ pageId, data, setData }: { pageId:
                                <span className="text-[10px] font-bold text-[#646970] uppercase tracking-widest">Phase</span>
                             </div>
                             <button onClick={() => {
-                              const newP = data.process.filter((_: any, idx: number) => idx !== i); updateField("process", newP);
+                              const newP = (data.process || []).filter((_: any, idx: number) => idx !== i); updateField("process", newP);
                             }} className="text-[#d63638]"><Trash2 className="w-4 h-4" /></button>
                          </div>
                          <div className="space-y-6">
                             <IconSelector label="Phase Icon" value={p.icon || "Settings"} onChange={(val) => {
-                               const newP = [...data.process]; newP[i].icon = val; updateField("process", newP);
+                               const newP = [...(data.process || [])]; newP[i].icon = val; updateField("process", newP);
                             }} />
                             <div className="space-y-1.5">
                                <label className={UI.label}>Phase Title</label>
                                <input type="text" value={p.title} onChange={(e) => {
-                                 const newP = [...data.process]; newP[i].title = e.target.value; updateField("process", newP);
+                                 const newP = [...(data.process || [])]; newP[i].title = e.target.value; updateField("process", newP);
                                }} className={UI.input + " font-bold"} />
                             </div>
                              <RichTextEditor 
                                 label="Process Details" 
                                 content={p.description} 
-                                onChange={(html) => { const newP = [...data.process]; newP[i].description = html; updateField("process", newP); }} 
+                                onChange={(html) => { const newP = [...(data.process || [])]; newP[i].description = html; updateField("process", newP); }} 
                              />
                          </div>
                       </div>
@@ -311,11 +311,11 @@ export default function ServiceDetailEditor({ pageId, data, setData }: { pageId:
                     <div className="space-y-4">
                        <div className="space-y-1.5">
                           <label className={UI.label}>Button Call-to-Action</label>
-                          <input type="text" value={data.cta?.text || ""} onChange={(e) => updateField("cta", { ...data.cta, text: e.target.value })} className={UI.input} />
+                          <input type="text" value={data.cta?.text || ""} onChange={(e) => updateField("cta", { ...(data.cta || {}), text: e.target.value })} className={UI.input} />
                        </div>
                        <div className="space-y-1.5">
                           <label className={UI.label}>Target Destination (URL)</label>
-                          <input type="text" value={data.cta?.link || ""} onChange={(e) => updateField("cta", { ...data.cta, link: e.target.value })} className={UI.input} />
+                          <input type="text" value={data.cta?.link || ""} onChange={(e) => updateField("cta", { ...(data.cta || {}), link: e.target.value })} className={UI.input} />
                        </div>
                     </div>
                  </div>

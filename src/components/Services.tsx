@@ -54,6 +54,7 @@ const Counter = ({ value, suffix = "" }: { value: number; suffix: string }) => {
 
 const CompactServiceCard = ({ service }: { service: any }) => {
   const [isHovered, setIsHovered] = useState(false);
+  if (!service) return null;
 
   return (
     <motion.div
@@ -415,9 +416,13 @@ const Services = () => {
                 ))}
               </div>
 
-              {featuredService && (
+              {featuredService ? (
                 <div className="mt-8">
                   <CompactServiceCard service={featuredService} />
+                </div>
+              ) : (
+                <div className="mt-8 p-6 rounded-xl border border-dashed border-border/40 text-center">
+                   <p className="text-muted-foreground text-sm">Select a featured service in the dashboard</p>
                 </div>
               )}
             </motion.div>
