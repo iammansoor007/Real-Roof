@@ -10,6 +10,7 @@ const MediaSchema = new mongoose.Schema({
   description: { type: String, default: "" },
   width: { type: Number },
   height: { type: Number },
+  publicId: { type: String }, // For Cloudinary
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 });
