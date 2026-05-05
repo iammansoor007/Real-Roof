@@ -64,6 +64,13 @@ export default function ServicesTemplate({ pageData, params }: { pageData?: any,
 
     return (
         <main className="min-h-screen bg-background pt-24 pb-16">
+            <div className="max-w-7xl mx-auto px-4 mb-8">
+                <nav className="flex items-center gap-2 text-muted-foreground text-xs font-bold uppercase tracking-[0.2em]">
+                    <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+                    <span className="opacity-30">/</span>
+                    <span className="text-primary">Services</span>
+                </nav>
+            </div>
             <div className="max-w-7xl mx-auto px-4 text-center mb-16">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

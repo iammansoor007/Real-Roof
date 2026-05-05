@@ -55,14 +55,16 @@ export default function CareersTemplate({ pageData, params }: { pageData?: any, 
         method: "POST",
         body: formData,
       });
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
       if (response.ok || data.success || data.submissionId) {
         setIsSuccess(true);
       } else {
+        // Log the specific error from API
+        console.error("API Submission Error:", data.error, data.details);
         throw new Error(data.error || "Form submission failed");
       }
     } catch (error: any) {
-      console.error("Career form error:", error);
+      console.error("Career form fallback triggered:", error);
       
       // Fallback to mailto if API fails
       const name = formData.get("name");
@@ -86,9 +88,11 @@ ${message}
       `;
       
       const mailtoLink = `mailto:banderson@eaglerevolution.com?subject=Job Application - ${name}&body=${encodeURIComponent(emailContent)}`;
-      window.location.href = mailtoLink;
       
-      setIsSuccess(true); // Show success since we redirected to email
+      // We still set success to true because the user is being redirected to their email client
+      // but we can also set a small note or alert if we want.
+      window.location.href = mailtoLink;
+      setIsSuccess(true); 
     } finally {
       setIsSubmitting(false);
     }

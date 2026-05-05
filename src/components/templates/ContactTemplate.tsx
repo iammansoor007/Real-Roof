@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useContent } from "../../hooks/useContent";
@@ -114,6 +115,7 @@ export default function ContactTemplate({ pageData }: { pageData?: any }) {
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-primary/5 to-transparent opacity-60 blur-3xl pointer-events-none" />
 
             <div className="max-w-4xl mx-auto px-4 relative">
+
                 {/* Section Header */}
                 <div className="text-center mb-16">
                     <motion.div

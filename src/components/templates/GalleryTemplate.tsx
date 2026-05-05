@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useMemo } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -145,7 +146,7 @@ export default function GalleryTemplate({ pageData, params }: { pageData?: any; 
   const [lightboxProject, setLightboxProject] = useState<any>(null);
 
   // Prefer page-specific content, fall back to global
-  const pageContent = pageData?.content || {};
+  const pageContent = pageData?.content || {}
   const portfolio = pageContent?.portfolio || globalPortfolio;
   const galleryPage = pageContent?.galleryPage || globalGalleryPage;
 

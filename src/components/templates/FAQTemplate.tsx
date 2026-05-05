@@ -6,6 +6,8 @@ import { Icon } from "../../config/icons";
 import { useContent } from "../../hooks/useContent";
 import RichTextRenderer from "../ui/RichTextRenderer";
 
+import Link from "next/link";
+
 const AccordionItem = ({ item, index, isOpen, onToggle, searchHighlight }: any) => {
     const itemRef = useRef(null);
     const isInView = useInView(itemRef, { once: true, margin: "-30px" });
@@ -33,11 +35,11 @@ const AccordionItem = ({ item, index, isOpen, onToggle, searchHighlight }: any) 
                 <AnimatePresence>
                     {isOpen && (
                         <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                             <div className="px-7 pb-7">
-                                 <div className="text-muted-foreground leading-relaxed">
-                                     <RichTextRenderer content={item.answer} stripParagraphs={true} />
-                                 </div>
-                             </div>
+                            <div className="px-7 pb-7">
+                                <div className="text-muted-foreground leading-relaxed">
+                                    <RichTextRenderer content={item.answer} stripParagraphs={true} />
+                                </div>
+                            </div>
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -50,7 +52,7 @@ export default function FAQTemplate({ pageData, params }: { pageData?: any, para
     const { faq: globalFaq } = useContent();
     const [openItems, setOpenItems] = useState<number[]>([0]);
     const [activeCategory, setActiveCategory] = useState('all');
-    
+
     // Use page-specific FAQs if provided (e.g. from dynamic pages), otherwise fallback to global
     // The page editor stores FAQs in content.faqs (simple list) or content.faq.items (structured)
     const pageFaqs = pageData?.faqs || pageData?.content?.faqs || pageData?.content?.faq?.items;
@@ -63,12 +65,13 @@ export default function FAQTemplate({ pageData, params }: { pageData?: any, para
 
     return (
         <section className="relative bg-background py-24 min-h-screen">
+
             <div className="max-w-7xl mx-auto px-4">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl sm:text-6xl font-medium mb-4">{section?.headline}</h2>
-                     <div className="text-muted-foreground text-lg">
+                    <div className="text-muted-foreground text-lg">
                         <RichTextRenderer content={section?.description} />
-                     </div>
+                    </div>
                 </div>
                 <div className="space-y-4">
                     {filteredItems.map((item: any, index: number) => (

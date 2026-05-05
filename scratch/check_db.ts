@@ -1,5 +1,5 @@
-import connectToDatabase from "./src/lib/mongodb";
-import SiteContent from "./src/models/Content";
+import connectToDatabase from "../src/lib/mongodb";
+import SiteContent from "../src/models/Content";
 
 async function checkSlugs() {
   await connectToDatabase();

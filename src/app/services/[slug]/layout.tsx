@@ -683,12 +683,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     alternates: {
-      canonical: `${BASE_URL}/${slug}`,
+      canonical: `${BASE_URL}/services/${slug}`,
     },
     openGraph: {
       title,
       description,
-      url: `${BASE_URL}/${slug}`,
+      url: `${BASE_URL}/services/${slug}`,
       type: "website",
       siteName: "Eagle Revolution",
       locale: "en_US",

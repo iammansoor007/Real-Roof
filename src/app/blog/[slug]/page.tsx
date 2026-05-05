@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return { title: 'Post Not Found' };
 
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://eaglerevolution.com";
-  const url = `${BASE_URL}/${slug}`;
+  const url = `${BASE_URL}/blog/${slug}`;
 
   return {
     title: {
@@ -85,7 +85,7 @@ export default async function BlogPostPage({ params }: Props) {
   if (post.categories?.length > 0) console.log(`[Blog Debug] First Category: ${post.categories[0].name}`);
 
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://eaglerevolution.com";
-  const url = `${BASE_URL}/${slug}`;
+  const url = `${BASE_URL}/blog/${slug}`;
   const wordCount = post.content ? post.content.split(/\s+/).length : 0;
   const publishDate = post.publishedAt?.toISOString();
   const modifiedDate = (post.updatedAt || post.publishedAt)?.toISOString();

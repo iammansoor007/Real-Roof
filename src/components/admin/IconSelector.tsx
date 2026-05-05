@@ -6,9 +6,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, X, Check } from "lucide-react";
 
 // Filter out non-icon exports from Lucide
-const ICON_NAMES = Object.keys(LucideIcons).filter(
+const ICON_NAMES = Array.from(new Set(Object.keys(LucideIcons).filter(
   (key) => typeof (LucideIcons as any)[key] === "function" || typeof (LucideIcons as any)[key] === "object"
-).sort();
+))).sort();
 
 export default function IconSelector({ 
   value, 

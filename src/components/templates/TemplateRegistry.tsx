@@ -35,7 +35,8 @@ export const TemplateWrapper = ({ templateName, pageData, params }: any) => {
   
   // Only append the inline FAQ section if this page isn't already the FAQ template
   // and it has page-specific FAQs defined in its content.
-  const hasInlineFaqs = templateName !== 'faq' && 
+  // We also exclude 'service-detail' and 'about' because those templates manually render their own FAQs.
+  const hasInlineFaqs = !['faq', 'service-detail', 'about'].includes(templateName) && 
                         pageData?.content?.faqs && 
                         Array.isArray(pageData.content.faqs) && 
                         pageData.content.faqs.length > 0;

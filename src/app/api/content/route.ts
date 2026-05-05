@@ -59,6 +59,13 @@ export async function PUT(req: NextRequest) {
       ip: req.headers.get('x-forwarded-for') || (req as any).ip || 'unknown'
     });
 
+    const { revalidatePath } = await import('next/cache');
+    revalidatePath('/');
+    revalidatePath('/services');
+    revalidatePath('/blog');
+    revalidatePath('/services/[slug]', 'page');
+    revalidatePath('/blog/[slug]', 'page');
+
     return NextResponse.json({ success: true, result });
   } catch (error: any) {
     console.error('Content update error:', error);

@@ -162,8 +162,8 @@ const StatsSection = ({ content: passedContent }: { content?: any }) => {
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-2 sm:mb-4 px-2">
             {statsData.headline}
           </h2>
-          <RichTextRenderer 
-            content={statsData.description} 
+          <RichTextRenderer
+            content={statsData.description}
             className="text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto px-3 sm:px-4"
             stripParagraphs={true}
           />
@@ -229,6 +229,7 @@ const Hero = ({ content: passedContent }: { content?: any }) => {
         style={{ backgroundImage: `radial-gradient(hsl(var(--foreground)) 0.5px, transparent 0.5px)`, backgroundSize: '24px 24px' }} />
 
       <div className="relative z-30 w-full max-w-[1440px] mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+
         <div className="flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-12 lg:gap-16">
 
           <motion.div
@@ -247,8 +248,8 @@ const Hero = ({ content: passedContent }: { content?: any }) => {
               {hero.headline?.line3}
             </h1>
 
-            <RichTextRenderer 
-              content={hero.description} 
+            <RichTextRenderer
+              content={hero.description}
               className="text-muted-foreground text-lg sm:text-lg md:text-lg lg:text-xl xl:text-2xl max-w-xl mx-auto lg:mx-0 mb-6 sm:mb-8 font-medium leading-relaxed px-2 sm:px-0"
               stripParagraphs={true}
             />
@@ -482,8 +483,8 @@ const FounderStory = ({ content: passedContent }: { content?: any }) => {
             {story.headline?.replace(story.highlight || '', '')} <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80">{story.highlight}</span>
           </h2>
 
-          <RichTextRenderer 
-            content={story.description} 
+          <RichTextRenderer
+            content={story.description}
             className="text-muted-foreground text-sm sm:text-base md:text-lg lg:text-xl font-light max-w-2xl mx-auto px-3 sm:px-4 text-center"
             stripParagraphs={true}
           />
@@ -507,20 +508,20 @@ const FounderStory = ({ content: passedContent }: { content?: any }) => {
                 <div className="absolute -left-2 sm:-left-4 -top-2 text-primary/20">
                   <Icon name="Quote" className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10" />
                 </div>
-                <RichTextRenderer 
-                  content={story.founder?.quote} 
+                <RichTextRenderer
+                  content={story.founder?.quote}
                   className="text-foreground text-base sm:text-lg md:text-xl font-medium leading-relaxed pl-4 sm:pl-6 md:pl-8"
                 />
               </div>
 
-              <RichTextRenderer 
-                content={story.founder?.bio} 
+              <RichTextRenderer
+                content={story.founder?.bio}
                 className="mt-6 sm:mt-8 space-y-4"
               />
 
               <blockquote className="border-l-4 border-primary pl-3 sm:pl-4 md:pl-6 py-2 my-6 sm:my-8">
-                <RichTextRenderer 
-                  content={story.founder?.secondaryQuote} 
+                <RichTextRenderer
+                  content={story.founder?.secondaryQuote}
                   className="text-sm sm:text-base md:text-lg font-medium text-foreground italic"
                 />
                 <footer className="mt-2 sm:mt-3 font-bold text-[10px] sm:text-xs text-primary uppercase tracking-widest">
@@ -588,8 +589,8 @@ const MissionSection = ({ content: passedContent }: { content?: any }) => {
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">{mission.headline}</h2>
               <motion.div initial={{ width: 0 }} animate={inView ? { width: 60 } : {}} className="h-[2px] bg-primary mt-3 sm:mt-4 mx-auto lg:mx-0" />
             </div>
-            <RichTextRenderer 
-              content={mission.description} 
+            <RichTextRenderer
+              content={mission.description}
               className="text-sm sm:text-base md:text-lg text-muted-foreground mb-6 sm:mb-8 px-2 sm:px-0"
               stripParagraphs={true}
             />
@@ -613,8 +614,8 @@ const MissionSection = ({ content: passedContent }: { content?: any }) => {
                     <span className="text-[10px] sm:text-xs text-muted-foreground">{item.val}</span>
                   </div>
                   <h3 className="text-base sm:text-lg md:text-xl font-bold mb-1 sm:mb-2">{item.title}</h3>
-                  <RichTextRenderer 
-                    content={item.desc} 
+                  <RichTextRenderer
+                    content={item.desc}
                     className="text-xs sm:text-sm text-muted-foreground"
                   />
                 </motion.div>
@@ -701,26 +702,26 @@ const ServiceCard = ({ service, index }: { service: any; index: number }) => {
 const ServicesSection = ({ content: passedContent, featuredServices: passedFeatured }: { content?: any, featuredServices?: any[] }) => {
   const { aboutPage, services } = useContent();
   const capabilities = passedContent || aboutPage?.capabilities || {};
-  
+
   // Robust normalization: Ensure featuredServicesRaw is an array
   const rawData = passedFeatured || aboutPage?.services || [];
   const featuredServicesRaw = Array.isArray(rawData) ? rawData : (rawData?.services || []);
-  
+
   // Resolve IDs to objects if necessary
   const resolvedFeatured = (Array.isArray(featuredServicesRaw) ? featuredServicesRaw : []).map((s: any) => {
     if (typeof s === 'string') {
-        const fullServiceList = Array.isArray(services) ? services : (services as any)?.services || [];
-        const fullService = fullServiceList.find((ps: any) => ps._id === s || ps.id === s || ps.slug === s);
-        return fullService || null;
+      const fullServiceList = Array.isArray(services) ? services : (services as any)?.services || [];
+      const fullService = fullServiceList.find((ps: any) => ps._id === s || ps.id === s || ps.slug === s);
+      return fullService || null;
     }
     return s;
   }).filter(Boolean);
 
-  const servicesList = resolvedFeatured.length > 0 
-    ? resolvedFeatured 
+  const servicesList = resolvedFeatured.length > 0
+    ? resolvedFeatured
     : (Array.isArray(services) ? services : (services as any)?.services || [])
-        .filter((s: any) => s.status === 'published' || s.status === undefined)
-        .slice(0, 6);
+      .filter((s: any) => s.status === 'published' || s.status === undefined)
+      .slice(0, 6);
 
   return (
     <section className="py-16 md:py-24 px-6 lg:px-12 bg-transparent relative z-30">
@@ -731,8 +732,8 @@ const ServicesSection = ({ content: passedContent, featuredServices: passedFeatu
             {capabilities.headline || "Our Capabilities"}
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto rounded-full mb-6" />
-          <RichTextRenderer 
-            content={capabilities.description} 
+          <RichTextRenderer
+            content={capabilities.description}
             className="max-w-3xl mx-auto text-muted-foreground text-lg md:text-xl leading-relaxed"
             stripParagraphs={true}
           />
@@ -770,8 +771,8 @@ const AwardCTABanner = ({ content: passedContent }: { content?: any }) => {
           <h3 className="text-3xl lg:text-5xl font-bold text-foreground mb-4 leading-tight">
             {ctaBanner.headline?.replace(ctaBanner.highlight || '', '')} <span className="text-primary">{ctaBanner.highlight}</span>
           </h3>
-          <RichTextRenderer 
-            content={ctaBanner.description} 
+          <RichTextRenderer
+            content={ctaBanner.description}
             className="text-muted-foreground text-lg leading-relaxed max-w-lg mx-auto lg:mx-0"
             stripParagraphs={true}
           />
@@ -806,8 +807,8 @@ const ValuesGrid = ({ content: passedContent }: { content?: any }) => {
             {valuesData.headline?.replace(valuesData.highlight || '', '')} <br />
             <span className="bg-gradient-to-r from-primary to-primary/95 bg-clip-text text-transparent">{valuesData.highlight}</span>
           </h2>
-          <RichTextRenderer 
-            content={valuesData.description} 
+          <RichTextRenderer
+            content={valuesData.description}
             className="text-muted-foreground text-lg max-w-2xl mx-auto"
           />
         </div>
@@ -820,8 +821,8 @@ const ValuesGrid = ({ content: passedContent }: { content?: any }) => {
                   <VIcon className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors" />
                 </div>
                 <h3 className="text-2xl font-bold mb-4">{value.title}</h3>
-                <RichTextRenderer 
-                  content={value.description} 
+                <RichTextRenderer
+                  content={value.description}
                   className="text-muted-foreground mb-6"
                 />
                 <div className="pt-6 border-t border-border/50 flex items-center justify-between">
@@ -854,8 +855,8 @@ export default function AboutTemplate({ pageData, params }: { pageData?: any, pa
       <div className="max-w-7xl mx-auto px-4 relative z-20">
         <AwardCTABanner content={content.ctaBanner} />
       </div>
-      
-      <BlogSection 
+
+      <BlogSection
         title={blogSection?.title}
         subtitle={blogSection?.subtitle}
         description={blogSection?.description}

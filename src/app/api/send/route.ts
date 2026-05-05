@@ -215,7 +215,12 @@ Source: Website
     });
 
     if (resendError) {
-      console.error('Resend API Error:', resendError);
+      console.error('RESEND API ERROR:', {
+        name: resendError.name,
+        message: resendError.message,
+        receiver: receiverEmail,
+        isDefaultSender: !process.env.RESEND_DOMAIN_VERIFIED
+      });
       return NextResponse.json({
         error: 'Email failed but DB saved',
         details: resendError.message,
@@ -230,11 +235,14 @@ Source: Website
     });
 
   } catch (error: any) {
-    console.error('CRITICAL API ERROR:', error);
+    console.error('CRITICAL API ERROR IN /api/send:', {
+      message: error.message,
+      stack: error.stack,
+      cause: error.cause
+    });
     return NextResponse.json({
       error: 'Critical server error',
       details: error.message,
-      stack: error.stack
     }, { status: 500 });
   }
 }
