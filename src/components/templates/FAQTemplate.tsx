@@ -52,8 +52,8 @@ export default function FAQTemplate({ pageData, params }: { pageData?: any, para
     const [activeCategory, setActiveCategory] = useState('all');
     
     // Use page-specific FAQs if provided (e.g. from dynamic pages), otherwise fallback to global
-    // The page editor stores FAQs in content.faqs; support both locations
-    const pageFaqs = pageData?.faqs || pageData?.content?.faqs;
+    // The page editor stores FAQs in content.faqs (simple list) or content.faq.items (structured)
+    const pageFaqs = pageData?.faqs || pageData?.content?.faqs || pageData?.content?.faq?.items;
     const faq = pageFaqs ? { ...globalFaq, items: pageFaqs } : globalFaq;
     const { section, items = [] } = faq || {};
 

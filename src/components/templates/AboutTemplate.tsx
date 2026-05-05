@@ -165,6 +165,7 @@ const StatsSection = ({ content: passedContent }: { content?: any }) => {
           <RichTextRenderer 
             content={statsData.description} 
             className="text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto px-3 sm:px-4"
+            stripParagraphs={true}
           />
         </div>
 
@@ -249,6 +250,7 @@ const Hero = ({ content: passedContent }: { content?: any }) => {
             <RichTextRenderer 
               content={hero.description} 
               className="text-muted-foreground text-lg sm:text-lg md:text-lg lg:text-xl xl:text-2xl max-w-xl mx-auto lg:mx-0 mb-6 sm:mb-8 font-medium leading-relaxed px-2 sm:px-0"
+              stripParagraphs={true}
             />
 
             <div className="flex flex-row gap-3 sm:gap-4 justify-center lg:justify-start items-center">
@@ -483,6 +485,7 @@ const FounderStory = ({ content: passedContent }: { content?: any }) => {
           <RichTextRenderer 
             content={story.description} 
             className="text-muted-foreground text-sm sm:text-base md:text-lg lg:text-xl font-light max-w-2xl mx-auto px-3 sm:px-4 text-center"
+            stripParagraphs={true}
           />
         </div>
 
@@ -588,6 +591,7 @@ const MissionSection = ({ content: passedContent }: { content?: any }) => {
             <RichTextRenderer 
               content={mission.description} 
               className="text-sm sm:text-base md:text-lg text-muted-foreground mb-6 sm:mb-8 px-2 sm:px-0"
+              stripParagraphs={true}
             />
             <div className="flex gap-4 sm:gap-6 justify-center lg:justify-start">
               {(mission.stats || []).map((stat: any, i: number) => (
@@ -730,6 +734,7 @@ const ServicesSection = ({ content: passedContent, featuredServices: passedFeatu
           <RichTextRenderer 
             content={capabilities.description} 
             className="max-w-3xl mx-auto text-muted-foreground text-lg md:text-xl leading-relaxed"
+            stripParagraphs={true}
           />
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 relative z-30">
@@ -768,6 +773,7 @@ const AwardCTABanner = ({ content: passedContent }: { content?: any }) => {
           <RichTextRenderer 
             content={ctaBanner.description} 
             className="text-muted-foreground text-lg leading-relaxed max-w-lg mx-auto lg:mx-0"
+            stripParagraphs={true}
           />
           <div className="flex flex-wrap justify-center lg:justify-start items-center gap-4 mt-6">
             {(ctaBanner.features || []).map((feature: string, i: number) => (

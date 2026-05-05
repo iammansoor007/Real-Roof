@@ -598,6 +598,7 @@ const FAQ = ({ currentPage = "home", hideHeader = false }: { currentPage?: strin
             <RichTextRenderer 
               content={section.description} 
               className="text-muted-foreground text-base md:text-lg"
+              stripParagraphs={true}
             />
             <div className="w-16 h-0.5 bg-gradient-to-r from-primary to-primary/60 mx-auto mt-6 rounded-full" />
           </div>

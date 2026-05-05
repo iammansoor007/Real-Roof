@@ -44,18 +44,28 @@ export default function RichTextRenderer({ content, className = "", stripParagra
 
   // If the user is seeing literal <p> tags, it might be due to double escaping
   // or the editor's output being rendered as text.
-  // We'll strip both actual tags and escaped tags if stripParagraphs is true.
+  // We'll decode common escaped tags if they are found as literal text.
+  const unescapeLiteralTags = (html: string) => {
+    return html
+      .replace(/&lt;p&gt;/gi, '<p>')
+      .replace(/&lt;\/p&gt;/gi, '</p>')
+      .replace(/&lt;br\s*\/?&gt;/gi, '<br />')
+      .replace(/&lt;b&gt;/gi, '<b>')
+      .replace(/&lt;\/b&gt;/gi, '</b>')
+      .replace(/&lt;strong&gt;/gi, '<strong>')
+      .replace(/&lt;\/strong&gt;/gi, '</strong>');
+  };
+
+  sanitizedHtml = unescapeLiteralTags(sanitizedHtml);
+
+  // If stripParagraphs is true, remove all P tags (real or just unescaped)
   if (stripParagraphs) {
     sanitizedHtml = sanitizedHtml
       .replace(/<p[^>]*>/gi, '')
       .replace(/<\/p>/gi, '')
-      .replace(/&lt;p[^&]*&gt;/gi, '')
-      .replace(/&lt;\/p&gt;/gi, '');
+      .replace(/\n/g, ' '); // Replace newlines with spaces for single line flow
   }
 
-  // Final fallback to ensure no stray literal <p> tags are visible if they are causing issues
-  // but we should be careful not to over-sanitize.
-  
   return (
     <div 
       className={`rich-text-content 

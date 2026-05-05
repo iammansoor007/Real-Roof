@@ -680,6 +680,7 @@ const WhyChooseUs = () => {
                         <RichTextRenderer 
                             content={section?.description || ""} 
                             className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto"
+                            stripParagraphs={true}
                         />
                     </motion.div>
                 </header>

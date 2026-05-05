@@ -34,10 +34,11 @@ const HolographicInput = ({ icon: IconName, label, type = "text", ...props }: an
 };
 
 export default function ContactTemplate({ pageData }: { pageData?: any }) {
-    const { contactPage: globalContactData } = useContent();
+    const { contactPage: globalContactData, footer } = useContent();
 
     // Prioritize page-specific content over global content
     const contactData = pageData?.content?.contactPage || globalContactData;
+    const footerContact = footer?.contact || {};
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [formData, setFormData] = useState<Record<string, string>>({});
@@ -69,10 +70,7 @@ export default function ContactTemplate({ pageData }: { pageData?: any }) {
             });
 
             const result = await response.json().catch(() => ({}));
-            console.log('Contact Form API Status:', response.status);
-            console.log('Contact Form API Body:', result);
-
-            if (response.ok) {
+            if (response.ok || result.success || result.submissionId) {
                 setShowSuccess(true);
                 setFormData({});
             } else {
@@ -93,12 +91,12 @@ export default function ContactTemplate({ pageData }: { pageData?: any }) {
     const info = contactData?.info || {};
     const infoCards = contactData?.infoCards || [];
 
-    // Map infoCards to the info structure if info is empty
+    // Map infoCards to the info structure if info is empty — also fall back to footer contact
     const finalInfo = {
-        phone: info.phone || infoCards.find((c: any) => c.type === 'phone')?.value || "",
-        email: info.email || infoCards.find((c: any) => c.type === 'email')?.value || "",
-        address: info.address || infoCards.find((c: any) => c.type === 'location')?.value || "",
-        hours: info.hours || infoCards.find((c: any) => c.type === 'phone')?.label || "" // Often hours are in the label for phone
+        phone: info.phone || infoCards.find((c: any) => c.type === 'phone')?.value || footerContact.phone || "",
+        email: info.email || infoCards.find((c: any) => c.type === 'email')?.value || footerContact.email || "",
+        address: info.address || infoCards.find((c: any) => c.type === 'location')?.value || footerContact.address || "",
+        hours: info.hours || footerContact.hours || ""
     };
 
     return (

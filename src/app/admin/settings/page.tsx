@@ -103,9 +103,11 @@ export default function SettingsEditor() {
       fetch("/api/admin/pages").then(res => res.json()),
       fetch("/api/content").then(res => res.json())
     ]).then(([pagesJson, contentJson]) => {
-      const pageList = (pagesJson || []).map((p: any) => ({ ...p, type: 'page' }));
+      const pageList = (pagesJson || [])
+        .filter((p: any) => p.status === 'published')
+        .map((p: any) => ({ ...p, type: 'page' }));
       const serviceList = (contentJson.services?.services || contentJson.services || [])
-        .filter((s: any) => s.published !== false)
+        .filter((s: any) => s.status === 'published' || s.status === undefined)
         .map((s: any) => ({ ...s, _id: s._id || s.slug, type: 'service', title: s.title, slug: `services/${s.slug}` }));
       setPages([...pageList, ...serviceList]);
     });

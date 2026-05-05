@@ -26,10 +26,13 @@ const ParallaxLayer = ({ children, speed = 0.1, className = "" }: any) => {
 };
 
 export default function CareersTemplate({ pageData, params }: { pageData?: any, params?: any }) {
-  const { careers: careersData } = useContent();
+  const { careers: globalCareersData } = useContent();
+  // Prefer page-specific content (saved in editor) over global fallback
+  const careersData = pageData?.content?.careers || globalCareersData;
   const [fileName, setFileName] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -42,25 +45,25 @@ export default function CareersTemplate({ pageData, params }: { pageData?: any, 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMsg(null);
     const formData = new FormData(e.currentTarget);
     formData.append("type", "Job Application");
     formData.append("_subject", "New Job Application - Eagle Revolution");
-    formData.append("_captcha", "false");
-    formData.append("_template", "table");
 
     try {
       const response = await fetch("/api/send", {
         method: "POST",
         body: formData,
-        headers: { 'Accept': 'application/json' }
       });
-      if (response.ok) {
+      const data = await response.json();
+      if (response.ok || data.success || data.submissionId) {
         setIsSuccess(true);
       } else {
-        throw new Error("Form submission failed");
+        throw new Error(data.error || "Form submission failed");
       }
-    } catch (error) {
-      alert("Failed to submit your application. Please try again or contact us directly.");
+    } catch (error: any) {
+      console.error("Career form error:", error);
+      setErrorMsg("Failed to submit. Please try again or call us directly.");
     } finally {
       setIsSubmitting(false);
     }
@@ -127,12 +130,12 @@ export default function CareersTemplate({ pageData, params }: { pageData?: any, 
                       {careersData?.labels?.attachment || "CV / RESUME (PDF)"}
                     </label>
                     <div className="relative group">
-                      <input 
-                        type="file" 
-                        name="attachment" 
-                        accept=".pdf" 
+                      <input
+                        type="file"
+                        name="attachment"
+                        accept=".pdf"
                         onChange={handleFileChange}
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                       />
                       <div className="w-full px-5 py-4 bg-slate-50/50 border border-dashed rounded-xl flex items-center justify-between group-hover:border-blue-400 transition-all">
                         <span className="text-slate-500 font-medium">{fileName || careersData?.labels?.attachmentPlaceholder || "Upload your resume (PDF)..."}</span>
@@ -147,6 +150,11 @@ export default function CareersTemplate({ pageData, params }: { pageData?: any, 
                   <button type="submit" disabled={isSubmitting} className="w-full py-5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all disabled:opacity-70">
                     {isSubmitting ? 'SENDING...' : 'SUBMIT APPLICATION'}
                   </button>
+                  {errorMsg && (
+                    <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm text-center">
+                      {errorMsg}
+                    </div>
+                  )}
                 </form>
               )}
             </div>

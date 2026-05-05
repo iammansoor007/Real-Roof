@@ -248,16 +248,14 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
   const service = servicesList.find((s: any) => s.slug === slug);
 
   useEffect(() => {
-    // If the service is found and it has the new dynamic fields, we know the DB data is loaded
-    if (service && (service.overviewTitle || service.benefits?.length > 0)) {
+    if (service) {
       setIsDataLoaded(true);
     }
   }, [service]);
 
   if (!service && slug) return notFound();
   
-  // Show a premium loader while fetching dynamic content to avoid "old data" flash
-  if (!service || (!isDataLoaded && slug)) {
+  if (!service || !isDataLoaded) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 gap-4">
         <Loader2 className="w-12 h-12 animate-spin text-primary opacity-20" />
