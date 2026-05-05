@@ -108,18 +108,22 @@ export default function CareersTemplate({ pageData, params }: { pageData?: any, 
                       <label className="text-xs font-bold tracking-widest uppercase text-slate-500 flex items-center gap-2"><Mail className="w-4 h-4 text-blue-500" />{careersData?.labels?.email}</label>
                       <input type="email" name="email" required className="w-full px-5 py-4 bg-slate-50/50 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
                     </div>
+                    <div className="space-y-3">
+                      <label className="text-xs font-bold tracking-widest uppercase text-slate-500 flex items-center gap-2"><Phone className="w-4 h-4 text-blue-500" />{careersData?.labels?.phone || "Phone Number"}</label>
+                      <input type="tel" name="phone" required className="w-full px-5 py-4 bg-slate-50/50 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
+                    </div>
                   </div>
                   <div className="space-y-3">
                     <label className="text-xs font-bold tracking-widest uppercase text-slate-500 flex items-center gap-2"><Briefcase className="w-4 h-4 text-blue-500" />{careersData?.labels?.role}</label>
                     <select name="role" required defaultValue="" className="w-full px-5 py-4 bg-slate-50/50 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all appearance-none">
-                      <option value="" disabled>Select role...</option>
+                      <option value="" disabled>{careersData?.labels?.roleSelector || "Select a Position"}</option>
                       {careersData?.roles?.map((role: any, index: number) => <option key={index} value={role.value}>{role.label}</option>)}
                     </select>
                   </div>
                   <div className="space-y-3">
                     <label className="text-xs font-bold tracking-widest uppercase text-slate-500 flex items-center gap-2">
                       <FileText className="w-4 h-4 text-blue-500" />
-                      CV / RESUME (PDF)
+                      {careersData?.labels?.attachment || "CV / RESUME (PDF)"}
                     </label>
                     <div className="relative group">
                       <input 
@@ -130,7 +134,7 @@ export default function CareersTemplate({ pageData, params }: { pageData?: any, 
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
                       />
                       <div className="w-full px-5 py-4 bg-slate-50/50 border border-dashed rounded-xl flex items-center justify-between group-hover:border-blue-400 transition-all">
-                        <span className="text-slate-500 font-medium">{fileName || "Upload your resume (PDF)..."}</span>
+                        <span className="text-slate-500 font-medium">{fileName || careersData?.labels?.attachmentPlaceholder || "Upload your resume (PDF)..."}</span>
                         <Upload className="w-5 h-5 text-slate-400 group-hover:text-blue-500" />
                       </div>
                     </div>

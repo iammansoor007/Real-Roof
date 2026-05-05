@@ -26,7 +26,7 @@ export default function ContactEditor() {
         setSaving(true);
         setMessage("");
         try {
-            const res = await fetch("/api/admin/content", {
+            const res = await fetch("/api/content", {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
@@ -119,17 +119,51 @@ export default function ContactEditor() {
                 </div>
 
                 <div className="bg-white border border-gray-200 rounded-3xl p-8 space-y-6 shadow-sm">
-                    <h2 className="text-lg font-bold text-slate-900">Receiver Settings</h2>
-                    <div className="space-y-2">
-                        <label className="text-xs uppercase tracking-widest text-slate-400 font-bold">Receiver Email</label>
-                        <p className="text-xs text-slate-500 mb-2 font-medium">Form submissions from the Contact page will be sent here.</p>
-                        <input
-                            type="email"
-                            value={data.contactPage?.email || ""}
-                            onChange={(e) => setData((prev: any) => ({ ...prev, contactPage: { ...(prev.contactPage || {}), email: e.target.value } }))}
-                            placeholder="e.g. hello@eaglerevolution.com"
-                            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm focus:border-primary/50 focus:outline-none transition-all shadow-inner"
-                        />
+                    <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <Phone className="w-5 h-5 text-primary" /> Business Vitals
+                    </h2>
+                    <p className="text-xs text-slate-500 font-medium -mt-4">These appear as info cards below the contact form.</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div className="space-y-2">
+                            <label className="text-xs uppercase tracking-widest text-slate-400 font-bold">Phone Number</label>
+                            <input
+                                type="text"
+                                value={data.contactPage?.info?.phone || ""}
+                                onChange={(e) => setData((prev: any) => ({ ...prev, contactPage: { ...(prev.contactPage || {}), info: { ...(prev.contactPage?.info || {}), phone: e.target.value } } }))}
+                                placeholder="e.g. (314) 555-0100"
+                                className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm focus:border-primary/50 focus:outline-none transition-all shadow-inner"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-xs uppercase tracking-widest text-slate-400 font-bold">Email Address</label>
+                            <input
+                                type="email"
+                                value={data.contactPage?.info?.email || data.contactPage?.email || ""}
+                                onChange={(e) => setData((prev: any) => ({ ...prev, contactPage: { ...(prev.contactPage || {}), info: { ...(prev.contactPage?.info || {}), email: e.target.value }, email: e.target.value } }))}
+                                placeholder="e.g. hello@eaglerevolution.com"
+                                className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm focus:border-primary/50 focus:outline-none transition-all shadow-inner"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-xs uppercase tracking-widest text-slate-400 font-bold">Address</label>
+                            <input
+                                type="text"
+                                value={data.contactPage?.info?.address || ""}
+                                onChange={(e) => setData((prev: any) => ({ ...prev, contactPage: { ...(prev.contactPage || {}), info: { ...(prev.contactPage?.info || {}), address: e.target.value } } }))}
+                                placeholder="e.g. St. Louis, MO"
+                                className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm focus:border-primary/50 focus:outline-none transition-all shadow-inner"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-xs uppercase tracking-widest text-slate-400 font-bold">Business Hours</label>
+                            <input
+                                type="text"
+                                value={data.contactPage?.info?.hours || ""}
+                                onChange={(e) => setData((prev: any) => ({ ...prev, contactPage: { ...(prev.contactPage || {}), info: { ...(prev.contactPage?.info || {}), hours: e.target.value } } }))}
+                                placeholder="e.g. Mon–Fri, 8am–6pm"
+                                className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm focus:border-primary/50 focus:outline-none transition-all shadow-inner"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

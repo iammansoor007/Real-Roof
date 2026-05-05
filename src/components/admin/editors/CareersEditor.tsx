@@ -29,7 +29,7 @@ export default function CareersEditor({ pageId, data, setData }: { pageId: strin
              { label: "Sales Consultant", value: "sales-consultant" }
            ],
            success: { title: "Application Received", description: "Thank you for your interest. Our recruitment team will review your profile and reach out shortly." },
-           labels: { name: "Full Name", email: "Email Address", role: "Position Applied For", summary: "Tell us about your experience" }
+           labels: { name: "Full Name", email: "Email Address", phone: "Phone Number", role: "Position Applied For", summary: "Tell us about your experience" }
          }
        });
     }
@@ -179,11 +179,31 @@ export default function CareersEditor({ pageId, data, setData }: { pageId: strin
                  <div className="space-y-6">
                     <label className={UI.label}>Form Input Labels</label>
                     <div className={UI.card + " space-y-4"}>
-                       {Object.entries(data.careers?.labels || {}).map(([key, val]: [string, any]) => (
+                       {Object.entries({
+                         name: "Full Name",
+                         email: "Email Address",
+                         phone: "Phone Number",
+                         role: "Position Applied For",
+                         summary: "Tell us about your experience",
+                         attachment: "Resume / CV",
+                         attachmentPlaceholder: "Upload your resume (PDF)...",
+                         roleSelector: "Select a Position",
+                         ...(data.careers?.labels || {})
+                       }).map(([key, val]: [string, any]) => (
                          <div key={key} className="space-y-1.5">
-                            <label className={UI.label}>{key.charAt(0).toUpperCase() + key.slice(1)} Field Label</label>
+                            <label className={UI.label}>{key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')} Field Label</label>
                             <input type="text" value={val} onChange={(e) => {
-                              const newLabels = { ...(data.careers?.labels || {}), [key]: e.target.value };
+                              const newLabels = { 
+                                name: "Full Name",
+                                email: "Email Address",
+                                phone: "Phone Number",
+                                role: "Position Applied For",
+                                summary: "Tell us about your experience",
+                                attachment: "Resume / CV",
+                                roleSelector: "Select a Position",
+                                ...(data.careers?.labels || {}), 
+                                [key]: e.target.value 
+                              };
                               updateCareers("labels", null, newLabels);
                             }} className={UI.input} />
                          </div>

@@ -91,7 +91,7 @@ export async function POST(request: Request) {
     // Fetch dynamic email from Content CMS
     let receiverEmail = 'banderson@eaglerevolution.com';
     try {
-      const contentDoc = await Content.findOne({ documentId: "complete_data" }).lean() as any;
+      const contentDoc = await Content.findOne({ key: "complete_data" }).lean() as any;
       if (contentDoc && contentDoc.data) {
         if (type === 'Quote Request' && contentDoc.data.quote?.email) {
           receiverEmail = contentDoc.data.quote.email;

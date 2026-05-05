@@ -27,6 +27,7 @@ interface SeoData {
   breadcrumbTitle?: string;
   secondaryKeywords?: string;
   featuredImage?: string;
+  featuredImageAlt?: string;
 }
 
 interface SeoEditorProps {
@@ -43,7 +44,30 @@ export default function SeoEditor({ data, setData, pageSlug, pageTitle, pageCont
   const [score, setScore] = useState(0);
 
   const updateField = (field: keyof SeoData, value: string) => {
-    setData({ ...data, [field]: value });
+    const newData = { ...data, [field]: value };
+
+    // Sync logic: If featuredImage is updated and ogImage is empty, sync them
+    if (field === 'featuredImage' && !data.ogImage) {
+      newData.ogImage = value;
+    }
+
+    setData(newData);
+  };
+
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.eaglerevolution.com";
+
+  useEffect(() => {
+    // Auto-suggest canonical URL if missing
+    if (!data.canonicalUrl && pageSlug) {
+      const slugPart = pageSlug === 'home' ? '' : pageSlug;
+      const defaultCanonical = `${BASE_URL}/${slugPart}`;
+      setData({ ...data, canonicalUrl: defaultCanonical });
+    }
+  }, [pageSlug, data.canonicalUrl]);
+
+  const suggestCanonical = () => {
+    const slug = pageSlug === 'home' ? '' : pageSlug;
+    updateField('canonicalUrl', `${BASE_URL}/${slug}`);
   };
 
   useEffect(() => {
@@ -59,7 +83,7 @@ export default function SeoEditor({ data, setData, pageSlug, pageTitle, pageCont
 
     if (!data.metaTitle) issues.push({ type: 'warning', text: "Meta title is missing." });
     if (!description) issues.push({ type: 'error', text: "Meta description missing." });
-    
+
     setAnalysis(issues);
     const successCount = issues.filter(i => i.type === 'success').length;
     const totalCount = issues.filter(i => i.type !== 'info').length;
@@ -79,8 +103,8 @@ export default function SeoEditor({ data, setData, pageSlug, pageTitle, pageCont
             key={tab.id}
             onClick={() => setActiveTab(tab.id as any)}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-[3px] text-[11px] font-bold uppercase transition-all ${activeTab === tab.id
-                ? "bg-white border border-[#c3c4c7] text-[#1d2327]"
-                : "text-[#2271b1] hover:text-[#135e96]"
+              ? "bg-white border border-[#c3c4c7] text-[#1d2327]"
+              : "text-[#2271b1] hover:text-[#135e96]"
               }`}
           >
             <tab.icon className="w-3.5 h-3.5" />
@@ -97,12 +121,12 @@ export default function SeoEditor({ data, setData, pageSlug, pageTitle, pageCont
               <motion.div key="general" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                      <label className="text-[11px] font-bold text-[#1d2327] uppercase">Focus Keyword</label>
-                      <input type="text" value={data.focusKeyword || ""} onChange={(e) => updateField('focusKeyword', e.target.value)} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" />
+                    <label className="text-[11px] font-bold text-[#1d2327] uppercase">Focus Keyword</label>
+                    <input type="text" value={data.focusKeyword || ""} onChange={(e) => updateField('focusKeyword', e.target.value)} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" />
                   </div>
                   <div className="space-y-1">
-                      <label className="text-[11px] font-bold text-[#1d2327] uppercase">Secondary Keywords</label>
-                      <input type="text" value={data.secondaryKeywords || ""} onChange={(e) => updateField('secondaryKeywords', e.target.value)} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" placeholder="comma separated" />
+                    <label className="text-[11px] font-bold text-[#1d2327] uppercase">Secondary Keywords</label>
+                    <input type="text" value={data.secondaryKeywords || ""} onChange={(e) => updateField('secondaryKeywords', e.target.value)} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" placeholder="comma separated" />
                   </div>
                 </div>
 
@@ -124,26 +148,43 @@ export default function SeoEditor({ data, setData, pageSlug, pageTitle, pageCont
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-1">
+                    <div className="flex justify-between items-center">
                       <label className="text-[11px] font-bold text-[#1d2327] uppercase">Canonical URL</label>
-                      <input type="text" value={data.canonicalUrl || ""} onChange={(e) => updateField('canonicalUrl', e.target.value)} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" placeholder="https://..." />
+                      {!data.canonicalUrl && (
+                        <button
+                          onClick={() => updateField('canonicalUrl', `https://eaglerevolution.com/${pageSlug === 'home' ? '' : pageSlug}`)}
+                          className="text-[10px] text-[#2271b1] hover:underline"
+                        >
+                          Suggest Default
+                        </button>
+                      )}
+                    </div>
+                    <input type="text" value={data.canonicalUrl || ""} onChange={(e) => updateField('canonicalUrl', e.target.value)} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" placeholder="https://..." />
                   </div>
                   <div className="space-y-1">
-                      <label className="text-[11px] font-bold text-[#1d2327] uppercase">Breadcrumb Title</label>
-                      <input type="text" value={data.breadcrumbTitle || ""} onChange={(e) => updateField('breadcrumbTitle', e.target.value)} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" />
+                    <label className="text-[11px] font-bold text-[#1d2327] uppercase">Breadcrumb Title</label>
+                    <input type="text" value={data.breadcrumbTitle || ""} onChange={(e) => updateField('breadcrumbTitle', e.target.value)} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" />
                   </div>
                 </div>
 
                 <div className="flex items-center gap-4 pt-2">
-                   <div className="flex-1">
-                      <ImageField label="Featured Image (SEO)" value={data.featuredImage || ""} onChange={(url) => updateField('featuredImage', url)} />
-                   </div>
-                   <div className="w-32 space-y-1">
-                      <label className="text-[11px] font-bold text-[#1d2327] uppercase">Robots</label>
-                      <select value={data.metaRobotsIndex || 'index'} onChange={(e) => updateField('metaRobotsIndex', e.target.value)} className="w-full border border-[#8c8f94] bg-white px-2 py-1 text-[12px] rounded-[3px]">
-                        <option value="index">Index</option>
-                        <option value="noindex">NoIndex</option>
-                      </select>
-                   </div>
+                  <div className="flex-1">
+                    <ImageField
+                      label="Featured Image (Global/Schema)"
+                      value={data.featuredImage || ""}
+                      onChange={(url) => updateField('featuredImage', url)}
+                      altValue={data.featuredImageAlt || ""}
+                      onAltChange={(alt) => updateField('featuredImageAlt', alt)}
+                      description="Main image used for Schema.org and as a fallback for OG/Twitter."
+                    />
+                  </div>
+                  <div className="w-32 space-y-1">
+                    <label className="text-[11px] font-bold text-[#1d2327] uppercase">Robots</label>
+                    <select value={data.metaRobotsIndex || 'index'} onChange={(e) => updateField('metaRobotsIndex', e.target.value)} className="w-full border border-[#8c8f94] bg-white px-2 py-1 text-[12px] rounded-[3px]">
+                      <option value="index">Index</option>
+                      <option value="noindex">NoIndex</option>
+                    </select>
+                  </div>
                 </div>
               </motion.div>
             )}
@@ -162,11 +203,11 @@ export default function SeoEditor({ data, setData, pageSlug, pageTitle, pageCont
                   <h3 className="text-[11px] font-bold text-[#1d2327] uppercase border-b border-[#f0f0f1] pb-1">Twitter / X</h3>
                   <div className="space-y-3">
                     <div className="grid grid-cols-2 gap-4">
-                       <input type="text" placeholder="Twitter Title" value={data.twitterTitle || ""} onChange={(e) => updateField('twitterTitle', e.target.value)} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" />
-                       <select value={data.twitterCard || 'summary_large_image'} onChange={(e) => updateField('twitterCard', e.target.value)} className="w-full border border-[#8c8f94] bg-white px-2 py-1 text-[12px] rounded-[3px]">
-                          <option value="summary">Summary</option>
-                          <option value="summary_large_image">Large Image</option>
-                       </select>
+                      <input type="text" placeholder="Twitter Title" value={data.twitterTitle || ""} onChange={(e) => updateField('twitterTitle', e.target.value)} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" />
+                      <select value={data.twitterCard || 'summary_large_image'} onChange={(e) => updateField('twitterCard', e.target.value)} className="w-full border border-[#8c8f94] bg-white px-2 py-1 text-[12px] rounded-[3px]">
+                        <option value="summary">Summary</option>
+                        <option value="summary_large_image">Large Image</option>
+                      </select>
                     </div>
                     <textarea placeholder="Twitter Description" rows={2} value={data.twitterDescription || ""} onChange={(e) => updateField('twitterDescription', e.target.value)} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px] resize-none" />
                     <ImageField label="Twitter Image" value={data.twitterImage || ""} onChange={(url) => updateField('twitterImage', url)} />
@@ -181,9 +222,8 @@ export default function SeoEditor({ data, setData, pageSlug, pageTitle, pageCont
                   <p className="text-[13px] text-[#00a32a]">All good! No major issues found.</p>
                 ) : (
                   analysis.map((issue, idx) => (
-                    <div key={idx} className={`flex items-center gap-3 p-3 text-[12px] rounded-[3px] border-l-4 ${
-                      issue.type === 'error' ? "bg-red-50 border-red-500 text-red-700" : "bg-amber-50 border-amber-500 text-amber-700"
-                    }`}>
+                    <div key={idx} className={`flex items-center gap-3 p-3 text-[12px] rounded-[3px] border-l-4 ${issue.type === 'error' ? "bg-red-50 border-red-500 text-red-700" : "bg-amber-50 border-amber-500 text-amber-700"
+                      }`}>
                       <AlertCircle className="w-4 h-4" />
                       {issue.text}
                     </div>
@@ -211,13 +251,13 @@ export default function SeoEditor({ data, setData, pageSlug, pageTitle, pageCont
           <div className="space-y-4">
             <h3 className="text-[10px] font-bold text-[#646970] uppercase tracking-wider">Social Preview</h3>
             <div className="bg-white border border-[#c3c4c7] rounded-[3px] shadow-sm overflow-hidden">
-               <div className="aspect-[1.91/1] bg-[#f0f0f1] flex items-center justify-center overflow-hidden">
-                  {data.ogImage ? <img src={data.ogImage} className="w-full h-full object-cover" /> : <ImageIcon className="w-6 h-6 text-[#c3c4c7]" />}
-               </div>
-               <div className="p-3 border-t border-[#f0f0f1]">
-                  <div className="text-[9px] text-[#646970] uppercase font-bold">eaglerevolution.com</div>
-                  <div className="text-[13px] font-bold text-[#1d2327] line-clamp-1">{data.ogTitle || data.metaTitle || pageTitle}</div>
-               </div>
+              <div className="aspect-[1.91/1] bg-[#f0f0f1] flex items-center justify-center overflow-hidden">
+                {data.ogImage ? <img src={data.ogImage} className="w-full h-full object-cover" /> : <ImageIcon className="w-6 h-6 text-[#c3c4c7]" />}
+              </div>
+              <div className="p-3 border-t border-[#f0f0f1]">
+                <div className="text-[9px] text-[#646970] uppercase font-bold">eaglerevolution.com</div>
+                <div className="text-[13px] font-bold text-[#1d2327] line-clamp-1">{data.ogTitle || data.metaTitle || pageTitle}</div>
+              </div>
             </div>
           </div>
         </div>

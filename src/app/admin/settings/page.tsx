@@ -179,6 +179,25 @@ export default function SettingsEditor() {
                <SettingsRow label="Title Template" description="How page titles are constructed. %s will be replaced by the page name.">
                   <input type="text" value={data.settings?.siteTemplate || ""} onChange={(e) => updateData("settings", "siteTemplate", e.target.value)} className="w-full max-w-md border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px] focus:border-[#2271b1] outline-none" />
                </SettingsRow>
+               <SettingsRow label="Homepage" description="Select which page or service should be displayed on the root (/) URL.">
+                  <select 
+                    value={data.settings?.homepageId || ""} 
+                    onChange={(e) => updateData("settings", "homepageId", e.target.value)}
+                    className="w-full max-w-md border border-[#8c8f94] bg-white px-3 py-1.5 text-[14px] rounded-[3px] focus:border-[#2271b1] outline-none"
+                  >
+                    <option value="">Default (Home Template)</option>
+                    <optgroup label="Published Pages">
+                      {pages.filter(p => p.type === 'page' && p.published !== false).map(page => (
+                        <option key={page._id} value={page._id}>{page.title}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Published Services">
+                      {pages.filter(p => p.type === 'service').map(page => (
+                        <option key={page._id} value={page._id}>{page.title}</option>
+                      ))}
+                    </optgroup>
+                  </select>
+               </SettingsRow>
                <SettingsRow label="Site Favicon" description="Upload the small icon that appears in the browser tab.">
                   <ImageField value={data.settings?.favicon || ""} onChange={(val) => updateData("settings", "favicon", val)} label="Favicon" />
                </SettingsRow>

@@ -142,3 +142,47 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
+
+export async function PATCH(req: NextRequest) {
+  const session = await getSessionUser(req);
+  if (!(await hasPermission(req, 'media', 'update'))) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+  }
+
+  try {
+    await connectToDatabase();
+    const { id, alt, title, description } = await req.json();
+
+    if (!id) {
+      return NextResponse.json({ error: 'Media ID required' }, { status: 400 });
+    }
+
+    const updatedMedia = await Media.findByIdAndUpdate(
+      id,
+      { $set: { alt, title, description } },
+      { new: true }
+    );
+
+    if (!updatedMedia) {
+      return NextResponse.json({ error: 'Media not found' }, { status: 404 });
+    }
+
+    await recordActivity({
+      user: (session as any).userId,
+      userName: (session as any).username,
+      action: 'UPDATE_MEDIA',
+      entity: 'Media',
+      entityId: id,
+      details: { 
+        after: { alt, title, description }, 
+        message: `Updated media metadata: ${updatedMedia.name}` 
+      },
+      ip: req.headers.get('x-forwarded-for') || (req as any).ip || 'unknown'
+    });
+
+    return NextResponse.json(updatedMedia);
+  } catch (error: any) {
+    console.error('Media update error:', error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  }
+}

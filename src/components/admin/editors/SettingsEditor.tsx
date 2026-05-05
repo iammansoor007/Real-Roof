@@ -115,6 +115,27 @@ export default function SettingsEditor({ pageId, data, setData }: { pageId: stri
                           <label className={UI.label}>Global Site Title</label>
                           <input type="text" value={data.settings?.siteTitle || ""} onChange={(e) => updateNested(["settings", "siteTitle"], e.target.value)} className={UI.inputLarge} />
                        </div>
+                       <div className="space-y-1.5 pt-4 border-t border-[#f0f0f1]">
+                           <label className={UI.label}>Static Homepage</label>
+                           <p className="text-[10px] text-muted-foreground mb-2">Select which page or service should be served at the root (/) URL.</p>
+                           <select 
+                             value={data.settings?.homepageId || ""} 
+                             onChange={(e) => updateNested(["settings", "homepageId"], e.target.value)} 
+                             className={UI.input}
+                           >
+                              <option value="">Default Home Template</option>
+                              <optgroup label="Published Pages">
+                                 {publishedPages.map(p => (
+                                   <option key={p._id} value={p._id}>{p.title}</option>
+                                 ))}
+                              </optgroup>
+                              <optgroup label="Services">
+                                 {(data.services?.services || []).filter((s: any) => !s.status || s.status === 'published').map((s: any) => (
+                                   <option key={s._id || s.slug} value={s._id || s.slug}>{s.title}</option>
+                                 ))}
+                              </optgroup>
+                           </select>
+                       </div>
                        <div className="space-y-1.5">
                           <label className={UI.label}>Metadata Template (e.g. %s | Brand)</label>
                           <input type="text" value={data.settings?.siteTemplate || ""} onChange={(e) => updateNested(["settings", "siteTemplate"], e.target.value)} className={UI.input + " font-mono text-[11px]"} />

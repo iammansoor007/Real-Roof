@@ -5,14 +5,38 @@ import SiteContent from "@/models/Content";
 import Script from "next/script";
 import { generateSchema } from "@/lib/schema-generator";
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.eaglerevolution.com";
+
 export async function generateMetadata(): Promise<Metadata> {
   await connectToDatabase();
   const content = await SiteContent.findOne({ key: "complete_data" }).lean() as any;
-  const faqData = content?.data?.faqPage;
+  const faqData = content?.data?.faqPage || content?.data?.faq;
+  const seo = faqData?.seo || {};
+  const pageUrl = `${BASE_URL}/faq`;
   
   return {
-    title: faqData?.title || "Frequently Asked Questions | Eagle Revolution",
-    description: faqData?.description || "Find clear answers to common questions about our services, processes, and military-grade standards.",
+    metadataBase: new URL(BASE_URL),
+    title: {
+      absolute: seo.metaTitle || faqData?.section?.headline || faqData?.title || "Frequently Asked Questions | Eagle Revolution"
+    },
+    description: seo.metaDescription || faqData?.section?.description || faqData?.description || "Find clear answers to common questions about our services, processes, and military-grade standards.",
+    alternates: {
+      canonical: seo.canonicalUrl || pageUrl,
+    },
+    openGraph: {
+      title: seo.ogTitle || seo.metaTitle || faqData?.section?.headline || "Frequently Asked Questions",
+      description: seo.ogDescription || seo.metaDescription || faqData?.section?.description,
+      url: pageUrl,
+      siteName: "Eagle Revolution",
+      type: "website",
+      images: seo.featuredImage ? [{ url: seo.featuredImage }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo.twitterTitle || seo.ogTitle || seo.metaTitle,
+      description: seo.twitterDescription || seo.ogDescription || seo.metaDescription,
+      images: [seo.featuredImage || seo.twitterImage || seo.ogImage].filter(Boolean) as string[],
+    }
   };
 }
 

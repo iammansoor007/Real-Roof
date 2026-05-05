@@ -6,9 +6,10 @@ import DOMPurify from "dompurify";
 interface RichTextRendererProps {
   content: string | string[];
   className?: string;
+  stripParagraphs?: boolean;
 }
 
-export default function RichTextRenderer({ content, className = "" }: RichTextRendererProps) {
+export default function RichTextRenderer({ content, className = "", stripParagraphs = false }: RichTextRendererProps) {
   // Safe sanitize helper that handles Next.js ESM/CJS interop and SSR
   const safeSanitize = (html: string) => {
     if (typeof window === "undefined") return html;
@@ -39,7 +40,11 @@ export default function RichTextRenderer({ content, className = "" }: RichTextRe
   if (!content) return null;
 
   // Sanitize and render single HTML string
-  const sanitizedHtml = safeSanitize(content as string);
+  let sanitizedHtml = safeSanitize(content as string);
+
+  if (stripParagraphs) {
+    sanitizedHtml = sanitizedHtml.replace(/<p[^>]*>/gi, '').replace(/<\/p>/gi, '');
+  }
 
   return (
     <div 

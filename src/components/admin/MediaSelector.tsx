@@ -53,8 +53,11 @@ export default function MediaSelector({ onSelect, onClose, title = "Select Asset
       });
       if (res.ok) {
         const newItem = await res.json();
-        onSelect(newItem);
-        onClose();
+        // Update local media list
+        setMedia(prev => [newItem, ...prev]);
+        // Switch to library tab and select the new item
+        setActiveTab('library');
+        setSelectedItem(newItem);
       }
     } catch (err) {
       alert("Upload failed");
@@ -215,7 +218,35 @@ export default function MediaSelector({ onSelect, onClose, title = "Select Asset
                   <div className="pt-4 border-t border-[#c3c4c7] space-y-4">
                      <div className="space-y-1">
                         <label className="text-[11px] font-bold text-[#646970] uppercase">Alt Text</label>
-                        <input type="text" readOnly value={selectedItem.alt || ""} className="w-full bg-white border border-[#c3c4c7] px-2 py-1 text-[12px] outline-none" />
+                        <div className="flex flex-col gap-1">
+                          <input 
+                            type="text" 
+                            value={selectedItem.alt || ""} 
+                            onChange={(e) => {
+                              const newAlt = e.target.value;
+                              // Update local state for immediate feedback
+                              setSelectedItem({ ...selectedItem, alt: newAlt });
+                              setMedia(prev => prev.map(m => m._id === selectedItem._id ? { ...m, alt: newAlt } : m));
+                              
+                              // Debounced save
+                              if ((window as any).mediaDebounce) clearTimeout((window as any).mediaDebounce);
+                              (window as any).mediaDebounce = setTimeout(async () => {
+                                try {
+                                  await fetch("/api/admin/media", {
+                                    method: "PATCH",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify({ id: selectedItem._id, alt: newAlt })
+                                  });
+                                } catch (err) {
+                                  console.error("Failed to save alt text");
+                                }
+                              }, 500);
+                            }}
+                            className="w-full bg-white border border-[#c3c4c7] px-2 py-1 text-[12px] outline-none focus:border-[#2271b1]" 
+                            placeholder="Describe this image..."
+                          />
+                          <p className="text-[10px] text-[#646970] italic">Changes are saved automatically.</p>
+                        </div>
                      </div>
                      <div className="space-y-1">
                         <label className="text-[11px] font-bold text-[#646970] uppercase">File URL</label>

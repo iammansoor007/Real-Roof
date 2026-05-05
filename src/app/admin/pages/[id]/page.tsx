@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { TemplateEditors } from "@/components/admin/editors";
 import SeoEditor from "@/components/admin/SeoEditor";
+import MediaSelector from "@/components/admin/MediaSelector";
 
 const EDITOR_TEMPLATES = [
   { id: 'home', label: 'Home Page', icon: LayoutTemplate },
@@ -36,6 +37,7 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
+  const [showMediaSelector, setShowMediaSelector] = useState(false);
 
   useEffect(() => {
     fetchPage();
@@ -105,9 +107,9 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
           <h1 className="text-[20px] font-normal text-[#1d2327] font-serif">Edit Page</h1>
           <Link href="/admin/pages" className="bg-white border border-[#2271b1] text-[#2271b1] text-[12px] px-1.5 py-0.5 rounded-[3px] hover:bg-[#f0f6fb] transition-colors">Add New</Link>
           {page?.slug && (
-            <Link 
-              href={page.slug === 'home' ? '/' : `/${page.slug}`} 
-              target="_blank" 
+            <Link
+              href={page.slug === 'home' ? '/' : `/${page.slug}`}
+              target="_blank"
               className="bg-white border border-[#c3c4c7] text-[#2c3338] text-[12px] px-1.5 py-0.5 rounded-[3px] hover:bg-[#f6f7f7] transition-colors flex items-center gap-1"
             >
               View Page <ExternalLink className="w-3 h-3" />
@@ -136,10 +138,10 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
             <span className="bg-[#f0f0f1] border border-[#c3c4c7] px-1 rounded-sm text-[#1d2327] break-all">
               https://eaglerevolution.com/{page.slug}
             </span>
-            <button 
+            <button
               onClick={() => {
                 const ns = prompt("Enter new slug:", page.slug);
-                if(ns) setPage({...page, slug: ns});
+                if (ns) setPage({ ...page, slug: ns });
               }}
               className="bg-white border border-[#c3c4c7] px-1.5 py-0.5 rounded-[3px] text-[#2c3338] hover:bg-[#f6f7f7]"
             >
@@ -149,49 +151,47 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
 
           {/* Main Editor Tabs */}
           <div className="bg-white border border-[#c3c4c7] shadow-sm overflow-hidden">
-             <div className="flex border-b border-[#f0f0f1] bg-[#f6f7f7]">
-                <button
-                  onClick={() => setActiveTab('content')}
-                  className={`px-3 py-2 text-[12px] font-semibold border-r border-[#c3c4c7] transition-all ${
-                    activeTab === 'content' ? "bg-white text-[#1d2327]" : "text-[#2271b1] hover:text-[#135e96]"
+            <div className="flex border-b border-[#f0f0f1] bg-[#f6f7f7]">
+              <button
+                onClick={() => setActiveTab('content')}
+                className={`px-3 py-2 text-[12px] font-semibold border-r border-[#c3c4c7] transition-all ${activeTab === 'content' ? "bg-white text-[#1d2327]" : "text-[#2271b1] hover:text-[#135e96]"
                   }`}
-                >
-                  Page Content
-                </button>
-                <button
-                  onClick={() => setActiveTab('seo')}
-                  className={`px-3 py-2 text-[12px] font-semibold border-r border-[#c3c4c7] transition-all ${
-                    activeTab === 'seo' ? "bg-white text-[#1d2327]" : "text-[#2271b1] hover:text-[#135e96]"
+              >
+                Page Content
+              </button>
+              <button
+                onClick={() => setActiveTab('seo')}
+                className={`px-3 py-2 text-[12px] font-semibold border-r border-[#c3c4c7] transition-all ${activeTab === 'seo' ? "bg-white text-[#1d2327]" : "text-[#2271b1] hover:text-[#135e96]"
                   }`}
-                >
-                  SEO Settings
-                </button>
-             </div>
+              >
+                SEO Settings
+              </button>
+            </div>
 
-             <div className="p-0 overflow-x-auto">
-                {activeTab === 'content' ? (
-                  <div className="p-4 sm:p-5">
-                    {TemplateEditors[page.template] ? (
-                       (() => {
-                         const Editor = TemplateEditors[page.template];
-                         return <Editor pageId={id} data={content} setData={setContent} />;
-                       })()
-                    ) : (
-                      <div className="p-10 text-center text-[#646970] text-[13px]">
-                        Select a template in the right sidebar to start editing.
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <SeoEditor 
-                    data={seo} 
-                    setData={setSeo} 
-                    pageSlug={page.slug} 
-                    pageTitle={page.title} 
-                    pageContent={content}
-                  />
-                )}
-             </div>
+            <div className="p-0 overflow-x-auto">
+              {activeTab === 'content' ? (
+                <div className="p-4 sm:p-5">
+                  {TemplateEditors[page.template] ? (
+                    (() => {
+                      const Editor = TemplateEditors[page.template];
+                      return <Editor pageId={id} data={content} setData={setContent} />;
+                    })()
+                  ) : (
+                    <div className="p-10 text-center text-[#646970] text-[13px]">
+                      Select a template in the right sidebar to start editing.
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <SeoEditor
+                  data={seo}
+                  setData={setSeo}
+                  pageSlug={page.slug}
+                  pageTitle={page.title}
+                  pageContent={content}
+                />
+              )}
+            </div>
           </div>
         </div>
 
@@ -205,7 +205,7 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
             <div className="p-3 space-y-2 text-[12px] text-[#2c3338]">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5 text-[#82878c]" /> Status:</span>
-                <select 
+                <select
                   value={page.status || "published"}
                   onChange={(e) => setPage({ ...page, status: e.target.value })}
                   className="bg-white border border-[#8c8f94] text-[12px] px-1 py-0.5 rounded-[3px] outline-none focus:border-[#2271b1]"
@@ -221,9 +221,9 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
               </div>
               {page?.slug && (
                 <div className="pt-2 border-t border-[#f0f0f1] mt-2">
-                   <Link 
-                    href={page.slug === 'home' ? '/' : `/${page.slug}`} 
-                    target="_blank" 
+                  <Link
+                    href={page.slug === 'home' ? '/' : `/${page.slug}`}
+                    target="_blank"
                     className="text-[#2271b1] hover:underline flex items-center gap-1"
                   >
                     View Page <ExternalLink className="w-3 h-3" />
@@ -233,8 +233,8 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
             </div>
             <div className="bg-[#f6f7f7] border-t border-[#c3c4c7] px-3 py-2 flex items-center justify-between">
               <button onClick={handleDelete} className="text-[#d63638] underline text-[12px] hover:text-[#b32d2e]">Trash</button>
-              <button 
-                onClick={handleSave} 
+              <button
+                onClick={handleSave}
                 disabled={saving}
                 className="bg-[#2271b1] text-white text-[12px] font-semibold px-3 py-1 rounded-[3px] border border-[#135e96] shadow-[0_1px_0_#135e96] hover:bg-[#135e96] disabled:opacity-50"
               >
@@ -251,9 +251,9 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
             <div className="p-3 space-y-3">
               <div className="space-y-1">
                 <label className="text-[11px] font-semibold text-[#1d2327]">Template</label>
-                <select 
+                <select
                   value={page.template}
-                  onChange={(e) => setPage({...page, template: e.target.value})}
+                  onChange={(e) => setPage({ ...page, template: e.target.value })}
                   className="w-full border border-[#8c8f94] bg-white px-2 py-1 text-[12px] rounded-[3px] outline-none focus:border-[#2271b1]"
                 >
                   {EDITOR_TEMPLATES.map(t => <option key={t.id} value={t.id}>{t.label}</option>)}
@@ -268,11 +268,60 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
               <h2 className="text-[13px] font-semibold text-[#1d2327]">Featured Image</h2>
             </div>
             <div className="p-3">
-              <button className="text-[#2271b1] underline text-[12px] hover:text-[#135e96]">Set image</button>
+              {seo?.featuredImage ? (
+                <div className="space-y-2">
+                  <div className="relative aspect-video bg-slate-50 border border-[#c3c4c7] rounded-sm overflow-hidden group">
+                    <img
+                      src={seo.featuredImage}
+                      alt="Featured"
+                      className="w-full h-full object-cover"
+                    />
+                    <button
+                      onClick={() => setSeo({ ...seo, featuredImage: '' })}
+                      className="absolute top-1 right-1 p-1 bg-black/50 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <Trash2 className="w-3 h-3" />
+                    </button>
+                  </div>
+                  <button
+                    onClick={() => setShowMediaSelector(true)}
+                    className="text-[#2271b1] underline text-[12px] hover:text-[#135e96]"
+                  >
+                    Set featured image
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setShowMediaSelector(true)}
+                  className="text-[#2271b1] underline text-[12px] hover:text-[#135e96]"
+                >
+                  Set featured image
+                </button>
+              )}
             </div>
           </div>
         </div>
       </div>
+
+      <AnimatePresence>
+        {showMediaSelector && (
+          <MediaSelector
+            onSelect={(item: any) => {
+              const url = item.url;
+              const altText = item.alt || '';
+              setSeo((prev: any) => ({
+                ...prev,
+                featuredImage: url,
+                featuredImageAlt: altText,
+                ogImage: prev.ogImage || url,
+                twitterImage: prev.twitterImage || url,
+              }));
+              setShowMediaSelector(false);
+            }}
+            onClose={() => setShowMediaSelector(false)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Toast Notification */}
       <AnimatePresence>

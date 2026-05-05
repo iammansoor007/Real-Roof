@@ -47,9 +47,14 @@ const AccordionItem = ({ item, index, isOpen, onToggle, searchHighlight }: any) 
 };
 
 export default function FAQTemplate({ pageData, params }: { pageData?: any, params?: any }) {
-    const { faq } = useContent();
+    const { faq: globalFaq } = useContent();
     const [openItems, setOpenItems] = useState<number[]>([0]);
     const [activeCategory, setActiveCategory] = useState('all');
+    
+    // Use page-specific FAQs if provided (e.g. from dynamic pages), otherwise fallback to global
+    // The page editor stores FAQs in content.faqs; support both locations
+    const pageFaqs = pageData?.faqs || pageData?.content?.faqs;
+    const faq = pageFaqs ? { ...globalFaq, items: pageFaqs } : globalFaq;
     const { section, items = [] } = faq || {};
 
     const filteredItems = useMemo(() => {

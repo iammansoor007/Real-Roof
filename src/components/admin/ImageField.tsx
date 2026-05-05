@@ -60,6 +60,21 @@ export default function ImageField({
                 Remove
               </button>
             </div>
+
+            {onAltChange && (
+              <div className="mt-4 pt-4 border-t border-[#c3c4c7] w-full max-w-md mx-auto text-left">
+                <label className="text-[11px] font-bold text-[#1d2327] uppercase block mb-1">
+                  Alt Text (for accessibility/SEO)
+                </label>
+                <input
+                  type="text"
+                  value={altValue || ""}
+                  onChange={(e) => onAltChange(e.target.value)}
+                  className="w-full bg-white border border-[#c3c4c7] px-3 py-1.5 text-[14px] rounded-[3px] focus:border-[#2271b1] outline-none"
+                  placeholder="Describe this image..."
+                />
+              </div>
+            )}
           </div>
         ) : (
           <button

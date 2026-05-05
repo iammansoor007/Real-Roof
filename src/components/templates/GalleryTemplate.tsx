@@ -35,17 +35,23 @@ const IMAGE_MAP: Record<string, any> = {
   commercialroof: commercialRoofImg,
   siding: sidingImg,
   gutter: gutterImg,
+  home1: residental1Img,
+  home2: residental2Img,
+  home3: deckMain,
+  home4: windowImg,
+  home5: sidingImg,
+  home6: gutterImg,
 };
 
-function resolveImage(key: string) {
+function resolveImage(key: string, assetMap: any = {}) {
   if (!key) return portfolioFallback;
   // If it already looks like a real URL or path, use as-is
-  if (key.startsWith("http") || key.startsWith("/")) return key;
-  return IMAGE_MAP[key] ?? portfolioFallback;
+  if (typeof key === 'string' && (key.startsWith("http") || key.startsWith("/") || key.startsWith("blob:"))) return key;
+  return (assetMap[key] || IMAGE_MAP[key]) ?? portfolioFallback;
 }
 
 // ---------- Lightbox ----------
-const Lightbox = ({ project, onClose }: { project: any; onClose: () => void }) => (
+const Lightbox = ({ project, assetMap, onClose }: { project: any; assetMap: any; onClose: () => void }) => (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
@@ -67,7 +73,7 @@ const Lightbox = ({ project, onClose }: { project: any; onClose: () => void }) =
         <X className="w-5 h-5" />
       </button>
       <div className="relative h-[50vh]">
-        <Image src={resolveImage(project.image)} alt={project.title} fill className="object-cover" />
+        <Image src={resolveImage(project.image, assetMap)} alt={project.title} fill className="object-cover" />
       </div>
       <div className="p-6">
         <div className="flex items-start justify-between mb-3">
@@ -79,9 +85,9 @@ const Lightbox = ({ project, onClose }: { project: any; onClose: () => void }) =
             {project.category}
           </span>
         </div>
-        <RichTextRenderer 
-          content={project.desc} 
-          className="text-muted-foreground text-sm leading-relaxed mb-4" 
+        <RichTextRenderer
+          content={project.desc}
+          className="text-muted-foreground text-sm leading-relaxed mb-4"
         />
         <div className="flex items-center gap-4 text-sm text-muted-foreground">
           {project.location && (
@@ -97,8 +103,8 @@ const Lightbox = ({ project, onClose }: { project: any; onClose: () => void }) =
 );
 
 // ---------- Masonry Card ----------
-const MasonryCard = ({ project, onClick }: any) => {
-  const img = resolveImage(project.image);
+const MasonryCard = ({ project, assetMap, onClick }: any) => {
+  const img = resolveImage(project.image, assetMap);
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -132,9 +138,14 @@ const MasonryCard = ({ project, onClick }: any) => {
 
 // ---------- Template ----------
 export default function GalleryTemplate({ pageData, params }: { pageData?: any; params?: any }) {
-  const { galleryPage, portfolio } = useContent();
+  const { galleryPage: globalGalleryPage, portfolio: globalPortfolio, images } = useContent();
+  const assetMap = images?.portfolio || {};
   const [activeCategory, setActiveCategory] = useState("All");
   const [lightboxProject, setLightboxProject] = useState<any>(null);
+
+  // Prefer server-fetched pageData (real DB URLs) over useContent() which may fall back to static JSON
+  const portfolio = pageData?.portfolio || globalPortfolio;
+  const galleryPage = pageData?.galleryPage || globalGalleryPage;
 
   // Projects now come from the portfolio managed in the dashboard
   const projects: any[] = portfolio?.projects || [];
@@ -182,8 +193,8 @@ export default function GalleryTemplate({ pageData, params }: { pageData?: any; 
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <RichTextRenderer 
-            content={galleryPage?.header?.description || "Browse our completed projects across St. Louis."} 
+          <RichTextRenderer
+            content={galleryPage?.header?.description || "Browse our completed projects across St. Louis."}
             className="text-muted-foreground text-lg max-w-2xl mx-auto"
           />
         </motion.div>
@@ -195,11 +206,10 @@ export default function GalleryTemplate({ pageData, params }: { pageData?: any; 
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 border ${
-              activeCategory === cat
-                ? "bg-primary text-white border-primary shadow-lg shadow-primary/25"
-                : "bg-card text-muted-foreground border-border hover:border-primary/40 hover:text-primary"
-            }`}
+            className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 border ${activeCategory === cat
+              ? "bg-primary text-white border-primary shadow-lg shadow-primary/25"
+              : "bg-card text-muted-foreground border-border hover:border-primary/40 hover:text-primary"
+              }`}
           >
             {cat}
           </button>
@@ -213,6 +223,7 @@ export default function GalleryTemplate({ pageData, params }: { pageData?: any; 
             <MasonryCard
               key={project.id ?? i}
               project={project}
+              assetMap={assetMap}
               onClick={() => setLightboxProject(project)}
             />
           ))}
@@ -222,7 +233,7 @@ export default function GalleryTemplate({ pageData, params }: { pageData?: any; 
       {/* Lightbox */}
       <AnimatePresence>
         {lightboxProject && (
-          <Lightbox project={lightboxProject} onClose={() => setLightboxProject(null)} />
+          <Lightbox project={lightboxProject} assetMap={assetMap} onClose={() => setLightboxProject(null)} />
         )}
       </AnimatePresence>
     </main>

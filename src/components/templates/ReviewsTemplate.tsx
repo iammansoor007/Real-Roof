@@ -43,7 +43,7 @@ const TestimonialCard = ({ testimonial, index, onPlay }: any) => {
                 ))}
             </div>
             <div className="text-gray-700 dark:text-foreground/80 text-sm sm:text-base leading-relaxed mb-6 line-clamp-5 italic">
-                <RichTextRenderer content={testimonial.text} />
+                <RichTextRenderer content={testimonial.text} stripParagraphs={true} />
             </div>
             <div className="flex items-center justify-between pt-5 border-t border-gray-100">
                 <div>
@@ -65,7 +65,7 @@ export default function ReviewsTemplate({ pageData, params }: { pageData?: any, 
             <div className="max-w-6xl mx-auto px-4 text-center">
                 <h1 className="text-4xl sm:text-7xl font-bold tracking-tight mb-4" dangerouslySetInnerHTML={{ __html: section?.headline || 'Customer Stories' }} />
                 <div className="text-lg text-gray-600 max-w-xl mx-auto mb-12">
-                    <RichTextRenderer content={section?.description} />
+                    <RichTextRenderer content={section?.description} stripParagraphs={true} />
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">

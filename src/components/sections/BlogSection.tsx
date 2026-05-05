@@ -55,7 +55,7 @@ export default function BlogSection({
                                 {title}
                             </h2>
                             <div className="text-muted-foreground text-lg leading-relaxed">
-                                <RichTextRenderer content={description} />
+                                <RichTextRenderer content={description} stripParagraphs={true} />
                             </div>
                         </motion.div>
                     </div>

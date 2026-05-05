@@ -17,6 +17,7 @@ export default function PagesDashboard() {
   const [actionLoading, setActionLoading] = useState(false);
   const [filter, setFilter] = useState("all");
   const [bulkAction, setBulkAction] = useState("");
+  const [editingPage, setEditingPage] = useState<any>(null);
 
   // New Page Form
   const [newPage, setNewPage] = useState({
@@ -130,6 +131,31 @@ export default function PagesDashboard() {
         });
         if (res.ok) fetchPages();
       } catch (err) { alert("Status update failed."); }
+    }
+  };
+
+  const handleQuickEditSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`/api/admin/pages/${editingPage._id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: editingPage.title,
+          slug: editingPage.slug,
+          status: editingPage.status,
+          template: editingPage.template
+        })
+      });
+      if (res.ok) {
+        setEditingPage(null);
+        fetchPages();
+      } else {
+        const error = await res.json();
+        alert("Update failed: " + (error.error || "Unknown error"));
+      }
+    } catch (err) {
+      alert("Update failed");
     }
   };
 
@@ -259,6 +285,8 @@ export default function PagesDashboard() {
                     <div className="flex items-center gap-2 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
                       <Link href={`/admin/pages/${page._id}`} className="text-[#2271b1] hover:underline text-[12px]">Edit</Link>
                       <span className="text-[#a7aaad]">|</span>
+                      <button onClick={() => setEditingPage(page)} className="text-[#2271b1] hover:underline text-[12px]">Quick Edit</button>
+                      <span className="text-[#a7aaad]">|</span>
                       <button onClick={(e) => handleIndividualAction(e, 'duplicate', page._id)} className="text-[#2271b1] hover:underline text-[12px]">Duplicate</button>
                       <span className="text-[#a7aaad]">|</span>
                       <button onClick={(e) => handleIndividualAction(e, 'status', page._id)} className="text-[#2271b1] hover:underline text-[12px]">
@@ -352,6 +380,88 @@ export default function PagesDashboard() {
                    </button>
                 </div>
              </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Quick Edit Modal */}
+      <AnimatePresence>
+        {editingPage && (
+          <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setEditingPage(null)} className="absolute inset-0 bg-[#00000066]" />
+            <motion.div
+              initial={{ y: -10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -10, opacity: 0 }}
+              className="relative w-full max-w-2xl bg-[#f1f1f1] border border-[#c3c4c7] shadow-lg rounded-[3px] overflow-hidden flex flex-col"
+            >
+              <div className="flex items-center justify-between px-4 py-3 bg-white border-b border-[#c3c4c7]">
+                <h2 className="text-[#1d2327] text-lg font-normal font-serif">Quick Edit</h2>
+                <button onClick={() => setEditingPage(null)} className="text-[#787c82] hover:text-[#d63638]"><X className="w-5 h-5" /></button>
+              </div>
+              <form onSubmit={handleQuickEditSave}>
+                <div className="p-6 bg-[#f0f0f1] grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-[#1d2327] text-[12px] font-bold mb-1">Title</label>
+                      <input
+                        type="text"
+                        value={editingPage.title}
+                        onChange={(e) => setEditingPage({ ...editingPage, title: e.target.value })}
+                        className="w-full border border-[#8c8f94] bg-white px-3 py-1 text-[13px] rounded-[3px] focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] outline-none"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[#1d2327] text-[12px] font-bold mb-1">Slug</label>
+                      <input
+                        type="text"
+                        value={editingPage.slug}
+                        onChange={(e) => setEditingPage({ ...editingPage, slug: e.target.value })}
+                        className="w-full border border-[#8c8f94] bg-white px-3 py-1 text-[13px] rounded-[3px] focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] outline-none"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-[#1d2327] text-[12px] font-bold mb-1">Template</label>
+                      <select
+                        value={editingPage.template}
+                        onChange={(e) => setEditingPage({ ...editingPage, template: e.target.value })}
+                        className="w-full border border-[#8c8f94] bg-white px-2 py-1 text-[13px] rounded-[3px] outline-none"
+                      >
+                        <option value="home">Home Page</option>
+                        <option value="about">About Us</option>
+                        <option value="services">Services Index</option>
+                        <option value="team">Team / Staff</option>
+                        <option value="careers">Careers / Jobs</option>
+                        <option value="gallery">Gallery Showcase</option>
+                        <option value="reviews">Reviews</option>
+                        <option value="faq">Knowledge Base</option>
+                        <option value="contact">Contact Portal</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-[#1d2327] text-[12px] font-bold mb-1">Status</label>
+                      <select
+                        value={editingPage.status}
+                        onChange={(e) => setEditingPage({ ...editingPage, status: e.target.value })}
+                        className="w-full border border-[#8c8f94] bg-white px-2 py-1 text-[13px] rounded-[3px] outline-none"
+                      >
+                        <option value="published">Published</option>
+                        <option value="draft">Draft</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center justify-end gap-3 px-4 py-3 bg-[#f6f7f7] border-t border-[#c3c4c7]">
+                  <button type="button" onClick={() => setEditingPage(null)} className="text-[#2271b1] text-[13px] hover:text-[#135e96]">Cancel</button>
+                  <button
+                    type="submit"
+                    className="bg-[#2271b1] text-white text-[13px] font-bold px-4 py-1.5 rounded-[3px] border border-[#135e96] hover:bg-[#135e96]"
+                  >
+                    Update
+                  </button>
+                </div>
+              </form>
+            </motion.div>
           </div>
         )}
       </AnimatePresence>

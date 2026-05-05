@@ -101,6 +101,7 @@ const CompactServiceCard = ({ service }: { service: any }) => {
           <RichTextRenderer 
             content={service.description} 
             className="text-sm text-muted-foreground leading-relaxed line-clamp-2"
+            stripParagraphs={true}
           />
           <motion.div
             className="flex items-center gap-2 mt-3"
@@ -252,6 +253,7 @@ const ServiceCard = ({ service, index }: { service: any; index: number }) => {
           <RichTextRenderer 
             content={service.description} 
             className="text-muted-foreground text-sm leading-relaxed line-clamp-3 mb-3"
+            stripParagraphs={true}
           />
 
           <motion.div
@@ -311,7 +313,17 @@ const Services = () => {
   const imageScale = useTransform(smoothProgress, [0, 0.1], [1.15, 1]);
   const overlayOpacity = useTransform(smoothProgress, [0, 0.08], [0.5, 0.1]);
 
-  const { badge, headline = { prefix: '', highlight: '', suffix: '' }, description: rawDescription = [], stats = [], cta = { title: '', description: '', buttonText: '', buttonLink: '/' } } = servicesData;
+  const { 
+    badge = "Premium Services", 
+    headline = { prefix: 'Our', highlight: 'Expert', suffix: 'Services' }, 
+    description: rawDescription = "Professional exterior remodeling with military precision.", 
+    stats = [
+        { value: 500, suffix: "+", label: "Projects" },
+        { value: 50, suffix: "+", label: "Years Combined" },
+        { value: 4.9, suffix: "", label: "Rating" }
+    ], 
+    cta = { title: 'Ready to Start?', description: 'Get your free estimate today.', buttonText: 'Contact Us', buttonLink: '/contact' } 
+  } = (servicesData || {}) as any;
   
   const description = Array.isArray(rawDescription) 
     ? rawDescription 
@@ -319,7 +331,7 @@ const Services = () => {
       ? [rawDescription] 
       : [];
 
-  const servicesListRaw = ((servicesData as any).services || []).filter((s: any) => s.status === 'published');
+  const servicesListRaw = (servicesData?.services || (Array.isArray(servicesData) ? servicesData : [])).filter((s: any) => !s.status || s.status === 'published');
   const servicesList = servicesListRaw.map((s: any, idx: number) => ({
     ...s,
     number: String(idx + 1).padStart(2, '0')
@@ -401,6 +413,7 @@ const Services = () => {
                 <RichTextRenderer 
                   content={description} 
                   className="text-muted-foreground text-lg leading-relaxed"
+                  stripParagraphs={true}
                 />
               </div>
               <div className="flex items-center justify-between gap-8 mt-8 pt-6 border-t border-border">
@@ -483,7 +496,7 @@ const Services = () => {
                     >
                       <span className="text-xs font-semibold text-primary flex items-center gap-1.5">
                         <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
-                        {servicesData.image?.badge || "🇺🇸 Veteran Owned & Operated"}
+                        {servicesData.image?.badge || "Veteran Owned & Operated"}
                       </span>
                     </motion.div>
                   </div>

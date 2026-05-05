@@ -5,14 +5,38 @@ import SiteContent from "@/models/Content";
 import Script from "next/script";
 import { generateSchema } from "@/lib/schema-generator";
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.eaglerevolution.com";
+
 export async function generateMetadata(): Promise<Metadata> {
   await connectToDatabase();
   const content = await SiteContent.findOne({ key: "complete_data" }).lean() as any;
   const aboutData = content?.data?.aboutPage;
+  const seo = aboutData?.seo || {};
+  const pageUrl = `${BASE_URL}/about`;
   
   return {
-    title: aboutData?.hero?.headline || "About Us | Eagle Revolution",
-    description: aboutData?.hero?.description || "Learn about Eagle Revolution, our veteran-owned standards, and our commitment to roofing excellence in St. Louis.",
+    metadataBase: new URL(BASE_URL),
+    title: {
+      absolute: seo.metaTitle || aboutData?.hero?.headline || "About Us | Eagle Revolution"
+    },
+    description: seo.metaDescription || aboutData?.hero?.description || "Learn about Eagle Revolution, our veteran-owned standards, and our commitment to roofing excellence in St. Louis.",
+    alternates: {
+      canonical: seo.canonicalUrl || pageUrl,
+    },
+    openGraph: {
+      title: seo.ogTitle || seo.metaTitle || aboutData?.hero?.headline || "About Us",
+      description: seo.ogDescription || seo.metaDescription || aboutData?.hero?.description,
+      url: pageUrl,
+      siteName: "Eagle Revolution",
+      type: "website",
+      images: seo.featuredImage ? [{ url: seo.featuredImage }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo.twitterTitle || seo.ogTitle || seo.metaTitle,
+      description: seo.twitterDescription || seo.ogDescription || seo.metaDescription,
+      images: [seo.featuredImage || seo.twitterImage || seo.ogImage].filter(Boolean) as string[],
+    }
   };
 }
 

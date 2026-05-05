@@ -49,7 +49,7 @@ const TestimonialCard = ({ testimonial, isActive }: { testimonial: any; isActive
 
         <div className="flex-1 mb-6 overflow-y-auto pr-2 custom-scrollbar">
           <div className="text-foreground/90 text-lg lg:text-xl leading-relaxed font-light italic">
-            <RichTextRenderer content={testimonial.text} />
+            <RichTextRenderer content={testimonial.text} stripParagraphs={true} />
           </div>
         </div>
 
@@ -260,7 +260,7 @@ const Testimonials = () => {
           </h2>
 
           <div className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            <RichTextRenderer content={section.description} />
+            <RichTextRenderer content={section.description} stripParagraphs={true} />
           </div>
 
           <div className="flex items-center justify-center gap-3 mt-6">

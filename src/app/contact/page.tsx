@@ -5,14 +5,38 @@ import SiteContent from "@/models/Content";
 import Script from "next/script";
 import { generateSchema } from "@/lib/schema-generator";
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.eaglerevolution.com";
+
 export async function generateMetadata(): Promise<Metadata> {
   await connectToDatabase();
   const content = await SiteContent.findOne({ key: "complete_data" }).lean() as any;
   const contactData = content?.data?.contactPage;
+  const seo = contactData?.seo || {};
+  const pageUrl = `${BASE_URL}/contact`;
   
   return {
-    title: contactData?.hero?.headline || "Contact Us | Eagle Revolution",
-    description: contactData?.hero?.description || "Get a free estimate for your roofing or decking project. Contact St. Louis's most trusted veteran-owned contractor.",
+    metadataBase: new URL(BASE_URL),
+    title: {
+      absolute: seo.metaTitle || contactData?.hero?.headline || "Contact Us | Eagle Revolution"
+    },
+    description: seo.metaDescription || contactData?.hero?.description || "Get a free estimate for your roofing or decking project. Contact St. Louis's most trusted veteran-owned contractor.",
+    alternates: {
+      canonical: seo.canonicalUrl || pageUrl,
+    },
+    openGraph: {
+      title: seo.ogTitle || seo.metaTitle || contactData?.hero?.headline || "Contact Us",
+      description: seo.ogDescription || seo.metaDescription || contactData?.hero?.description,
+      url: pageUrl,
+      siteName: "Eagle Revolution",
+      type: "website",
+      images: seo.featuredImage ? [{ url: seo.featuredImage }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo.twitterTitle || seo.ogTitle || seo.metaTitle,
+      description: seo.twitterDescription || seo.ogDescription || seo.metaDescription,
+      images: [seo.featuredImage || seo.twitterImage || seo.ogImage].filter(Boolean) as string[],
+    }
   };
 }
 

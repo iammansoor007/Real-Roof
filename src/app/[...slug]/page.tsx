@@ -108,10 +108,9 @@ export default async function DynamicPage({ params }: PageProps) {
   const isValidFaq = (items: any) => Array.isArray(items) && items.length > 0 && items.every((i: any) => i.question && i.answer);
 
   // Detect FAQs ONLY if this is the FAQ template (as requested)
-  let faqs = undefined;
   if (page.template === 'faq') {
     const allFaqs = globalData.faq?.items || [];
-    faqs = allFaqs.filter((item: any) =>
+    page.faqs = allFaqs.filter((item: any) =>
       item.visibility === 'global' ||
       (item.visibility === 'specific' && item.targetPages?.includes(slug))
     );
@@ -131,7 +130,7 @@ export default async function DynamicPage({ params }: PageProps) {
     description: page.seo?.metaDescription || "",
     slug: page.slug,
     type: pageType,
-    faqs: faqs,
+    faqs: page.faqs,
     breadcrumbTitle: page.seo?.breadcrumbTitle,
     image: featuredImage
   });

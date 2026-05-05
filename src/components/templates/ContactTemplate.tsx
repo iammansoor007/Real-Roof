@@ -34,7 +34,7 @@ const HolographicInput = ({ icon: IconName, label, type = "text", ...props }: an
 
 export default function ContactTemplate({ pageData }: { pageData?: any }) {
     const { contactPage: globalContactData } = useContent();
-    
+
     // Prioritize page-specific content over global content
     const contactData = pageData?.content?.contactPage || globalContactData;
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -88,6 +88,17 @@ export default function ContactTemplate({ pageData }: { pageData?: any }) {
 
     const inlineFields = formFields.filter((f: any) => f.type !== "textarea");
     const textareaFields = formFields.filter((f: any) => f.type === "textarea");
+
+    const info = contactData?.info || {};
+    const infoCards = contactData?.infoCards || [];
+
+    // Map infoCards to the info structure if info is empty
+    const finalInfo = {
+        phone: info.phone || infoCards.find((c: any) => c.type === 'phone')?.value || "",
+        email: info.email || infoCards.find((c: any) => c.type === 'email')?.value || "",
+        address: info.address || infoCards.find((c: any) => c.type === 'location')?.value || "",
+        hours: info.hours || infoCards.find((c: any) => c.type === 'phone')?.label || "" // Often hours are in the label for phone
+    };
 
     return (
         <main className="relative bg-background py-24 min-h-screen overflow-hidden">
@@ -180,6 +191,53 @@ export default function ContactTemplate({ pageData }: { pageData?: any }) {
                         </motion.button>
                     </form>
                 </motion.div>
+
+                {/* Business Vitals Section */}
+                {(finalInfo.phone || finalInfo.email || finalInfo.address || finalInfo.hours) && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6"
+                    >
+                        {finalInfo.phone && (
+                            <div className="bg-card/40 border border-border/50 rounded-2xl p-6 text-center">
+                                <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-primary">
+                                    <Icon name="Phone" className="w-5 h-5" />
+                                </div>
+                                <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Phone</h3>
+                                <p className="text-foreground font-medium">{finalInfo.phone}</p>
+                            </div>
+                        )}
+                        {finalInfo.email && (
+                            <div className="bg-card/40 border border-border/50 rounded-2xl p-6 text-center">
+                                <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-primary">
+                                    <Icon name="Mail" className="w-5 h-5" />
+                                </div>
+                                <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Email</h3>
+                                <p className="text-foreground font-medium truncate px-2">{finalInfo.email}</p>
+                            </div>
+                        )}
+                        {finalInfo.address && (
+                            <div className="bg-card/40 border border-border/50 rounded-2xl p-6 text-center">
+                                <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-primary">
+                                    <Icon name="MapPin" className="w-5 h-5" />
+                                </div>
+                                <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Address</h3>
+                                <p className="text-foreground font-medium">{finalInfo.address}</p>
+                            </div>
+                        )}
+                        {finalInfo.hours && (
+                            <div className="bg-card/40 border border-border/50 rounded-2xl p-6 text-center">
+                                <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-primary">
+                                    <Icon name="Clock" className="w-5 h-5" />
+                                </div>
+                                <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Hours</h3>
+                                <p className="text-foreground font-medium">{finalInfo.hours}</p>
+                            </div>
+                        )}
+                    </motion.div>
+                )}
             </div>
 
             {/* Success Modal */}

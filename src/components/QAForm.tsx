@@ -413,9 +413,9 @@ const SuccessModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                 transition={{ delay: 0.6 }}
                 className="text-muted-foreground text-xs sm:text-sm leading-relaxed"
               >
-                <RichTextRenderer content={success.message} className="mb-2" />
+                <RichTextRenderer content={success.message} className="mb-2" stripParagraphs={true} />
                 <span className="font-medium text-primary mt-2 block">
-                  <RichTextRenderer content={success.response} />
+                  <RichTextRenderer content={success.response} stripParagraphs={true} />
                 </span>
               </motion.div>
 
@@ -792,14 +792,13 @@ ${formData.message}
             <div className="w-8 sm:w-12 h-[2px] bg-gradient-to-r from-primary via-primary to-transparent" />
           </div>
 
-          <h2
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-foreground mb-4 sm:mb-6 leading-tight"
-            dangerouslySetInnerHTML={{ __html: section.headline }}
-          />
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-foreground mb-4 sm:mb-6 leading-tight">
+            <RichTextRenderer content={section.headline} stripParagraphs={true} />
+          </h2>
 
-          <p className="text-sm sm:text-base md:text-lg text-muted-foreground font-light max-w-2xl mx-auto px-4">
-            {section.description}
-          </p>
+          <div className="text-sm sm:text-base md:text-lg text-muted-foreground font-light max-w-2xl mx-auto px-4">
+            <RichTextRenderer content={section.description} stripParagraphs={true} />
+          </div>
         </div>
 
         <motion.div

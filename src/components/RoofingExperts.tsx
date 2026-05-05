@@ -5,6 +5,7 @@ import { Icon } from "../config/icons";
 import { useContent } from "../hooks/useContent";
 import Link from "next/link";
 import EagleAboutImg from "@/assets/fairabout.png";
+import RichTextRenderer from "./ui/RichTextRenderer";
 
 const Counter = memo(({ value, suffix = "", duration = 1.8 }: { value: number; suffix?: string; duration?: number }) => {
     const ref = useRef(null);
@@ -303,7 +304,6 @@ export default function AboutSection() {
                                 >
                                     <div className="bg-card/95 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-xl border border-border">
                                         <span className="flex items-center gap-2 text-sm font-bold text-primary">
-                                            <span className="text-lg">🇺🇸</span>
                                             {image?.badge || "Veteran Owned & Operated"}
                                         </span>
                                     </div>
@@ -353,14 +353,9 @@ export default function AboutSection() {
                             />
                         </div>
 
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.5, duration: 0.6 }}
-                            className="text-muted-foreground text-lg md:text-xl leading-relaxed"
-                            dangerouslySetInnerHTML={{ __html: description }}
-                        />
+                        <div className="text-muted-foreground text-lg md:text-xl leading-relaxed">
+                            <RichTextRenderer content={description} stripParagraphs={true} />
+                        </div>
 
                         {coreValues && (
                             <motion.div

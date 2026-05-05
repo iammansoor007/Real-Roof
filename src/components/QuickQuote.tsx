@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '../config/icons';
 import { useContent } from '../hooks/useContent';
+import RichTextRenderer from './ui/RichTextRenderer';
 
 // SMS Consent Checkbox Component
 const SMSConsentCheckbox = ({ checked, onChange }: { checked: boolean; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void }) => {
@@ -502,7 +503,9 @@ ${formData.message}
                                                     <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
                                                         {quickQuote.title || "Quick Quote"}
                                                     </h2>
-                                                    <p className="text-sm text-muted-foreground">{quickQuote.description || "Get your free estimate in minutes"}</p>
+                                                    <div className="text-sm text-muted-foreground">
+                                                         <RichTextRenderer content={quickQuote.description || "Get your free estimate in minutes"} stripParagraphs={true} />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </motion.div>

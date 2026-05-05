@@ -152,6 +152,7 @@ const Hero = () => {
               >
                 <RichTextRenderer 
                   content={description} 
+                  stripParagraphs={true}
                   className="text-base sm:text-lg md:text-xl text-white/80 leading-relaxed" 
                 />
               </motion.div>

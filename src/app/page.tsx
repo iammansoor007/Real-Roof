@@ -2,44 +2,99 @@ import HomeTemplate from "@/components/templates/HomeTemplate";
 import { Metadata } from "next";
 import connectToDatabase from "@/lib/mongodb";
 import SiteContent from "@/models/Content";
+import Page from "@/models/Page";
 import Script from "next/script";
 import { generateSchema } from "@/lib/schema-generator";
+import { TemplateWrapper } from "@/components/templates/TemplateRegistry";
+import ServiceDetailTemplate from "@/components/templates/ServiceDetailTemplate";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.eaglerevolution.com";
 
 export async function generateMetadata(): Promise<Metadata> {
   await connectToDatabase();
   const content = await SiteContent.findOne({ key: "complete_data" }).lean() as any;
-  const homeData = content?.data?.home;
   const settings = content?.data?.settings;
+  const homepageId = settings?.homepageId;
 
+  const pageUrl = BASE_URL;
+
+  let metadata: Metadata = {
+    metadataBase: new URL(BASE_URL),
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      url: pageUrl,
+      siteName: "Eagle Revolution",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "@EagleRevolution",
+      creator: "@EagleRevolution",
+    }
+  };
+
+  if (homepageId) {
+    // Check if it's a page
+    const page = await Page.findById(homepageId).lean();
+    if (page) {
+      const seo = page.seo || {};
+      return {
+        ...metadata,
+        title: { absolute: seo.metaTitle || page.title },
+        description: seo.metaDescription,
+        openGraph: {
+          ...metadata.openGraph,
+          title: seo.ogTitle || seo.metaTitle || page.title,
+          description: seo.ogDescription || seo.metaDescription,
+          images: seo.featuredImage ? [{ url: seo.featuredImage }] : [],
+        },
+        twitter: {
+          ...metadata.twitter,
+          title: seo.twitterTitle || seo.ogTitle || seo.metaTitle || page.title,
+          description: seo.twitterDescription || seo.ogDescription || seo.metaDescription,
+          images: [seo.featuredImage || seo.twitterImage || seo.ogImage].filter(Boolean) as string[],
+        }
+      };
+    }
+    // Check if it's a service
+    const service = content?.data?.services?.services?.find((s: any) => s._id === homepageId || s.slug === homepageId);
+    if (service) {
+      const seo = service.seo || {};
+      return {
+        ...metadata,
+        title: { absolute: seo.metaTitle || service.title },
+        description: seo.metaDescription || service.description,
+        openGraph: {
+          ...metadata.openGraph,
+          title: seo.ogTitle || seo.metaTitle || service.title,
+          description: seo.ogDescription || seo.metaDescription || service.description,
+          images: seo.featuredImage ? [{ url: seo.featuredImage }] : [],
+        },
+        twitter: {
+          ...metadata.twitter,
+          title: seo.twitterTitle || seo.ogTitle || seo.metaTitle || service.title,
+          description: seo.twitterDescription || seo.ogDescription || seo.metaDescription || service.description,
+          images: [seo.featuredImage || seo.twitterImage || seo.ogImage].filter(Boolean) as string[],
+        }
+      };
+    }
+  }
+
+  // Default to Home data
+  const homeData = content?.data?.home;
   return {
+    ...metadata,
     title: {
       absolute: homeData?.hero?.headline || settings?.siteTitle || "Eagle Revolution | #1 Roofing & Home Improvement"
     },
     description: homeData?.hero?.subheadline || "Veteran-owned roofing & home improvement in St. Louis, MO.",
     openGraph: {
-      title: homeData?.hero?.headline || settings?.siteTitle || "Eagle Revolution",
-      description: homeData?.hero?.subheadline || "Veteran-owned roofing & home improvement in St. Louis, MO.",
-      url: BASE_URL,
-      siteName: "Eagle Revolution",
-      type: "website",
-      images: [
-        {
-          url: `${BASE_URL}/eagle-logo.png`,
-          width: 1200,
-          height: 630,
-          alt: "Eagle Revolution",
-        }
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: homeData?.hero?.headline || settings?.siteTitle || "Eagle Revolution",
-      description: homeData?.hero?.subheadline || "Veteran-owned roofing & home improvement in St. Louis, MO.",
+      ...metadata.openGraph,
+      title: homeData?.hero?.headline || settings?.siteTitle,
+      description: homeData?.hero?.subheadline || "Veteran-owned roofing & home improvement",
       images: [`${BASE_URL}/eagle-logo.png`],
-      site: "@EagleRevolution",
-      creator: "@EagleRevolution",
     }
   };
 }
@@ -47,11 +102,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Index() {
   await connectToDatabase();
   const content = await SiteContent.findOne({ key: "complete_data" }).lean() as any;
-  const homeData = content?.data?.home;
   const settings = content?.data?.settings;
-
-  // Helper to validate FAQ items
-  const isValidFaq = (items: any) => Array.isArray(items) && items.length > 0 && items.every((i: any) => i.question && i.answer);
+  const homepageId = settings?.homepageId;
 
   // Detect FAQs for Homepage (Global + specific to home)
   const allFaqs = content?.data?.faq?.items || [];
@@ -60,6 +112,50 @@ export default async function Index() {
     (item.visibility === 'specific' && item.targetPages?.includes('home'))
   );
 
+  if (homepageId) {
+    // Check if it's a page
+    const pageDoc = await Page.findById(homepageId).lean();
+    if (pageDoc) {
+      const page = JSON.parse(JSON.stringify(pageDoc));
+      const schema = generateSchema({
+        title: page.seo?.metaTitle || page.title,
+        description: page.seo?.metaDescription || "",
+        slug: "/",
+        type: "WebPage",
+        faqs: faqs,
+        image: `${BASE_URL}/eagle-logo.png`
+      });
+      return (
+        <>
+          <Script id="json-ld-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+          <TemplateWrapper templateName={page.template} pageData={page} params={Promise.resolve({ slug: ['/'] })} />
+        </>
+      );
+    }
+
+    // Check if it's a service
+    const serviceDoc = content?.data?.services?.services?.find((s: any) => s._id === homepageId || s.slug === homepageId);
+    if (serviceDoc) {
+      const service = JSON.parse(JSON.stringify(serviceDoc));
+      const schema = generateSchema({
+        title: service.seo?.metaTitle || service.title,
+        description: service.seo?.metaDescription || service.description || "",
+        slug: "/",
+        type: "Service",
+        faqs: faqs,
+        image: `${BASE_URL}/eagle-logo.png`
+      });
+      return (
+        <>
+          <Script id="json-ld-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+          <ServiceDetailTemplate params={Promise.resolve({ slug: service.slug })} />
+        </>
+      );
+    }
+  }
+
+  // Default Home Template
+  const homeData = content?.data?.home;
   const schema = generateSchema({
     title: settings?.siteTitle || "Eagle Revolution",
     description: homeData?.hero?.subheadline || "Veteran-owned roofing & home improvement in St. Louis, MO.",

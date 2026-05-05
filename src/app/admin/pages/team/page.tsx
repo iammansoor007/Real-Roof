@@ -107,6 +107,8 @@ export default function TeamPageEditor() {
       name: "New Member",
       role: "Position",
       image: "",
+      linkedin: "",
+      email: "",
       description: ["Member bio goes here..."],
       badge1: "Certified Specialist",
       badge2: "Award Winner"
@@ -277,7 +279,7 @@ export default function TeamPageEditor() {
                   {/* Content Column */}
                   <div className="lg:col-span-8 p-8 lg:p-10 space-y-8">
                     <div className="flex items-start justify-between">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1 pr-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 flex-1 pr-6">
                         <div className="space-y-2">
                           <label className="text-xs uppercase tracking-widest text-slate-500 font-extrabold">Full Name</label>
                           <div className="relative">
@@ -301,6 +303,32 @@ export default function TeamPageEditor() {
                               onChange={(e) => updateMember(mIdx, "role", e.target.value)}
                               className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-6 py-3.5 text-slate-900 font-bold focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                               placeholder="e.g. Senior Project Manager"
+                            />
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-xs uppercase tracking-widest text-slate-500 font-extrabold">LinkedIn URL</label>
+                          <div className="relative">
+                            <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none"><path d="M4 8h4v12H4V8z" stroke="currentColor" strokeWidth="1.5"/><circle cx="6" cy="4" r="2" stroke="currentColor" strokeWidth="1.5"/><path d="M10 8h4v2c.6-.8 1.5-2 3-2 2.5 0 4 1.5 4 4v8h-4v-6c0-1.5-.5-2-2-2s-2 .5-2 2v6h-4V8z" stroke="currentColor" strokeWidth="1.5"/></svg>
+                            <input
+                              type="url"
+                              value={member.linkedin || ""}
+                              onChange={(e) => updateMember(mIdx, "linkedin", e.target.value)}
+                              className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-6 py-3.5 text-slate-900 font-medium focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                              placeholder="https://linkedin.com/in/..."
+                            />
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-xs uppercase tracking-widest text-slate-500 font-extrabold">Email Address</label>
+                          <div className="relative">
+                            <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" strokeWidth="1.5"/><path d="M22 7l-10 7L2 7" stroke="currentColor" strokeWidth="1.5"/></svg>
+                            <input
+                              type="email"
+                              value={member.email || ""}
+                              onChange={(e) => updateMember(mIdx, "email", e.target.value)}
+                              className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-6 py-3.5 text-slate-900 font-medium focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                              placeholder="member@example.com"
                             />
                           </div>
                         </div>

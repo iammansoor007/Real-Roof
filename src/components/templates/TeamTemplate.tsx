@@ -163,10 +163,24 @@ export default function TeamTemplate({ pageData, params }: { pageData?: any, par
               <div key={member.id || index} className="grid lg:grid-cols-12 gap-8 items-center lg:items-start mb-24 sm:mb-32 md:mb-40 relative">
                 <div className={`lg:col-span-7 space-y-8 ${alignRight ? 'order-2 lg:order-1 lg:pr-6' : 'lg:pl-6 order-2 lg:order-2'} leadership-reveal relative z-10 w-full`}>
                   <div className="bg-white/70 backdrop-blur-xl rounded-[2rem] p-6 sm:p-10 border border-white shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)]">
-                    <h3 className="text-2xl sm:text-5xl font-light text-slate-900 mb-2">
-                      {member.name}
-                      <span className="block text-[10px] sm:text-xs font-mono font-bold text-blue-600 mt-2 tracking-[0.2em] uppercase">{member.role}</span>
-                    </h3>
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
+                      <h3 className="text-2xl sm:text-5xl font-light text-slate-900">
+                        {member.name}
+                        <span className="block text-[10px] sm:text-xs font-mono font-bold text-blue-600 mt-2 tracking-[0.2em] uppercase">{member.role}</span>
+                      </h3>
+                      <div className="flex items-center gap-3">
+                        {member.linkedin && (
+                          <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-200 transition-all">
+                            <Icons.Linkedin />
+                          </a>
+                        )}
+                        {member.email && (
+                          <a href={`mailto:${member.email}`} className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-200 transition-all">
+                            <Icons.Mail />
+                          </a>
+                        )}
+                      </div>
+                    </div>
                     <div className="mt-8 relative">
                       <div className="absolute -left-3 sm:-left-6 -top-4 text-blue-100/60 scale-[1.2] sm:scale-[1.8] pointer-events-none"><Icons.Quote /></div>
                       <div className="space-y-4 text-slate-600 text-[13px] sm:text-lg leading-relaxed relative z-10">

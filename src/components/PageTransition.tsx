@@ -45,45 +45,7 @@ export default function PageTransition({ children }: { children: React.ReactNode
       </AnimatePresence>
 
       <AnimatePresence>
-        {shouldPlayShutters && isTransitioning && (
-          <>
-            {/* Top Shutter - Swipes UP */}
-            <motion.div
-              className="fixed inset-0 bg-primary z-[9999] pointer-events-none flex items-center justify-center"
-              initial={{ translateY: "100%" }}
-              animate={{ translateY: ["100%", "0%", "-100%"] }}
-              transition={{
-                duration: 1,
-                times: [0, 0.5, 1],
-                ease: [0.76, 0, 0.24, 1]
-              }}
-            >
-              <div className="relative">
-                <motion.span 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: [0, 1, 0], y: [20, 0, -20] }}
-                  transition={{ duration: 1, times: [0, 0.5, 1] }}
-                  className="text-white text-2xl md:text-5xl font-black tracking-[0.2em] uppercase px-4 whitespace-nowrap"
-                >
-                  Eagle Revolution
-                </motion.span>
-              </div>
-            </motion.div>
-
-            {/* Bottom Shutter - Secondary Swipe for depth */}
-            <motion.div
-              className="fixed inset-0 bg-secondary z-[9998] pointer-events-none"
-              initial={{ translateY: "100%" }}
-              animate={{ translateY: ["100%", "0%", "100%"] }}
-              transition={{
-                duration: 1,
-                times: [0, 0.5, 1],
-                ease: [0.76, 0, 0.24, 1],
-                delay: 0.05
-              }}
-            />
-          </>
-        )}
+        {/* Shutters removed as requested */}
       </AnimatePresence>
     </div>
   );

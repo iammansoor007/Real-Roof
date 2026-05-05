@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { 
-  Save, Loader2, Eye, Calendar, Settings, 
-  Image as ImageIcon, Tag, Folder, 
+import {
+  Save, Loader2, Eye, Calendar, Settings,
+  Image as ImageIcon, Tag, Folder,
   ChevronRight, ArrowLeft, ExternalLink, Globe,
   CheckCircle2, AlertCircle, BarChart3, Search
 } from "lucide-react";
@@ -26,13 +26,14 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
   const [loading, setLoading] = useState(!!id && !initialData);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
-  
+
   const [post, setPost] = useState(initialData || {
     title: "",
     slug: "",
     content: "",
     excerpt: "",
     featuredImage: "",
+    location: "",
     status: "draft",
     categories: [],
     tags: [],
@@ -132,19 +133,19 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
           {!id && <button onClick={handleSave} className="bg-white border border-[#2271b1] text-[#2271b1] text-[13px] px-2 py-0.5 rounded-[3px] hover:bg-[#f0f6fb] transition-colors">Save Draft</button>}
         </div>
         <div className="flex items-center gap-3">
-            {id && (
-              <Link href={`/blog/${post.slug}`} target="_blank" className="flex items-center gap-1.5 text-[#2271b1] text-[13px] hover:text-[#135e96]">
-                <ExternalLink className="w-4 h-4" /> View Post
-              </Link>
-            )}
-            <button 
-              onClick={handleSave} 
-              disabled={saving}
-              className="bg-[#2271b1] text-white text-[13px] font-semibold px-4 py-1.5 rounded-[3px] border border-[#135e96] shadow-[0_1px_0_#135e96] hover:bg-[#135e96] disabled:opacity-50 flex items-center gap-2"
-            >
-              {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-              {id ? 'Update' : 'Publish'}
-            </button>
+          {id && (
+            <Link href={`/blog/${post.slug}`} target="_blank" className="flex items-center gap-1.5 text-[#2271b1] text-[13px] hover:text-[#135e96]">
+              <ExternalLink className="w-4 h-4" /> View Post
+            </Link>
+          )}
+          <button
+            onClick={handleSave}
+            disabled={saving}
+            className="bg-[#2271b1] text-white text-[13px] font-semibold px-4 py-1.5 rounded-[3px] border border-[#135e96] shadow-[0_1px_0_#135e96] hover:bg-[#135e96] disabled:opacity-50 flex items-center gap-2"
+          >
+            {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+            {id ? 'Update' : 'Publish'}
+          </button>
         </div>
       </div>
 
@@ -152,8 +153,8 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
         {/* Main Column */}
         <div className="flex-1 w-full space-y-4">
           <div className="bg-white">
-            <input 
-              type="text" 
+            <input
+              type="text"
               value={post.title}
               onChange={(e) => setPost({ ...post, title: e.target.value })}
               onBlur={generateSlug}
@@ -167,46 +168,46 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
             <span className="bg-[#f0f0f1] px-1 rounded border border-[#c3c4c7]">https://eaglerevolution.com/blog/{post.slug}</span>
             <button onClick={() => {
               const s = prompt("Enter slug:", post.slug);
-              if(s) setPost({...post, slug: s});
+              if (s) setPost({ ...post, slug: s });
             }} className="border border-[#c3c4c7] px-2 rounded hover:bg-[#f6f7f7]">Edit</button>
           </div>
 
           {/* Editor Tabs */}
           <div className="bg-white border border-[#c3c4c7] shadow-sm overflow-hidden">
-             <div className="flex border-b border-[#f0f0f1] bg-[#f6f7f7]">
-                <button 
-                  onClick={() => setActiveTab('content')}
-                  className={`px-4 py-2.5 text-[13px] font-semibold border-r border-[#c3c4c7] transition-all ${activeTab === 'content' ? "bg-white text-[#1d2327]" : "text-[#2271b1] hover:text-[#135e96]"}`}
-                >
-                  Post Content
-                </button>
-                <button 
-                  onClick={() => setActiveTab('seo')}
-                  className={`px-4 py-2.5 text-[13px] font-semibold border-r border-[#c3c4c7] transition-all ${activeTab === 'seo' ? "bg-white text-[#1d2327]" : "text-[#2271b1] hover:text-[#135e96]"}`}
-                >
-                  SEO (Yoast-style)
-                </button>
-             </div>
+            <div className="flex border-b border-[#f0f0f1] bg-[#f6f7f7]">
+              <button
+                onClick={() => setActiveTab('content')}
+                className={`px-4 py-2.5 text-[13px] font-semibold border-r border-[#c3c4c7] transition-all ${activeTab === 'content' ? "bg-white text-[#1d2327]" : "text-[#2271b1] hover:text-[#135e96]"}`}
+              >
+                Post Content
+              </button>
+              <button
+                onClick={() => setActiveTab('seo')}
+                className={`px-4 py-2.5 text-[13px] font-semibold border-r border-[#c3c4c7] transition-all ${activeTab === 'seo' ? "bg-white text-[#1d2327]" : "text-[#2271b1] hover:text-[#135e96]"}`}
+              >
+                SEO (Yoast-style)
+              </button>
+            </div>
 
-             <div className="p-0">
-                {activeTab === 'content' ? (
-                  <div className="p-0 min-h-[500px]">
-                    <RichTextEditor 
-                      content={post.content} 
-                      onChange={(html) => setPost({ ...post, content: html })} 
-                      showStatusBar={true}
-                    />
-                  </div>
-                ) : (
-                  <SeoEditor 
-                    data={post.seo} 
-                    setData={(seo) => setPost({ ...post, seo })} 
-                    pageSlug={post.slug}
-                    pageTitle={post.title}
-                    pageContent={post.content}
+            <div className="p-0">
+              {activeTab === 'content' ? (
+                <div className="p-0 min-h-[500px]">
+                  <RichTextEditor
+                    content={post.content}
+                    onChange={(html) => setPost({ ...post, content: html })}
+                    showStatusBar={true}
                   />
-                )}
-             </div>
+                </div>
+              ) : (
+                <SeoEditor
+                  data={post.seo}
+                  setData={(seo) => setPost({ ...post, seo })}
+                  pageSlug={post.slug}
+                  pageTitle={post.title}
+                  pageContent={post.content}
+                />
+              )}
+            </div>
           </div>
         </div>
 
@@ -220,7 +221,7 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
             <div className="p-3 space-y-3 text-[12px] text-[#2c3338]">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-1.5"><Settings className="w-3.5 h-3.5 text-[#82878c]" /> Status:</span>
-                <select 
+                <select
                   value={post.status}
                   onChange={(e) => setPost({ ...post, status: e.target.value })}
                   className="bg-white border border-[#8c8f94] px-1 py-0.5 rounded outline-none focus:border-[#2271b1]"
@@ -248,13 +249,29 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
             </div>
             <div className="bg-[#f6f7f7] border-t border-[#c3c4c7] px-3 py-2 flex items-center justify-between">
               <button className="text-[#d63638] underline text-[12px] hover:text-[#b32d2e]">Move to Trash</button>
-              <button 
-                onClick={handleSave} 
+              <button
+                onClick={handleSave}
                 disabled={saving}
                 className="bg-[#2271b1] text-white text-[12px] font-semibold px-3 py-1 rounded-[3px] border border-[#135e96] shadow-[0_1px_0_#135e96] hover:bg-[#135e96]"
               >
                 {saving ? "..." : id ? "Update" : "Publish"}
               </button>
+            </div>
+          </div>
+
+          {/* Location Box */}
+          <div className="bg-white border border-[#c3c4c7] shadow-sm rounded-sm">
+            <div className="px-3 py-2 border-b border-[#c3c4c7] bg-[#f6f7f7]">
+              <h2 className="text-[13px] font-semibold text-[#1d2327]">Location</h2>
+            </div>
+            <div className="p-3">
+              <input
+                type="text"
+                value={post.location || ""}
+                onChange={(e) => setPost({ ...post, location: e.target.value })}
+                placeholder="e.g. New York, USA"
+                className="w-full border border-[#c3c4c7] px-2 py-1 text-[12px] outline-none focus:border-[#2271b1]"
+              />
             </div>
           </div>
 
@@ -264,7 +281,7 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
               <h2 className="text-[13px] font-semibold text-[#1d2327]">Excerpt</h2>
             </div>
             <div className="p-3">
-              <textarea 
+              <textarea
                 value={post.excerpt}
                 onChange={(e) => setPost({ ...post, excerpt: e.target.value })}
                 rows={3}
@@ -283,11 +300,11 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
             <div className="p-3 max-h-48 overflow-y-auto space-y-1.5">
               {categories.map(cat => (
                 <label key={cat._id} className="flex items-center gap-2 text-[12px] text-[#2c3338] cursor-pointer hover:text-[#2271b1]">
-                  <input 
-                    type="checkbox" 
+                  <input
+                    type="checkbox"
                     checked={post.categories?.includes(cat._id)}
                     onChange={(e) => {
-                      const newCats = e.target.checked 
+                      const newCats = e.target.checked
                         ? [...post.categories, cat._id]
                         : post.categories.filter((id: string) => id !== cat._id);
                       setPost({ ...post, categories: newCats });
@@ -313,16 +330,16 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
                   return (
                     <span key={tagId} className="inline-flex items-center gap-1 bg-[#f0f0f1] px-2 py-0.5 rounded-full text-[11px] text-[#2c3338] border border-[#dcdcde]">
                       {tag.name}
-                      <button onClick={() => setPost({...post, tags: post.tags.filter((t: string) => t !== tagId)})} className="hover:text-red-500 font-bold">×</button>
+                      <button onClick={() => setPost({ ...post, tags: post.tags.filter((t: string) => t !== tagId) })} className="hover:text-red-500 font-bold">×</button>
                     </span>
                   );
                 })}
               </div>
               <div className="flex gap-1">
-                <select 
+                <select
                   onChange={(e) => {
                     if (e.target.value && !post.tags.includes(e.target.value)) {
-                      setPost({...post, tags: [...post.tags, e.target.value]});
+                      setPost({ ...post, tags: [...post.tags, e.target.value] });
                     }
                     e.target.value = "";
                   }}
@@ -348,16 +365,16 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
                 <div className="relative group">
                   <img src={post.featuredImage} alt="" className="w-full aspect-video object-cover rounded border border-[#c3c4c7]" />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded">
-                     <button onClick={() => setPost({...post, featuredImage: ""})} className="text-white text-[12px] font-bold underline">Remove image</button>
+                    <button onClick={() => setPost({ ...post, featuredImage: "" })} className="text-white text-[12px] font-bold underline">Remove image</button>
                   </div>
                 </div>
               ) : (
                 <div className="border-2 border-dashed border-[#c3c4c7] p-5 rounded-sm flex flex-col items-center gap-2">
-                   <ImageIcon className="w-8 h-8 text-[#dcdcde]" />
-                   <p className="text-[11px] text-[#646970]">Set featured image</p>
+                  <ImageIcon className="w-8 h-8 text-[#dcdcde]" />
+                  <p className="text-[11px] text-[#646970]">Set featured image</p>
                 </div>
               )}
-              <button 
+              <button
                 onClick={() => setShowMediaSelector(true)}
                 className="bg-[#f6f7f7] border border-[#2271b1] text-[#2271b1] text-[12px] font-semibold px-4 py-1.5 rounded-[3px] hover:bg-[#f0f6fb]"
               >
@@ -369,8 +386,19 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
       </div>
 
       {showMediaSelector && (
-        <MediaSelector 
-          onSelect={(item) => setPost({ ...post, featuredImage: item.url })}
+        <MediaSelector
+          onSelect={(item) => {
+            const url = item.url;
+            setPost({ 
+              ...post, 
+              featuredImage: url,
+              seo: {
+                ...post.seo,
+                featuredImage: post.seo.featuredImage || url,
+                ogImage: post.seo.ogImage || url
+              }
+            });
+          }}
           onClose={() => setShowMediaSelector(false)}
           title="Select Featured Image"
         />
