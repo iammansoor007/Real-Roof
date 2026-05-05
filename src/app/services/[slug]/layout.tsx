@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import completeData from "../../../src/data/completeData.json";
+import connectToDatabase from "@/lib/mongodb";
+import SiteContent from "@/models/Content";
 
 const BASE_URL = "https://eaglerevolution.com";
 
@@ -660,7 +661,9 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const services = (completeData.services as any).services || [];
+  await connectToDatabase();
+  const content = await SiteContent.findOne({ key: "complete_data" }).lean() as any;
+  const services = content?.data?.services?.services || [];
   const service = services.find((s: any) => s.slug === slug);
 
   if (!service) {
@@ -671,27 +674,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const seo = seoMap[slug];
+  const seo = service.seo || seoMap[slug] || {};
 
-  const title =
-    seo?.title ||
-    `${service.title} Services in St. Louis, MO | Eagle Revolution`;
-  const description =
-    seo?.description ||
-    `Professional ${service.title.toLowerCase()} services in St. Louis, MO. ${service.description} Veteran-owned. Free estimate. Call 636-449-9714.`;
-  const keywords = seo?.keywords || [
-    `${service.title.toLowerCase()} St. Louis`,
-    `${service.title.toLowerCase()} Missouri`,
-    `${service.title.toLowerCase()} near me`,
-    "Eagle Revolution",
-    "veteran owned contractor St. Louis",
-    "free estimate St. Louis MO",
-  ];
+  const title = seo.metaTitle || seo.title || `${service.title} Services in St. Louis, MO | Eagle Revolution`;
+  const description = seo.metaDescription || seo.description || `Professional ${service.title.toLowerCase()} services in St. Louis, MO. Veteran-owned. Free estimate. Call 636-449-9714.`;
 
   return {
     title,
     description,
-    keywords,
     alternates: {
       canonical: `${BASE_URL}/${slug}`,
     },
@@ -727,14 +717,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// Pre-generate all service pages at build time for optimal SEO
-export async function generateStaticParams() {
-  const services = (completeData.services as any).services || [];
-  return services.map((service: any) => ({
-    slug: service.slug,
-  }));
-}
-
 export default function ServiceDetailLayout({
   children,
 }: {
@@ -743,5 +725,4 @@ export default function ServiceDetailLayout({
   return <>{children}</>;
 }
 
-// Named exports for per-page schema injection (used by page.jsx via layout chain)
 export { seoMap };

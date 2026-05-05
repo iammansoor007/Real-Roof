@@ -76,11 +76,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
 
-  // Fetch service for schema injection
   await connectToDatabase();
   const content = await SiteContent.findOne({ key: "complete_data" }).lean() as any;
   const serviceDoc = content?.data?.services?.services?.find((s: any) => 
-    s.slug === resolvedParams.slug && (s.status === 'published' || s.status === undefined)
+    s.slug === resolvedParams.slug && (s.status !== 'draft')
   );
   if (!serviceDoc) return notFound();
   const service = JSON.parse(JSON.stringify(serviceDoc));

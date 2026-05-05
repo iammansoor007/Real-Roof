@@ -37,7 +37,7 @@ const RichTextEditor = dynamic(() => import("@/components/admin/RichTextEditor")
   loading: () => <div className="h-64 bg-[#f6f7f7] animate-pulse border border-[#c3c4c7] rounded-sm flex items-center justify-center text-[#8c8f94] text-xs">Loading Rich Text Editor...</div>
 });
 
-const ICON_LIST = [
+const ICON_LIST = Array.from(new Set([
   "Home", "Layout", "Building2", "Building", "Droplets", "Shield", "ShieldCheck",
   "Award", "Clock", "BadgeCheck", "TrendingUp", "Star", "Zap", "Sparkles",
   "Palette", "Sun", "Snowflake", "Trophy", "Hammer", "Truck", "ClipboardCheck",
@@ -53,22 +53,22 @@ const ICON_LIST = [
   "Activity", "Anchor", "Aperture", "Archive", "AtSign", "Bell", "Bluetooth",
   "Book", "Bookmark", "Briefcase", "Calendar", "Cast", "Cloud", "Code",
   "Compass", "Copy", "Cpu", "Database", "Disc", "Download", "Edit", "ExternalLink",
-  "Eye", "Facebook", "Feather", "File", "Filter", "Flag", "Folder", "Gift",
-  "Github", "Gitlab", "Grid", "HardDrive", "Hash", "Headphones", "Heart", "HelpCircle",
-  "Image", "Inbox", "Instagram", "Key", "Layers", "LifeBuoy", "Link", "Linkedin",
+  "Eye", "Facebook", "Feather", "File", "Filter", "Flag", "Folder",
+  "Github", "Gitlab", "Grid", "HardDrive", "Hash", "Heart", "HelpCircle",
+  "Image", "Inbox", "Instagram", "Key", "LifeBuoy", "Link", "Linkedin",
   "List", "Loader", "Lock", "LogIn", "LogOut", "Maximize", "Menu", "MessageCircle",
   "MessageSquare", "Mic", "Minimize", "Minus", "Moon", "MoreHorizontal", "MoreVertical",
   "MousePointer", "Music", "Navigation", "Octagon", "Package", "Paperclip", "Pause",
-  "Percent", "Phone", "PieChart", "Play", "Plus", "Pocket", "Printer", "Radio",
+  "Percent", "PieChart", "Play", "Plus", "Pocket", "Printer", "Radio",
   "RefreshCcw", "Repeat", "Rewind", "RotateCcw", "RotateCw", "Rss", "Save", "Scissors",
-  "Search", "Send", "Server", "Settings", "Share", "Shield", "ShoppingBag",
-  "Shuffle", "SkipBack", "SkipForward", "Slack", "Sliders", "Smile", "Speaker",
-  "Square", "Star", "StopCircle", "Sun", "Sunrise", "Sunset", "Tablet", "Tag",
-  "Target", "Terminal", "Thermometer", "ThumbsDown", "ThumbsUp", "ToggleLeft",
-  "ToggleRight", "Trash", "Trello", "TrendingDown", "TrendingUp", "Triangle",
+  "Send", "Server", "Share", "ShoppingBag",
+  "Shuffle", "SkipBack", "SkipForward", "Slack", "Sliders", "Smile", 
+  "SkipBack", "SkipForward", "Sunrise", "Sunset", "Tag",
+  "Target", "Terminal", "ThumbsDown", "ThumbsUp", "ToggleLeft",
+  "ToggleRight", "Trash", "Trello", "TrendingDown", "Triangle",
   "Tv", "Twitter", "Type", "Umbrella", "Underline", "Unlock", "Upload", "User",
-  "Users", "Video", "Voicemail", "Volume", "Watch", "Wifi", "Wind", "X", "Youtube", "Zap"
-];
+  "Voicemail", "Volume", "Watch", "Wifi", "X", "Youtube"
+]));
 
 const IconComponentMap: Record<string, any> = require('lucide-react');
 
@@ -184,20 +184,28 @@ export default function ServicesAdminPage() {
     saveToDb(newServices);
   };
 
-  const handleEdit = (idx: number) => {
-    const s = filteredServices[idx];
-    const originalIdx = services.findIndex(orig => orig.id === s.id);
+  const handleEdit = (service: any) => {
+    const originalIdx = services.findIndex(orig => orig.id === service.id);
     setForm({
-      ...s,
-      features: s.features || [],
-      stats: s.stats || [],
-      benefits: s.benefits || [],
-      process: s.process || [],
-      faq: s.faq || []
+      ...service,
+      features: service.features || [],
+      stats: service.stats || [],
+      benefits: service.benefits || [],
+      process: service.process || [],
+      faq: service.faq || []
     });
-    setSeo(s.seo || {});
+    setSeo(service.seo || {});
     setIsEditing(originalIdx);
     setActiveTab("general");
+  };
+
+  const toggleStatus = (service: any) => {
+    const newServices = [...services];
+    const originalIdx = services.findIndex(orig => orig.id === service.id);
+    if (originalIdx === -1) return;
+    const s = newServices[originalIdx];
+    newServices[originalIdx] = { ...s, status: s.status === 'published' ? 'draft' : 'published' };
+    saveToDb(newServices);
   };
 
   const handleDuplicate = (idx: number) => {
@@ -231,12 +239,7 @@ export default function ServicesAdminPage() {
     setSelectedIds([]);
   };
 
-  const toggleStatus = (idx: number) => {
-    const newServices = [...services];
-    const s = newServices[idx];
-    newServices[idx] = { ...s, status: s.status === 'published' ? 'draft' : 'published' };
-    saveToDb(newServices);
-  };
+
 
   const filteredServices = services.filter(s =>
     s.title.toLowerCase().includes(search.toLowerCase()) &&
@@ -547,11 +550,11 @@ export default function ServicesAdminPage() {
                           <div>
                             <strong className="text-[#2271b1] block text-[14px]">{service.title} {service.status === 'draft' && <span className="text-[#646970] font-normal italic">— Draft</span>}</strong>
                             <div className="flex items-center gap-2 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                              <button onClick={() => handleEdit(idx)} className="text-[#2271b1] hover:underline text-[12px]">Edit</button>
+                              <button onClick={() => handleEdit(service)} className="text-[#2271b1] hover:underline text-[12px]">Edit</button>
                               <span className="text-[#a7aaad]">|</span>
                               <button onClick={() => setQuickEditing(service)} className="text-[#2271b1] hover:underline text-[12px]">Quick Edit</button>
                               <span className="text-[#a7aaad]">|</span>
-                              <button onClick={() => toggleStatus(idx)} className="text-[#2271b1] hover:underline text-[12px]">
+                              <button onClick={() => toggleStatus(service)} className="text-[#2271b1] hover:underline text-[12px]">
                                 {service.status === 'draft' ? 'Publish' : 'Set as Draft'}
                               </button>
                               <span className="text-[#a7aaad]">|</span>
@@ -559,7 +562,7 @@ export default function ServicesAdminPage() {
                               <span className="text-[#a7aaad]">|</span>
                               <button onClick={() => handleDuplicate(idx)} className="text-[#2271b1] hover:underline text-[12px]">Duplicate</button>
                               <span className="text-[#a7aaad]">|</span>
-                              <button onClick={() => { if (confirm("Delete this service?")) saveToDb(services.filter((_, i) => i !== idx)); }} className="text-[#d63638] hover:underline text-[12px]">Trash</button>
+                              <button onClick={() => { if (confirm("Delete this service?")) saveToDb(services.filter(orig => orig.id !== service.id)); }} className="text-[#d63638] hover:underline text-[12px]">Trash</button>
                             </div>
                           </div>
                         </div>
