@@ -75,7 +75,7 @@ export default function ReviewsTemplate({ pageData, params }: { pageData?: any, 
                     ))}
                 </div>
             </div>
-            <PageInlineFaqs faqs={pageData?.content?.faqs || pageData?.faqs || []} />
+
         </main>
     );
 }

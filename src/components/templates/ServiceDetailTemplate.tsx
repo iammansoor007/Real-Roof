@@ -17,7 +17,11 @@ import {
   ChevronRight, Star, ThumbsUp, Truck,
   ChevronDown, ArrowUpRight, Users, Trophy, Loader2,
   FileText, ClipboardCheck, Hammer, Minus, Plus, Sparkles, Zap, Palette, Sun, Snowflake,
-  ShieldCheck, BadgeCheck, TrendingUp, Check, Wrench, HardHat, Ruler, Paintbrush, Wind, Flame, Thermometer
+  ShieldCheck, BadgeCheck, TrendingUp, Check, Wrench, HardHat, Ruler, Paintbrush, Wind, Flame, Thermometer,
+  Shovel, Fence, Drill, Square, Box, Construction, PenTool as Tool,
+  Map, MapPin, Search, Settings, Mail, Globe, Layers,
+  Warehouse, Factory, Store, Landmark, Castle, Mountain, Trees,
+  Droplet, FlameKindling, Lightbulb, Power
 } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import breakcrumb from '@/assets/Breadcrumb-Image.jpeg';
@@ -37,7 +41,11 @@ const iconMap: Record<string, any> = {
   Home, Layout, TreePine, Building2, Building, Droplets,
   Shield, Trophy, Users, ThumbsUp, FileText, ClipboardCheck,
   Truck, Hammer, CheckCircle, Award, Clock, Sparkles, Zap, Palette, Sun, Snowflake, Star,
-  ShieldCheck, BadgeCheck, TrendingUp, Check, Wrench, HardHat, Ruler, Paintbrush, Wind, Flame, Thermometer
+  ShieldCheck, BadgeCheck, TrendingUp, Check, Wrench, HardHat, Ruler, Paintbrush, Wind, Flame, Thermometer,
+  Shovel, Fence, Drill, Square, Box, Construction, Tool,
+  Map, MapPin, Search, Settings, Phone, Mail, Globe, Layers,
+  Warehouse, Factory, Store, Landmark, Castle, Mountain, Trees,
+  Droplet, FlameKindling, Lightbulb, Power
 };
 
 const imageMap: Record<string, any> = {
@@ -165,8 +173,8 @@ const ProcessCard = ({ step, index }: { step: any, index: number }) => {
           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary/50">Phase {String(index + 1).padStart(2, '0')}</span>
         </div>
         <h3 className="text-xl sm:text-2xl font-bold mb-4 group-hover:text-primary transition-colors">{step.title}</h3>
-        <RichTextRenderer 
-          content={step.description} 
+        <RichTextRenderer
+          content={step.description}
           className="text-muted-foreground text-sm sm:text-base leading-relaxed flex-1"
         />
       </div>
@@ -178,7 +186,7 @@ const ProcessCard = ({ step, index }: { step: any, index: number }) => {
 const BenefitCard = ({ benefit, index }: { benefit: any, index: number }) => {
   const Icon = iconMap[benefit.icon] || Shield;
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
@@ -189,8 +197,8 @@ const BenefitCard = ({ benefit, index }: { benefit: any, index: number }) => {
         <Icon className="w-6 h-6" />
       </div>
       <h3 className="text-xl font-bold mb-3">{benefit.title}</h3>
-      <RichTextRenderer 
-        content={benefit.description} 
+      <RichTextRenderer
+        content={benefit.description}
         className="text-muted-foreground text-sm leading-relaxed"
       />
     </motion.div>
@@ -220,7 +228,7 @@ const FAQItem = ({ faq, index, isOpen, onToggle }: { faq: any, index: number, is
           {isOpen && (
             <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
               <div className="px-8 pb-8">
-                 <RichTextRenderer content={faq.answer} className="text-muted-foreground text-sm sm:text-base leading-relaxed" />
+                <RichTextRenderer content={faq.answer} className="text-muted-foreground text-sm sm:text-base leading-relaxed" />
               </div>
             </motion.div>
           )}
@@ -254,7 +262,7 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
   }, [service]);
 
   if (!service && slug) return notFound();
-  
+
   if (!service || !isDataLoaded) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 gap-4">
@@ -281,11 +289,13 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
         )}
         <div className="absolute inset-0 bg-black/60 flex items-center">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            {service.breadcrumbText && (
-               <span className="inline-block text-primary font-bold tracking-widest uppercase mb-2">
-                 {service.breadcrumbText}
-               </span>
-            )}
+            <nav className="flex items-center gap-2 text-white/60 text-xs sm:text-sm font-medium uppercase tracking-widest mb-4">
+              <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+              <ChevronRight className="w-3 h-3" />
+              <Link href="/services" className="hover:text-primary transition-colors">Services</Link>
+              <ChevronRight className="w-3 h-3" />
+              <span className="text-white">{service.title}</span>
+            </nav>
             <h1 className="text-3xl sm:text-7xl font-bold text-white mb-4">{service.title}</h1>
             <p className="text-white/80 text-lg sm:text-2xl max-w-2xl">{service.tagline}</p>
           </div>
@@ -306,8 +316,8 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
             <h2 className="text-3xl sm:text-6xl font-bold mb-8 leading-tight">{service.overviewTitle || "Craftsmanship Without Compromise."}</h2>
-            <RichTextRenderer 
-              content={service.overview} 
+            <RichTextRenderer
+              content={service.overview}
               className="text-lg text-muted-foreground mb-10 leading-relaxed"
             />
             <div className="grid sm:grid-cols-2 gap-6 mb-12">
@@ -329,10 +339,10 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative">
             <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl z-10 border border-border/50">
-              <img 
-                src={service.overviewImage || (imageMap[service.title] ? (imageMap[service.title] as any).src : "/src/assets/roof1.jpg.jpeg")} 
-                alt={service.title} 
-                className="w-full h-full object-cover" 
+              <img
+                src={service.overviewImage || (imageMap[service.title] ? (imageMap[service.title] as any).src : "/src/assets/roof1.jpg.jpeg")}
+                alt={service.title}
+                className="w-full h-full object-cover"
               />
             </div>
             <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
@@ -384,7 +394,7 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
         </div>
       </section>
 
-      <BlogSection 
+      <BlogSection
         title={service.blogSection?.title}
         subtitle={service.blogSection?.subtitle}
         description={service.blogSection?.description}

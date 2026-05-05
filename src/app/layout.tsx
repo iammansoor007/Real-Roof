@@ -16,7 +16,7 @@ const dmSans = DM_Sans({
   variable: "--font-body",
 });
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.eaglerevolution.com";
+const BASE_URL = "https://eaglerevolution.com";
 
 export async function generateMetadata(): Promise<Metadata> {
   let settings = { siteTitle: "Eagle Revolution | #1 Roofing & Home Improvement in St. Louis, MO", siteTemplate: "%s | Eagle Revolution", favicon: "/eagle-logo.png" };

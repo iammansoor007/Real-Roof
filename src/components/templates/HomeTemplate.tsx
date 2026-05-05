@@ -41,11 +41,9 @@ export default function HomeTemplate({ pageData, params }: { pageData?: any, par
       <section id="contact">
         <QAForm />
       </section>
-      <section id="faq">
-        <FAQ />
-      </section>
-      
-      <BlogSection 
+
+
+      <BlogSection
         title={blogSection?.title}
         subtitle={blogSection?.subtitle}
         description={blogSection?.description}
@@ -53,7 +51,7 @@ export default function HomeTemplate({ pageData, params }: { pageData?: any, par
       />
 
       <QuickQuote />
-      <PageInlineFaqs faqs={pageData?.content?.faqs || pageData?.faqs || []} />
+
     </div>
   );
 }

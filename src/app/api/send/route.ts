@@ -46,7 +46,7 @@ export async function POST(request: Request) {
 
         attachments.push({
           filename: file.name,
-          content: buffer,
+          content: buffer.toString('base64'),
         });
       } else {
         console.log('No file attachment found in multipart data');

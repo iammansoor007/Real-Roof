@@ -11,7 +11,7 @@ import { generateSchema } from "@/lib/schema-generator";
 import { TemplateWrapper } from "@/components/templates/TemplateRegistry";
 import ServiceDetailTemplate from "@/components/templates/ServiceDetailTemplate";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.eaglerevolution.com";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://eaglerevolution.com";
 
 export async function generateMetadata(): Promise<Metadata> {
   await connectToDatabase();

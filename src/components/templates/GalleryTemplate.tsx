@@ -238,7 +238,7 @@ export default function GalleryTemplate({ pageData, params }: { pageData?: any; 
           <Lightbox project={lightboxProject} assetMap={assetMap} onClose={() => setLightboxProject(null)} />
         )}
       </AnimatePresence>
-      <PageInlineFaqs faqs={pageData?.content?.faqs || pageData?.faqs || []} />
+
     </main>
   );
 }

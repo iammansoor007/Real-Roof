@@ -11,7 +11,21 @@ import {
   BadgeCheck, Star, Zap, Sparkles, Palette, Sun, Snowflake,
   Trophy, Hammer, Truck, ClipboardCheck, FileText, ArrowRight,
   Wrench, HardHat, Ruler, Paintbrush, Wind, Flame, Thermometer,
-  Copy
+  Copy, Shovel, Fence, Drill, Square, Box, Construction, PenTool as Tool,
+  Home as HomeIcon, Map, MapPin, Search as SearchIcon, Settings as SettingsIcon,
+  Phone as PhoneIcon, Mail as MailIcon, Globe as GlobeIcon, Layers as LayersIcon,
+  Shield as ShieldIcon, ShieldCheck as ShieldCheckIcon, Award as AwardIcon,
+  Trophy as TrophyIcon, Zap as ZapIcon, Sparkles as SparklesIcon, Palette as PaletteIcon,
+  Sun as SunIcon, Snowflake as SnowflakeIcon, Truck as TruckIcon,
+  ClipboardCheck as ClipboardCheckIcon, FileText as FileTextIcon,
+  Hammer as HammerIcon, CheckCircle as CheckCircleIcon, Check as CheckIcon,
+  ArrowRight as ArrowRightIcon, Users as UsersIcon, TrendingUp as TrendingUpIcon,
+  BadgeCheck as BadgeCheckIcon, Star as StarIcon, Clock as ClockIcon,
+  Warehouse, Factory, Store, Landmark, Castle, Mountain, Trees,
+  ThermometerSnowflake, Droplet, FlameKindling, Lightbulb, Power,
+  WashingMachine, Microwave, Speaker, Camera, Video, Monitor,
+  Smartphone, Tablet, Laptop, Headphones, Wallet, CreditCard,
+  ShoppingCart, Gift, Coffee, Utensils, Pizza, Beer
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -28,7 +42,11 @@ const ICON_LIST = [
   "Award", "Clock", "BadgeCheck", "TrendingUp", "Star", "Zap", "Sparkles",
   "Palette", "Sun", "Snowflake", "Trophy", "Hammer", "Truck", "ClipboardCheck",
   "FileText", "ArrowRight", "CheckCircle", "Check", "Wrench", "HardHat",
-  "Ruler", "Paintbrush", "Wind", "Flame", "Thermometer", "Users"
+  "Ruler", "Paintbrush", "Wind", "Flame", "Thermometer", "Users",
+  "Shovel", "Fence", "Drill", "Square", "Box", "Construction", "Tool",
+  "Map", "MapPin", "Search", "Settings", "Phone", "Mail", "Globe", "Layers",
+  "Warehouse", "Factory", "Store", "Landmark", "Castle", "Mountain", "Trees",
+  "Droplet", "FlameKindling", "Lightbulb", "Power"
 ];
 
 const IconComponentMap: Record<string, any> = {
@@ -36,7 +54,12 @@ const IconComponentMap: Record<string, any> = {
   Award, Clock, BadgeCheck, TrendingUp, Star, Zap, Sparkles,
   Palette, Sun, Snowflake, Trophy, Hammer, Truck, ClipboardCheck,
   FileText, ArrowRight, CheckCircle, Check, Wrench, HardHat,
-  Ruler, Paintbrush, Wind, Flame, Thermometer, Users
+  Ruler, Paintbrush, Wind, Flame, Thermometer, Users,
+  Shovel, Fence, Drill, Square, Box, Construction, Tool,
+  Map, MapPin, Search: SearchIcon, Settings: SettingsIcon, Phone: PhoneIcon,
+  Mail: MailIcon, Globe: GlobeIcon, Layers: LayersIcon,
+  Warehouse, Factory, Store, Landmark, Castle, Mountain, Trees,
+  Droplet, FlameKindling, Lightbulb, Power
 };
 
 function IconSelector({ value, onChange }: { value: string, onChange: (v: string) => void }) {
@@ -369,8 +392,8 @@ export default function ServicesAdminPage() {
                         <div className="w-8 h-8 bg-[#2271b1] text-white rounded-full flex items-center justify-center shrink-0 text-xs font-bold">{i + 1}</div>
                         <div className="flex-1 space-y-2">
                           <div className="flex gap-2 items-center">
-                             <IconSelector value={step.icon} onChange={(v) => { const np = [...form.process]; np[i] = { ...np[i], icon: v }; setForm({ ...form, process: np }); }} />
-                             <input value={step.title} onChange={(e) => { const np = [...form.process]; np[i] = { ...np[i], title: e.target.value }; setForm({ ...form, process: np }); }} placeholder="Step Title" className="flex-1 border border-[#8c8f94] px-2 py-1 text-xs font-bold" />
+                            <IconSelector value={step.icon} onChange={(v) => { const np = [...form.process]; np[i] = { ...np[i], icon: v }; setForm({ ...form, process: np }); }} />
+                            <input value={step.title} onChange={(e) => { const np = [...form.process]; np[i] = { ...np[i], title: e.target.value }; setForm({ ...form, process: np }); }} placeholder="Step Title" className="flex-1 border border-[#8c8f94] px-2 py-1 text-xs font-bold" />
                           </div>
                           <RichTextEditor
                             content={step.description}

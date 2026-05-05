@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) return { title: 'Post Not Found' };
 
-  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.eaglerevolution.com";
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://eaglerevolution.com";
   const url = `${BASE_URL}/blog/${slug}`;
 
   return {
@@ -79,7 +79,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   if (!post) notFound();
 
-  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.eaglerevolution.com";
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://eaglerevolution.com";
   const url = `${BASE_URL}/blog/${slug}`;
   const wordCount = post.content ? post.content.split(/\s+/).length : 0;
   const publishDate = post.publishedAt?.toISOString();
@@ -159,9 +159,23 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="flex items-center justify-center gap-2 text-white/60 text-[10px] font-bold uppercase tracking-[0.4em] mb-8">
             <Link href="/" className="text-white/60 hover:text-white transition-colors">Home</Link>
             <span className="opacity-30">/</span>
-            <Link href="/blog" className="text-white/60 hover:text-white transition-colors">Blog Index</Link>
+            <Link href="/blog" className="text-white/60 hover:text-white transition-colors">Blog</Link>
             <span className="opacity-30">/</span>
-            <span className="text-white">Post Analysis</span>
+            {post.categories && post.categories.length > 0 && (
+              <>
+                <Link href={`/blog?category=${post.categories[0].slug || ''}`} className="text-white/60 hover:text-white transition-colors">
+                  {post.categories[0].name}
+                </Link>
+                <span className="opacity-30">/</span>
+              </>
+            )}
+            {post.location && (
+              <>
+                <span className="text-white/60">{post.location}</span>
+                <span className="opacity-30">/</span>
+              </>
+            )}
+            <span className="text-white">{post.title}</span>
           </div>
           <h1 className="text-2xl min-[350px]:text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight max-w-5xl mx-auto drop-shadow-2xl px-2">
             {post.title}

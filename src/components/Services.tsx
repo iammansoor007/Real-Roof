@@ -98,8 +98,8 @@ const CompactServiceCard = ({ service }: { service: any }) => {
               {service.number}
             </span>
           </div>
-          <RichTextRenderer 
-            content={service.description} 
+          <RichTextRenderer
+            content={service.description}
             className="text-sm text-muted-foreground leading-relaxed line-clamp-2"
             stripParagraphs={true}
           />
@@ -250,8 +250,8 @@ const ServiceCard = ({ service, index }: { service: any; index: number }) => {
         </h3>
 
         <div className="flex-1">
-          <RichTextRenderer 
-            content={service.description} 
+          <RichTextRenderer
+            content={service.description}
             className="text-muted-foreground text-sm leading-relaxed line-clamp-3 mb-3"
             stripParagraphs={true}
           />
@@ -313,27 +313,27 @@ const Services = () => {
   const imageScale = useTransform(smoothProgress, [0, 0.1], [1.15, 1]);
   const overlayOpacity = useTransform(smoothProgress, [0, 0.08], [0.5, 0.1]);
 
-  const { 
-    badge = "Premium Services", 
-    headline = { prefix: 'Our', highlight: 'Expert', suffix: 'Services' }, 
-    description: rawDescription = "Professional exterior remodeling with military precision.", 
+  const {
+    badge = "Premium Services",
+    headline = { prefix: 'Our', highlight: 'Expert', suffix: 'Services' },
+    description: rawDescription = "Professional exterior remodeling with military precision.",
     stats = [
-        { value: 500, suffix: "+", label: "Projects" },
-        { value: 50, suffix: "+", label: "Years Combined" },
-        { value: 4.9, suffix: "", label: "Rating" }
-    ], 
-    cta = { title: 'Ready to Start?', description: 'Get your free estimate today.', buttonText: 'Contact Us', buttonLink: '/contact' } 
+      { value: 500, suffix: "+", label: "Projects" },
+      { value: 50, suffix: "+", label: "Years Combined" },
+      { value: 4.9, suffix: "", label: "Rating" }
+    ],
+    cta = { title: 'Ready to Start?', description: 'Get your free estimate today.', buttonText: 'Contact Us', buttonLink: '/contact' }
   } = (servicesData || {}) as any;
-  
-  const description = Array.isArray(rawDescription) 
-    ? rawDescription 
-    : typeof rawDescription === 'string' 
-      ? [rawDescription] 
+
+  const description = Array.isArray(rawDescription)
+    ? rawDescription
+    : typeof rawDescription === 'string'
+      ? [rawDescription]
       : [];
 
   const servicesListRaw = (
-    servicesData?.services || 
-    (Array.isArray(servicesData) ? servicesData : []) || 
+    servicesData?.services ||
+    (Array.isArray(servicesData) ? servicesData : []) ||
     []
   ).filter((s: any) => !s.status || s.status === 'published');
 
@@ -418,8 +418,8 @@ const Services = () => {
               </div>
 
               <div className="overflow-hidden mt-2">
-                <RichTextRenderer 
-                  content={description} 
+                <RichTextRenderer
+                  content={description}
                   className="text-muted-foreground text-lg leading-relaxed"
                   stripParagraphs={true}
                 />
@@ -443,7 +443,7 @@ const Services = () => {
                 </div>
               ) : (
                 <div className="mt-8 p-6 rounded-xl border border-dashed border-border/40 text-center">
-                   <p className="text-muted-foreground text-sm">Select a featured service in the dashboard</p>
+                  <p className="text-muted-foreground text-sm">Select a featured service in the dashboard</p>
                 </div>
               )}
             </motion.div>

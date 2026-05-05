@@ -63,7 +63,32 @@ export default function CareersTemplate({ pageData, params }: { pageData?: any, 
       }
     } catch (error: any) {
       console.error("Career form error:", error);
-      setErrorMsg("Failed to submit. Please try again or call us directly.");
+      
+      // Fallback to mailto if API fails
+      const name = formData.get("name");
+      const email = formData.get("email");
+      const phone = formData.get("phone");
+      const role = formData.get("role");
+      const message = formData.get("message");
+      
+      const emailContent = `
+NEW JOB APPLICATION - EAGLE REVOLUTION
+----------------------------------
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Position: ${role}
+
+MESSAGE:
+${message}
+
+(Note: Please attach your resume manually to this email)
+      `;
+      
+      const mailtoLink = `mailto:banderson@eaglerevolution.com?subject=Job Application - ${name}&body=${encodeURIComponent(emailContent)}`;
+      window.location.href = mailtoLink;
+      
+      setIsSuccess(true); // Show success since we redirected to email
     } finally {
       setIsSubmitting(false);
     }
@@ -161,7 +186,7 @@ export default function CareersTemplate({ pageData, params }: { pageData?: any, 
           </motion.div>
         </div>
       </section>
-      <PageInlineFaqs faqs={pageData?.content?.faqs || pageData?.faqs || []} />
+
     </main>
   );
 }

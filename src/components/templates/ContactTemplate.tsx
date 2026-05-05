@@ -269,7 +269,7 @@ export default function ContactTemplate({ pageData }: { pageData?: any }) {
                     </motion.div>
                 )}
             </AnimatePresence>
-            <PageInlineFaqs faqs={pageData?.content?.faqs || pageData?.faqs || []} />
+
         </main>
     );
 }

@@ -210,7 +210,7 @@ export default function TeamTemplate({ pageData, params }: { pageData?: any, par
           })}
         </div>
       </section>
-      <PageInlineFaqs faqs={pageData?.content?.faqs || pageData?.faqs || []} />
+
     </main>
   );
 }

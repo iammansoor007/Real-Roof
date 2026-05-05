@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Home, Layout, TreePine, Building2, Building, Droplets, ArrowRight, Shield, Clock, Award, Users, TrendingUp, BadgeCheck, Star } from 'lucide-react';
+import { Home, Layout, TreePine, Building2, Building, Droplets, ArrowRight, Shield, Clock, Award, Users, TrendingUp, BadgeCheck, Star, ChevronRight } from 'lucide-react';
 import { useContent } from "../../hooks/useContent";
 import RichTextRenderer from "../ui/RichTextRenderer";
 import BlogSection from "../sections/BlogSection";
@@ -64,6 +64,13 @@ export default function ServicesTemplate({ pageData, params }: { pageData?: any,
 
     return (
         <main className="min-h-screen bg-background pt-24 pb-16">
+            <div className="max-w-7xl mx-auto px-4 mb-8">
+                <nav className="flex items-center gap-2 text-muted-foreground text-xs sm:text-sm font-medium uppercase tracking-widest">
+                    <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+                    <ChevronRight className="w-3 h-3" />
+                    <span className="text-foreground">Services</span>
+                </nav>
+            </div>
             <div className="max-w-7xl mx-auto px-4 text-center mb-16">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -99,7 +106,7 @@ export default function ServicesTemplate({ pageData, params }: { pageData?: any,
                 description={blogSection?.description}
                 posts={allBlogs.filter((p: any) => blogSection?.selectedPosts?.includes(p._id))}
             />
-            <PageInlineFaqs faqs={pageData?.content?.faqs || pageData?.faqs || []} />
+
         </main>
     );
 }
