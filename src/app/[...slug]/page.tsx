@@ -93,7 +93,6 @@ export default async function DynamicPage({ params }: PageProps) {
   }).lean();
 
   if (!pageDoc) {
-    // If no page found in DB, 404
     notFound();
   }
 

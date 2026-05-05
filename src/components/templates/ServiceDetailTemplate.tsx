@@ -261,7 +261,7 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
     }
   }, [service]);
 
-  if (!service && slug) return notFound();
+
 
   if (!service || !isDataLoaded) {
     return (

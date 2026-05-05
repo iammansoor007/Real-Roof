@@ -78,6 +78,11 @@ export default async function BlogPostPage({ params }: Props) {
     .populate('categories tags author');
 
   if (!post) notFound();
+  
+  console.log(`[Blog Debug] Post Title: ${post.title}`);
+  console.log(`[Blog Debug] Post Location: "${post.location}"`);
+  console.log(`[Blog Debug] Post Categories: ${post.categories?.length || 0}`);
+  if (post.categories?.length > 0) console.log(`[Blog Debug] First Category: ${post.categories[0].name}`);
 
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://eaglerevolution.com";
   const url = `${BASE_URL}/${slug}`;

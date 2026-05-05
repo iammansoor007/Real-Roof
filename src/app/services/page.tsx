@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import ServicesTemplate from "@/components/templates/ServicesTemplate";
 import { Metadata } from "next";
 import connectToDatabase from "@/lib/mongodb";
