@@ -49,6 +49,7 @@ import {
 import React from 'react';
 import RichTextRenderer from "../ui/RichTextRenderer";
 import BlogSection from "../sections/BlogSection";
+import PageInlineFaqs from "@/components/PageInlineFaqs";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -854,6 +855,7 @@ export default function AboutTemplate({ pageData, params }: { pageData?: any, pa
         description={blogSection?.description}
         posts={allBlogs.filter((p: any) => blogSection?.selectedPosts?.includes(p._id))}
       />
+      <PageInlineFaqs faqs={pageData?.content?.faqs || pageData?.faqs || []} />
     </main>
   );
 }

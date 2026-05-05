@@ -16,6 +16,7 @@ const QuickQuote = dynamic(() => import("@/components/QuickQuote"), { ssr: false
 const BlogSection = dynamic(() => import("@/components/sections/BlogSection"), { ssr: false });
 
 import { useContent } from "@/hooks/useContent";
+import PageInlineFaqs from "@/components/PageInlineFaqs";
 
 export default function HomeTemplate({ pageData, params }: { pageData?: any, params?: any }) {
   const { allBlogs, blogSection } = useContent();
@@ -52,6 +53,8 @@ export default function HomeTemplate({ pageData, params }: { pageData?: any, par
       />
 
       <QuickQuote />
+      <PageInlineFaqs faqs={pageData?.content?.faqs || pageData?.faqs || []} />
     </div>
   );
 }
+

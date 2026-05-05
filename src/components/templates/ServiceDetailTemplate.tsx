@@ -219,7 +219,9 @@ const FAQItem = ({ faq, index, isOpen, onToggle }: { faq: any, index: number, is
         <AnimatePresence>
           {isOpen && (
             <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-              <div className="px-8 pb-8"><p className="text-muted-foreground text-sm sm:text-base leading-relaxed">{faq.answer}</p></div>
+              <div className="px-8 pb-8">
+                 <RichTextRenderer content={faq.answer} className="text-muted-foreground text-sm sm:text-base leading-relaxed" />
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -274,9 +276,18 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
     <main className="bg-background text-foreground font-body">
       {/* Hero Section */}
       <section className="relative h-[300px] sm:h-[500px] w-full">
-        <Image src={breakcrumb} alt={service.title} fill className="object-cover" priority />
+        {service.breadcrumbImage ? (
+          <img src={service.breadcrumbImage} alt={service.title} className="absolute inset-0 w-full h-full object-cover" />
+        ) : (
+          <Image src={breakcrumb} alt={service.title} fill className="object-cover" priority />
+        )}
         <div className="absolute inset-0 bg-black/60 flex items-center">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            {service.breadcrumbText && (
+               <span className="inline-block text-primary font-bold tracking-widest uppercase mb-2">
+                 {service.breadcrumbText}
+               </span>
+            )}
             <h1 className="text-3xl sm:text-7xl font-bold text-white mb-4">{service.title}</h1>
             <p className="text-white/80 text-lg sm:text-2xl max-w-2xl">{service.tagline}</p>
           </div>

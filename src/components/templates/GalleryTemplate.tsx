@@ -21,6 +21,7 @@ import commercialRoofImg from "../../assets/commercial-tpo.png";
 import sidingImg from "../../assets/siding5.jpg.jpeg";
 import gutterImg from "../../assets/gutterinstallation.jpg.jpeg";
 import portfolioFallback from "../../assets/portfolio-hero.jpg";
+import PageInlineFaqs from "@/components/PageInlineFaqs";
 
 const IMAGE_MAP: Record<string, any> = {
   deck1: deckMain,
@@ -143,9 +144,10 @@ export default function GalleryTemplate({ pageData, params }: { pageData?: any; 
   const [activeCategory, setActiveCategory] = useState("All");
   const [lightboxProject, setLightboxProject] = useState<any>(null);
 
-  // Prefer server-fetched pageData (real DB URLs) over useContent() which may fall back to static JSON
-  const portfolio = pageData?.portfolio || globalPortfolio;
-  const galleryPage = pageData?.galleryPage || globalGalleryPage;
+  // Prefer page-specific content, fall back to global
+  const pageContent = pageData?.content || {};
+  const portfolio = pageContent?.portfolio || globalPortfolio;
+  const galleryPage = pageContent?.galleryPage || globalGalleryPage;
 
   // Projects now come from the portfolio managed in the dashboard
   const projects: any[] = portfolio?.projects || [];
@@ -236,6 +238,7 @@ export default function GalleryTemplate({ pageData, params }: { pageData?: any; 
           <Lightbox project={lightboxProject} assetMap={assetMap} onClose={() => setLightboxProject(null)} />
         )}
       </AnimatePresence>
+      <PageInlineFaqs faqs={pageData?.content?.faqs || pageData?.faqs || []} />
     </main>
   );
 }

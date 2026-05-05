@@ -9,6 +9,7 @@ import FAQTemplate from './FAQTemplate';
 import ContactTemplate from './ContactTemplate';
 import GalleryTemplate from './GalleryTemplate';
 import ServicesTemplate from './ServicesTemplate';
+import PageInlineFaqs from '../PageInlineFaqs';
 
 import { ContentProvider } from "@/context/ContentContext";
 
@@ -31,9 +32,20 @@ export const getTemplate = (name: string) => {
 
 export const TemplateWrapper = ({ templateName, pageData, params }: any) => {
   const Template = getTemplate(templateName);
+  
+  // Only append the inline FAQ section if this page isn't already the FAQ template
+  // and it has page-specific FAQs defined in its content.
+  const hasInlineFaqs = templateName !== 'faq' && 
+                        pageData?.content?.faqs && 
+                        Array.isArray(pageData.content.faqs) && 
+                        pageData.content.faqs.length > 0;
+
   return (
     <ContentProvider initialData={pageData.content}>
        <Template pageData={pageData} params={params} />
+       {hasInlineFaqs && (
+         <PageInlineFaqs faqs={pageData.content.faqs} />
+       )}
     </ContentProvider>
   );
 };

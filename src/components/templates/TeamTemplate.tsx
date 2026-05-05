@@ -11,6 +11,7 @@ import {
 } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import PageInlineFaqs from "@/components/PageInlineFaqs";
 import brandon from '@/assets/ownerteam.jpeg'
 import chrissy from '@/assets/Chrissyteam.jpeg'
 import austin from '@/assets/Austinteam.jpeg'
@@ -209,6 +210,7 @@ export default function TeamTemplate({ pageData, params }: { pageData?: any, par
           })}
         </div>
       </section>
+      <PageInlineFaqs faqs={pageData?.content?.faqs || pageData?.faqs || []} />
     </main>
   );
 }

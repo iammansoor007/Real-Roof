@@ -6,6 +6,7 @@ import { Icon } from "../../config/icons";
 import { useContent } from "../../hooks/useContent";
 import Image from "next/image";
 import RichTextRenderer from "../ui/RichTextRenderer";
+import PageInlineFaqs from "@/components/PageInlineFaqs";
 
 const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&h=450&fit=crop&q=80";
 const GOOGLE_MAPS_REVIEW_URL = "https://maps.app.goo.gl/PbvRBs4tJsDAJVMy6";
@@ -74,6 +75,7 @@ export default function ReviewsTemplate({ pageData, params }: { pageData?: any, 
                     ))}
                 </div>
             </div>
+            <PageInlineFaqs faqs={pageData?.content?.faqs || pageData?.faqs || []} />
         </main>
     );
 }

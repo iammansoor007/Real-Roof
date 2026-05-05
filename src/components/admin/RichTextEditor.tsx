@@ -10,7 +10,7 @@ import {
   Bold, Italic, Underline as UnderlineIcon, List, ListOrdered, 
   Link as LinkIcon, Image as ImageIcon, Heading1, Heading2, 
   Heading3, Heading4, Heading5, Heading6, RemoveFormatting, 
-  Type, AlignLeft, AlignCenter, AlignRight, Code
+  Type, AlignLeft, AlignCenter, AlignRight, Code, Info
 } from "lucide-react";
 import MediaSelector from "./MediaSelector";
 import DOMPurify from "dompurify";
@@ -54,6 +54,7 @@ const MenuButton = ({
 export default function RichTextEditor({ content, onChange, placeholder, label, showStatusBar }: RichTextEditorProps) {
   const [isMediaOpen, setIsMediaOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [showOverview, setShowOverview] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -241,14 +242,87 @@ export default function RichTextEditor({ content, onChange, placeholder, label, 
               <RemoveFormatting className="w-4 h-4" />
             </MenuButton>
           </div>
+
+          <div className="flex items-center gap-0.5 ml-auto pl-2 border-l border-[#dcdcde]">
+            <MenuButton 
+              title="Content Structure Overview"
+              onClick={() => setShowOverview(!showOverview)}
+              isActive={showOverview}
+            >
+              <Info className="w-4 h-4" />
+            </MenuButton>
+          </div>
         </div>
 
-        {/* Editor Area */}
-        <div className="relative">
-          <EditorContent editor={editor} />
-          {editor.isEmpty && (
-            <div className="absolute top-3 left-4 pointer-events-none text-[#8c8f94] text-[14px]">
-              {placeholder || "Start writing..."}
+        {/* Editor Area & Sidebar */}
+        <div className="relative flex items-stretch border-b border-[#c3c4c7] last:border-0">
+          <div className={`relative flex-1 ${showOverview ? 'border-r border-[#c3c4c7]' : ''}`}>
+            <EditorContent editor={editor} />
+            {editor.isEmpty && (
+              <div className="absolute top-3 left-4 pointer-events-none text-[#8c8f94] text-[14px]">
+                {placeholder || "Start writing..."}
+              </div>
+            )}
+          </div>
+
+          {showOverview && (
+            <div className="w-64 bg-[#f6f7f7] flex-shrink-0 flex flex-col">
+              <div className="p-3 border-b border-[#dcdcde] bg-white sticky top-0 z-10 flex justify-between items-center">
+                 <span className="font-bold text-[11px] text-[#646970] uppercase tracking-wider">Document Structure</span>
+                 <div className="text-[10px] text-[#8c8f94] font-medium">
+                   {editor.state.doc.textContent.length} chars
+                 </div>
+              </div>
+              <div className="p-3 overflow-y-auto max-h-[400px] space-y-4">
+                {(() => {
+                  let counts = { h1:0, h2:0, h3:0, h4:0, h5:0, h6:0, p:0, ul:0, ol:0 };
+                  const structure: { id: string, name: string, level?: number, pos: number, text: string }[] = [];
+                  
+                  editor.state.doc.descendants((node, pos) => {
+                    if (node.type.name === 'heading') {
+                      counts[`h${node.attrs.level}` as keyof typeof counts]++;
+                      structure.push({ id: `h-${pos}`, name: 'heading', level: node.attrs.level, pos, text: node.textContent });
+                    }
+                    if (node.type.name === 'paragraph') counts.p++;
+                    if (node.type.name === 'bulletList') counts.ul++;
+                    if (node.type.name === 'orderedList') counts.ol++;
+                  });
+
+                  return (
+                    <>
+                      <div className="grid grid-cols-2 gap-2 text-[12px] text-[#50575e] bg-white p-2 border border-[#dcdcde] rounded-[3px]">
+                        <div><strong className="text-[#1d2327]">H1-H6:</strong> {counts.h1+counts.h2+counts.h3+counts.h4+counts.h5+counts.h6}</div>
+                        <div><strong className="text-[#1d2327]">Paragraphs:</strong> {counts.p}</div>
+                        <div><strong className="text-[#1d2327]">Lists:</strong> {counts.ul + counts.ol}</div>
+                      </div>
+
+                      <div className="space-y-1">
+                        <h4 className="text-[11px] font-bold text-[#646970] uppercase mb-2">Outline</h4>
+                        {structure.length === 0 ? (
+                          <div className="text-[12px] text-[#8c8f94] italic">No headings found.</div>
+                        ) : (
+                          structure.map((item) => (
+                            <button
+                              key={item.id}
+                              onClick={() => {
+                                editor.chain().focus().setTextSelection(item.pos).run();
+                                const element = editor.view.nodeDOM(item.pos) as HTMLElement;
+                                if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                              }}
+                              className="w-full text-left flex flex-col gap-0.5 p-1.5 rounded hover:bg-[#e6f0fa] transition-colors group"
+                            >
+                              <div className="flex items-center gap-1.5">
+                                <span className="text-[9px] font-bold bg-[#d2e3f7] text-[#2271b1] px-1 py-0.5 rounded">H{item.level}</span>
+                                <span className="text-[12px] text-[#1d2327] font-medium truncate group-hover:text-[#2271b1]">{item.text || 'Empty Heading'}</span>
+                              </div>
+                            </button>
+                          ))
+                        )}
+                      </div>
+                    </>
+                  );
+                })()}
+              </div>
             </div>
           )}
         </div>

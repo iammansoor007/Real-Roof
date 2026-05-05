@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Upload, Send, Briefcase, FileText, User, Mail, Phone, CheckCircle, ArrowRight } from 'lucide-react';
 import { useContent } from "../../hooks/useContent";
 import RichTextRenderer from '../ui/RichTextRenderer';
+import PageInlineFaqs from "@/components/PageInlineFaqs";
 
 const Images = {
   Pattern: "https://images.unsplash.com/photo-1502691876148-a84978e59af8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
@@ -152,6 +153,7 @@ export default function CareersTemplate({ pageData, params }: { pageData?: any, 
           </motion.div>
         </div>
       </section>
+      <PageInlineFaqs faqs={pageData?.content?.faqs || pageData?.faqs || []} />
     </main>
   );
 }

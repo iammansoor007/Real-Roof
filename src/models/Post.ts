@@ -12,6 +12,7 @@ const PostSchema = new Schema({
   author: { type: Schema.Types.ObjectId, ref: 'User' },
   categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
   tags: [{ type: Schema.Types.ObjectId, ref: 'Tag' }],
+  location: { type: String, default: '' },
   status: { 
     type: String, 
     enum: ['draft', 'published', 'scheduled'], 
@@ -28,7 +29,9 @@ const PostSchema = new Schema({
     ogTitle: String,
     ogDescription: String,
     ogImage: String,
-    twitterCard: { type: String, default: 'summary_large_image' }
+    twitterCard: { type: String, default: 'summary_large_image' },
+    featuredImage: String,
+    featuredImageAlt: String
   },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }

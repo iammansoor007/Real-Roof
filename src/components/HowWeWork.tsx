@@ -545,17 +545,19 @@ const AwardCTABanner = () => {
 
                 <div className="relative px-8 py-16 md:px-20 md:py-20 flex flex-col lg:flex-row items-center justify-between gap-10 z-30">
                     <div className="max-w-2xl">
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.4 }}
-                            className="flex items-center gap-2 mb-4"
-                        >
-                            <span className="w-8 h-[2px] bg-primary" />
-                            <span className="text-lg font-bold tracking-[0.3em] uppercase text-primary">
-                                {cta?.badge}
-                            </span>
-                        </motion.div>
+                        {cta?.badge && cta.badge.trim() !== "" && (
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.4 }}
+                                className="flex items-center gap-2 mb-4"
+                            >
+                                <span className="w-8 h-[2px] bg-primary" />
+                                <span className="text-lg font-bold tracking-[0.3em] uppercase text-primary">
+                                    {cta.badge}
+                                </span>
+                            </motion.div>
+                        )}
 
                         <h3
                             className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 leading-tight"
@@ -660,13 +662,15 @@ const WhyChooseUs = () => {
                         viewport={{ once: true }}
                         className="reveal-text"
                     >
-                        <div className="flex items-center justify-center gap-3 mb-6">
-                            <div className="w-16 h-[2px] bg-primary" />
-                            <span className="text-xs font-bold tracking-[0.3em] uppercase text-primary">
-                                {section?.badge}
-                            </span>
-                            <div className="w-16 h-[2px] bg-primary" />
-                        </div>
+                        {section?.badge && section.badge.trim() !== "" && (
+                            <div className="flex items-center justify-center gap-3 mb-6">
+                                <div className="w-16 h-[2px] bg-primary" />
+                                <span className="text-xs font-bold tracking-[0.3em] uppercase text-primary">
+                                    {section.badge}
+                                </span>
+                                <div className="w-16 h-[2px] bg-primary" />
+                            </div>
+                        )}
 
                         <h1
                             className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight"

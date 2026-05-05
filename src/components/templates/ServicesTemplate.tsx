@@ -8,6 +8,7 @@ import { Home, Layout, TreePine, Building2, Building, Droplets, ArrowRight, Shie
 import { useContent } from "../../hooks/useContent";
 import RichTextRenderer from "../ui/RichTextRenderer";
 import BlogSection from "../sections/BlogSection";
+import PageInlineFaqs from "@/components/PageInlineFaqs";
 
 const iconMap: Record<string, any> = { Home, Layout, TreePine, Building2, Building, Droplets, Shield, Award, Clock, BadgeCheck, TrendingUp, Star };
 
@@ -98,6 +99,7 @@ export default function ServicesTemplate({ pageData, params }: { pageData?: any,
                 description={blogSection?.description}
                 posts={allBlogs.filter((p: any) => blogSection?.selectedPosts?.includes(p._id))}
             />
+            <PageInlineFaqs faqs={pageData?.content?.faqs || pageData?.faqs || []} />
         </main>
     );
 }

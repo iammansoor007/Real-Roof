@@ -331,12 +331,20 @@ const Services = () => {
       ? [rawDescription] 
       : [];
 
-  const servicesListRaw = (servicesData?.services || (Array.isArray(servicesData) ? servicesData : [])).filter((s: any) => !s.status || s.status === 'published');
+  const servicesListRaw = (
+    servicesData?.services || 
+    (Array.isArray(servicesData) ? servicesData : []) || 
+    []
+  ).filter((s: any) => !s.status || s.status === 'published');
+
   const servicesList = servicesListRaw.map((s: any, idx: number) => ({
     ...s,
     number: String(idx + 1).padStart(2, '0')
   }));
-  const featuredService = servicesList[0];
+
+  // Robust featured service selection
+  const featuredService = servicesList.length > 0 ? servicesList[0] : null;
+  const gridServices = servicesList.length > 1 ? servicesList.slice(1) : servicesList;
 
   useEffect(() => {
     setIsClient(true);
@@ -517,7 +525,7 @@ const Services = () => {
             </span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {servicesList.slice(1).map((service: any, index: number) => (
+            {gridServices.map((service: any, index: number) => (
               <ServiceCard key={index} service={service} index={index} />
             ))}
           </div>

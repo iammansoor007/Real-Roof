@@ -33,7 +33,7 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
   const [page, setPage] = useState<any>(null);
   const [content, setContent] = useState<any>(null);
   const [seo, setSeo] = useState<any>({});
-  const [activeTab, setActiveTab] = useState<'content' | 'seo'>('content');
+  const [activeTab, setActiveTab] = useState<'content' | 'seo' | 'faqs'>('content');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
@@ -49,7 +49,9 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
       if (res.ok) {
         const data = await res.json();
         setPage(data);
-        setContent(data.content || {});
+        const pageContent = data.content || {};
+        if (!pageContent.faqs) pageContent.faqs = [];
+        setContent(pageContent);
         setSeo(data.seo || {});
       } else {
         router.push('/admin/pages');
@@ -166,6 +168,13 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
               >
                 SEO Settings
               </button>
+              <button
+                onClick={() => setActiveTab('faqs')}
+                className={`px-3 py-2 text-[12px] font-semibold border-r border-[#c3c4c7] transition-all ${activeTab === 'faqs' ? "bg-white text-[#1d2327]" : "text-[#2271b1] hover:text-[#135e96]"
+                  }`}
+              >
+                Page FAQs
+              </button>
             </div>
 
             <div className="p-0 overflow-x-auto">
@@ -182,7 +191,7 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
                     </div>
                   )}
                 </div>
-              ) : (
+              ) : activeTab === 'seo' ? (
                 <SeoEditor
                   data={seo}
                   setData={setSeo}
@@ -190,6 +199,48 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
                   pageTitle={page.title}
                   pageContent={content}
                 />
+              ) : (
+                 <div className="p-4 sm:p-5 space-y-4">
+                    <div className="flex items-center justify-between mb-2">
+                       <div>
+                         <h3 className="text-sm font-bold text-[#1d2327]">Page-Specific FAQs</h3>
+                         <p className="text-[12px] text-[#646970] mt-1">These FAQs will appear at the bottom of this specific page.</p>
+                       </div>
+                       <button onClick={() => {
+                          const currentFaqs = Array.isArray(content.faqs) ? content.faqs : [];
+                          const nf = [...currentFaqs];
+                          nf.push({ question: "", answer: "" });
+                          setContent({ ...content, faqs: nf });
+                       }} className="bg-[#f0f0f1] border border-[#c3c4c7] px-2 py-1 text-[12px] rounded-sm hover:bg-white text-[#2c3338] transition-colors">+ Add FAQ</button>
+                    </div>
+                    {(!content.faqs || content.faqs.length === 0) ? (
+                       <div className="text-[13px] text-[#646970] italic">No FAQs added for this page yet.</div>
+                    ) : (
+                       <div className="space-y-4">
+                          {content.faqs.map((faq: any, idx: number) => (
+                             <div key={idx} className="bg-white border border-[#c3c4c7] p-4 rounded-sm space-y-3">
+                               <div className="flex justify-between items-start gap-4">
+                                 <div className="flex-1 space-y-3">
+                                   <input type="text" value={faq.question} onChange={e => {
+                                      const nf = [...content.faqs];
+                                      nf[idx].question = e.target.value;
+                                      setContent({...content, faqs: nf});
+                                   }} className="w-full border border-[#8c8f94] px-2 py-1.5 text-[14px] font-bold text-[#1d2327] rounded-sm focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] outline-none" placeholder="Question" />
+                                   <textarea value={faq.answer} onChange={e => {
+                                      const nf = [...content.faqs];
+                                      nf[idx].answer = e.target.value;
+                                      setContent({...content, faqs: nf});
+                                   }} className="w-full border border-[#8c8f94] px-2 py-1.5 text-[13px] rounded-sm focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] outline-none" rows={3} placeholder="Answer" />
+                                 </div>
+                                 <button onClick={() => {
+                                    setContent({...content, faqs: content.faqs.filter((_:any, i:number) => i !== idx)});
+                                 }} className="text-[#d63638] hover:underline text-[12px] pt-1"><Trash2 className="w-4 h-4" /></button>
+                               </div>
+                             </div>
+                          ))}
+                       </div>
+                    )}
+                 </div>
               )}
             </div>
           </div>

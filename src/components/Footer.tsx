@@ -15,6 +15,7 @@ import { Icon } from "../config/icons";
 import { useContent } from "../hooks/useContent";
 import Image from "next/image";
 import Link from "next/link";
+import RichTextRenderer from "./ui/RichTextRenderer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -172,7 +173,13 @@ const NewsletterForm = () => {
 
 const ServiceLinks = () => {
   const { services: servicesData, footer } = useContent();
-  const dynamicServices = ((servicesData as any).services || []).filter((s: any) => s.status === 'published' || s.status === undefined);
+  const dynamicServicesRaw = ((servicesData as any).services || []).filter((s: any) => s.status === 'published' || s.status === undefined);
+  const selectedServices = footer?.services?.selectedServices || [];
+  
+  const dynamicServices = selectedServices.length > 0 
+    ? dynamicServicesRaw.filter((s: any) => selectedServices.includes(s._id))
+    : dynamicServicesRaw;
+
   const footerServices = footer?.services || { title: "Our Services" };
 
   return (
@@ -512,9 +519,9 @@ const Footer = () => {
                 </div>
               </div>
 
-              <p className="text-muted-foreground text-xs leading-relaxed">
-                {company.description}
-              </p>
+              <div className="text-muted-foreground text-xs leading-relaxed [&>p]:m-0">
+                <RichTextRenderer content={company.description} />
+              </div>
 
               <SocialLinks />
             </motion.div>

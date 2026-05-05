@@ -147,7 +147,13 @@ export default async function DynamicPage({ params }: PageProps) {
       />
       <TemplateWrapper
         templateName={page.template}
-        pageData={page}
+        pageData={{
+          ...page,
+          content: {
+            ...globalData,
+            ...(page.content || {})
+          }
+        }}
         params={resolvedParams}
       />
     </main>

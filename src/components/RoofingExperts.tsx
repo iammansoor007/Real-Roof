@@ -328,7 +328,9 @@ export default function AboutSection() {
                             className="inline-flex items-center gap-2 bg-primary/5 px-4 py-2 rounded-full border border-primary/10"
                         >
                             <span className="text-primary text-lg">⚡</span>
+                        {badge && badge !== "US" && (
                             <span className="text-primary uppercase tracking-[0.2em] text-xs sm:text-sm font-bold">{badge}</span>
+                        )}
                         </motion.div>
 
                         <div className="space-y-4">

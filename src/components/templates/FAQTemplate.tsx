@@ -35,7 +35,7 @@ const AccordionItem = ({ item, index, isOpen, onToggle, searchHighlight }: any) 
                         <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
                              <div className="px-7 pb-7">
                                  <div className="text-muted-foreground leading-relaxed">
-                                     <RichTextRenderer content={item.answer} />
+                                     <RichTextRenderer content={item.answer} stripParagraphs={true} />
                                  </div>
                              </div>
                         </motion.div>

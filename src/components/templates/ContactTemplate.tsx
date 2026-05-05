@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useContent } from "../../hooks/useContent";
 import { Icon } from "../../config/icons";
 import RichTextRenderer from "../ui/RichTextRenderer";
+import PageInlineFaqs from "@/components/PageInlineFaqs";
 
 const HolographicInput = ({ icon: IconName, label, type = "text", ...props }: any) => {
     const [isFocused, setIsFocused] = useState(false);
@@ -270,6 +271,7 @@ export default function ContactTemplate({ pageData }: { pageData?: any }) {
                     </motion.div>
                 )}
             </AnimatePresence>
+            <PageInlineFaqs faqs={pageData?.content?.faqs || pageData?.faqs || []} />
         </main>
     );
 }

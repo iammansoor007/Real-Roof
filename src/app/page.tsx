@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import HomeTemplate from "@/components/templates/HomeTemplate";
 import { Metadata } from "next";
 import connectToDatabase from "@/lib/mongodb";
@@ -128,7 +131,17 @@ export default async function Index() {
       return (
         <>
           <Script id="json-ld-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-          <TemplateWrapper templateName={page.template} pageData={page} params={Promise.resolve({ slug: ['/'] })} />
+          <TemplateWrapper 
+            templateName={page.template} 
+            pageData={{
+              ...page,
+              content: {
+                ...(content?.data || {}),
+                ...(page.content || {})
+              }
+            }} 
+            params={Promise.resolve({ slug: ['/'] })} 
+          />
         </>
       );
     }

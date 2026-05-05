@@ -150,8 +150,17 @@ export default function HomeEditor({ pageId, data, setData }: { pageId: string, 
                </div>
                <div className="space-y-6">
                   <h3 className={UI.sectionHeader}>6. Media</h3>
-                  <ImageField label="Background Image" value={data.hero?.images?.[0]} onChange={(url) => { const imgs = [...(data.hero?.images || [])]; imgs[0] = url; updateSection("hero", "images", imgs); }} />
-                  <div className="space-y-1.5"><label className={UI.label}>Alt Text</label><input type="text" value={data.hero?.bgImageAlt || ""} onChange={(e) => updateSection("hero", "bgImageAlt", e.target.value)} className={UI.input} /></div>
+                  <ImageField 
+                    label="Background Image" 
+                    value={data.hero?.images?.[0]} 
+                    onChange={(url) => { 
+                      const imgs = [...(data.hero?.images || [])]; 
+                      imgs[0] = url; 
+                      updateSection("hero", "images", imgs); 
+                    }} 
+                    altValue={data.hero?.bgImageAlt || ""}
+                    onAltChange={(alt) => updateSection("hero", "bgImageAlt", alt)}
+                  />
                </div>
             </div>
           )}
@@ -235,8 +244,13 @@ export default function HomeEditor({ pageId, data, setData }: { pageId: string, 
                </div>
                <div className="space-y-6">
                   <h3 className={UI.sectionHeader}>7. Media</h3>
-                  <ImageField label="Section Image" value={data.about?.image?.src || ""} onChange={(url) => updateSection("about", "image", { ...(data.about?.image || {}), src: url })} />
-                  <div className="space-y-1.5"><label className={UI.label}>Alt Text</label><input type="text" value={data.about?.image?.alt || ""} onChange={(e) => updateSection("about", "image", { ...(data.about?.image || {}), alt: e.target.value })} className={UI.input} /></div>
+                  <ImageField 
+                    label="Section Image" 
+                    value={data.about?.image?.src || ""} 
+                    onChange={(url) => updateSection("about", "image", { ...(data.about?.image || {}), src: url })} 
+                    altValue={data.about?.image?.alt || ""}
+                    onAltChange={(alt) => updateSection("about", "image", { ...(data.about?.image || {}), alt: alt })}
+                  />
                   <div className="space-y-1.5"><label className={UI.label}>Floating Badge</label><input type="text" value={data.about?.image?.badge || ""} onChange={(e) => updateSection("about", "image", { ...(data.about?.image || {}), badge: e.target.value })} className={UI.input} /></div>
                </div>
             </div>

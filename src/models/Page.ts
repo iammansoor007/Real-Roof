@@ -37,6 +37,7 @@ const PageSchema = new mongoose.Schema({
     schemaData: { type: String }, // JSON string for structured data
     breadcrumbTitle: { type: String },
     featuredImage: { type: String },
+    featuredImageAlt: { type: String },
   },
   // This could store page-specific overrides if needed later
   content: { type: mongoose.Schema.Types.Mixed, default: {} },

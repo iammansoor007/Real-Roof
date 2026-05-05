@@ -42,10 +42,20 @@ export default function RichTextRenderer({ content, className = "", stripParagra
   // Sanitize and render single HTML string
   let sanitizedHtml = safeSanitize(content as string);
 
+  // If the user is seeing literal <p> tags, it might be due to double escaping
+  // or the editor's output being rendered as text.
+  // We'll strip both actual tags and escaped tags if stripParagraphs is true.
   if (stripParagraphs) {
-    sanitizedHtml = sanitizedHtml.replace(/<p[^>]*>/gi, '').replace(/<\/p>/gi, '');
+    sanitizedHtml = sanitizedHtml
+      .replace(/<p[^>]*>/gi, '')
+      .replace(/<\/p>/gi, '')
+      .replace(/&lt;p[^&]*&gt;/gi, '')
+      .replace(/&lt;\/p&gt;/gi, '');
   }
 
+  // Final fallback to ensure no stray literal <p> tags are visible if they are causing issues
+  // but we should be careful not to over-sanitize.
+  
   return (
     <div 
       className={`rich-text-content 

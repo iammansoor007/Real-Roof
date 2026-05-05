@@ -224,8 +224,41 @@ export default function SettingsEditor() {
                   </div>
                   <div className="space-y-6">
                      {(data.navbar?.companyLinks || []).map((link: any, idx: number) => (
-                        <div key={idx} className="bg-[#f6f7f7] border border-[#c3c4c7] p-5 rounded-sm space-y-5">
-                           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                        <div key={idx} className="bg-[#f6f7f7] border border-[#c3c4c7] p-5 rounded-sm space-y-5 relative">
+                           <div className="absolute top-2 right-2 flex gap-1">
+                              <button 
+                                onClick={() => {
+                                  if (idx === 0) return;
+                                  const nl = [...data.navbar.companyLinks];
+                                  const temp = nl[idx - 1];
+                                  nl[idx - 1] = nl[idx];
+                                  nl[idx] = temp;
+                                  updateData("navbar", "companyLinks", nl);
+                                }}
+                                disabled={idx === 0}
+                                className="p-1 text-[#50575e] hover:bg-[#dcdcde] rounded disabled:opacity-30 transition-colors"
+                                title="Move Up"
+                              >
+                                ↑
+                              </button>
+                              <button 
+                                onClick={() => {
+                                  if (idx === data.navbar.companyLinks.length - 1) return;
+                                  const nl = [...data.navbar.companyLinks];
+                                  const temp = nl[idx + 1];
+                                  nl[idx + 1] = nl[idx];
+                                  nl[idx] = temp;
+                                  updateData("navbar", "companyLinks", nl);
+                                }}
+                                disabled={idx === data.navbar.companyLinks.length - 1}
+                                className="p-1 text-[#50575e] hover:bg-[#dcdcde] rounded disabled:opacity-30 transition-colors"
+                                title="Move Down"
+                              >
+                                ↓
+                              </button>
+                           </div>
+
+                           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 pr-16">
                               <PageSelector value={link.pageId} pages={pages} label="Map to Page" onChange={(p) => {
                                  const nl = [...data.navbar.companyLinks];
                                  nl[idx] = { ...nl[idx], pageId: p?._id || "", label: p?.title || nl[idx].label, href: p ? "/"+p.slug : nl[idx].href };
@@ -255,8 +288,16 @@ export default function SettingsEditor() {
                                     updateData("navbar", "companyLinks", nl);
                                  }} />
                               </div>
-                              <div className="flex justify-end pt-5">
-                                 <button onClick={() => updateData("navbar", "companyLinks", data.navbar.companyLinks.filter((_:any,i:number)=>i!==idx))} className="text-[#d63638] hover:underline text-[12px]">Remove Parent</button>
+                              <div className="flex flex-col gap-2 pt-5">
+                                 <label className="flex items-center gap-2 cursor-pointer text-[12px] text-[#1d2327]">
+                                   <input type="checkbox" checked={link.useMegaMenu || false} onChange={(e) => {
+                                      const nl = [...data.navbar.companyLinks];
+                                      nl[idx].useMegaMenu = e.target.checked;
+                                      updateData("navbar", "companyLinks", nl);
+                                   }} className="rounded-sm border-[#8c8f94]" />
+                                   Use Services Mega Menu
+                                 </label>
+                                 <button onClick={() => updateData("navbar", "companyLinks", data.navbar.companyLinks.filter((_:any,i:number)=>i!==idx))} className="text-[#d63638] hover:underline text-[12px] text-left">Remove Parent</button>
                               </div>
                            </div>
 
@@ -353,6 +394,70 @@ export default function SettingsEditor() {
                      <button onClick={() => updateData("footer", "marquee", { ...data.footer.marquee, texts: [...(data.footer.marquee?.texts || []), "New Announcement"] })} className="text-[#2271b1] text-xs underline">+ Add Item</button>
                   </div>
                </SettingsRow>
+               <SettingsRow label="Services Menu Title" description="The title for the dynamic services list in the footer.">
+                  <input type="text" value={data.footer?.services?.title || "Our Services"} onChange={(e) => updateData("footer", "services", { ...data.footer.services, title: e.target.value })} className="w-full max-w-md border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px]" />
+               </SettingsRow>
+               <SettingsRow label="Selected Footer Services" description="Select which services to display in the footer. If none are selected, all published services will be shown.">
+                  <div className="flex flex-wrap gap-2">
+                     {pages.filter(p => p.type === 'service').map(service => {
+                        const isSelected = data.footer?.services?.selectedServices?.includes(service._id);
+                        return (
+                           <label key={service._id} className="flex items-center gap-2 bg-[#f6f7f7] border border-[#c3c4c7] px-3 py-1.5 rounded-[3px] text-[13px] cursor-pointer hover:bg-white transition-colors">
+                              <input
+                                 type="checkbox"
+                                 checked={!!isSelected}
+                                 onChange={(e) => {
+                                    const selected = data.footer?.services?.selectedServices || [];
+                                    if (e.target.checked) {
+                                       updateData("footer", "services", { ...data.footer.services, selectedServices: [...selected, service._id] });
+                                    } else {
+                                       updateData("footer", "services", { ...data.footer.services, selectedServices: selected.filter((id: string) => id !== service._id) });
+                                    }
+                                 }}
+                              />
+                              {service.title}
+                           </label>
+                        );
+                     })}
+                  </div>
+               </SettingsRow>
+               <SettingsRow label="Certifications">
+                  <div className="space-y-4">
+                     {(data.footer?.certifications || []).map((cert: any, i: number) => (
+                        <div key={i} className="flex gap-4 items-end bg-[#f6f7f7] p-4 border border-[#c3c4c7] rounded-sm">
+                           <div className="flex-1 space-y-1">
+                              <label className="text-[11px] font-bold">Certification Name</label>
+                              <input type="text" value={cert.cert || ""} onChange={(e) => {
+                                 const nc = [...data.footer.certifications];
+                                 nc[i].cert = e.target.value;
+                                 updateData("footer", "certifications", nc);
+                              }} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" />
+                           </div>
+                           <div className="flex-1 space-y-1">
+                              <label className="text-[11px] font-bold">License / Number</label>
+                              <input type="text" value={cert.number || ""} onChange={(e) => {
+                                 const nc = [...data.footer.certifications];
+                                 nc[i].number = e.target.value;
+                                 updateData("footer", "certifications", nc);
+                              }} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" />
+                           </div>
+                           <div className="space-y-1 w-24">
+                              <label className="text-[11px] font-bold">Icon</label>
+                              <IconPicker value={cert.icon || "ShieldCheck"} onChange={(v) => {
+                                 const nc = [...data.footer.certifications];
+                                 nc[i].icon = v;
+                                 updateData("footer", "certifications", nc);
+                              }} />
+                           </div>
+                           <button onClick={() => {
+                              const nc = data.footer.certifications.filter((_:any, idx:number) => idx !== i);
+                              updateData("footer", "certifications", nc);
+                           }} className="text-[#d63638] text-[13px] mb-1 hover:underline">Remove</button>
+                        </div>
+                     ))}
+                     <button onClick={() => updateData("footer", "certifications", [...(data.footer.certifications || []), { cert: "New Cert", number: "#123456", icon: "ShieldCheck" }])} className="text-[#2271b1] text-[13px] hover:underline">+ Add Certification</button>
+                  </div>
+               </SettingsRow>
             </motion.div>
           )}
 
@@ -367,6 +472,12 @@ export default function SettingsEditor() {
                </SettingsRow>
                <SettingsRow label="Office Address">
                   <textarea rows={2} value={data.footer?.contact?.address || ""} onChange={(e) => updateData("footer", "contact", { ...data.footer.contact, address: e.target.value })} className="w-full max-w-md border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px]" />
+               </SettingsRow>
+               <SettingsRow label="24/7 Emergency Text">
+                  <input type="text" value={data.footer?.contact?.emergency || ""} onChange={(e) => updateData("footer", "contact", { ...data.footer.contact, emergency: e.target.value })} className="w-full max-w-md border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px]" />
+               </SettingsRow>
+               <SettingsRow label="Service Areas">
+                  <textarea rows={3} value={data.footer?.contact?.areas || ""} onChange={(e) => updateData("footer", "contact", { ...data.footer.contact, areas: e.target.value })} className="w-full max-w-md border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px]" />
                </SettingsRow>
                <SettingsRow label="Office Hours">
                   <div className="grid grid-cols-3 gap-2">

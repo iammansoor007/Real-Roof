@@ -388,16 +388,17 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
       {showMediaSelector && (
         <MediaSelector
           onSelect={(item) => {
-            const url = item.url;
-            setPost({ 
-              ...post, 
-              featuredImage: url,
+            setPost({
+              ...post,
+              featuredImage: item.url,
               seo: {
                 ...post.seo,
-                featuredImage: post.seo.featuredImage || url,
-                ogImage: post.seo.ogImage || url
+                featuredImage: post.seo.featuredImage || item.url,
+                featuredImageAlt: post.seo.featuredImageAlt || item.alt || "",
+                ogImage: post.seo.ogImage || item.url
               }
             });
+            setShowMediaSelector(false);
           }}
           onClose={() => setShowMediaSelector(false)}
           title="Select Featured Image"

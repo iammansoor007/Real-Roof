@@ -20,7 +20,7 @@ export default function FAQEditor({ pageId, data, setData }: { pageId: string, d
   const [activeTab, setActiveTab] = useState("header");
 
   useEffect(() => {
-    if (data && Object.keys(data).length === 0) {
+    if (data && !data.faq) {
        setData({
          faq: {
            section: { headline: "Frequently Asked Questions", description: "Find answers to common questions about our services and process." },
