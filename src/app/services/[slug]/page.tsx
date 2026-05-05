@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!service) return {};
 
   const seo = service.seo || {};
-  const pageUrl = `${BASE_URL}/services/${slug}`;
+  const pageUrl = `${BASE_URL}/${slug}`;
 
   return {
     title: {

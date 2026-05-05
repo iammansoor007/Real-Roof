@@ -6,7 +6,7 @@ export const revalidate = 0;
 import { notFound } from 'next/navigation';
 import connectToDatabase from '@/lib/mongodb';
 import Post from '@/models/Post';
-import { Calendar, User, Tag as TagIcon, Clock, BookOpen, ArrowLeft, ArrowRight, Share2, Facebook, Twitter, Linkedin } from 'lucide-react';
+import { Calendar, User, Tag as TagIcon, Clock, BookOpen, ArrowLeft, ArrowRight, Share2, Facebook, Twitter, Linkedin, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import Script from 'next/script';
 import ReadingProgress from '@/components/blog/ReadingProgress';
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return { title: 'Post Not Found' };
 
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://eaglerevolution.com";
-  const url = `${BASE_URL}/blog/${slug}`;
+  const url = `${BASE_URL}/${slug}`;
 
   return {
     title: {
@@ -80,7 +80,7 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://eaglerevolution.com";
-  const url = `${BASE_URL}/blog/${slug}`;
+  const url = `${BASE_URL}/${slug}`;
   const wordCount = post.content ? post.content.split(/\s+/).length : 0;
   const publishDate = post.publishedAt?.toISOString();
   const modifiedDate = (post.updatedAt || post.publishedAt)?.toISOString();
@@ -193,6 +193,22 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
               <span>{Math.ceil(wordCount / 200)} Minute Read</span>
             </div>
+            {post.categories && post.categories.length > 0 && (
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-full bg-blue-600/20 flex items-center justify-center border border-blue-500/30">
+                  <TagIcon className="w-3.5 h-3.5 text-blue-400" />
+                </div>
+                <span>{post.categories[0].name}</span>
+              </div>
+            )}
+            {post.location && (
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-full bg-blue-600/20 flex items-center justify-center border border-blue-500/30">
+                  <MapPin className="w-3.5 h-3.5 text-blue-400" />
+                </div>
+                <span>{post.location}</span>
+              </div>
+            )}
           </div>
         </div>
       </section>

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     "Eagle Revolution terms and conditions of service. Review our policies for roofing, siding, windows, decks, and gutter services in St. Louis, MO.",
   alternates: {
-    canonical: "https://www.eaglerevolution.com/terms",
+    canonical: "https://eaglerevolution.com/terms",
   },
   robots: {
     index: true,

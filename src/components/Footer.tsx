@@ -298,7 +298,7 @@ const ContactInfo = () => {
           Service Areas
         </h5>
         <div className="text-white/70 text-sm leading-relaxed group-hover:text-white/90 transition-colors">
-          <RichTextRenderer content={contact.areas} stripParagraphs={true} />
+          <RichTextRenderer content={contact.areas} />
         </div>
       </div>
     </div>

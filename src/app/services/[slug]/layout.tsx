@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import completeData from "../../../src/data/completeData.json";
 
-const BASE_URL = "https://eagle-revolution.vercel.app";
+const BASE_URL = "https://eaglerevolution.com";
 
 // ─────────────────────────────────────────────
 // Per-page SEO map — title, description, keywords, JSON-LD
@@ -693,22 +693,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     keywords,
     alternates: {
-      canonical: `${BASE_URL}/services/${slug}`,
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
+      canonical: `${BASE_URL}/${slug}`,
     },
     openGraph: {
       title,
       description,
-      url: `${BASE_URL}/services/${slug}`,
+      url: `${BASE_URL}/${slug}`,
       type: "website",
       siteName: "Eagle Revolution",
       locale: "en_US",

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     "Eagle Revolution privacy policy. Learn how we collect, use, and protect your personal information when you use our roofing and home improvement services.",
   alternates: {
-    canonical: "https://www.eaglerevolution.com/privacy",
+    canonical: "https://eaglerevolution.com/privacy",
   },
   robots: {
     index: true,

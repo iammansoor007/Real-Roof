@@ -12,13 +12,13 @@ export const metadata: Metadata = {
     "home improvement quote St. Louis MO",
   ],
   alternates: {
-    canonical: "https://www.eaglerevolution.com/contact",
+    canonical: "https://eaglerevolution.com/contact",
   },
   openGraph: {
     title: "Contact Eagle Revolution | Free Estimate in St. Louis, MO",
     description:
       "Request a free estimate for roofing, siding, windows, decks, and more. Veteran-owned company serving the greater St. Louis area. Call 636-449-9714.",
-    url: "https://www.eaglerevolution.com/contact",
+    url: "https://eaglerevolution.com/contact",
     type: "website",
   },
 };

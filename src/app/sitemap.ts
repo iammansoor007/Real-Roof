@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import completeData from '../src/data/completeData.json';
 
-const BASE_URL = 'https://www.eaglerevolution.com';
+const BASE_URL = 'https://eaglerevolution.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date().toISOString();
@@ -68,7 +68,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const services = (completeData.services as any).services || [];
   const serviceRoutes: MetadataRoute.Sitemap = services.map(
     (service: any) => ({
-      url: `${BASE_URL}/services/${service.slug}`,
+      url: `${BASE_URL}/${service.slug}`,
       lastModified: now,
       changeFrequency: 'weekly' as const,
       priority: 0.85,

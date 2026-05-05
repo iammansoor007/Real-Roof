@@ -289,15 +289,18 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
         )}
         <div className="absolute inset-0 bg-black/60 flex items-center">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <nav className="flex items-center gap-2 text-white/60 text-xs sm:text-sm font-medium uppercase tracking-widest mb-4">
-              <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-              <ChevronRight className="w-3 h-3" />
-              <Link href="/services" className="hover:text-primary transition-colors">Services</Link>
-              <ChevronRight className="w-3 h-3" />
-              <span className="text-white">{service.title}</span>
+            <nav className="flex flex-col items-center justify-center text-center">
+              <div className="flex items-center justify-center gap-3 text-white/70 text-[10px] sm:text-xs font-black uppercase tracking-[0.4em] mb-6">
+                <Link href="/" className="hover:text-primary transition-colors text-white">Home</Link>
+                <span className="w-1 h-1 rounded-full bg-white/20" />
+                <Link href="/services" className="hover:text-primary transition-colors text-white">Services</Link>
+                <span className="w-1 h-1 rounded-full bg-white/20" />
+                <span className="text-white">{service.title}</span>
+              </div>
+              <h1 className="text-4xl sm:text-8xl font-black text-white tracking-tight drop-shadow-2xl">
+                {service.title}
+              </h1>
             </nav>
-            <h1 className="text-3xl sm:text-7xl font-bold text-white mb-4">{service.title}</h1>
-            <p className="text-white/80 text-lg sm:text-2xl max-w-2xl">{service.tagline}</p>
           </div>
         </div>
       </section>
@@ -333,7 +336,7 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
                 );
               })}
             </div>
-            <Link href={service.cta?.link || "/contact"} className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-white font-bold rounded-2xl shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+            <Link href={service.cta?.link || "/contact"} className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-white font-bold rounded-2xl shadow-xl hover:text-white transition-all">
               {service.cta?.text || "Start Your Project"} <ArrowRight className="w-5 h-5" />
             </Link>
           </motion.div>

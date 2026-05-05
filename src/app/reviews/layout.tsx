@@ -12,13 +12,13 @@ export const metadata: Metadata = {
     "best rated roofer St. Louis MO",
   ],
   alternates: {
-    canonical: "https://www.eaglerevolution.com/reviews",
+    canonical: "https://eaglerevolution.com/reviews",
   },
   openGraph: {
     title: "Customer Reviews | Eagle Revolution – 4.9★ Rated",
     description:
       "500+ satisfied homeowners trust Eagle Revolution for roofing and home improvement. Read their stories.",
-    url: "https://www.eaglerevolution.com/reviews",
+    url: "https://eaglerevolution.com/reviews",
     type: "website",
   },
 };

@@ -12,13 +12,13 @@ export const metadata: Metadata = {
     "how long does roof replacement take",
   ],
   alternates: {
-    canonical: "https://www.eaglerevolution.com/faq",
+    canonical: "https://eaglerevolution.com/faq",
   },
   openGraph: {
     title: "FAQ | Eagle Revolution Roofing & Home Improvement",
     description:
       "Common questions about our roofing, siding, window, and deck services answered by our expert team.",
-    url: "https://www.eaglerevolution.com/faq",
+    url: "https://eaglerevolution.com/faq",
     type: "website",
   },
 };

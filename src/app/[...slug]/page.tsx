@@ -15,7 +15,7 @@ interface PageProps {
   params: Promise<{ slug: string[] }>;
 }
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.eaglerevolution.com";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://eaglerevolution.com";
 
 function getAbsoluteUrl(path: string | undefined) {
   if (!path) return undefined;

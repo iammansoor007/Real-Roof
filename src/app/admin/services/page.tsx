@@ -46,21 +46,31 @@ const ICON_LIST = [
   "Shovel", "Fence", "Drill", "Square", "Box", "Construction", "Tool",
   "Map", "MapPin", "Search", "Settings", "Phone", "Mail", "Globe", "Layers",
   "Warehouse", "Factory", "Store", "Landmark", "Castle", "Mountain", "Trees",
-  "Droplet", "FlameKindling", "Lightbulb", "Power"
+  "Droplet", "FlameKindling", "Lightbulb", "Power",
+  "WashingMachine", "Microwave", "Speaker", "Camera", "Video", "Monitor",
+  "Smartphone", "Tablet", "Laptop", "Headphones", "Wallet", "CreditCard",
+  "ShoppingCart", "Gift", "Coffee", "Utensils", "Pizza", "Beer",
+  "Activity", "Anchor", "Aperture", "Archive", "AtSign", "Bell", "Bluetooth",
+  "Book", "Bookmark", "Briefcase", "Calendar", "Cast", "Cloud", "Code",
+  "Compass", "Copy", "Cpu", "Database", "Disc", "Download", "Edit", "ExternalLink",
+  "Eye", "Facebook", "Feather", "File", "Filter", "Flag", "Folder", "Gift",
+  "Github", "Gitlab", "Grid", "HardDrive", "Hash", "Headphones", "Heart", "HelpCircle",
+  "Image", "Inbox", "Instagram", "Key", "Layers", "LifeBuoy", "Link", "Linkedin",
+  "List", "Loader", "Lock", "LogIn", "LogOut", "Maximize", "Menu", "MessageCircle",
+  "MessageSquare", "Mic", "Minimize", "Minus", "Moon", "MoreHorizontal", "MoreVertical",
+  "MousePointer", "Music", "Navigation", "Octagon", "Package", "Paperclip", "Pause",
+  "Percent", "Phone", "PieChart", "Play", "Plus", "Pocket", "Printer", "Radio",
+  "RefreshCcw", "Repeat", "Rewind", "RotateCcw", "RotateCw", "Rss", "Save", "Scissors",
+  "Search", "Send", "Server", "Settings", "Share", "Shield", "ShoppingBag",
+  "Shuffle", "SkipBack", "SkipForward", "Slack", "Sliders", "Smile", "Speaker",
+  "Square", "Star", "StopCircle", "Sun", "Sunrise", "Sunset", "Tablet", "Tag",
+  "Target", "Terminal", "Thermometer", "ThumbsDown", "ThumbsUp", "ToggleLeft",
+  "ToggleRight", "Trash", "Trello", "TrendingDown", "TrendingUp", "Triangle",
+  "Tv", "Twitter", "Type", "Umbrella", "Underline", "Unlock", "Upload", "User",
+  "Users", "Video", "Voicemail", "Volume", "Watch", "Wifi", "Wind", "X", "Youtube", "Zap"
 ];
 
-const IconComponentMap: Record<string, any> = {
-  Home, Layout, Building2, Building, Droplets, Shield, ShieldCheck,
-  Award, Clock, BadgeCheck, TrendingUp, Star, Zap, Sparkles,
-  Palette, Sun, Snowflake, Trophy, Hammer, Truck, ClipboardCheck,
-  FileText, ArrowRight, CheckCircle, Check, Wrench, HardHat,
-  Ruler, Paintbrush, Wind, Flame, Thermometer, Users,
-  Shovel, Fence, Drill, Square, Box, Construction, Tool,
-  Map, MapPin, Search: SearchIcon, Settings: SettingsIcon, Phone: PhoneIcon,
-  Mail: MailIcon, Globe: GlobeIcon, Layers: LayersIcon,
-  Warehouse, Factory, Store, Landmark, Castle, Mountain, Trees,
-  Droplet, FlameKindling, Lightbulb, Power
-};
+const IconComponentMap: Record<string, any> = require('lucide-react');
 
 function IconSelector({ value, onChange }: { value: string, onChange: (v: string) => void }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -244,7 +254,7 @@ export default function ServicesAdminPage() {
           <button
             onClick={() => {
               setIsEditing(services.length);
-              setForm({ title: "", slug: "", tagline: "", description: "", overviewTitle: "Craftsmanship Without Compromise.", overview: "", overviewImage: "", cta: { text: "Start Your Project", link: "/contact" }, icon: "Layout", tag: "", features: [], stats: [], benefits: [], process: [], faq: [] });
+              setForm({ title: "", slug: "", tagline: "", description: "", overviewTitle: "Craftsmanship Without Compromise.", overview: "", overviewImage: "", cta: { text: "Start Your Project", link: "/contact" }, icon: "Layout", tag: "", status: "published", features: [], stats: [], benefits: [], process: [], faq: [] });
               setSeo({});
               setActiveTab("general");
             }}

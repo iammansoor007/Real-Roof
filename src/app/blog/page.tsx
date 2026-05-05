@@ -4,7 +4,7 @@ import Category from '@/models/Category';
 import { Calendar, User, ArrowRight, BookOpen, Search } from 'lucide-react';
 import Link from 'next/link';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.eaglerevolution.com";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://eaglerevolution.com";
 
 export const metadata = {
   title: 'Insights & Stories - Eagle Revolution',

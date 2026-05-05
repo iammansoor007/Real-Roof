@@ -12,13 +12,13 @@ export const metadata: Metadata = {
     "trusted roofing contractor St. Louis MO",
   ],
   alternates: {
-    canonical: "https://www.eaglerevolution.com/about",
+    canonical: "https://eaglerevolution.com/about",
   },
   openGraph: {
     title: "About Eagle Revolution | Veteran-Owned, St. Louis Based",
     description:
       "Veteran-owned roofing & home improvement experts serving the St. Louis metro. Learn our story, values, and commitment to military-grade craftsmanship.",
-    url: "https://www.eaglerevolution.com/about",
+    url: "https://eaglerevolution.com/about",
     type: "website",
   },
 };

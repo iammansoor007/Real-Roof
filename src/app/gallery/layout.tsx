@@ -12,13 +12,13 @@ export const metadata: Metadata = {
     "Eagle Revolution completed projects",
   ],
   alternates: {
-    canonical: "https://www.eaglerevolution.com/gallery",
+    canonical: "https://eaglerevolution.com/gallery",
   },
   openGraph: {
     title: "Project Gallery | Eagle Revolution St. Louis",
     description:
       "See our completed roofing, siding, deck, and window projects. Real results from a veteran-owned contractor in St. Louis, MO.",
-    url: "https://www.eaglerevolution.com/gallery",
+    url: "https://eaglerevolution.com/gallery",
     type: "website",
   },
 };
