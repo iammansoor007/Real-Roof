@@ -27,6 +27,7 @@ import { notFound } from 'next/navigation';
 import breakcrumb from '@/assets/Breadcrumb-Image.jpeg';
 import { useContent } from "../../hooks/useContent";
 import RichTextRenderer from "../ui/RichTextRenderer";
+import PageInlineFaqs from "../PageInlineFaqs";
 import BlogSection from "../sections/BlogSection";
 
 import roofingImg from '@/assets/roof1.jpg.jpeg';
@@ -205,42 +206,11 @@ const BenefitCard = ({ benefit, index }: { benefit: any, index: number }) => {
   );
 };
 
-// --- FAQ Item Component ---
-const FAQItem = ({ faq, index, isOpen, onToggle }: { faq: any, index: number, isOpen: boolean, onToggle: (i: number) => void }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-30px" }}
-      transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="relative group"
-    >
-      <div className={`relative bg-card/90 backdrop-blur-sm rounded-xl border transition-all duration-300 ${isOpen ? 'border-primary/40 shadow-2xl shadow-primary/10' : 'border-primary/10 hover:border-primary/25 shadow-lg'}`}>
-        <button onClick={() => onToggle(index)} className="w-full text-left p-6 sm:p-8 focus:outline-none relative z-10">
-          <div className="flex items-center justify-between gap-6">
-            <h3 className={`text-sm sm:text-lg lg:text-xl font-semibold transition-all duration-300 ${isOpen ? 'text-primary' : 'text-foreground'}`}>{faq.question}</h3>
-            <div className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-primary text-white' : 'border-border bg-background'}`}>
-              {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-            </div>
-          </div>
-        </button>
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-              <div className="px-8 pb-8">
-                <RichTextRenderer content={faq.answer} className="text-muted-foreground text-sm sm:text-base leading-relaxed" />
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </motion.div>
-  );
-};
+// --- FAQ Item Component removed as PageInlineFaqs is now used ---
+// --- End of FAQ Item Component ---
 
 export default function ServiceDetailTemplate({ pageData, params: syncParams }: { pageData?: any, params?: any }) {
   const { services: servicesData, allBlogs } = useContent();
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [slug, setSlug] = useState<string | null>(null);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
@@ -386,16 +356,7 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 px-4">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl sm:text-6xl font-bold text-center mb-16">Your Questions, Answered</h2>
-          <div className="space-y-4">
-            {faqs.map((faq: any, idx: number) => (
-              <FAQItem key={idx} faq={faq} index={idx} isOpen={openFaq === idx} onToggle={() => setOpenFaq(openFaq === idx ? null : idx)} />
-            ))}
-          </div>
-        </div>
-      </section>
+      <PageInlineFaqs faqs={faqs} />
 
       <BlogSection
         title={service.blogSection?.title}

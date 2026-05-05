@@ -78,7 +78,7 @@ export default async function BlogPostPage({ params }: Props) {
     .populate('categories tags author');
 
   if (!post) notFound();
-  
+
   console.log(`[Blog Debug] Post Title: ${post.title}`);
   console.log(`[Blog Debug] Post Location: "${post.location}"`);
   console.log(`[Blog Debug] Post Categories: ${post.categories?.length || 0}`);
@@ -128,13 +128,13 @@ export default async function BlogPostPage({ params }: Props) {
     const tag = match[1].toLowerCase();
     const text = match[2].replace(/<[^>]*>/g, '');
     const id = slugify(text);
-    
+
     // Demote H1 to H2 to ensure only one H1 on the page
     const finalTag = tag === 'h1' ? 'h2' : tag;
     const level = parseInt(finalTag[1]);
-    
+
     tableOfContents.push({ id, text, level });
-    
+
     const originalTag = match[0];
     const newTag = `<${finalTag} id="${id}" class="scroll-mt-32">${match[2]}</${finalTag}>`;
     processedContent = processedContent.replace(originalTag, newTag);
@@ -165,22 +165,7 @@ export default async function BlogPostPage({ params }: Props) {
             <Link href="/" className="text-white/60 hover:text-white transition-colors">Home</Link>
             <span className="opacity-30">/</span>
             <Link href="/blog" className="text-white/60 hover:text-white transition-colors">Blog</Link>
-            <span className="opacity-30">/</span>
-            {post.categories && post.categories.length > 0 && (
-              <>
-                <Link href={`/blog?category=${post.categories[0].slug || ''}`} className="text-white/60 hover:text-white transition-colors">
-                  {post.categories[0].name}
-                </Link>
-                <span className="opacity-30">/</span>
-              </>
-            )}
-            {post.location && (
-              <>
-                <span className="text-white/60">{post.location}</span>
-                <span className="opacity-30">/</span>
-              </>
-            )}
-            <span className="text-white">{post.title}</span>
+
           </div>
           <h1 className="text-2xl min-[350px]:text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight max-w-5xl mx-auto drop-shadow-2xl px-2">
             {post.title}
@@ -245,7 +230,7 @@ export default async function BlogPostPage({ params }: Props) {
 
             {/* Left: Blog Content (8 columns approx) */}
             <div className="lg:w-[65%] min-w-0 px-1 min-[350px]:px-0">
-              
+
               {/* Author Attribution Card */}
               <div className="flex flex-col min-[400px]:flex-row items-center gap-5 mb-12 p-6 min-[400px]:p-8 bg-slate-50 border border-slate-100 rounded-2xl min-[400px]:rounded-3xl">
                 <div className="relative">
@@ -268,7 +253,7 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
 
               {/* Main Content Body */}
-              <div 
+              <div
                 className="prose prose-slate prose-sm min-[400px]:prose-base md:prose-lg max-w-none 
                 prose-headings:text-slate-900 prose-headings:font-bold prose-headings:tracking-tight
                 prose-h2:text-2xl min-[400px]:text-3xl md:text-4xl prose-h2:mt-12 md:prose-h2:mt-16 prose-h2:mb-6 md:prose-h2:mb-8 prose-h2:border-l-4 prose-h2:border-blue-600 prose-h2:pl-4 md:prose-h2:pl-6
@@ -298,15 +283,15 @@ export default async function BlogPostPage({ params }: Props) {
             {/* Right: Sticky Table of Contents (Sidebar) */}
             <aside className="lg:w-[35%] shrink-0 px-1 min-[350px]:px-0">
               <div className="sticky top-32 space-y-6 md:space-y-8">
-                
+
                 <div className="bg-white border border-slate-100 rounded-2xl md:rounded-[2rem] p-6 md:p-8 shadow-xl shadow-slate-200/50">
                   <div className="flex items-center gap-3 mb-6 md:mb-8 pb-4 md:pb-6 border-b border-slate-100">
                     <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-blue-50 flex items-center justify-center">
-                        <BookOpen className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
+                      <BookOpen className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
                     </div>
                     <div>
-                        <h3 className="text-[10px] md:text-sm font-black uppercase tracking-widest text-slate-900">Navigation</h3>
-                        <p className="text-[8px] md:text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Quick Select</p>
+                      <h3 className="text-[10px] md:text-sm font-black uppercase tracking-widest text-slate-900">Navigation</h3>
+                      <p className="text-[8px] md:text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Quick Select</p>
                     </div>
                   </div>
 
