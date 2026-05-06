@@ -143,22 +143,30 @@ export default function MediaSelector({ onSelect, onClose, title = "Select Asset
                   <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2">
                     {filteredMedia.map((item) => (
                       <div
-                        key={item._id}
+                        key={String(item._id)}
                         onClick={() => setSelectedItem(item)}
-                        className={`relative aspect-square cursor-pointer border-2 transition-all ${
-                          selectedItem?._id === item._id 
-                            ? "border-[#2271b1] ring-1 ring-[#2271b1]" 
+                        onDoubleClick={() => {
+                          onSelect(item);
+                          onClose();
+                        }}
+                        className={`relative aspect-square cursor-pointer border-2 transition-all group overflow-hidden ${
+                          selectedItem && String(selectedItem._id) === String(item._id)
+                            ? "border-[#2271b1] ring-2 ring-[#2271b1] ring-inset" 
                             : "border-[#dcdcde] hover:border-[#c3c4c7]"
                         }`}
                       >
                         <img
                           src={item.url}
                           alt={item.alt || item.name}
-                          className="w-full h-full object-cover"
+                          className={`w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 ${
+                            selectedItem && String(selectedItem._id) === String(item._id) ? "opacity-90" : ""
+                          }`}
                         />
-                        {selectedItem?._id === item._id && (
-                          <div className="absolute top-0 right-0 bg-[#2271b1] p-0.5">
-                            <Check className="w-3.5 h-3.5 text-white" />
+                        {selectedItem && String(selectedItem._id) === String(item._id) && (
+                          <div className="absolute inset-0 bg-[#2271b1]/10 flex items-center justify-center">
+                            <div className="bg-[#2271b1] p-1.5 rounded-full shadow-lg">
+                              <Check className="w-5 h-5 text-white" />
+                            </div>
                           </div>
                         )}
                       </div>

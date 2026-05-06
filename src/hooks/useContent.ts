@@ -25,63 +25,28 @@ export const useContent = () => {
             // Normalize: if it's already an array, wrap it in the expected object structure
             return Array.isArray(s) ? { services: s } : s;
         })(),
-        leadership: (() => {
-            const l = getSafe(completeData, 'leadership', {});
-            // If it's effectively empty, use fallback
-            if (!l.ceo || !l.ceo.name) {
-                return {
-                    section: {
-                        badge: "Our Leadership",
-                        headline: "Meet the Team Behind <span class=\"text-primary\">Eagle Revolution</span>",
-                        description: "Veterans and experts dedicated to soaring beyond your expectations."
-                    },
-                    ceo: {
-                        name: "Brandon Anderson",
-                        title: "Owner & Founder",
-                        image: { src: "/src/assets/ownerupdatedimage.jpeg" },
-                        alt: "Brandon Anderson - Owner of Eagle Revolution",
-                        badges: { top: "U.S. Army Veteran", bottom: "Combat Sports Official" },
-                        quotes: ["At Eagle Revolution, we bring military precision and battlefield discipline to every roof, window, and deck we build."],
-                        description: "<p>Brandon Anderson is a U.S. Army veteran and globally licensed combat sports official who founded Eagle Revolution to bring a higher standard of excellence to the construction industry in St. Louis.</p>",
-                        socials: [{ icon: "Linkedin", url: "https://www.linkedin.com/company/eagle-revolution" }]
-                    }
-                };
-            }
-            return l;
-        })(),
+        leadership: getSafe(completeData, 'leadership', {
+            section: { badge: "", headline: "", description: "" },
+            ceo: { name: "", title: "", image: { src: "" }, badges: { top: "", bottom: "" }, quotes: [], description: "", socials: [] }
+        }),
         portfolio: (() => {
             const p = getSafe(completeData, 'portfolio', {});
-            const hasProjects = p.projects && Array.isArray(p.projects) && p.projects.length > 0;
-            
-            return {
-                section: p.section || {
-                    badge: "OUR WORK",
-                    headline: "Eagle Revolution <span class='text-primary'>Transformations</span>"
-                },
-                projects: hasProjects ? p.projects : [
-                    {
-                        number: "01",
-                        title: "Lakeside Composite Deck",
-                        category: "Decks",
-                        location: "Lake Ozark, MO",
-                        year: "2024",
-                        desc: "Expansive composite deck with built-in lighting.",
-                        image: "/src/assets/outdoor-sitting-desk.png"
-                    },
-                    {
-                        number: "02",
-                        title: "Suburban Roof Replacement",
-                        category: "Roofing",
-                        location: "St. Louis, MO",
-                        year: "2023",
-                        desc: "Complete architectural shingle replacement with improved ventilation.",
-                        image: "/src/assets/roof1.jpg.jpeg"
-                    }
-                ],
-                button: p.button || {
-                    text: "View Full Gallery",
-                    link: "/gallery"
+            const selectedProjects = Array.isArray(p.projects) ? p.projects : [];
+
+            // If no projects specifically selected for home, use from galleryPage
+            if (selectedProjects.length === 0) {
+                const galleryProjects = completeData?.galleryPage?.projects || [];
+                if (Array.isArray(galleryProjects) && galleryProjects.length > 0) {
+                    return {
+                        ...p,
+                        projects: galleryProjects.slice(0, 8) // Show up to 8 featured
+                    };
                 }
+            }
+
+            return {
+                ...p,
+                projects: selectedProjects
             };
         })(),
         testimonials: getSafe(completeData, 'testimonials', {

@@ -24,7 +24,7 @@ export default function ContentSelector({ type, selectedItems = [], onSelect, la
 
         let masterList: any[] = [];
         if (type === "services") masterList = data.services?.services || [];
-        if (type === "projects") masterList = data.galleryPage?.projects || [];
+        if (type === "projects") masterList = data.portfolio?.projects || [];
         if (type === "reviews") masterList = data.testimonials?.testimonials || [];
         if (type === "faq") masterList = data.faq?.items || [];
 
@@ -137,11 +137,10 @@ export default function ContentSelector({ type, selectedItems = [], onSelect, la
                 </p>
               </div>
 
-              <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all flex-shrink-0 ${
-                selected
-                  ? "bg-primary border-primary text-white"
-                  : "border-slate-300 text-transparent group-hover:border-primary/60"
-              }`}>
+              <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all flex-shrink-0 ${selected
+                ? "bg-primary border-primary text-white"
+                : "border-slate-300 text-transparent group-hover:border-primary/60"
+                }`}>
                 <Check className="w-3.5 h-3.5" />
               </div>
             </button>

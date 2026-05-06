@@ -82,7 +82,7 @@ const Counter = ({ value, suffix = "", duration = 2, start = false }: any) => {
 
   return (
     <span className="tabular-nums">
-      {count.toLocaleString()}
+      {(count ?? 0).toLocaleString()}
       {suffix}
     </span>
   );
@@ -137,8 +137,8 @@ const StatCard = ({ stat, index }: any) => {
           <div className="space-y-0.5 sm:space-y-1">
             <h3 className="text-2xl xs:text-4xl sm:text-5xl font-black text-foreground tracking-tight">
               <Counter
-                value={parseInt(stat.value?.toString().replace(/[^0-9]/g, '') || "0")}
-                suffix={stat.value?.toString().includes('%') ? '%' : (stat.value?.toString().includes('+') ? '+' : '')}
+                value={parseInt((stat.value || "0").toString().replace(/[^0-9]/g, '') || "0")}
+                suffix={(stat.value || "").toString().includes('%') ? '%' : ((stat.value || "").toString().includes('+') ? '+' : '')}
                 start={inView}
               />
             </h3>

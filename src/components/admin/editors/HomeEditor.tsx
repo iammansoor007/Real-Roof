@@ -303,10 +303,10 @@ export default function HomeEditor({ pageId, data, setData }: { pageId: string, 
                         <h3 className={UI.sectionHeader}>1. Narrative</h3>
                         <div className="space-y-1.5"><label className={UI.label}>Badge</label><input type="text" value={data.whyChooseUs?.section?.badge || ""} onChange={(e) => updateSection("whyChooseUs", "section", { ...(data.whyChooseUs?.section || {}), badge: e.target.value })} className={UI.input} /></div>
                         <div className="space-y-1.5"><label className={UI.label}>Headline</label><input type="text" value={data.whyChooseUs?.section?.headline || ""} onChange={(e) => updateSection("whyChooseUs", "section", { ...(data.whyChooseUs?.section || {}), headline: e.target.value })} className={UI.inputLarge} /></div>
-                        <RichTextEditor 
-                           label="Intro Narrative" 
-                           content={data.whyChooseUs?.section?.description || ""} 
-                           onChange={(html) => updateSection("whyChooseUs", "section", { ...(data.whyChooseUs?.section || {}), description: html })} 
+                        <RichTextEditor
+                           label="Intro Narrative"
+                           content={data.whyChooseUs?.section?.description || ""}
+                           onChange={(html) => updateSection("whyChooseUs", "section", { ...(data.whyChooseUs?.section || {}), description: html })}
                         />
                      </div>
                      <div className="space-y-8">
@@ -315,15 +315,15 @@ export default function HomeEditor({ pageId, data, setData }: { pageId: string, 
                            {(data.whyChooseUs?.features || []).map((f: any, i: number) => (
                               <div key={i} className={UI.card + " space-y-4"}>
                                  <div className="flex justify-between items-center pb-2 border-b border-[#f0f0f1]">
-                                    <span className="text-[10px] font-bold">Feature #{i+1}</span>
+                                    <span className="text-[10px] font-bold">Feature #{i + 1}</span>
                                     <button onClick={() => { const newF = data.whyChooseUs.features.filter((_: any, idx: number) => idx !== i); updateSection("whyChooseUs", "features", newF); }} className="text-[#d63638]"><Trash2 className="w-4 h-4" /></button>
                                  </div>
                                  <IconSelector label="Icon" value={f.icon || ""} onChange={(val) => { const newF = [...data.whyChooseUs.features]; newF[i].icon = val; updateSection("whyChooseUs", "features", newF); }} />
                                  <input type="text" value={f.title || ""} onChange={(e) => { const newF = [...data.whyChooseUs.features]; newF[i].title = e.target.value; updateSection("whyChooseUs", "features", newF); }} className={UI.input + " font-bold"} placeholder="Title" />
-                                 <RichTextEditor 
-                                    label="Feature Detail" 
-                                    content={f.description} 
-                                    onChange={(html) => { const newF = [...data.whyChooseUs.features]; newF[i].description = html; updateSection("whyChooseUs", "features", newF); }} 
+                                 <RichTextEditor
+                                    label="Feature Detail"
+                                    content={f.description}
+                                    onChange={(html) => { const newF = [...data.whyChooseUs.features]; newF[i].description = html; updateSection("whyChooseUs", "features", newF); }}
                                  />
                               </div>
                            ))}
