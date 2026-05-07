@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import connectToDatabase from "@/lib/mongodb";
 import SiteContent from "@/models/Content";
-
-const BASE_URL = "https://eaglerevolution.com";
+import { BASE_URL } from "@/lib/constants";
 
 // ─────────────────────────────────────────────
 // Per-page SEO map — title, description, keywords, JSON-LD
@@ -668,16 +667,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!service) {
     return {
-      title: "Service Not Found | Eagle Revolution",
-      description: "The requested service page could not be found.",
+      title: "Service Not Found",
       robots: { index: false, follow: false },
     };
   }
 
-  const seo = service.seo || seoMap[slug] || {};
+  const seo = service.seo || {};
 
-  const title = seo.metaTitle || seo.title || `${service.title} Services in St. Louis, MO | Eagle Revolution`;
-  const description = seo.metaDescription || seo.description || `Professional ${service.title.toLowerCase()} services in St. Louis, MO. Veteran-owned. Free estimate. Call 636-449-9714.`;
+  const title = seo.metaTitle || seo.title || service.title;
+  const description = seo.metaDescription || seo.description;
 
   return {
     title,
@@ -690,14 +688,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       url: `${BASE_URL}/services/${slug}`,
       type: "website",
-      siteName: "Eagle Revolution",
-      locale: "en_US",
       images: [
         {
-          url: `${BASE_URL}/eagle-logo.png`,
+          url: seo.featuredImage || seo.ogImage || `${BASE_URL}/eagle-logo.png`,
           width: 1200,
           height: 630,
-          alt: `Eagle Revolution – ${service.title} in St. Louis, MO`,
+          alt: service.title,
         },
       ],
     },
@@ -705,14 +701,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title,
       description,
-      images: [`${BASE_URL}/eagle-logo.png`],
-      creator: "@EagleRevolution",
-    },
-    other: {
-      "geo.region": "US-MO",
-      "geo.placename": "St. Louis, Missouri",
-      "geo.position": "38.627003;-90.199404",
-      ICBM: "38.627003, -90.199404",
+      images: [seo.featuredImage || seo.twitterImage || seo.ogImage || `${BASE_URL}/eagle-logo.png`],
     },
   };
 }

@@ -14,6 +14,7 @@ import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import MediaSelector from "./MediaSelector";
 import SeoEditor from "./SeoEditor";
+import { BASE_URL } from "@/lib/constants";
 
 const RichTextEditor = dynamic(() => import("./RichTextEditor"), { ssr: false });
 
@@ -167,7 +168,7 @@ export default function BlogPostEditor({ id, initialData }: BlogPostEditorProps)
 
           <div className="flex items-center gap-1 text-[12px] text-[#646970]">
             <strong>Permalink:</strong>
-            <span className="bg-[#f0f0f1] px-1 rounded border border-[#c3c4c7] truncate max-w-[200px] sm:max-w-md">https://eaglerevolution.com/blog/{post.slug}</span>
+            <span className="bg-[#f0f0f1] px-1 rounded border border-[#c3c4c7] truncate max-w-[200px] sm:max-w-md">{BASE_URL}/blog/{post.slug}</span>
             <button onClick={() => {
               const s = prompt("Enter slug:", post.slug);
               if (s) setPost({ ...post, slug: s });

@@ -1,17 +1,27 @@
-import type { Metadata } from "next";
+import connectToDatabase from "@/lib/mongodb";
+import SiteContent from "@/models/Content";
+import { BASE_URL } from "@/lib/constants";
+import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Terms and Conditions",
-  description:
-    "Eagle Revolution terms and conditions of service. Review our policies for roofing, siding, windows, decks, and gutter services in St. Louis, MO.",
-  alternates: {
-    canonical: "https://eaglerevolution.com/terms",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  await connectToDatabase();
+  const content = await SiteContent.findOne({ key: "complete_data" }).lean() as any;
+  const termsData = content?.data?.termsPage || {};
+  const seo = termsData.seo || {};
+  const pageUrl = `${BASE_URL}/terms`;
+
+  return {
+    title: seo.metaTitle || "Terms and Conditions",
+    description: seo.metaDescription,
+    alternates: {
+      canonical: seo.canonicalUrl || pageUrl,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
 export default function TermsLayout({
   children,

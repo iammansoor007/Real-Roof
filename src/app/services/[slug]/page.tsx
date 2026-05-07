@@ -6,8 +6,7 @@ import connectToDatabase from "@/lib/mongodb";
 import SiteContent from "@/models/Content";
 import { generateSchema } from "@/lib/schema-generator";
 import ServiceDetailTemplate from "@/components/templates/ServiceDetailTemplate";
-
-const BASE_URL = "https://eaglerevolution.com";
+import { BASE_URL } from "@/lib/constants";
 
 function getAbsoluteUrl(path: string | undefined) {
   if (!path) return undefined;
@@ -25,8 +24,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!service) return {};
 
   const seo = service.seo || {};
-  const title = seo.metaTitle || seo.title || `${service.title} | Eagle Revolution`;
-  const description = seo.metaDescription || service.description || "";
+  const title = seo.metaTitle || seo.title;
+  const description = seo.metaDescription;
 
   return {
     title,

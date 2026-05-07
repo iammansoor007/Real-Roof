@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { TemplateEditors } from "@/components/admin/editors";
 import SeoEditor from "@/components/admin/SeoEditor";
 import MediaSelector from "@/components/admin/MediaSelector";
+import { BASE_URL } from "@/lib/constants";
 
 const EDITOR_TEMPLATES = [
   { id: 'home', label: 'Home Page', icon: LayoutTemplate },
@@ -138,7 +139,7 @@ export default function DynamicPageEditor({ params }: { params: Promise<{ id: st
           <div className="flex flex-wrap items-center gap-1 text-[12px] text-[#646970] px-1">
             <strong>Permalink:</strong>
             <span className="bg-[#f0f0f1] border border-[#c3c4c7] px-1 rounded-sm text-[#1d2327] break-all">
-              https://eaglerevolution.com/{page.slug}
+              {BASE_URL}/{page.slug}
             </span>
             <button
               onClick={() => {

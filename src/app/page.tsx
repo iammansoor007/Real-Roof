@@ -9,8 +9,7 @@ import Script from "next/script";
 import { generateSchema } from "@/lib/schema-generator";
 import { TemplateWrapper } from "@/components/templates/TemplateRegistry";
 import ServiceDetailTemplate from "@/components/templates/ServiceDetailTemplate";
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://eaglerevolution.com";
+import { BASE_URL } from "@/lib/constants";
 
 export async function generateMetadata(): Promise<Metadata> {
   await connectToDatabase();
@@ -86,17 +85,18 @@ export async function generateMetadata(): Promise<Metadata> {
 
   // Default to Home data
   const homeData = content?.data?.home;
+  const seo = homeData?.seo || {};
   return {
     ...metadata,
     title: {
-      absolute: homeData?.hero?.headline || settings?.siteTitle || "Eagle Revolution | #1 Roofing & Home Improvement"
+      absolute: seo.metaTitle || homeData?.hero?.headline || settings?.siteTitle
     },
-    description: homeData?.hero?.subheadline || "Veteran-owned roofing & home improvement in St. Louis, MO.",
+    description: seo.metaDescription || homeData?.hero?.subheadline,
     openGraph: {
       ...metadata.openGraph,
-      title: homeData?.hero?.headline || settings?.siteTitle,
-      description: homeData?.hero?.subheadline || "Veteran-owned roofing & home improvement",
-      images: [`${BASE_URL}/eagle-logo.png`],
+      title: seo.ogTitle || seo.metaTitle || homeData?.hero?.headline || settings?.siteTitle,
+      description: seo.ogDescription || seo.metaDescription || homeData?.hero?.subheadline,
+      images: [seo.featuredImage || `${BASE_URL}/eagle-logo.png`].filter(Boolean) as string[],
     }
   };
 }

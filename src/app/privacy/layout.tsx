@@ -1,17 +1,27 @@
-import type { Metadata } from "next";
+import connectToDatabase from "@/lib/mongodb";
+import SiteContent from "@/models/Content";
+import { BASE_URL } from "@/lib/constants";
+import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description:
-    "Eagle Revolution privacy policy. Learn how we collect, use, and protect your personal information when you use our roofing and home improvement services.",
-  alternates: {
-    canonical: "https://eaglerevolution.com/privacy",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  await connectToDatabase();
+  const content = await SiteContent.findOne({ key: "complete_data" }).lean() as any;
+  const privacyData = content?.data?.privacyPage || {};
+  const seo = privacyData.seo || {};
+  const pageUrl = `${BASE_URL}/privacy`;
+
+  return {
+    title: seo.metaTitle || "Privacy Policy",
+    description: seo.metaDescription,
+    alternates: {
+      canonical: seo.canonicalUrl || pageUrl,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
 export default function PrivacyLayout({
   children,

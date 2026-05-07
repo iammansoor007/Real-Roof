@@ -4,8 +4,8 @@ import connectToDatabase from "@/lib/mongodb";
 import SiteContent from "@/models/Content";
 import Script from "next/script";
 import { generateSchema } from "@/lib/schema-generator";
+import { BASE_URL } from "@/lib/constants";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://eaglerevolution.com";
 
 export async function generateMetadata(): Promise<Metadata> {
   await connectToDatabase();
@@ -17,9 +17,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(BASE_URL),
     title: {
-      absolute: seo.metaTitle || faqData?.section?.headline || faqData?.title || "Frequently Asked Questions | Eagle Revolution"
+      absolute: seo.metaTitle || faqData?.title
     },
-    description: seo.metaDescription || faqData?.section?.description || faqData?.description || "Find clear answers to common questions about our services, processes, and military-grade standards.",
+    description: seo.metaDescription,
     alternates: {
       canonical: seo.canonicalUrl || pageUrl,
     },

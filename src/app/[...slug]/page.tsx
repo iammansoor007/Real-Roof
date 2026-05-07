@@ -9,12 +9,12 @@ import { getTemplate } from '@/components/templates/TemplateRegistry';
 import { Metadata } from 'next';
 import Script from 'next/script';
 import { generateSchema } from '@/lib/schema-generator';
+import { BASE_URL } from '@/lib/constants';
 
 interface PageProps {
   params: Promise<{ slug: string[] }>;
 }
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://eaglerevolution.com";
 
 function getAbsoluteUrl(path: string | undefined) {
   if (!path) return undefined;
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: {
-      absolute: seo.metaTitle || `${page.title}`
+      absolute: seo.metaTitle || page.title
     },
     description: seo.metaDescription,
     alternates: {

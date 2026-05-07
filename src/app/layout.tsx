@@ -5,6 +5,7 @@ import { Providers } from "@/components/Providers";
 import SiteLayout from "@/components/SiteLayout";
 import connectToDatabase from "@/lib/mongodb";
 import SiteContent from "@/models/Content";
+import { BASE_URL } from "@/lib/constants";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -16,11 +17,16 @@ const dmSans = DM_Sans({
   variable: "--font-body",
 });
 
-const BASE_URL = "https://eaglerevolution.com";
 
 export async function generateMetadata(): Promise<Metadata> {
-  let settings = { siteTitle: "Eagle Revolution | #1 Roofing & Home Improvement in St. Louis, MO", siteTemplate: "%s | Eagle Revolution", favicon: "/eagle-logo.png" };
-  
+  let settings: any = {
+    siteTitle: "",
+    siteTemplate: "%s",
+    favicon: "",
+    siteDescription: "",
+    siteKeywords: []
+  };
+
   try {
     await connectToDatabase();
     const content = await SiteContent.findOne({ key: 'complete_data' });
@@ -36,15 +42,14 @@ export async function generateMetadata(): Promise<Metadata> {
       apple: settings.favicon || `${BASE_URL}/eagle-logo.png`,
     },
     facebook: {
-      appId: "YOUR_FB_APP_ID", // TODO: Replace with your actual Facebook App ID
+      appId: "Eagle-Revolution-61564977483096",
     },
     title: {
       default: settings.siteTitle,
       template: settings.siteTemplate,
     },
-    description:
-      "Veteran-owned roofing & home improvement company in St. Louis, MO. Expert residential & commercial roofing, siding, windows, decks & gutters. Free estimates. Call 636-449-9714.",
-    keywords: ["Eagle Revolution", "Roofing St. Louis", "Home Improvement Missouri"],
+    description: settings.siteDescription,
+    keywords: settings.siteKeywords || ["Eagle Revolution"],
     authors: [{ name: "Eagle Revolution", url: BASE_URL }],
     creator: "Eagle Revolution",
     publisher: "Eagle Revolution",
@@ -68,8 +73,7 @@ export async function generateMetadata(): Promise<Metadata> {
       url: BASE_URL,
       siteName: "Eagle Revolution",
       title: settings.siteTitle,
-      description:
-        "Veteran-owned roofing & exterior remodeling experts serving the greater St. Louis area. Professional residential & commercial roofing, siding, windows, decks, and gutters. Free estimates available.",
+      description: settings.siteDescription,
       images: [
         {
           url: settings.favicon || `${BASE_URL}/eagle-logo.png`,
@@ -85,8 +89,7 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: settings.siteTitle,
-      description:
-        "Veteran-owned roofing & home improvement company. Expert residential & commercial roofing, siding, windows, decks & gutters in St. Louis, MO.",
+      description: settings.siteDescription,
       images: [settings.favicon || `${BASE_URL}/eagle-logo.png`],
       creator: "@EagleRevolution",
       site: "@EagleRevolution",
@@ -116,9 +119,9 @@ export default async function RootLayout({
     // Non-fatal — site renders fine without CMS scripts
   }
   const activeScripts = siteScripts.filter((s) => s.active);
-  const headScripts    = activeScripts.filter((s) => s.location === 'head');
+  const headScripts = activeScripts.filter((s) => s.location === 'head');
   const bodyStartScripts = activeScripts.filter((s) => s.location === 'body_start');
-  const bodyEndScripts   = activeScripts.filter((s) => s.location === 'body_end');
+  const bodyEndScripts = activeScripts.filter((s) => s.location === 'body_end');
 
   // ── Fetch Global Content & Blogs for the Provider ──
   let initialGlobalData = null;
@@ -128,7 +131,7 @@ export default async function RootLayout({
       SiteContent.findOne({ key: 'complete_data' }),
       import('@/models/Post').then(m => m.default.find({ status: 'published', isTrashed: { $ne: true } }).sort({ date: -1 }).limit(10).lean())
     ]);
-    
+
     if (globalContent?.data) initialGlobalData = globalContent.data;
     if (blogPosts) initialBlogs = JSON.parse(JSON.stringify(blogPosts));
   } catch (e) {

@@ -3,17 +3,43 @@ import Post from '@/models/Post';
 import Category from '@/models/Category';
 import { Calendar, User, ArrowRight, BookOpen, Search } from 'lucide-react';
 import Link from 'next/link';
+import { Metadata } from 'next';
+import { BASE_URL } from '@/lib/constants';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://eaglerevolution.com";
 export const revalidate = 60; // Cache for 1 minute
 
-export const metadata = {
-  title: 'Insights & Stories - Eagle Revolution',
-  description: 'Deep dives into industry trends, professional guides, and the stories shaping the future of digital excellence.',
-  alternates: {
-    canonical: `${BASE_URL}/blog`,
-  }
-};
+import SiteContent from '@/models/Content';
+
+export async function generateMetadata(): Promise<Metadata> {
+  await connectToDatabase();
+  const content = await SiteContent.findOne({ key: 'complete_data' }).lean() as any;
+  const blogData = content?.data?.blogPage;
+  const seo = blogData?.seo || {};
+  const pageUrl = `${BASE_URL}/blog`;
+
+  return {
+    title: {
+      absolute: seo.metaTitle
+    },
+    description: seo.metaDescription || blogData?.hero?.description,
+    alternates: {
+      canonical: seo.canonicalUrl || pageUrl,
+    },
+    openGraph: {
+      title: seo.ogTitle || seo.metaTitle || blogData?.hero?.title,
+      description: seo.ogDescription || seo.metaDescription || blogData?.hero?.description,
+      url: pageUrl,
+      type: 'website',
+      images: seo.featuredImage ? [{ url: seo.featuredImage }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: seo.twitterTitle || seo.ogTitle || seo.metaTitle,
+      description: seo.twitterDescription || seo.ogDescription || seo.metaDescription,
+      images: [seo.featuredImage || seo.twitterImage || seo.ogImage].filter(Boolean) as string[],
+    }
+  };
+}
 
 export default async function BlogIndexPage() {
   await connectToDatabase();

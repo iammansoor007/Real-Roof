@@ -13,8 +13,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const servicesData = content?.data?.services;
   
   return {
-    title: servicesData?.section?.headline || "Our Services | Eagle Revolution",
-    description: servicesData?.section?.description || "Expert roofing, decking, siding, and home improvement services in St. Louis.",
+    title: servicesData?.seo?.metaTitle || servicesData?.section?.headline,
+    description: servicesData?.seo?.metaDescription || servicesData?.section?.description,
   };
 }
 

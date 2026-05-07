@@ -3,6 +3,7 @@ import connectDB from '@/lib/mongodb';
 import User from '@/models/User';
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
+import { BASE_URL } from '@/lib/constants';
 
 // Configure SMTP transport
 const transporter = nodemailer.createTransport({
@@ -45,7 +46,7 @@ export async function POST(req: Request) {
     user.resetPasswordExpires = resetExpires;
     await user.save();
 
-    const resetUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/admin/reset-password/${resetToken}`;
+    const resetUrl = `${BASE_URL}/admin/reset-password/${resetToken}`;
 
     // Send email
     try {

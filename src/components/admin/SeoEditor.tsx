@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ImageField from "./ImageField";
+import { BASE_URL } from "@/lib/constants";
 
 interface SeoData {
   metaTitle?: string;
@@ -54,7 +55,6 @@ export default function SeoEditor({ data, setData, pageSlug, pageTitle, pageCont
     setData(newData);
   };
 
-  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.eaglerevolution.com";
 
   useEffect(() => {
     // Auto-suggest canonical URL if missing
@@ -152,7 +152,7 @@ export default function SeoEditor({ data, setData, pageSlug, pageTitle, pageCont
                       <label className="text-[11px] font-bold text-[#1d2327] uppercase">Canonical URL</label>
                       {!data.canonicalUrl && (
                         <button
-                          onClick={() => updateField('canonicalUrl', `https://eaglerevolution.com/${pageSlug === 'home' ? '' : pageSlug}`)}
+                          onClick={() => updateField('canonicalUrl', `${BASE_URL}/${pageSlug === 'home' ? '' : pageSlug}`)}
                           className="text-[10px] text-[#2271b1] hover:underline"
                         >
                           Suggest Default

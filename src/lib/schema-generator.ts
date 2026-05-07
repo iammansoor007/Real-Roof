@@ -1,5 +1,5 @@
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.eaglerevolution.com";
+import { BASE_URL } from "./constants";
 
 interface SchemaOptions {
   title: string;

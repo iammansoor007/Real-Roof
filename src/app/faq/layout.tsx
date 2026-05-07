@@ -1,27 +1,29 @@
-import type { Metadata } from "next";
+import connectToDatabase from "@/lib/mongodb";
+import SiteContent from "@/models/Content";
+import { Metadata } from "next";
+import { BASE_URL } from "@/lib/constants";
 
-export const metadata: Metadata = {
-  title: "Frequently Asked Questions | Roofing & Home Improvement FAQ",
-  description:
-    "Get answers to common questions about roofing, siding, windows, decks, and gutter services from Eagle Revolution in St. Louis, MO. Insurance claims, financing, timelines & more.",
-  keywords: [
-    "roofing FAQ St. Louis",
-    "roof replacement questions",
-    "home improvement FAQ Missouri",
-    "roofing insurance claims questions",
-    "how long does roof replacement take",
-  ],
-  alternates: {
-    canonical: "https://eaglerevolution.com/faq",
-  },
-  openGraph: {
-    title: "FAQ | Eagle Revolution Roofing & Home Improvement",
-    description:
-      "Common questions about our roofing, siding, window, and deck services answered by our expert team.",
-    url: "https://eaglerevolution.com/faq",
-    type: "website",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  await connectToDatabase();
+  const content = await SiteContent.findOne({ key: "complete_data" }).lean() as any;
+  const faqData = content?.data?.faqPage || content?.data?.faq || {};
+  const seo = faqData.seo || {};
+  const pageUrl = `${BASE_URL}/faq`;
+
+  return {
+    title: seo.metaTitle || "Frequently Asked Questions",
+    description: seo.metaDescription,
+    alternates: {
+      canonical: seo.canonicalUrl || pageUrl,
+    },
+    openGraph: {
+      title: seo.ogTitle || seo.metaTitle || "FAQ",
+      description: seo.ogDescription || seo.metaDescription,
+      url: pageUrl,
+      type: "website",
+    },
+  };
+}
 
 export default function FaqLayout({
   children,

@@ -11,6 +11,7 @@ import Script from 'next/script';
 import ReadingProgress from '@/components/blog/ReadingProgress';
 import ShareButton from '@/components/blog/ShareButton';
 import PageInlineFaqs from '@/components/PageInlineFaqs';
+import { BASE_URL } from '@/lib/constants';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -23,14 +24,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) return { title: 'Post Not Found' };
 
-  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://eaglerevolution.com";
   const url = `${BASE_URL}/blog/${slug}`;
 
   return {
     title: {
-      absolute: post.seo?.metaTitle || `${post.title}`
+      absolute: post.seo?.metaTitle || post.title
     },
-    description: post.seo?.metaDescription || post.excerpt,
+    description: post.seo?.metaDescription,
     openGraph: {
       title: post.seo?.ogTitle || post.title,
       description: post.seo?.ogDescription || post.excerpt,
@@ -87,7 +87,6 @@ export default async function BlogPostPage({ params }: Props) {
   console.log(`[Blog Debug] FAQ Count: ${post.faq?.length || 0}`);
   if (post.faq?.length > 0) console.log(`[Blog Debug] First FAQ: ${post.faq[0].question}`);
 
-  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://eaglerevolution.com";
   const url = `${BASE_URL}/blog/${slug}`;
   const wordCount = post.content ? post.content.split(/\s+/).length : 0;
   const publishDate = post.publishedAt?.toISOString();

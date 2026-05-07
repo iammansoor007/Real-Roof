@@ -1,6 +1,5 @@
 import { MetadataRoute } from 'next';
-
-const BASE_URL = 'https://eaglerevolution.com';
+import { BASE_URL } from '@/lib/constants';
 
 export default function robots(): MetadataRoute.Robots {
   return {

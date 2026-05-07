@@ -1,27 +1,29 @@
-import type { Metadata } from "next";
+import connectToDatabase from "@/lib/mongodb";
+import SiteContent from "@/models/Content";
+import { Metadata } from "next";
+import { BASE_URL } from "@/lib/constants";
 
-export const metadata: Metadata = {
-  title: "Contact Us | Get a Free Roofing & Home Improvement Estimate",
-  description:
-    "Contact Eagle Revolution for a free roofing, siding, windows, or deck estimate in St. Louis, MO. Call 636-449-9714 or fill out our quick quote form. Veteran-owned, locally operated.",
-  keywords: [
-    "contact roofing contractor St. Louis",
-    "free roofing estimate Missouri",
-    "Eagle Revolution phone number",
-    "schedule roof inspection St. Louis",
-    "home improvement quote St. Louis MO",
-  ],
-  alternates: {
-    canonical: "https://eaglerevolution.com/contact",
-  },
-  openGraph: {
-    title: "Contact Eagle Revolution | Free Estimate in St. Louis, MO",
-    description:
-      "Request a free estimate for roofing, siding, windows, decks, and more. Veteran-owned company serving the greater St. Louis area. Call 636-449-9714.",
-    url: "https://eaglerevolution.com/contact",
-    type: "website",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  await connectToDatabase();
+  const content = await SiteContent.findOne({ key: "complete_data" }).lean() as any;
+  const contactData = content?.data?.contactPage || content?.data?.contact || {};
+  const seo = contactData.seo || {};
+  const pageUrl = `${BASE_URL}/contact`;
+
+  return {
+    title: seo.metaTitle || "Contact Us",
+    description: seo.metaDescription,
+    alternates: {
+      canonical: seo.canonicalUrl || pageUrl,
+    },
+    openGraph: {
+      title: seo.ogTitle || seo.metaTitle || "Contact Us",
+      description: seo.ogDescription || seo.metaDescription,
+      url: pageUrl,
+      type: "website",
+    },
+  };
+}
 
 export default function ContactLayout({
   children,

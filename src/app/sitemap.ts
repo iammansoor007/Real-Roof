@@ -1,8 +1,7 @@
 import { MetadataRoute } from 'next';
 import connectToDatabase from '@/lib/mongodb';
 import SiteContent from '@/models/Content';
-
-const BASE_URL = 'https://eaglerevolution.com';
+import { BASE_URL } from '@/lib/constants';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date().toISOString();
