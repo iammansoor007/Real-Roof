@@ -27,38 +27,45 @@ const deepMerge = (target: any, source: any) => {
   return output;
 };
 
-export const ContentProvider = ({ children, initialData }: { children: React.ReactNode, initialData?: any }) => {
-  // Merge initialData with staticData immediately to ensure global sections (navbar/footer) 
-  // are available even if the page-specific data is limited.
+export const ContentProvider = ({ children, initialData, initialBlogs }: { children: React.ReactNode, initialData?: any, initialBlogs?: any[] }) => {
+  // Initialize with server-provided data to eliminate "loading" states on mount
   const [content, setContent] = useState<any>(initialData || {});
-  const [blogs, setBlogs] = useState<any[]>([]);
+  const [blogs, setBlogs] = useState<any[]>(initialBlogs || []);
   const [isLoading, setIsLoading] = useState(!initialData);
 
   useEffect(() => {
+    // Only fetch if initialData is missing (fallback)
+    // In production, RootLayout should always provide initialData
+    if (initialData && initialBlogs && initialBlogs.length > 0) {
+      setIsLoading(false);
+      return;
+    }
+
     const fetchContent = async () => {
       try {
-        const response = await fetch('/api/content');
-        if (response.ok) {
-          const globalData = await response.json();
-          // Merge logic: local data takes precedence via deepMerge
+        const [contentRes, blogRes] = await Promise.all([
+          fetch('/api/content'),
+          fetch('/api/blog')
+        ]);
+
+        if (contentRes.ok) {
+          const globalData = await contentRes.json();
           setContent(initialData ? deepMerge(globalData, initialData) : globalData);
         }
 
-        // Fetch blogs
-        const blogRes = await fetch('/api/blog');
         if (blogRes.ok) {
           const blogData = await blogRes.json();
           setBlogs(blogData);
         }
       } catch (error) {
-        console.error('Failed to fetch content from DB, falling back to static data:', error);
+        console.error('Failed to fetch content from DB:', error);
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchContent();
-  }, [initialData]);
+  }, [initialData, initialBlogs]);
 
   return (
     <ContentContext.Provider value={{ ...content, allBlogs: blogs }}>

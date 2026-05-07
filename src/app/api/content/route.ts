@@ -3,6 +3,7 @@ import connectToDatabase from '@/lib/mongodb';
 import SiteContent from '@/models/Content';
 import { hasPermission, getSessionUser } from '@/lib/rbac';
 import { recordActivity } from '@/lib/logger';
+export const revalidate = 60; // Cache for 1 minute
 
 export async function GET() {
   try {

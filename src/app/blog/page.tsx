@@ -5,6 +5,7 @@ import { Calendar, User, ArrowRight, BookOpen, Search } from 'lucide-react';
 import Link from 'next/link';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://eaglerevolution.com";
+export const revalidate = 60; // Cache for 1 minute
 
 export const metadata = {
   title: 'Insights & Stories - Eagle Revolution',

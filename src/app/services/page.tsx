@@ -1,5 +1,4 @@
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 60; // Cache for 1 minute, updated via revalidatePath in admin panel
 
 import ServicesTemplate from "@/components/templates/ServicesTemplate";
 import { Metadata } from "next";

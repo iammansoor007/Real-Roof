@@ -1,5 +1,4 @@
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 60; // Cache for 1 minute, updated via revalidatePath in admin panel
 
 import HomeTemplate from "@/components/templates/HomeTemplate";
 import { Metadata } from "next";
@@ -117,7 +116,12 @@ export default async function Index() {
 
   if (homepageId) {
     // Check if it's a page
-    const pageDoc = await Page.findById(homepageId).lean();
+    // Check if it's a page and ensure it's published and not trashed
+    const pageDoc = await Page.findOne({ 
+      _id: homepageId, 
+      status: 'published', 
+      isTrashed: { $ne: true } 
+    }).lean();
     if (pageDoc) {
       const page = JSON.parse(JSON.stringify(pageDoc));
       const schema = generateSchema({
@@ -147,7 +151,10 @@ export default async function Index() {
     }
 
     // Check if it's a service
-    const serviceDoc = content?.data?.services?.services?.find((s: any) => s._id === homepageId || s.slug === homepageId);
+    // Check if it's a service and ensure it's not a draft
+    const serviceDoc = content?.data?.services?.services?.find((s: any) => 
+      (s._id === homepageId || s.slug === homepageId) && s.status !== 'draft'
+    );
     if (serviceDoc) {
       const service = JSON.parse(JSON.stringify(serviceDoc));
       const schema = generateSchema({

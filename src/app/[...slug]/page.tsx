@@ -1,7 +1,6 @@
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 60; // Cache for 1 minute, updated via revalidatePath in admin panel
 
 import connectToDatabase from '@/lib/mongodb';
 import Page from '@/models/Page';
@@ -99,9 +98,15 @@ export default async function DynamicPage({ params }: PageProps) {
   // Convert to plain object to avoid Mongoose serialization issues in Client Components
   const page = JSON.parse(JSON.stringify(pageDoc));
 
-  // Fetch global content for FAQ detection if needed
+  // Fetch global content for FAQ detection and settings
   const globalContent = await SiteContent.findOne({ key: 'complete_data' }).lean() as any;
   const globalData = globalContent?.data || {};
+  const settings = globalData.settings || {};
+
+  // If this page is set as the homepage, redirect slug to root /
+  if (settings.homepageId && String(pageDoc._id) === String(settings.homepageId)) {
+    permanentRedirect("/");
+  }
 
   // Helper to validate FAQ items
   const isValidFaq = (items: any) => Array.isArray(items) && items.length > 0 && items.every((i: any) => i.question && i.answer);

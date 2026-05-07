@@ -1,4 +1,5 @@
 import GalleryTemplate from "@/components/templates/GalleryTemplate";
+export const revalidate = 60; // Cache for 1 minute
 import { Metadata } from "next";
 import connectToDatabase from "@/lib/mongodb";
 import SiteContent from "@/models/Content";

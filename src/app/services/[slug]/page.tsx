@@ -1,5 +1,6 @@
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+export const revalidate = 60; // Cache for 1 minute
+import { notFound, permanentRedirect } from "next/navigation";
 import Script from "next/script";
 import connectToDatabase from "@/lib/mongodb";
 import SiteContent from "@/models/Content";
@@ -62,6 +63,13 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     console.warn(`[Service Debug] No published service found for "${resolvedParams.slug}"`);
     console.log(`[Service Debug] Existing slugs: ${services.map((s: any) => s.slug).join(", ")}`);
     return notFound();
+  }
+
+  const settings = content?.data?.settings || {};
+
+  // If this service is set as the homepage, redirect slug to root /
+  if (settings.homepageId && (String(serviceDoc._id) === String(settings.homepageId) || serviceDoc.slug === settings.homepageId)) {
+    permanentRedirect("/");
   }
 
   const service = JSON.parse(JSON.stringify(serviceDoc));

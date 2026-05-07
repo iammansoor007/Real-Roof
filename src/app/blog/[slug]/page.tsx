@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 60; // Cache for 1 minute, updated via revalidatePath in admin panel
 
 import { notFound } from 'next/navigation';
 import connectToDatabase from '@/lib/mongodb';

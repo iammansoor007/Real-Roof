@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import Post from '@/models/Post';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60; // Cache for 1 minute, updated via revalidatePath in admin panel
 
 export async function GET() {
   try {

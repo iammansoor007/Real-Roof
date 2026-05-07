@@ -153,7 +153,7 @@ export default async function RootLayout({
         {bodyStartScripts.map((s) => (
           <div key={s.id} dangerouslySetInnerHTML={{ __html: s.code }} />
         ))}
-        <ContentProvider initialData={initialGlobalData}>
+        <ContentProvider initialData={initialGlobalData} initialBlogs={initialBlogs}>
           <Providers>
             <div className="relative min-h-screen flex flex-col">
               {/* Common background grid for all pages */}
