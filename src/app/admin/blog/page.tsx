@@ -24,8 +24,7 @@ export default function BlogPosts() {
 
   const fetchPosts = async () => {
     try {
-      const url = `/api/admin/blog/posts?${statusFilter !== 'all' ? `status=${statusFilter}` : ''}`;
-      const res = await fetch(url);
+      const res = await fetch('/api/admin/blog/posts?all=true');
       const data = await res.json();
       setPosts(data);
       setSelectedPosts([]);
@@ -36,9 +35,16 @@ export default function BlogPosts() {
     }
   };
 
-  const filteredPosts = posts.filter(post => 
-    post.title.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredPosts = posts.filter(post => {
+    const matchesSearch = post.title.toLowerCase().includes(search.toLowerCase());
+    const isTrashed = post.isTrashed === true;
+
+    if (statusFilter === 'trash') return matchesSearch && isTrashed;
+    if (isTrashed) return false;
+
+    if (statusFilter === 'all') return matchesSearch;
+    return matchesSearch && post.status === statusFilter;
+  });
 
   const toggleSelectAll = () => {
     if (selectedPosts.length === filteredPosts.length) {
@@ -65,7 +71,14 @@ export default function BlogPosts() {
       value = bulkAction.replace('status-', '');
     }
 
-    if (action === 'delete' && !confirm(`Are you sure you want to delete ${selectedPosts.length} posts?`)) return;
+    if (action === 'delete') {
+      if (statusFilter === 'trash') {
+        if (!confirm(`Permanently delete ${selectedPosts.length} posts?`)) return;
+        // Proceed to bulk delete
+      } else {
+        action = 'trash';
+      }
+    }
 
     try {
       const res = await fetch('/api/admin/blog/posts/bulk', {
@@ -83,17 +96,47 @@ export default function BlogPosts() {
   };
 
   const deletePost = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this post?")) return;
+    if (statusFilter === 'trash') {
+      if (!confirm("Are you sure you want to permanently delete this post?")) return;
+      try {
+        const res = await fetch(`/api/admin/blog/posts/${id}`, { method: "DELETE" });
+        if (res.ok) {
+          fetchPosts();
+        } else {
+          const error = await res.json();
+          alert("Delete failed: " + (error.error || "Unknown error"));
+        }
+      } catch (err) {
+        alert("Delete failed due to network error");
+      }
+    } else {
+      try {
+        const res = await fetch(`/api/admin/blog/posts/${id}`, {
+          method: "PATCH",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ isTrashed: true })
+        });
+        if (res.ok) {
+          fetchPosts();
+        }
+      } catch (err) {
+        alert("Moving to trash failed");
+      }
+    }
+  };
+
+  const restorePost = async (id: string) => {
     try {
-      const res = await fetch(`/api/admin/blog/posts/${id}`, { method: "DELETE" });
+      const res = await fetch(`/api/admin/blog/posts/${id}`, {
+        method: "PATCH",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isTrashed: false })
+      });
       if (res.ok) {
         fetchPosts();
-      } else {
-        const error = await res.json();
-        alert("Delete failed: " + (error.error || "Unknown error"));
       }
     } catch (err) {
-      alert("Delete failed due to network error");
+      alert("Restore failed");
     }
   };
 
@@ -146,11 +189,13 @@ export default function BlogPosts() {
 
       <div className="flex flex-wrap items-center justify-between gap-4 mb-4 text-[13px]">
         <div className="flex items-center gap-2 text-[#2271b1]">
-          <button onClick={() => setStatusFilter('all')} className={`${statusFilter === 'all' ? 'text-[#1d2327] font-bold' : ''}`}>All ({posts.length})</button>
+          <button onClick={() => setStatusFilter('all')} className={`${statusFilter === 'all' ? 'text-[#1d2327] font-bold' : ''}`}>All ({posts.filter(p => !p.isTrashed).length})</button>
           <span className="text-[#c3c4c7]">|</span>
-          <button onClick={() => setStatusFilter('published')} className={`${statusFilter === 'published' ? 'text-[#1d2327] font-bold' : ''}`}>Published ({posts.filter(p => p.status === 'published').length})</button>
+          <button onClick={() => setStatusFilter('published')} className={`${statusFilter === 'published' ? 'text-[#1d2327] font-bold' : ''}`}>Published ({posts.filter(p => p.status === 'published' && !p.isTrashed).length})</button>
           <span className="text-[#c3c4c7]">|</span>
-          <button onClick={() => setStatusFilter('draft')} className={`${statusFilter === 'draft' ? 'text-[#1d2327] font-bold' : ''}`}>Drafts ({posts.filter(p => p.status === 'draft').length})</button>
+          <button onClick={() => setStatusFilter('draft')} className={`${statusFilter === 'draft' ? 'text-[#1d2327] font-bold' : ''}`}>Drafts ({posts.filter(p => p.status === 'draft' && !p.isTrashed).length})</button>
+          <span className="text-[#c3c4c7]">|</span>
+          <button onClick={() => setStatusFilter('trash')} className={`${statusFilter === 'trash' ? 'text-[#d63638] font-bold' : 'text-[#d63638]'}`}>Trash ({posts.filter(p => p.isTrashed).length || 0})</button>
         </div>
         <div className="flex items-center gap-2">
           <div className="relative">
@@ -173,9 +218,18 @@ export default function BlogPosts() {
           className="bg-white border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px] outline-none"
         >
           <option value="">Bulk Actions</option>
-          <option value="status-published">Move to Published</option>
-          <option value="status-draft">Move to Draft</option>
-          <option value="delete">Move to Trash</option>
+          {statusFilter === 'trash' ? (
+            <>
+              <option value="restore">Restore</option>
+              <option value="delete">Delete Permanently</option>
+            </>
+          ) : (
+            <>
+              <option value="status-published">Move to Published</option>
+              <option value="status-draft">Move to Draft</option>
+              <option value="delete">Move to Trash</option>
+            </>
+          )}
         </select>
         <button 
           onClick={handleBulkAction}
@@ -234,7 +288,15 @@ export default function BlogPosts() {
                         <span className="text-[#c3c4c7]">|</span>
                         <button onClick={() => setEditingPost(post)} className="text-[#2271b1] hover:text-[#135e96]">Quick Edit</button>
                         <span className="text-[#c3c4c7]">|</span>
-                        <button onClick={() => deletePost(post._id)} className="text-[#d63638] hover:text-[#b32d2e]">Trash</button>
+                        {post.isTrashed ? (
+                          <>
+                            <button onClick={() => restorePost(post._id)} className="text-[#2271b1] hover:text-[#135e96]">Restore</button>
+                            <span className="text-[#c3c4c7]">|</span>
+                            <button onClick={() => deletePost(post._id)} className="text-[#d63638] hover:text-[#b32d2e]">Delete Permanently</button>
+                          </>
+                        ) : (
+                          <button onClick={() => deletePost(post._id)} className="text-[#d63638] hover:text-[#b32d2e]">Trash</button>
+                        )}
                         <span className="text-[#c3c4c7]">|</span>
                         <Link href={`/blog/${post.slug}`} target="_blank" className="text-[#2271b1] hover:text-[#135e96]">View</Link>
                         <span className="text-[#c3c4c7]">|</span>

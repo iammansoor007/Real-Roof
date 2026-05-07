@@ -41,6 +41,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const isPublicPath = pathname === "/admin/login" || pathname === "/admin/forgot-password" || pathname?.startsWith("/admin/reset-password");
 
   useEffect(() => {
+    document.title = "Eagle Dashboard Mohsin Design";
+
     if (isPublicPath) {
       setLoading(false);
       return;
@@ -57,7 +59,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       })
       .catch(() => router.push("/admin/login"))
       .finally(() => setLoading(false));
-  }, [pathname, router]);
+  }, [pathname, router, isPublicPath]);
 
   if (isPublicPath) return <>{children}</>;
   if (loading) return <div className="h-screen flex items-center justify-center bg-[#f0f0f1]"><Loader2 className="w-6 h-6 animate-spin text-[#2271b1]" /></div>;

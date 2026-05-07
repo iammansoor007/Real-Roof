@@ -39,6 +39,32 @@ export async function POST(req: NextRequest) {
         details: { ids, status: value, message: `Bulk changed ${ids.length} posts to ${value}` },
         ip: req.headers.get('x-forwarded-for') || 'unknown'
       });
+    } else if (action === 'trash') {
+      await Post.updateMany(
+        { _id: { $in: ids } },
+        { $set: { isTrashed: true, trashedAt: new Date() } }
+      );
+      await recordActivity({
+        user: user.userId,
+        userName: user.username,
+        action: 'BULK_TRASH_POSTS',
+        entity: 'Post',
+        details: { ids, message: `Bulk moved ${ids.length} posts to trash` },
+        ip: req.headers.get('x-forwarded-for') || 'unknown'
+      });
+    } else if (action === 'restore') {
+      await Post.updateMany(
+        { _id: { $in: ids } },
+        { $set: { isTrashed: false, trashedAt: null } }
+      );
+      await recordActivity({
+        user: user.userId,
+        userName: user.username,
+        action: 'BULK_RESTORE_POSTS',
+        entity: 'Post',
+        details: { ids, message: `Bulk restored ${ids.length} posts from trash` },
+        ip: req.headers.get('x-forwarded-for') || 'unknown'
+      });
     }
 
     return NextResponse.json({ success: true });

@@ -16,7 +16,17 @@ export async function GET(req: NextRequest) {
     const search = searchParams.get('search');
 
     let query: any = {};
-    if (status) query.status = status;
+    const getAll = searchParams.get('all') === 'true';
+
+    if (getAll) {
+      // Return all posts for client-side filtering and counts
+    } else if (status === 'trash') {
+      query.isTrashed = true;
+    } else {
+      query.isTrashed = { $ne: true };
+      if (status) query.status = status;
+    }
+    
     if (search) {
       query.$or = [
         { title: { $regex: search, $options: 'i' } },

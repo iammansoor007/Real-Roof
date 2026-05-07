@@ -103,7 +103,7 @@ const Navbar = () => {
               {(companyLinks || []).map((link: any, linkIdx: number) => {
                 if (link.useMegaMenu) {
                   return (
-                    <div key={linkIdx} className="relative">
+                    <div key={linkIdx} className={link.useMegaMenu ? "static" : "relative"}>
                       <Link
                         href={link.href}
                         onMouseEnter={() => {
@@ -131,12 +131,12 @@ const Navbar = () => {
                         {activeMegaMenu === `mega-${linkIdx}` && (
                           <motion.div
                             ref={megaMenuRef}
-                            initial={{ opacity: 0, y: 15 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 10 }}
+                            initial={{ opacity: 0, y: 15, x: "-50%" }}
+                            animate={{ opacity: 1, y: 0, x: "-50%" }}
+                            exit={{ opacity: 0, y: 10, x: "-50%" }}
                             onMouseEnter={handleMegaMenuMouseEnter}
                             onMouseLeave={handleMegaMenuMouseLeave}
-                            className="absolute left-0 top-full mt-2 w-[800px] bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-border p-8"
+                            className="absolute left-1/2 top-full mt-2 w-[800px] bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-border p-8"
                             style={{ zIndex: 1000 }}
                           >
                             <div className="grid grid-cols-3 gap-6">

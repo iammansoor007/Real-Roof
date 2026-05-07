@@ -40,7 +40,13 @@ export async function PATCH(
     const oldPost = await Post.findById(id);
     if (!oldPost) return NextResponse.json({ error: 'Post not found' }, { status: 404 });
 
-    const post = await Post.findByIdAndUpdate(id, body, { new: true });
+    const updateData = { ...body };
+    if (body.isTrashed !== undefined) {
+      updateData.isTrashed = body.isTrashed;
+      updateData.trashedAt = body.isTrashed ? new Date() : null;
+    }
+
+    const post = await Post.findByIdAndUpdate(id, updateData, { new: true });
 
     await recordActivity({
       user: (session as any).userId,

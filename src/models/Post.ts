@@ -38,7 +38,9 @@ const PostSchema = new Schema({
     answer: String
   }],
   createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now }
+  updatedAt: { type: Date, default: Date.now },
+  isTrashed: { type: Boolean, default: false },
+  trashedAt: { type: Date, default: null }
 }, { timestamps: true });
 
 if (mongoose.models.Post) {

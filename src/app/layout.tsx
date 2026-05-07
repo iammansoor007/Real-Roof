@@ -120,13 +120,19 @@ export default async function RootLayout({
   const bodyStartScripts = activeScripts.filter((s) => s.location === 'body_start');
   const bodyEndScripts   = activeScripts.filter((s) => s.location === 'body_end');
 
-  // ── Fetch Global Content for the Provider ──
+  // ── Fetch Global Content & Blogs for the Provider ──
   let initialGlobalData = null;
+  let initialBlogs = [];
   try {
-    const globalContent = await SiteContent.findOne({ key: 'complete_data' });
+    const [globalContent, blogPosts] = await Promise.all([
+      SiteContent.findOne({ key: 'complete_data' }),
+      import('@/models/Post').then(m => m.default.find({ status: 'published', isTrashed: { $ne: true } }).sort({ date: -1 }).limit(10).lean())
+    ]);
+    
     if (globalContent?.data) initialGlobalData = globalContent.data;
+    if (blogPosts) initialBlogs = JSON.parse(JSON.stringify(blogPosts));
   } catch (e) {
-    console.error("Failed to fetch global content for provider", e);
+    console.error("Failed to fetch initial data for provider", e);
   }
 
   return (

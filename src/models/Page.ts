@@ -41,6 +41,8 @@ const PageSchema = new mongoose.Schema({
   },
   // This could store page-specific overrides if needed later
   content: { type: mongoose.Schema.Types.Mixed, default: {} },
+  isTrashed: { type: Boolean, default: false },
+  trashedAt: { type: Date, default: null },
 }, { timestamps: true });
 
 export default mongoose.models.Page || mongoose.model('Page', PageSchema);

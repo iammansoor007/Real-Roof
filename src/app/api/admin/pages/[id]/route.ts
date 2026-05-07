@@ -34,7 +34,7 @@ export async function PATCH(
   try {
     const { id } = await params;
     const body = await req.json();
-    const { slug, title, template, status, seo, content } = body;
+    const { slug, title, template, status, seo, content, isTrashed } = body;
 
     await connectToDatabase();
     const oldPage = await Page.findById(id);
@@ -47,16 +47,15 @@ export async function PATCH(
       slug: oldPage.slug,
       template: oldPage.template,
       seo: oldPage.seo,
-      content: oldPage.content
+      content: oldPage.content,
+      isTrashed: oldPage.isTrashed
     };
 
-    const updateData: any = {};
-    if (slug !== undefined) updateData.slug = slug;
-    if (title !== undefined) updateData.title = title;
-    if (template !== undefined) updateData.template = template;
-    if (status !== undefined) updateData.status = status;
-    if (seo !== undefined) updateData.seo = seo;
-    if (content !== undefined) updateData.content = content;
+    const updateData = { ...body };
+    if (body.isTrashed !== undefined) {
+      updateData.isTrashed = body.isTrashed;
+      updateData.trashedAt = body.isTrashed ? new Date() : null;
+    }
 
     const updatedPage = await Page.findByIdAndUpdate(id, updateData, { new: true });
 
@@ -66,18 +65,7 @@ export async function PATCH(
       action: 'UPDATE_PAGE',
       entity: 'Page',
       entityId: id,
-      details: {
-        before: beforeState,
-        after: { 
-          title: updatedPage.title, 
-          status: updatedPage.status, 
-          slug: updatedPage.slug,
-          template: updatedPage.template,
-          seo: updatedPage.seo,
-          content: updatedPage.content
-        },
-        message: `Updated page: ${updatedPage.title}`
-      },
+      details: { before: oldPage?.title || 'Unknown', after: updatedPage?.title || 'Unknown' },
       ip: req.headers.get('x-forwarded-for') || (req as any).ip || 'unknown'
     });
 
@@ -109,7 +97,7 @@ export async function DELETE(
       action: 'DELETE_PAGE',
       entity: 'Page',
       entityId: id,
-      details: { message: `Deleted page: ${deletedPage.title}` },
+      details: { message: `Deleted page: ${deletedPage?.title || 'Unknown'}` },
       ip: req.headers.get('x-forwarded-for') || (req as any).ip || 'unknown'
     });
 

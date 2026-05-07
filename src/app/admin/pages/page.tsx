@@ -33,7 +33,7 @@ export default function PagesDashboard() {
 
   const fetchPages = async () => {
     try {
-      const res = await fetch("/api/admin/pages");
+      const res = await fetch(`/api/admin/pages?t=${Date.now()}`);
       const data = await res.json();
       setPages(data);
     } catch (err) {
@@ -79,6 +79,22 @@ export default function PagesDashboard() {
       finally { setActionLoading(false); }
     }
 
+    if (action === 'trash' || action === 'restore') {
+      setActionLoading(true);
+      try {
+        const res = await fetch("/api/admin/pages", {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action, ids: selectedIds })
+        });
+        if (res.ok) {
+          setSelectedIds([]);
+          fetchPages();
+        }
+      } catch (err) { alert(`Bulk ${action} failed.`); }
+      finally { setActionLoading(false); }
+    }
+
     if (action === 'publish' || action === 'draft') {
       const status = action === 'publish' ? 'published' : 'draft';
       setActionLoading(true);
@@ -100,6 +116,22 @@ export default function PagesDashboard() {
   const handleIndividualAction = async (e: React.MouseEvent, action: string, id: string) => {
     e.preventDefault();
     e.stopPropagation();
+
+    if (action === 'trash' || action === 'restore') {
+      try {
+        const res = await fetch(`/api/admin/pages/${id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ isTrashed: action === 'trash' })
+        });
+        if (res.ok) {
+          fetchPages();
+        } else {
+          const errData = await res.json();
+          alert(`${action === 'trash' ? 'Trash' : 'Restore'} failed: ${errData.error || 'Unknown error'}`);
+        }
+      } catch (err) { alert(`${action === 'trash' ? 'Trash' : 'Restore'} failed due to network error.`); }
+    }
 
     if (action === 'delete') {
       if (!confirm("Permanently delete this page?")) return;
@@ -172,8 +204,13 @@ export default function PagesDashboard() {
 
   const filteredPages = pages.filter(p => {
     const matchesSearch = p.title.toLowerCase().includes(search.toLowerCase()) || p.slug.toLowerCase().includes(search.toLowerCase());
-    const matchesFilter = filter === "all" || p.status === filter;
-    return matchesSearch && matchesFilter;
+    const isTrashed = !!p.isTrashed;
+    
+    if (filter === 'trash') return matchesSearch && isTrashed;
+    if (isTrashed) return false;
+    
+    if (filter === "all") return matchesSearch;
+    return matchesSearch && p.status === filter;
   });
 
   if (loading) return <div className="flex h-screen items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-[#2271b1]" /></div>;
@@ -194,15 +231,19 @@ export default function PagesDashboard() {
       {/* Filter Links */}
       <div className="flex items-center gap-2 text-[13px]">
         <button onClick={() => setFilter("all")} className={`${filter === 'all' ? 'text-black font-bold' : 'text-[#2271b1] hover:text-[#135e96] underline decoration-transparent hover:decoration-current'}`}>
-          All <span className="text-[#646970] font-normal">({pages.length})</span>
+          All <span className="text-[#646970] font-normal">({pages.filter(p => !p.isTrashed).length})</span>
         </button>
         <span className="text-[#c3c4c7]">|</span>
         <button onClick={() => setFilter("published")} className={`${filter === 'published' ? 'text-black font-bold' : 'text-[#2271b1] hover:text-[#135e96] underline decoration-transparent hover:decoration-current'}`}>
-          Published <span className="text-[#646970] font-normal">({pages.filter(p => p.status === 'published').length})</span>
+          Published <span className="text-[#646970] font-normal">({pages.filter(p => p.status === 'published' && !p.isTrashed).length})</span>
         </button>
         <span className="text-[#c3c4c7]">|</span>
         <button onClick={() => setFilter("draft")} className={`${filter === 'draft' ? 'text-black font-bold' : 'text-[#2271b1] hover:text-[#135e96] underline decoration-transparent hover:decoration-current'}`}>
-          Drafts <span className="text-[#646970] font-normal">({pages.filter(p => p.status === 'draft').length})</span>
+          Drafts <span className="text-[#646970] font-normal">({pages.filter(p => p.status === 'draft' && !p.isTrashed).length})</span>
+        </button>
+        <span className="text-[#c3c4c7]">|</span>
+        <button onClick={() => setFilter("trash")} className={`${filter === 'trash' ? 'text-black font-bold' : 'text-[#d63638] underline decoration-transparent hover:decoration-current'}`}>
+          Trash <span className="text-[#646970] font-normal">({pages.filter(p => p.isTrashed).length})</span>
         </button>
       </div>
 
@@ -215,9 +256,18 @@ export default function PagesDashboard() {
             onChange={(e) => setBulkAction(e.target.value)}
           >
             <option value="">Bulk actions</option>
-            <option value="publish">Mark as Published</option>
-            <option value="draft">Mark as Draft</option>
-            <option value="delete">Delete Permanently</option>
+            {filter === 'trash' ? (
+              <>
+                <option value="restore">Restore</option>
+                <option value="delete">Delete Permanently</option>
+              </>
+            ) : (
+              <>
+                <option value="publish">Mark as Published</option>
+                <option value="draft">Mark as Draft</option>
+                <option value="trash">Move to Trash</option>
+              </>
+            )}
           </select>
           <button 
             onClick={() => { handleBulkAction(bulkAction); setBulkAction(""); }}
@@ -295,7 +345,15 @@ export default function PagesDashboard() {
                       <span className="text-[#a7aaad]">|</span>
                       <Link href={`/${page.slug}`} target="_blank" className="text-[#2271b1] hover:underline text-[12px]">View</Link>
                       <span className="text-[#a7aaad]">|</span>
-                      <button onClick={(e) => handleIndividualAction(e, 'delete', page._id)} className="text-[#d63638] hover:underline text-[12px]">Trash</button>
+                      {page.isTrashed ? (
+                        <>
+                          <button onClick={(e) => handleIndividualAction(e, 'restore', page._id)} className="text-[#2271b1] hover:underline text-[12px]">Restore</button>
+                          <span className="text-[#a7aaad]">|</span>
+                          <button onClick={(e) => handleIndividualAction(e, 'delete', page._id)} className="text-[#d63638] hover:underline text-[12px]">Delete Permanently</button>
+                        </>
+                      ) : (
+                        <button onClick={(e) => handleIndividualAction(e, 'trash', page._id)} className="text-[#d63638] hover:underline text-[12px]">Trash</button>
+                      )}
                     </div>
                   </td>
                   <td className="py-3 px-3 align-top capitalize text-[#50575e]">

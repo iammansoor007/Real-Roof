@@ -226,8 +226,12 @@ export default function ServicesAdminPage() {
 
     let newServices = [...services];
     if (action === 'delete') {
-      if (!confirm(`Delete ${selectedIds.length} services?`)) return;
+      if (!confirm(`Permanently delete ${selectedIds.length} services?`)) return;
       newServices = services.filter(s => !selectedIds.includes(s.id));
+    } else if (action === 'trash') {
+      newServices = services.map(s => selectedIds.includes(s.id) ? { ...s, isTrashed: true, trashedAt: new Date().toISOString() } : s);
+    } else if (action === 'restore') {
+      newServices = services.map(s => selectedIds.includes(s.id) ? { ...s, isTrashed: false, trashedAt: null } : s);
     } else if (action === 'publish' || action === 'draft') {
       const newStatus = action === 'publish' ? 'published' : 'draft';
       newServices = services.map(s => selectedIds.includes(s.id) ? { ...s, status: newStatus } : s);
@@ -241,10 +245,15 @@ export default function ServicesAdminPage() {
 
 
 
-  const filteredServices = services.filter(s =>
-    s.title.toLowerCase().includes(search.toLowerCase()) &&
-    (filter === 'all' || s.status === filter)
-  );
+  const filteredServices = services.filter(s => {
+    const matchesSearch = s.title.toLowerCase().includes(search.toLowerCase());
+    const isTrashed = s.isTrashed === true;
+
+    if (filter === 'trash') return matchesSearch && isTrashed;
+    if (isTrashed) return false;
+
+    return matchesSearch && (filter === 'all' || s.status === filter);
+  });
 
   if (!data) return <div className="flex h-screen items-center justify-center text-[#646970] font-serif">Loading...</div>;
 
@@ -470,7 +479,7 @@ export default function ServicesAdminPage() {
                   className="bg-[#2271b1] text-white px-4 py-1.5 rounded-[3px] text-[13px] font-semibold border border-[#2271b1] hover:bg-[#135e96] flex items-center gap-2"
                 >
                   {saving && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-                  {isEditing < services.length ? "Update" : "Publish"}
+                  {isEditing !== null && isEditing < services.length ? "Update" : "Publish"}
                 </button>
               </div>
             </div>
@@ -490,7 +499,11 @@ export default function ServicesAdminPage() {
             </button>
             <span className="text-[#c3c4c7]">|</span>
             <button onClick={() => setFilter("draft")} className={`${filter === 'draft' ? 'text-black font-bold' : 'text-[#2271b1] hover:text-[#135e96] underline decoration-transparent hover:decoration-current'}`}>
-              Drafts <span className="text-[#646970] font-normal">({services.filter(s => s.status === 'draft').length})</span>
+              Drafts <span className="text-[#646970] font-normal">({services.filter(s => s.status === 'draft' && !s.isTrashed).length})</span>
+            </button>
+            <span className="text-[#c3c4c7]">|</span>
+            <button onClick={() => setFilter("trash")} className={`${filter === 'trash' ? 'text-black font-bold' : 'text-[#d63638] underline decoration-transparent hover:decoration-current'}`}>
+              Trash <span className="text-[#646970] font-normal">({services.filter(s => s.isTrashed).length})</span>
             </button>
           </div>
 
@@ -502,9 +515,18 @@ export default function ServicesAdminPage() {
                 onChange={(e) => setBulkAction(e.target.value)}
               >
                 <option value="">Bulk actions</option>
-                <option value="publish">Mark as Published</option>
-                <option value="draft">Mark as Draft</option>
-                <option value="delete">Delete Permanently</option>
+                {filter === 'trash' ? (
+                  <>
+                    <option value="restore">Restore</option>
+                    <option value="delete">Delete Permanently</option>
+                  </>
+                ) : (
+                  <>
+                    <option value="publish">Mark as Published</option>
+                    <option value="draft">Mark as Draft</option>
+                    <option value="trash">Move to Trash</option>
+                  </>
+                )}
               </select>
               <button
                 onClick={() => { handleBulkAction(bulkAction); setBulkAction(""); }}
@@ -562,7 +584,23 @@ export default function ServicesAdminPage() {
                               <span className="text-[#a7aaad]">|</span>
                               <button onClick={() => handleDuplicate(idx)} className="text-[#2271b1] hover:underline text-[12px]">Duplicate</button>
                               <span className="text-[#a7aaad]">|</span>
-                              <button onClick={() => { if (confirm("Delete this service?")) saveToDb(services.filter(orig => orig.id !== service.id)); }} className="text-[#d63638] hover:underline text-[12px]">Trash</button>
+                              {service.isTrashed ? (
+                                <>
+                                  <button onClick={() => {
+                                    const ns = [...services];
+                                    const sidx = ns.findIndex(orig => orig.id === service.id);
+                                    if (sidx !== -1) { ns[sidx] = { ...ns[sidx], isTrashed: false, trashedAt: null }; saveToDb(ns); }
+                                  }} className="text-[#2271b1] hover:underline text-[12px]">Restore</button>
+                                  <span className="text-[#a7aaad]">|</span>
+                                  <button onClick={() => { if (confirm("Permanently delete this service?")) saveToDb(services.filter(orig => orig.id !== service.id)); }} className="text-[#d63638] hover:underline text-[12px]">Delete Permanently</button>
+                                </>
+                              ) : (
+                                <button onClick={() => {
+                                  const ns = [...services];
+                                  const sidx = ns.findIndex(orig => orig.id === service.id);
+                                  if (sidx !== -1) { ns[sidx] = { ...ns[sidx], isTrashed: true, trashedAt: new Date().toISOString() }; saveToDb(ns); }
+                                }} className="text-[#d63638] hover:underline text-[12px]">Trash</button>
+                              )}
                             </div>
                           </div>
                         </div>

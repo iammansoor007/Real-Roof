@@ -107,6 +107,38 @@ export async function PATCH(req: NextRequest) {
       });
 
       return NextResponse.json({ success: true });
+    } else if (action === 'trash' && ids && Array.isArray(ids)) {
+      await Page.updateMany(
+        { _id: { $in: ids } },
+        { $set: { isTrashed: true, trashedAt: new Date() } }
+      );
+
+      await recordActivity({
+        user: (session as any).userId,
+        userName: (session as any).username,
+        action: 'BULK_TRASH_PAGES',
+        entity: 'Page',
+        details: { message: `Bulk moved ${ids.length} pages to trash` },
+        ip: req.headers.get('x-forwarded-for') || (req as any).ip || 'unknown'
+      });
+
+      return NextResponse.json({ success: true });
+    } else if (action === 'restore' && ids && Array.isArray(ids)) {
+      await Page.updateMany(
+        { _id: { $in: ids } },
+        { $set: { isTrashed: false, trashedAt: null } }
+      );
+
+      await recordActivity({
+        user: (session as any).userId,
+        userName: (session as any).username,
+        action: 'BULK_RESTORE_PAGES',
+        entity: 'Page',
+        details: { message: `Bulk restored ${ids.length} pages from trash` },
+        ip: req.headers.get('x-forwarded-for') || (req as any).ip || 'unknown'
+      });
+
+      return NextResponse.json({ success: true });
     }
     
     return NextResponse.json({ error: 'Invalid Action' }, { status: 400 });
