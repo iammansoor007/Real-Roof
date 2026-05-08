@@ -178,12 +178,21 @@ export default function SeoEditor({ data, setData, pageSlug, pageTitle, pageCont
                       description="Main image used for Schema.org and as a fallback for OG/Twitter."
                     />
                   </div>
-                  <div className="w-32 space-y-1">
-                    <label className="text-[11px] font-bold text-[#1d2327] uppercase">Robots</label>
-                    <select value={data.metaRobotsIndex || 'index'} onChange={(e) => updateField('metaRobotsIndex', e.target.value)} className="w-full border border-[#8c8f94] bg-white px-2 py-1 text-[12px] rounded-[3px]">
-                      <option value="index">Index</option>
-                      <option value="noindex">NoIndex</option>
-                    </select>
+                  <div className="flex gap-4">
+                    <div className="w-32 space-y-1">
+                      <label className="text-[11px] font-bold text-[#1d2327] uppercase">Robots Index</label>
+                      <select value={data.metaRobotsIndex || 'index'} onChange={(e) => updateField('metaRobotsIndex', e.target.value)} className="w-full border border-[#8c8f94] bg-white px-2 py-1 text-[12px] rounded-[3px]">
+                        <option value="index">Index</option>
+                        <option value="noindex">NoIndex</option>
+                      </select>
+                    </div>
+                    <div className="w-32 space-y-1">
+                      <label className="text-[11px] font-bold text-[#1d2327] uppercase">Robots Follow</label>
+                      <select value={data.metaRobotsFollow || 'follow'} onChange={(e) => updateField('metaRobotsFollow', e.target.value)} className="w-full border border-[#8c8f94] bg-white px-2 py-1 text-[12px] rounded-[3px]">
+                        <option value="follow">Follow</option>
+                        <option value="nofollow">NoFollow</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </motion.div>

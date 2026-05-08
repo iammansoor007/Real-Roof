@@ -23,6 +23,15 @@ export async function generateMetadata(): Promise<Metadata> {
       url: pageUrl,
       type: "website",
     },
+    robots: {
+      index: seo.metaRobotsIndex !== 'noindex',
+      follow: seo.metaRobotsFollow !== 'nofollow',
+      ...(seo.metaRobotsIndex !== 'noindex' && {
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      })
+    }
   };
 }
 

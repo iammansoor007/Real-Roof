@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     robots: {
       index: seo.metaRobotsIndex !== 'noindex',
-      follow: seo.metaRobotsIndex !== 'noindex' && seo.metaRobotsFollow !== 'nofollow',
+      follow: seo.metaRobotsFollow !== 'nofollow',
       ...(seo.metaRobotsIndex !== 'noindex' && {
         'max-video-preview': -1,
         'max-image-preview': 'large',

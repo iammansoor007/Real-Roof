@@ -15,6 +15,15 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: servicesData?.seo?.metaTitle || servicesData?.section?.headline,
     description: servicesData?.seo?.metaDescription || servicesData?.section?.description,
+    robots: {
+      index: servicesData?.seo?.metaRobotsIndex !== 'noindex',
+      follow: servicesData?.seo?.metaRobotsFollow !== 'nofollow',
+      ...(servicesData?.seo?.metaRobotsIndex !== 'noindex' && {
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      })
+    }
   };
 }
 

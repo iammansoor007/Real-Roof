@@ -32,6 +32,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description,
     alternates: {
       canonical: `${BASE_URL}/${slug}`, // FLAT CANONICAL
+    },
+    robots: {
+      index: seo.metaRobotsIndex !== 'noindex',
+      follow: seo.metaRobotsFollow !== 'nofollow',
+      ...(seo.metaRobotsIndex !== 'noindex' && {
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      })
     }
   };
 }

@@ -56,6 +56,15 @@ export async function generateMetadata(): Promise<Metadata> {
           title: seo.twitterTitle || seo.ogTitle || seo.metaTitle || page.title,
           description: seo.twitterDescription || seo.ogDescription || seo.metaDescription,
           images: [seo.featuredImage || seo.twitterImage || seo.ogImage].filter(Boolean) as string[],
+        },
+        robots: {
+          index: seo.metaRobotsIndex !== 'noindex',
+          follow: seo.metaRobotsFollow !== 'nofollow',
+          ...(seo.metaRobotsIndex !== 'noindex' && {
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+          })
         }
       };
     }
@@ -78,6 +87,15 @@ export async function generateMetadata(): Promise<Metadata> {
           title: seo.twitterTitle || seo.ogTitle || seo.metaTitle || service.title,
           description: seo.twitterDescription || seo.ogDescription || seo.metaDescription || service.description,
           images: [seo.featuredImage || seo.twitterImage || seo.ogImage].filter(Boolean) as string[],
+        },
+        robots: {
+          index: seo.metaRobotsIndex !== 'noindex',
+          follow: seo.metaRobotsFollow !== 'nofollow',
+          ...(seo.metaRobotsIndex !== 'noindex' && {
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+          })
         }
       };
     }
@@ -97,6 +115,15 @@ export async function generateMetadata(): Promise<Metadata> {
       title: seo.ogTitle || seo.metaTitle || homeData?.hero?.headline || settings?.siteTitle,
       description: seo.ogDescription || seo.metaDescription || homeData?.hero?.subheadline,
       images: [seo.featuredImage || `${BASE_URL}/eagle-logo.png`].filter(Boolean) as string[],
+    },
+    robots: {
+      index: seo.metaRobotsIndex !== 'noindex',
+      follow: seo.metaRobotsFollow !== 'nofollow',
+      ...(seo.metaRobotsIndex !== 'noindex' && {
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      })
     }
   };
 }

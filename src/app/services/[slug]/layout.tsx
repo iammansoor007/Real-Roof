@@ -680,6 +680,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
+    robots: {
+      index: seo.metaRobotsIndex !== 'noindex',
+      follow: seo.metaRobotsFollow !== 'nofollow',
+      ...(seo.metaRobotsIndex !== 'noindex' && {
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      })
+    },
     alternates: {
       canonical: `${BASE_URL}/services/${slug}`,
     },

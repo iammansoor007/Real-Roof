@@ -17,8 +17,13 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical: seo.canonicalUrl || pageUrl,
     },
     robots: {
-      index: true,
-      follow: true,
+      index: seo.metaRobotsIndex !== 'noindex',
+      follow: seo.metaRobotsFollow !== 'nofollow',
+      ...(seo.metaRobotsIndex !== 'noindex' && {
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      })
     },
   };
 }
