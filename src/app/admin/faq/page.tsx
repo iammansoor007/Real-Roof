@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Pencil, Trash2, Loader2, HelpCircle, Save, X, ChevronRight, Globe, Layers, ListFilter } from "lucide-react";
+import { Plus, Pencil, Trash2, Loader2, CircleHelp, Save, X, ChevronRight, Globe, Layers, ListFilter } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import dynamic from "next/dynamic";

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Save, Loader2, LayoutTemplate, ChevronRight,
   Settings, Type, Image as ImageIcon, Briefcase,
-  Star, HelpCircle, Phone, Users, Globe, ArrowUpRight, Trash2, ArrowLeft, ExternalLink,
+  Star, CircleHelp, Phone, Users, Globe, ArrowUpRight, Trash2, ArrowLeft, ExternalLink,
   ChevronDown, Calendar, Eye
 } from "lucide-react";
 import Link from "next/link";
@@ -23,7 +23,7 @@ const EDITOR_TEMPLATES = [
   { id: 'team', label: 'Team Directory', icon: Users },
   { id: 'careers', label: 'Career Board', icon: Briefcase },
   { id: 'reviews', label: 'Client Reviews', icon: Star },
-  { id: 'faq', label: 'Support FAQ', icon: HelpCircle },
+  { id: 'faq', label: 'Support FAQ', icon: CircleHelp },
   { id: 'contact', label: 'Contact Center', icon: Phone },
 ];
 

@@ -376,38 +376,39 @@ const SocialLinks = () => {
 
 const LegacyMarquee = () => {
   const { footer } = useContent();
-  const marquee = footer?.marquee || { texts: [], speed: 30, repeats: 8 };
+  const certifications = footer?.certifications || [];
+  const marquee = footer?.marquee || { speed: 40 };
+
+  if (certifications.length === 0) return null;
 
   return (
-    <div className="relative overflow-hidden py-8 border-t border-border">
+    <div className="relative overflow-hidden py-12 border-t border-border bg-muted/10">
       <motion.div
         className="flex whitespace-nowrap"
-        animate={{ x: [0, -1000] }}
-        transition={{ duration: marquee.speed || 30, repeat: Infinity, ease: "linear" }}
+        animate={{ x: ["0%", "-50%"] }}
+        transition={{ duration: marquee.speed || 40, repeat: Infinity, ease: "linear" }}
       >
-        {[...Array(marquee.repeats || 8)].map((_, i) => (
-          <div key={i} className="flex items-center gap-8 mx-8 group">
-            <span className="text-xs font-mono text-primary/40 group-hover:text-primary transition-colors duration-300">
-              <Icon name="Sparkles" className="w-4 h-4" />
-            </span>
-            <span className="text-sm uppercase tracking-[0.3em] text-muted-foreground/40 group-hover:text-muted-foreground transition-colors duration-300">
-              {marquee.texts[0]}
-            </span>
-            <span className="text-xs font-mono text-primary/40 group-hover:text-primary transition-colors duration-300">
-              <Icon name="Sparkles" className="w-4 h-4" />
-            </span>
-            <span className="text-sm uppercase tracking-[0.3em] text-muted-foreground/40 group-hover:text-muted-foreground transition-colors duration-300">
-              {marquee.texts[1]}
-            </span>
-            <span className="text-xs font-mono text-primary/40 group-hover:text-primary transition-colors duration-300">
-              <Icon name="Sparkles" className="w-4 h-4" />
-            </span>
-            <span className="text-sm uppercase tracking-[0.3em] text-muted-foreground/40 group-hover:text-muted-foreground transition-colors duration-300">
-              {marquee.texts[2]}
-            </span>
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="flex items-center gap-16 px-8">
+            {certifications.map((cert: any, idx: number) => (
+              <div key={`${i}-${idx}`} className="flex items-center gap-5 group">
+                <div className="w-12 h-12 rounded-2xl bg-card flex items-center justify-center text-muted-foreground group-hover:text-primary transition-all duration-500 border border-border group-hover:border-primary/30 shadow-sm group-hover:shadow-md group-hover:-translate-y-0.5">
+                  <Icon name={cert.icon} className="w-6 h-6" />
+                </div>
+                <div className="flex flex-col">
+                   <span className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground/60 group-hover:text-foreground transition-colors">{cert.cert}</span>
+                   <span className="text-[10px] font-mono text-muted-foreground/40 mt-0.5">{cert.number}</span>
+                </div>
+                <div className="ml-12 opacity-20">
+                  <Icon name="Sparkles" className="w-3 h-3 text-primary" />
+                </div>
+              </div>
+            ))}
           </div>
         ))}
       </motion.div>
+      <div className="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-48 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
     </div>
   );
 };
@@ -498,13 +499,13 @@ const Footer = () => {
       <QuantumParticles />
 
       <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-30">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-24 pb-16 border-b border-border">
-          <div className="lg:col-span-3 space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pt-24 pb-16 border-b border-border">
+          <div className="lg:col-span-3 space-y-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="space-y-4"
+              className="space-y-6"
             >
               <div className="flex items-center gap-3">
                 {footer.company?.logo ? (
@@ -535,24 +536,39 @@ const Footer = () => {
               </h4>
               <NewsletterForm />
             </div>
-
-
           </div>
 
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-3">
             <ServiceLinks />
             <MaterialsSection />
           </div>
 
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-3">
             <ContactInfo />
+          </div>
 
-            <div className="mt-6 pt-4 border-t border-border">
-              <h4 className="text-xs font-mono tracking-[0.2em] uppercase text-muted-foreground flex items-center gap-2 mb-3">
-                <Icon name="Sparkles" className="w-4 h-4" />
-                Certifications & Accreditations
+          <div className="lg:col-span-3">
+            <div className="space-y-4">
+              <h4 className="text-xs font-mono tracking-[0.2em] uppercase text-muted-foreground flex items-center gap-2">
+                <Icon name="MapPin" className="w-4 h-4" />
+                Our Location
               </h4>
-              <CertificationsGrid />
+              <div className="relative w-full aspect-square lg:aspect-auto lg:h-[350px] rounded-2xl overflow-hidden border border-border shadow-2xl group transition-all duration-500 hover:border-primary/30">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3109.2535729046463!2d-90.68510192536498!3d38.803742752226945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa84c3b8dec6bf3f%3A0x18a7936317172933!2sEagle%20Revolution!5e0!3m2!1sen!2s!4v1778495491394!5m2!1sen!2s" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0 }} 
+                  allowFullScreen={true} 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="grayscale hover:grayscale-0 transition-all duration-700"
+                />
+                <div className="absolute inset-0 pointer-events-none border-[12px] border-background/20 rounded-2xl" />
+              </div>
+              <p className="text-[10px] text-muted-foreground font-mono mt-2">
+                1077 E Terra Ln, O&apos;Fallon, MO 63366
+              </p>
             </div>
           </div>
         </div>

@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title,
     description,
     alternates: {
-      canonical: `${BASE_URL}/${slug}`, // FLAT CANONICAL
+      canonical: seo.canonicalUrl || `${BASE_URL}/services/${slug}`,
     },
     robots: {
       index: seo.metaRobotsIndex !== 'noindex',
@@ -51,7 +51,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   await connectToDatabase();
   console.log(`[Service Debug] Fetching content for: ${resolvedParams.slug}`);
   const content = await SiteContent.findOne({ key: "complete_data" }).lean() as any;
-  
+
   if (!content) {
     console.error("[Service Debug] CRITICAL: complete_data document not found in DB!");
     return notFound();
@@ -60,7 +60,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const services = content?.data?.services?.services || [];
   console.log(`[Service Debug] Total services in DB: ${services.length}`);
   console.log(`[Service Debug] Looking for slug: "${resolvedParams.slug}"`);
-  
+
   const serviceDoc = services.find((s: any) => {
     const isMatch = s.slug === resolvedParams.slug;
     if (isMatch) console.log(`[Service Debug] MATCH FOUND! Status: ${s.status}`);
