@@ -68,7 +68,7 @@ export default function FAQTemplate({ pageData, params }: { pageData?: any, para
 
             <div className="max-w-7xl mx-auto px-4">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl sm:text-6xl font-medium mb-4">{section?.headline}</h2>
+                    <h1 className="text-4xl sm:text-6xl font-medium mb-4">{section?.headline}</h1>
                     <div className="text-muted-foreground text-lg">
                         <RichTextRenderer content={section?.description} />
                     </div>
