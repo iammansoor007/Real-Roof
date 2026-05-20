@@ -10,6 +10,11 @@ import logo from "../assets/eaglelogo.png";
 import Image from "next/image";
 import Link from "next/link";
 
+const stripHtml = (html: string) => {
+  if (!html) return "";
+  return html.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ");
+};
+
 const Navbar = () => {
   const content = useContent();
   const { navbar, settings, services: servicesData } = content;
@@ -160,7 +165,7 @@ const Navbar = () => {
                                       </h3>
                                     </div>
                                     <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2">
-                                      {service.description}
+                                      {stripHtml(service.description)}
                                     </p>
                                   </Link>
                                 );

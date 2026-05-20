@@ -801,7 +801,23 @@ ${formData.message}
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-foreground mb-4 sm:mb-6 leading-tight">
-            <RichTextRenderer content={section.headline} stripParagraphs={true} />
+            {(section?.headlinePrefix || section?.headlineHighlight || section?.headlineSuffix) ? (
+              <>
+                {section?.headlinePrefix && (
+                  <span>{section.headlinePrefix} </span>
+                )}
+                {section?.headlineHighlight && (
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80 font-semibold">
+                    {section.headlineHighlight}
+                  </span>
+                )}
+                {section?.headlineSuffix && (
+                  <span> {section.headlineSuffix}</span>
+                )}
+              </>
+            ) : (
+              <RichTextRenderer content={section.headline} stripParagraphs={true} />
+            )}
           </h2>
 
           <div className="text-sm sm:text-base md:text-lg text-muted-foreground font-light max-w-2xl mx-auto px-4">

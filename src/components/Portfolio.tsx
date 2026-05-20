@@ -417,8 +417,9 @@ const Portfolio = () => {
     }));
   }, [portfolioData?.projects]);
 
-  const row1 = projects.length > 0 ? projects : [];
-  const row2 = projects.length > 3 ? projects.slice(Math.ceil(projects.length / 2)) : [];
+  const half = Math.ceil(projects.length / 2);
+  const row1 = projects.length > 0 ? projects.slice(0, half) : [];
+  const row2 = projects.length > half ? projects.slice(half) : [];
 
   // Don't render marquee if no projects
   if (projects.length === 0) {

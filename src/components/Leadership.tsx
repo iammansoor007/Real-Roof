@@ -82,8 +82,25 @@ export default function Leadership() {
 
           <h2
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light text-foreground mb-4 sm:mb-6 leading-tight px-2"
-            dangerouslySetInnerHTML={{ __html: story.section?.headline || "" }}
-          />
+          >
+            {(story.section?.headlinePrefix || story.section?.headlineHighlight || story.section?.headlineSuffix) ? (
+              <>
+                {story.section?.headlinePrefix && (
+                  <span>{story.section.headlinePrefix} </span>
+                )}
+                {story.section?.headlineHighlight && (
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80 font-semibold">
+                    {story.section.headlineHighlight}
+                  </span>
+                )}
+                {story.section?.headlineSuffix && (
+                  <span> {story.section.headlineSuffix}</span>
+                )}
+              </>
+            ) : (
+              <span dangerouslySetInnerHTML={{ __html: story.section?.headline || "" }} />
+            )}
+          </h2>
 
           <RichTextRenderer
             content={story.section?.description}

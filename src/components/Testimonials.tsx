@@ -256,7 +256,23 @@ const Testimonials = () => {
           </motion.div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 tracking-tight">
-            {section.headline}
+            {(section?.headlinePrefix || section?.headlineHighlight || section?.headlineSuffix) ? (
+              <>
+                {section?.headlinePrefix && (
+                  <span>{section.headlinePrefix} </span>
+                )}
+                {section?.headlineHighlight && (
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80">
+                    {section.headlineHighlight}
+                  </span>
+                )}
+                {section?.headlineSuffix && (
+                  <span> {section.headlineSuffix}</span>
+                )}
+              </>
+            ) : (
+              <span>{section.headline}</span>
+            )}
           </h2>
 
           <div className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -391,7 +407,7 @@ const Testimonials = () => {
               ))}
             </div>
             <div className="text-sm text-muted-foreground">
-              <span className="font-semibold text-foreground">{stats.subscribers}+</span> satisfied customers
+              <span className="font-semibold text-foreground">{stats.subscribers}</span> satisfied customers
             </div>
           </div>
 

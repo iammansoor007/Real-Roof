@@ -236,6 +236,33 @@ export default function HomeEditor() {
                             className="w-full bg-white border border-gray-200 rounded-xl px-3 py-2 text-gray-900 text-sm focus:border-primary/50 focus:outline-none"
                           />
                         </div>
+                        <div className="space-y-2">
+                          <label className="text-xs uppercase tracking-wider text-slate-500 font-bold">Icon Name</label>
+                          <input
+                            type="text"
+                            value={btn.icon || ""}
+                            onChange={(e) => {
+                              const newBtns = [...data.hero.buttons];
+                              newBtns[idx].icon = e.target.value;
+                              updateSection("hero", "buttons", newBtns);
+                            }}
+                            placeholder="e.g. ArrowRight, Phone, Calendar"
+                            className="w-full bg-white border border-gray-200 rounded-xl px-3 py-2 text-gray-900 text-sm focus:border-primary/50 focus:outline-none"
+                          />
+                          <p className="text-[11px] text-slate-400 italic">Leave blank for no icon. Uses Lucide icon names.</p>
+                        </div>
+                        <label className="flex items-center gap-2 cursor-pointer text-xs font-medium text-slate-600">
+                          <input
+                            type="checkbox"
+                            checked={btn.primary || false}
+                            onChange={(e) => {
+                              const newBtns = [...data.hero.buttons];
+                              newBtns[idx].primary = e.target.checked;
+                              updateSection("hero", "buttons", newBtns);
+                            }}
+                          />
+                          Primary Style (filled background)
+                        </label>
                       </div>
                     ))}
                   </div>
@@ -437,10 +464,11 @@ export default function HomeEditor() {
                           <label className="text-xs uppercase tracking-wider text-slate-500 font-bold">Value</label>
                           <input
                             type="number"
-                            value={stat.value || 0}
+                            step="0.1"
+                            value={stat.value ?? 0}
                             onChange={(e) => {
                               const newStats = [...data.about.stats];
-                              newStats[idx].value = parseInt(e.target.value) || 0;
+                              newStats[idx].value = parseFloat(e.target.value);
                               updateSection("about", "stats", newStats);
                             }}
                             className="w-full bg-white border border-gray-200 rounded-xl px-3 py-2 text-gray-900 text-sm font-bold focus:border-primary/50 focus:outline-none"
@@ -620,10 +648,11 @@ export default function HomeEditor() {
                             <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Value</label>
                             <input
                               type="number"
-                              value={stat.value || 0}
+                              step="0.1"
+                              value={stat.value ?? 0}
                               onChange={(e) => {
                                 const newStats = [...data.services.stats];
-                                newStats[idx].value = parseInt(e.target.value) || 0;
+                                newStats[idx].value = parseFloat(e.target.value);
                                 updateSection("services", "stats", newStats);
                               }}
                               className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 text-lg font-bold focus:border-primary/50 focus:outline-none"
@@ -733,15 +762,33 @@ export default function HomeEditor() {
                         placeholder="e.g. OUR LEADERSHIP"
                       />
                     </div>
-                    <div className="space-y-2">
-                      <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Section Heading</label>
-                      <input
-                        type="text"
-                        value={data.leadership?.section?.headline || ""}
-                        onChange={(e) => setData((prev: any) => ({ ...prev, leadership: { ...prev.leadership, section: { ...prev.leadership.section, headline: e.target.value } } }))}
-                        className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none shadow-sm transition-all"
-                      />
-                    </div>
+                     <div className="space-y-2">
+                       <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Section Heading — Prefix (plain text)</label>
+                       <input
+                         type="text"
+                         value={data.testimonials?.section?.headlinePrefix || ""}
+                         onChange={(e) => setData((prev: any) => ({ ...prev, testimonials: { ...prev.testimonials, section: { ...prev.testimonials.section, headlinePrefix: e.target.value } } }))}
+                         className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none shadow-sm transition-all"
+                       />
+                     </div>
+                     <div className="space-y-2">
+                       <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Section Heading — Highlight (primary color)</label>
+                       <input
+                         type="text"
+                         value={data.leadership?.section?.headlineHighlight || ""}
+                         onChange={(e) => setData((prev: any) => ({ ...prev, leadership: { ...prev.leadership, section: { ...prev.leadership.section, headlineHighlight: e.target.value } } }))}
+                         className="w-full bg-white border border-primary/30 rounded-xl px-4 py-3 text-slate-900 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none shadow-sm transition-all font-bold"
+                       />
+                     </div>
+                     <div className="space-y-2">
+                       <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Section Heading — Suffix (plain text)</label>
+                       <input
+                         type="text"
+                         value={data.leadership?.section?.headlineSuffix || ""}
+                         onChange={(e) => setData((prev: any) => ({ ...prev, leadership: { ...prev.leadership, section: { ...prev.leadership.section, headlineSuffix: e.target.value } } }))}
+                         className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none shadow-sm transition-all"
+                       />
+                     </div>
                     <div className="space-y-2 md:col-span-2">
                       <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Section Paragraph</label>
                       <RichTextEditor 
@@ -1059,13 +1106,26 @@ export default function HomeEditor() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Section Heading</label>
+                      <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Section Heading — Prefix (plain text)</label>
                       <input
                         type="text"
-                        value={data.testimonials?.section?.headline || ""}
-                        onChange={(e) => setData((prev: any) => ({ ...prev, testimonials: { ...prev.testimonials, section: { ...prev.testimonials.section, headline: e.target.value } } }))}
+                        value={data.testimonials?.section?.headlinePrefix || ""}
+                        onChange={(e) => setData((prev: any) => ({ ...prev, testimonials: { ...prev.testimonials, section: { ...prev.testimonials.section, headlinePrefix: e.target.value } } }))}
+                        className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none shadow-sm transition-all mb-4"
+                      />
+                      <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Section Heading — Highlight (primary color)</label>
+                      <input
+                        type="text"
+                        value={data.testimonials?.section?.headlineHighlight || ""}
+                        onChange={(e) => setData((prev: any) => ({ ...prev, testimonials: { ...prev.testimonials, section: { ...prev.testimonials.section, headlineHighlight: e.target.value } } }))}
+                        className="w-full bg-white border border-primary/30 rounded-xl px-4 py-3 text-slate-900 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none shadow-sm transition-all font-bold mb-4"
+                      />
+                      <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Section Heading — Suffix (plain text)</label>
+                      <input
+                        type="text"
+                        value={data.testimonials?.section?.headlineSuffix || ""}
+                        onChange={(e) => setData((prev: any) => ({ ...prev, testimonials: { ...prev.testimonials, section: { ...prev.testimonials.section, headlineSuffix: e.target.value } } }))}
                         className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none shadow-sm transition-all"
-                        placeholder="e.g. What Our Clients Say"
                       />
                     </div>
                     <div className="space-y-2 md:col-span-2">
@@ -1403,11 +1463,29 @@ export default function HomeEditor() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs uppercase tracking-wider text-slate-500 font-bold">Section Title (Headline)</label>
+                    <label className="text-xs uppercase tracking-wider text-slate-500 font-bold">Section Title — Prefix (plain text)</label>
                     <input
                       type="text"
-                      value={data.quote?.section?.headline || ""}
-                      onChange={(e) => setData((prev: any) => ({ ...prev, quote: { ...(prev.quote || {}), section: { ...(prev.quote?.section || {}), headline: e.target.value } } }))}
+                      value={data.quote?.section?.headlinePrefix || ""}
+                      onChange={(e) => setData((prev: any) => ({ ...prev, quote: { ...(prev.quote || {}), section: { ...(prev.quote?.section || {}), headlinePrefix: e.target.value } } }))}
+                      className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none shadow-sm transition-all"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs uppercase tracking-wider text-slate-500 font-bold">Section Title — Highlight (primary color)</label>
+                    <input
+                      type="text"
+                      value={data.quote?.section?.headlineHighlight || ""}
+                      onChange={(e) => setData((prev: any) => ({ ...prev, quote: { ...(prev.quote || {}), section: { ...(prev.quote?.section || {}), headlineHighlight: e.target.value } } }))}
+                      className="w-full bg-white border border-primary/30 rounded-xl px-4 py-3 text-slate-900 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none shadow-sm transition-all font-bold"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs uppercase tracking-wider text-slate-500 font-bold">Section Title — Suffix (plain text)</label>
+                    <input
+                      type="text"
+                      value={data.quote?.section?.headlineSuffix || ""}
+                      onChange={(e) => setData((prev: any) => ({ ...prev, quote: { ...(prev.quote || {}), section: { ...(prev.quote?.section || {}), headlineSuffix: e.target.value } } }))}
                       className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none shadow-sm transition-all"
                     />
                   </div>

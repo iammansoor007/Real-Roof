@@ -161,11 +161,12 @@ export default function HomeEditor({ pageId, data, setData }: { pageId: string, 
                               <div key={i} className={UI.card + " space-y-4"}>
                                  <div className="space-y-1.5"><label className={UI.label}>Text</label><input type="text" value={btn.text || ""} onChange={(e) => { const newB = [...data.hero.buttons]; newB[i].text = e.target.value; updateSection("hero", "buttons", newB); }} className={UI.input} /></div>
                                  <div className="space-y-1.5"><label className={UI.label}>Link</label><input type="text" value={btn.href || ""} onChange={(e) => { const newB = [...data.hero.buttons]; newB[i].href = e.target.value; updateSection("hero", "buttons", newB); }} className={UI.input} /></div>
+                                 <div className="space-y-1.5"><label className={UI.label}>Icon Name</label><input type="text" value={btn.icon || ""} onChange={(e) => { const newB = [...data.hero.buttons]; newB[i].icon = e.target.value; updateSection("hero", "buttons", newB); }} className={UI.input} placeholder="e.g. ArrowRight" /></div>
                                  <label className="flex items-center gap-2 cursor-pointer text-[12px]"><input type="checkbox" checked={btn.primary} onChange={(e) => { const newB = [...data.hero.buttons]; newB[i].primary = e.target.checked; updateSection("hero", "buttons", newB); }} /> Primary Style</label>
                                  <button onClick={() => { const newB = data.hero.buttons.filter((_: any, idx: number) => idx !== i); updateSection("hero", "buttons", newB); }} className="text-[#d63638] text-[11px] font-bold">Remove Button</button>
                               </div>
                            ))}
-                           <button onClick={() => updateSection("hero", "buttons", [...(data.hero?.buttons || []), { text: "", href: "", primary: false }])} className={UI.buttonAdd}>+ Add Button</button>
+                           <button onClick={() => updateSection("hero", "buttons", [...(data.hero?.buttons || []), { text: "", href: "", primary: false, icon: "" }])} className={UI.buttonAdd}>+ Add Button</button>
                         </div>
                      </div>
                      <div className="space-y-6">
@@ -311,13 +312,26 @@ export default function HomeEditor({ pageId, data, setData }: { pageId: string, 
                            content={Array.isArray(data.services?.description) ? data.services.description.join("") : (data.services?.description || "")}
                            onChange={(html) => updateSection("services", "description", html)}
                         />
+                        <div className="space-y-1.5">
+                           <label className={UI.label}>Description Highlight Text</label>
+                           <input
+                              type="text"
+                              value={data.services?.highlightText || ""}
+                              onChange={(e) => updateSection("services", "highlightText", e.target.value)}
+                              className={UI.input}
+                              placeholder="e.g. Veteran Owned • Licensed • Bonded & Insured"
+                           />
+                           <p className="text-[11px] text-[#646970] italic">
+                              This text will be displayed with primary highlight styles right below the description paragraphs on the public site.
+                           </p>
+                        </div>
                      </div>
                      <div className="space-y-6">
                         <h3 className={UI.sectionHeader}>2. Metrics</h3>
                         <div className="space-y-4">
                            {(data.services?.stats || []).map((s: any, i: number) => (
                               <div key={i} className={UI.card + " space-y-3"}>
-                                 <div className="space-y-1.5"><label className={UI.label}>Value</label><input type="number" value={s.value || 0} onChange={(e) => { const newS = [...data.services.stats]; newS[i].value = parseInt(e.target.value); updateSection("services", "stats", newS); }} className={UI.inputLarge} /></div>
+                                 <div className="space-y-1.5"><label className={UI.label}>Value</label><input type="number" step="0.1" value={s.value ?? 0} onChange={(e) => { const newS = [...data.services.stats]; newS[i].value = parseFloat(e.target.value); updateSection("services", "stats", newS); }} className={UI.inputLarge} /></div>
                                  <div className="space-y-1.5"><label className={UI.label}>Label</label><input type="text" value={s.label || ""} onChange={(e) => { const newS = [...data.services.stats]; newS[i].label = e.target.value; updateSection("services", "stats", newS); }} className={UI.input} /></div>
                                  <button onClick={() => { const newS = data.services.stats.filter((_: any, idx: number) => idx !== i); updateSection("services", "stats", newS); }} className="text-[#d63638] text-[11px] font-bold">Remove</button>
                               </div>
@@ -338,7 +352,18 @@ export default function HomeEditor({ pageId, data, setData }: { pageId: string, 
                      <div className="space-y-6">
                         <h3 className={UI.sectionHeader}>1. Narrative</h3>
                         <div className="space-y-1.5"><label className={UI.label}>Badge</label><input type="text" value={data.whyChooseUs?.section?.badge || ""} onChange={(e) => updateSection("whyChooseUs", "section", { ...(data.whyChooseUs?.section || {}), badge: e.target.value })} className={UI.input} /></div>
-                        <div className="space-y-1.5"><label className={UI.label}>Headline</label><input type="text" value={data.whyChooseUs?.section?.headline || ""} onChange={(e) => updateSection("whyChooseUs", "section", { ...(data.whyChooseUs?.section || {}), headline: e.target.value })} className={UI.inputLarge} /></div>
+                         <div className="space-y-1.5">
+                            <label className={UI.label}>Headline — Prefix (plain text)</label>
+                            <input type="text" value={data.whyChooseUs?.section?.headlinePrefix || ""} onChange={(e) => updateSection("whyChooseUs", "section", { ...(data.whyChooseUs?.section || {}), headlinePrefix: e.target.value })} className={UI.input} placeholder="e.g. Why Homeowners" />
+                         </div>
+                         <div className="space-y-1.5">
+                            <label className={UI.label}>Headline — Highlight <span className="text-primary font-bold">(shown in primary color)</span></label>
+                            <input type="text" value={data.whyChooseUs?.section?.headlineHighlight || ""} onChange={(e) => updateSection("whyChooseUs", "section", { ...(data.whyChooseUs?.section || {}), headlineHighlight: e.target.value })} className={UI.input + " font-bold border-[#2271b1]"} placeholder="e.g. Choose Us" />
+                         </div>
+                         <div className="space-y-1.5">
+                            <label className={UI.label}>Headline — Suffix (plain text)</label>
+                            <input type="text" value={data.whyChooseUs?.section?.headlineSuffix || ""} onChange={(e) => updateSection("whyChooseUs", "section", { ...(data.whyChooseUs?.section || {}), headlineSuffix: e.target.value })} className={UI.input} placeholder="e.g. Over Anyone Else" />
+                         </div>
                         <RichTextEditor
                            label="Intro Narrative"
                            content={data.whyChooseUs?.section?.description || ""}
@@ -405,9 +430,17 @@ export default function HomeEditor({ pageId, data, setData }: { pageId: string, 
                            <input type="text" value={data.leadership?.section?.badge || ""} onChange={(e) => updateSection("leadership", "section", { ...(data.leadership?.section || {}), badge: e.target.value })} className={UI.input} placeholder="e.g. OUR LEADERSHIP" />
                         </div>
                         <div className="space-y-1.5">
-                           <label className={UI.label}>Headline (HTML allowed)</label>
-                           <input type="text" value={data.leadership?.section?.headline || ""} onChange={(e) => updateSection("leadership", "section", { ...(data.leadership?.section || {}), headline: e.target.value })} className={UI.inputLarge} />
-                        </div>
+                            <label className={UI.label}>Headline — Prefix (plain text)</label>
+                            <input type="text" value={data.leadership?.section?.headlinePrefix || ""} onChange={(e) => updateSection("leadership", "section", { ...(data.leadership?.section || {}), headlinePrefix: e.target.value })} className={UI.input} placeholder="e.g. Driven by" />
+                         </div>
+                         <div className="space-y-1.5">
+                            <label className={UI.label}>Headline — Highlight <span className="text-primary font-bold">(shown in primary color)</span></label>
+                            <input type="text" value={data.leadership?.section?.headlineHighlight || ""} onChange={(e) => updateSection("leadership", "section", { ...(data.leadership?.section || {}), headlineHighlight: e.target.value })} className={UI.input + " font-bold border-[#2271b1]"} placeholder="e.g. Passion" />
+                         </div>
+                         <div className="space-y-1.5">
+                            <label className={UI.label}>Headline — Suffix (plain text)</label>
+                            <input type="text" value={data.leadership?.section?.headlineSuffix || ""} onChange={(e) => updateSection("leadership", "section", { ...(data.leadership?.section || {}), headlineSuffix: e.target.value })} className={UI.input} placeholder="e.g. & Purpose" />
+                         </div>
                         <QuillEditor
                            label="Description Paragraph"
                            content={data.leadership?.section?.description || ""}
@@ -517,7 +550,18 @@ export default function HomeEditor({ pageId, data, setData }: { pageId: string, 
                      <div className="space-y-6">
                         <h3 className={UI.sectionHeader}>1. Branding</h3>
                         <div className="space-y-1.5"><label className={UI.label}>Badge</label><input type="text" value={data.testimonials?.section?.badge || ""} onChange={(e) => updateSection("testimonials", "section", { ...(data.testimonials?.section || {}), badge: e.target.value })} className={UI.input} /></div>
-                        <div className="space-y-1.5"><label className={UI.label}>Headline</label><input type="text" value={data.testimonials?.section?.headline || ""} onChange={(e) => updateSection("testimonials", "section", { ...(data.testimonials?.section || {}), headline: e.target.value })} className={UI.inputLarge} /></div>
+                         <div className="space-y-1.5">
+                            <label className={UI.label}>Headline — Prefix (plain text)</label>
+                            <input type="text" value={data.testimonials?.section?.headlinePrefix || ""} onChange={(e) => updateSection("testimonials", "section", { ...(data.testimonials?.section || {}), headlinePrefix: e.target.value })} className={UI.input} placeholder="e.g. What Our" />
+                         </div>
+                         <div className="space-y-1.5">
+                            <label className={UI.label}>Headline — Highlight <span className="text-primary font-bold">(shown in primary color)</span></label>
+                            <input type="text" value={data.testimonials?.section?.headlineHighlight || ""} onChange={(e) => updateSection("testimonials", "section", { ...(data.testimonials?.section || {}), headlineHighlight: e.target.value })} className={UI.input + " font-bold border-[#2271b1]"} placeholder="e.g. Clients" />
+                         </div>
+                         <div className="space-y-1.5">
+                            <label className={UI.label}>Headline — Suffix (plain text)</label>
+                            <input type="text" value={data.testimonials?.section?.headlineSuffix || ""} onChange={(e) => updateSection("testimonials", "section", { ...(data.testimonials?.section || {}), headlineSuffix: e.target.value })} className={UI.input} placeholder="e.g. Say About Us" />
+                         </div>
                         <div className="space-y-1.5"><label className={UI.label}>Seal Text</label><input type="text" value={data.testimonials?.section?.featured || ""} onChange={(e) => updateSection("testimonials", "section", { ...(data.testimonials?.section || {}), featured: e.target.value })} className={UI.input} /></div>
                      </div>
                      <div className="space-y-6">
@@ -539,7 +583,18 @@ export default function HomeEditor({ pageId, data, setData }: { pageId: string, 
                      <div className="space-y-6">
                         <h3 className={UI.sectionHeader}>1. Narrative</h3>
                         <div className="space-y-1.5"><label className={UI.label}>Badge</label><input type="text" value={data.quote?.section?.badge || ""} onChange={(e) => updateSection("quote", "section", { ...(data.quote?.section || {}), badge: e.target.value })} className={UI.input} /></div>
-                        <div className="space-y-1.5"><label className={UI.label}>Headline</label><input type="text" value={data.quote?.section?.headline || ""} onChange={(e) => updateSection("quote", "section", { ...(data.quote?.section || {}), headline: e.target.value })} className={UI.inputLarge} /></div>
+                         <div className="space-y-1.5">
+                            <label className={UI.label}>Headline — Prefix (plain text)</label>
+                            <input type="text" value={data.quote?.section?.headlinePrefix || ""} onChange={(e) => updateSection("quote", "section", { ...(data.quote?.section || {}), headlinePrefix: e.target.value })} className={UI.input} placeholder="e.g. Ready to" />
+                         </div>
+                         <div className="space-y-1.5">
+                            <label className={UI.label}>Headline — Highlight <span className="text-primary font-bold">(shown in primary color)</span></label>
+                            <input type="text" value={data.quote?.section?.headlineHighlight || ""} onChange={(e) => updateSection("quote", "section", { ...(data.quote?.section || {}), headlineHighlight: e.target.value })} className={UI.input + " font-bold border-[#2271b1]"} placeholder="e.g. Begin" />
+                         </div>
+                         <div className="space-y-1.5">
+                            <label className={UI.label}>Headline — Suffix (plain text)</label>
+                            <input type="text" value={data.quote?.section?.headlineSuffix || ""} onChange={(e) => updateSection("quote", "section", { ...(data.quote?.section || {}), headlineSuffix: e.target.value })} className={UI.input} placeholder="e.g. Your Project?" />
+                         </div>
                         <RichTextEditor
                            label="Intro Narrative"
                            content={data.quote?.section?.description || ""}

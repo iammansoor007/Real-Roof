@@ -166,15 +166,15 @@ export default function AboutSection() {
     const sectionRef = useRef<HTMLElement>(null);
     const shouldReduceMotion = useReducedMotion();
 
-    const { 
-        badge = "", 
-        headline = { prefix: "", highlight: "", suffix: "" }, 
-        description = "", 
-        image = {}, 
-        stats = [], 
-        buttons = [], 
-        trustBadges = [], 
-        coreValues = [] 
+    const {
+        badge = "",
+        headline = { prefix: "", highlight: "", suffix: "" },
+        description = "",
+        image = {},
+        stats = [],
+        buttons = [],
+        trustBadges = [],
+        coreValues = []
     } = about || {};
 
     const isDynamicImage = !!(image?.src && (image.src.startsWith('/') || image.src.startsWith('http')));
@@ -339,9 +339,9 @@ export default function AboutSection() {
                             className="inline-flex items-center gap-2 bg-primary/5 px-4 py-2 rounded-full border border-primary/10"
                         >
                             <span className="text-primary text-lg">⚡</span>
-                        {badge && (
-                            <span className="text-primary uppercase tracking-[0.2em] text-xs sm:text-sm font-bold">{badge}</span>
-                        )}
+                            {badge && (
+                                <span className="text-primary uppercase tracking-[0.2em] text-xs sm:text-sm font-bold">{badge}</span>
+                            )}
                         </motion.div>
 
                         <div className="space-y-4">
@@ -430,12 +430,12 @@ export default function AboutSection() {
                                                 <span className="relative z-10 flex items-center gap-2">
                                                     {button.text}
                                                     <svg
-                                                        className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:rotate-45"
+                                                        className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1"
                                                         fill="none"
                                                         viewBox="0 0 24 24"
                                                         stroke="currentColor"
                                                     >
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7l7-7M7 7l7 7M7 7h10" />
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                                     </svg>
                                                 </span>
                                             </motion.div>

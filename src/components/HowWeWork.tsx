@@ -695,8 +695,25 @@ const WhyChooseUs = () => {
 
                         <h2
                             className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight"
-                            dangerouslySetInnerHTML={{ __html: section?.headline || "" }}
-                        />
+                        >
+                            {(section?.headlinePrefix || section?.headlineHighlight || section?.headlineSuffix) ? (
+                              <>
+                                {section?.headlinePrefix && (
+                                  <span>{section.headlinePrefix} </span>
+                                )}
+                                {section?.headlineHighlight && (
+                                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80">
+                                    {section.headlineHighlight}
+                                  </span>
+                                )}
+                                {section?.headlineSuffix && (
+                                  <span> {section.headlineSuffix}</span>
+                                )}
+                              </>
+                            ) : (
+                              <span dangerouslySetInnerHTML={{ __html: section?.headline || "" }} />
+                            )}
+                        </h2>
 
                         <RichTextRenderer 
                             content={section?.description || ""} 
