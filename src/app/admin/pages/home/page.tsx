@@ -586,9 +586,21 @@ export default function HomeEditor() {
                         <span>Description Paragraphs</span>
                       </label>
                       <RichTextEditor 
-                        content={(data.services?.description || []).join("")} 
+                        content={Array.isArray(data.services?.description) ? data.services.description.join("") : (data.services?.description || "")} 
                         onChange={(v) => updateSection("services", "description", [v])} 
                       />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Description Highlight Text</label>
+                      <input
+                        type="text"
+                        value={data.services?.highlightText || ""}
+                        onChange={(e) => updateSection("services", "highlightText", e.target.value)}
+                        className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none shadow-sm transition-all"
+                        placeholder="e.g. Veteran Owned • Licensed • Bonded & Insured"
+                      />
+                      <p className="text-xs text-slate-500 italic">This text will be displayed with primary highlight styles right below the description paragraphs on the public site.</p>
                     </div>
                   </div>
                 </div>
@@ -840,7 +852,7 @@ export default function HomeEditor() {
                         <span className="text-gray-400 lowercase font-normal italic">Hit enter for a new quote</span>
                       </label>
                        <RichTextEditor 
-                         content={(data.leadership?.ceo?.quotes || []).join("")} 
+                         content={Array.isArray(data.leadership?.ceo?.quotes) ? data.leadership.ceo.quotes.join("") : (data.leadership?.ceo?.quotes || "")} 
                          onChange={(v) => setData((prev: any) => ({ ...prev, leadership: { ...prev.leadership, ceo: { ...prev.leadership.ceo, quotes: [v] } } }))} 
                        />
                     </div>
@@ -850,7 +862,7 @@ export default function HomeEditor() {
                         <span>Complete Description</span>
                       </label>
                       <RichTextEditor 
-                        content={(data.leadership?.ceo?.description || []).join("")} 
+                        content={Array.isArray(data.leadership?.ceo?.description) ? data.leadership.ceo.description.join("") : (data.leadership?.ceo?.description || "")} 
                         onChange={(v) => setData((prev: any) => ({ ...prev, leadership: { ...prev.leadership, ceo: { ...prev.leadership.ceo, description: [v] } } }))} 
                       />
                     </div>
@@ -1332,7 +1344,7 @@ export default function HomeEditor() {
                       <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Trust Badges (Comma separated)</label>
                       <input
                         type="text"
-                        value={data.whyChooseUs?.cta?.trustBadges?.join(', ') || ""}
+                        value={Array.isArray(data.whyChooseUs?.cta?.trustBadges) ? data.whyChooseUs.cta.trustBadges.join(', ') : (data.whyChooseUs?.cta?.trustBadges || "")}
                         onChange={(e) => setData((prev: any) => ({ ...prev, whyChooseUs: { ...prev.whyChooseUs, cta: { ...prev.whyChooseUs.cta, trustBadges: e.target.value.split(',').map((s: any) => s.trim()).filter(Boolean) } } }))}
                         className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none shadow-sm transition-all"
                       />

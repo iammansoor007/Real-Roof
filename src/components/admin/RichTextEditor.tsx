@@ -65,6 +65,16 @@ export default function RichTextEditor({
   const [isMediaOpen, setIsMediaOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [showOverview, setShowOverview] = useState(false);
+  const [isHtmlMode, setIsHtmlMode] = useState(false);
+
+  const toggleHtmlMode = () => {
+    if (isHtmlMode) {
+      if (editor) {
+        editor.commands.setContent(normalizeContent(content));
+      }
+    }
+    setIsHtmlMode(!isHtmlMode);
+  };
 
   // Capture initial content ONCE — editor owns its state after mount.
   // We do NOT sync content back in via useEffect to avoid infinite loops.
@@ -137,10 +147,23 @@ export default function RichTextEditor({
 
   return (
     <div className="space-y-1.5">
-      {label && (
-        <label className="text-[13px] font-bold text-[#1d2327]">{label}</label>
-      )}
-      <div className="border border-[#c3c4c7] rounded-sm bg-white overflow-hidden focus-within:border-[#2271b1] focus-within:ring-1 focus-within:ring-[#2271b1] transition-all">
+      <div className="flex justify-between items-center">
+        {label && (
+          <label className="text-[13px] font-bold text-[#1d2327]">{label}</label>
+        )}
+        <button
+          type="button"
+          onClick={toggleHtmlMode}
+          className="text-xs text-[#2271b1] hover:text-[#135e96] font-semibold flex items-center gap-1"
+        >
+          {isHtmlMode ? "✏️ Edit Visually" : "💻 Edit HTML"}
+        </button>
+      </div>
+
+      <div 
+        style={{ display: isHtmlMode ? "none" : "block" }} 
+        className="border border-[#c3c4c7] rounded-sm bg-white overflow-hidden focus-within:border-[#2271b1] focus-within:ring-1 focus-within:ring-[#2271b1] transition-all"
+      >
         {/* Toolbar */}
         <div className="flex flex-wrap items-center gap-1 p-1 border-b border-[#c3c4c7] bg-[#f6f7f7]">
           <div className="flex items-center gap-0.5 pr-2 mr-2 border-r border-[#dcdcde]">
@@ -311,6 +334,15 @@ export default function RichTextEditor({
           )}
         </div>
       </div>
+
+      {isHtmlMode && (
+        <textarea
+          value={normalizeContent(content)}
+          onChange={(e) => onChange(e.target.value)}
+          className="w-full min-h-[220px] p-4 font-mono text-[13px] text-[#1d2327] bg-white border border-[#c3c4c7] rounded-sm focus:outline-none focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1]"
+          placeholder="Paste or write HTML here..."
+        />
+      )}
 
       {isMediaOpen && (
         <MediaSelector

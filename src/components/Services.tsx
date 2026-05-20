@@ -323,6 +323,7 @@ const Services = () => {
     badge = "Premium Services",
     headline = { prefix: 'Our', highlight: 'Expert', suffix: 'Services' },
     description: rawDescription = "Professional exterior remodeling with military precision.",
+    highlightText = "",
     stats = [
       { value: 500, suffix: "+", label: "Projects" },
       { value: 50, suffix: "+", label: "Years Combined" },
@@ -425,8 +426,15 @@ const Services = () => {
                 <RichTextRenderer
                   content={description}
                   className="text-muted-foreground text-lg leading-relaxed"
-                  stripParagraphs={true}
+                  stripParagraphs={false}
                 />
+                {highlightText && (
+                  <div className="mt-4">
+                    <span className="font-semibold text-primary text-lg">
+                      {highlightText}
+                    </span>
+                  </div>
+                )}
               </div>
               <div className="flex items-center justify-between gap-8 mt-8 pt-6 border-t border-border">
                 {stats.map((stat: any, idx: number) => (

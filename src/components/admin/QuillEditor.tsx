@@ -21,6 +21,23 @@ export default function QuillEditor({ content, onChange, label, placeholder }: Q
   const quillRef = useRef<any>(null);
   const isMounted = useRef(false);
   const isUpdating = useRef(false);
+  const [isHtmlMode, setIsHtmlMode] = React.useState(false);
+
+  const toggleHtmlMode = () => {
+    if (isHtmlMode) {
+      // Switching from HTML to Visual
+      if (quillRef.current) {
+        isUpdating.current = true;
+        const normalized = normalizeContent(content);
+        const editorEl = editorRef.current?.querySelector(".ql-editor");
+        if (editorEl) {
+          editorEl.innerHTML = normalized;
+        }
+        isUpdating.current = false;
+      }
+    }
+    setIsHtmlMode(!isHtmlMode);
+  };
 
   useEffect(() => {
     if (isMounted.current || !editorRef.current) return;
@@ -84,12 +101,34 @@ export default function QuillEditor({ content, onChange, label, placeholder }: Q
 
   return (
     <div className="space-y-1.5">
-      {label && (
-        <label className="text-[13px] font-bold text-[#1d2327]">{label}</label>
-      )}
-      <div className="border border-[#c3c4c7] rounded-sm overflow-hidden focus-within:border-[#2271b1] focus-within:ring-1 focus-within:ring-[#2271b1] transition-all quill-admin-wrapper">
+      <div className="flex justify-between items-center">
+        {label && (
+          <label className="text-[13px] font-bold text-[#1d2327]">{label}</label>
+        )}
+        <button
+          type="button"
+          onClick={toggleHtmlMode}
+          className="text-xs text-[#2271b1] hover:text-[#135e96] font-semibold flex items-center gap-1"
+        >
+          {isHtmlMode ? "✏️ Edit Visually" : "💻 Edit HTML"}
+        </button>
+      </div>
+
+      <div 
+        style={{ display: isHtmlMode ? "none" : "block" }} 
+        className="border border-[#c3c4c7] rounded-sm overflow-hidden focus-within:border-[#2271b1] focus-within:ring-1 focus-within:ring-[#2271b1] transition-all quill-admin-wrapper"
+      >
         <div ref={editorRef} />
       </div>
+
+      {isHtmlMode && (
+        <textarea
+          value={normalizeContent(content)}
+          onChange={(e) => onChange(e.target.value)}
+          className="w-full min-h-[220px] p-4 font-mono text-[13px] text-[#1d2327] bg-white border border-[#c3c4c7] rounded-sm focus:outline-none focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1]"
+          placeholder="Paste or write HTML here..."
+        />
+      )}
       <style jsx global>{`
         .quill-admin-wrapper .ql-toolbar {
           border: none !important;
