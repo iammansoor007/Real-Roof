@@ -410,10 +410,12 @@ const AccordionItem = ({ item, index, isOpen, onToggle }: { item: any; index: nu
 };
 
 const CategoryFilter = ({ categories, activeCategory, onCategoryChange }: { categories: any[]; activeCategory: string; onCategoryChange: (id: string) => void }) => {
-  // Normalize categories if they are just strings
+  // Normalize categories if they are just strings, filtering out any duplicate 'all' categories
   const normalizedCategories = [
     { id: 'all', label: 'All Questions', icon: 'Layers' },
-    ...(Array.isArray(categories) ? categories : []).map(cat => (typeof cat === 'string' ? { id: cat, label: cat, icon: null } : cat))
+    ...(Array.isArray(categories) ? categories : [])
+      .filter(cat => (typeof cat === 'string' ? cat !== 'all' : cat?.id !== 'all'))
+      .map(cat => (typeof cat === 'string' ? { id: cat, label: cat, icon: null } : cat))
   ];
 
   return (
