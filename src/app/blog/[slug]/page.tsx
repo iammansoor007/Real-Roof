@@ -12,6 +12,7 @@ import ReadingProgress from '@/components/blog/ReadingProgress';
 import ShareButton from '@/components/blog/ShareButton';
 import PageInlineFaqs from '@/components/PageInlineFaqs';
 import { BASE_URL } from '@/lib/constants';
+import { makeLinksDoFollow } from '@/lib/utils';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -141,6 +142,8 @@ export default async function BlogPostPage({ params }: Props) {
     const newTag = `<${finalTag} id="${id}" class="scroll-mt-32">${match[2]}</${finalTag}>`;
     processedContent = processedContent.replace(originalTag, newTag);
   }
+
+  processedContent = makeLinksDoFollow(processedContent);
 
   return (
     <article className="min-h-screen bg-white pb-24">

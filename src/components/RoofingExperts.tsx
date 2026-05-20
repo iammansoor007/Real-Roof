@@ -177,6 +177,10 @@ export default function AboutSection() {
         coreValues = [] 
     } = about || {};
 
+    const isDynamicImage = !!(image?.src && (image.src.startsWith('/') || image.src.startsWith('http')));
+    const isCloudinaryOrUnsplash = !!(image?.src && (image.src.includes('res.cloudinary.com') || image.src.includes('images.unsplash.com')));
+    const shouldBeUnoptimized = isDynamicImage && image.src.startsWith('http') && !isCloudinaryOrUnsplash;
+
     const variants = useMemo(
         () => ({
             hidden: { opacity: 0, y: 30 },
@@ -278,11 +282,16 @@ export default function AboutSection() {
 
                         <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-gray-300/50">
                             <div className="relative aspect-[4/5] lg:aspect-[3/4]">
-                                {image?.src && (image.src.startsWith('http') || image.src.startsWith('/uploads')) ? (
-                                    <img
+                                {isDynamicImage ? (
+                                    <Image
                                         src={image.src}
                                         alt={image.alt || "About Eagle Revolution"}
-                                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                        fill
+                                        quality={100}
+                                        priority
+                                        loading="eager"
+                                        unoptimized={shouldBeUnoptimized}
                                     />
                                 ) : (
                                     <Image

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Save, Loader2, LayoutTemplate, Type, Image as ImageIcon, ChevronRight, Star, Phone, Plus, Trash2, Mail, Award, Target, Heart } from "lucide-react";
 import Link from "next/link";
 import ImageField from "@/components/admin/ImageField";
+import ContentSelector from "@/components/admin/ContentSelector";
 import dynamic from "next/dynamic";
 const RichTextEditor = dynamic(() => import("@/components/admin/RichTextEditor"), { 
   ssr: false,
@@ -28,6 +29,7 @@ export default function AboutEditor() {
         if (!d.aboutPage.stats) d.aboutPage.stats = { items: [], trustBadges: [] };
         if (!d.aboutPage.mission) d.aboutPage.mission = { principles: [], stats: [] };
         if (!d.aboutPage.capabilities) d.aboutPage.capabilities = {};
+        if (!d.aboutPage.services) d.aboutPage.services = [];
         if (!d.aboutPage.recognition) d.aboutPage.recognition = [];
         if (!d.aboutPage.ctaBanner) d.aboutPage.ctaBanner = { features: [] };
         setData(d);
@@ -79,12 +81,12 @@ export default function AboutEditor() {
   }
 
   const tabs = [
-    { id: "hero", label: "Hero Section", icon: LayoutTemplate },
-    { id: "story", label: "Founder Story", icon: Type },
-    { id: "stats", label: "Company Stats", icon: Award },
-    { id: "mission", label: "Mission & Values", icon: Target },
-    { id: "capabilities", label: "Capabilities Header", icon: LayoutTemplate },
-    { id: "cta", label: "Awards & CTA", icon: Heart },
+    { id: "hero", label: "1. Hero Section (Top of Page)", icon: LayoutTemplate },
+    { id: "story", label: "2. Founder Story & Quotes", icon: Type },
+    { id: "stats", label: "3. Company Impact Stats", icon: Award },
+    { id: "mission", label: "4. Mission & Values", icon: Target },
+    { id: "capabilities", label: "5. Capabilities & Services Selection", icon: LayoutTemplate },
+    { id: "cta", label: "6. Awards & Bottom CTA", icon: Heart },
   ];
 
   const { aboutPage } = data;
@@ -638,6 +640,17 @@ export default function AboutEditor() {
                       onChange={(v) => updateAbout("capabilities", "description", v)} 
                     />
                   </div>
+                </div>
+
+                <div className="space-y-6 pt-6 border-t border-slate-100">
+                  <h3 className="text-lg font-black text-slate-800">Featured Service Selection</h3>
+                  <p className="text-xs text-slate-500 italic">Select which services to feature in the capabilities section on the public About page. Drag and drop or use the arrows to reorder.</p>
+                  <ContentSelector
+                    type="services"
+                    label="Featured Services"
+                    selectedItems={aboutPage.services || []}
+                    onSelect={(items) => updateAbout("services", null, items)}
+                  />
                 </div>
               </motion.div>
             )}

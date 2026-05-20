@@ -591,29 +591,38 @@ const AwardCTABanner = () => {
                         </div>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-4">
-                        {(cta?.buttons || []).map((button: any, idx: number) => (
-                            <Link key={idx} href={button.href || "#"}>
-                                <motion.div
-                                    whileHover={{ scale: 1.03 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    className="relative px-8 py-4 bg-white text-primary border-2 border-primary font-bold rounded-full shadow-sm hover:bg-primary hover:text-white hover:shadow-md transition-all duration-300 overflow-hidden flex items-center justify-center gap-2 cursor-pointer"
-                                >
-                                    <span className="relative z-10 flex items-center gap-2 text-sm md:text-base">
-                                        {button.text}
-                                        <motion.svg
-                                            className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                        </motion.svg>
-                                    </span>
-                                </motion.div>
-                            </Link>
-                        ))}
-                    </div>
+                 <div className="flex flex-col sm:flex-row gap-4">
+    {(cta?.buttons || []).map((button: any, idx: number) => {
+        const links = ["/gallery", "/contact"];
+
+        return (
+            <Link key={idx} href={links[idx] || "#"}>
+                <motion.div
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="relative px-8 py-4 bg-white text-primary border-2 border-primary font-bold rounded-full shadow-sm hover:bg-primary hover:text-white hover:shadow-md transition-all duration-300 overflow-hidden flex items-center justify-center gap-2 cursor-pointer"
+                >
+                    <span className="relative z-10 flex items-center gap-2 text-sm md:text-base">
+                        {button.text}
+                        <motion.svg
+                            className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9 5l7 7-7 7"
+                            />
+                        </motion.svg>
+                    </span>
+                </motion.div>
+            </Link>
+        );
+    })}
+</div>
                 </div>
             </div>
         </motion.div>
@@ -684,7 +693,7 @@ const WhyChooseUs = () => {
                             </div>
                         )}
 
-                        <h1
+                        <h2
                             className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight"
                             dangerouslySetInnerHTML={{ __html: section?.headline || "" }}
                         />
@@ -721,4 +730,4 @@ const WhyChooseUs = () => {
     );
 };
 
-export default WhyChooseUs;
+export default WhyChooseUs;

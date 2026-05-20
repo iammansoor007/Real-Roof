@@ -67,7 +67,7 @@ export default function BrandStore() {
                     transition={{ duration: 0.8 }}
                     className="mb-6"
                 >
-                    <motion.h1
+                    <motion.h2
                         initial={{ y: 80 }}
                         whileInView={{ y: 0 }}
                         viewport={{ once: true }}
@@ -77,7 +77,7 @@ export default function BrandStore() {
                         <span className="text-foreground">REP THE</span>
                         <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/70">REVOLUTION</span>
-                    </motion.h1>
+                    </motion.h2>
                 </motion.div>
 
                 {/* Subtitle - Fixed contrast */}

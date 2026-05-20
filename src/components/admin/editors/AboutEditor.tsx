@@ -7,7 +7,12 @@ import dynamic from "next/dynamic";
 import IconSelector from "@/components/admin/IconSelector";
 import BlogSelector from "@/components/admin/BlogSelector";
 import ImageField from "@/components/admin/ImageField";
+import ContentSelector from "@/components/admin/ContentSelector";
 const RichTextEditor = dynamic(() => import("@/components/admin/RichTextEditor"), {
+   ssr: false,
+   loading: () => <div className="h-64 bg-[#f6f7f7] animate-pulse border border-[#c3c4c7] rounded-sm flex items-center justify-center text-[#8c8f94] text-xs">Loading Rich Text Editor...</div>
+});
+const QuillEditor = dynamic(() => import("@/components/admin/QuillEditor"), {
    ssr: false,
    loading: () => <div className="h-64 bg-[#f6f7f7] animate-pulse border border-[#c3c4c7] rounded-sm flex items-center justify-center text-[#8c8f94] text-xs">Loading Rich Text Editor...</div>
 });
@@ -19,13 +24,14 @@ export default function AboutEditor({ pageId, data, setData }: { pageId: string,
    useEffect(() => {
       if (data && Object.keys(data).length === 0) {
          setData({
-            hero: { headline: { line1: "", line2: "", line3: "" }, description: "", cta: "", phone: "", phoneLabel: "", trustLabel: "", stats: [], bgImage: "", bgImageAlt: "" },
+            hero: { headline: { line1: "", line2: "", line3: "" }, description: "", cta: "", ctaLink: "", phone: "", phoneLabel: "", trustLabel: "", stats: [], bgImage: "", bgImageAlt: "" },
             mission: { badge: "", headline: "", highlight: "", description: "", stats: [], principles: [] },
             story: { badge: "", headline: "", highlight: "", description: "", portrait: { image: "", alt: "", badgeLeft: "", badgeRight: "" }, founder: { name: "", title: "", quote: "", bio: "", secondaryQuote: "", footer: "", email: "", social: { linkedin: "" } } },
             values: { badge: "", headline: "", highlight: "", description: "", items: [] },
             capabilities: { badge: "", headline: "", highlight: "", description: "", cta: "" },
             ctaBanner: { badge: "", headline: "", highlight: "", description: "", features: [], primaryCta: "", secondaryCta: "" },
-            stats: { badge: "", headline: "", description: "", items: [], trustBadges: [] }
+            stats: { badge: "", headline: "", description: "", items: [], trustBadges: [] },
+            services: []
          });
       }
    }, [data, setData]);
@@ -52,14 +58,14 @@ export default function AboutEditor({ pageId, data, setData }: { pageId: string,
    };
 
    const tabs = [
-      { id: "hero", label: "Hero" },
-      { id: "mission", label: "Mission" },
-      { id: "story", label: "Story" },
-      { id: "values", label: "Values" },
-      { id: "capabilities", label: "Capabilities" },
-      { id: "stats", label: "Stats" },
-      { id: "blog", label: "Blog" },
-      { id: "ctaBanner", label: "CTA Banner" }
+      { id: "hero", label: "1. Hero Section (Top of Page)" },
+      { id: "mission", label: "2. Mission Section" },
+      { id: "story", label: "3. Founder's Story & Quotes" },
+      { id: "values", label: "4. Core Values Grid" },
+      { id: "capabilities", label: "5. Capabilities & Service Selection" },
+      { id: "stats", label: "6. Impact Stats & Trust Badges" },
+      { id: "blog", label: "7. Featured Blog Posts" },
+      { id: "ctaBanner", label: "8. Call to Action Banner (Bottom)" }
    ];
 
    return (
@@ -116,6 +122,7 @@ export default function AboutEditor({ pageId, data, setData }: { pageId: string,
                         <div className="space-y-1.5"><label className={UI.label}>Phone</label><input type="text" value={data.hero?.phone || ""} onChange={(e) => updateSection("hero", "phone", e.target.value)} className={UI.input} /></div>
                         <div className="space-y-1.5"><label className={UI.label}>Phone Label</label><input type="text" value={data.hero?.phoneLabel || ""} onChange={(e) => updateSection("hero", "phoneLabel", e.target.value)} className={UI.input} /></div>
                         <div className="space-y-1.5"><label className={UI.label}>CTA Text</label><input type="text" value={data.hero?.cta || ""} onChange={(e) => updateSection("hero", "cta", e.target.value)} className={UI.input} /></div>
+                        <div className="space-y-1.5"><label className={UI.label}>CTA Link</label><input type="text" value={data.hero?.ctaLink || ""} onChange={(e) => updateSection("hero", "ctaLink", e.target.value)} className={UI.input} placeholder="/contact" /></div>
                         <div className="space-y-1.5"><label className={UI.label}>Trust Label</label><input type="text" value={data.hero?.trustLabel || ""} onChange={(e) => updateSection("hero", "trustLabel", e.target.value)} className={UI.input} /></div>
                      </div>
                      <div className="space-y-6">
@@ -204,7 +211,7 @@ export default function AboutEditor({ pageId, data, setData }: { pageId: string,
                            <input type="text" value={data.story?.headline || ""} onChange={(e) => updateSection("story", "headline", e.target.value)} className={UI.input} placeholder="Headline" />
                            <input type="text" value={data.story?.highlight || ""} onChange={(e) => updateSection("story", "highlight", e.target.value)} className={UI.input + " font-bold border-[#2271b1]"} placeholder="Highlight" />
                         </div>
-                        <RichTextEditor
+                        <QuillEditor
                            label="Description"
                            content={data.story?.description || ""}
                            onChange={(html) => updateSection("story", "description", html)}
@@ -231,12 +238,12 @@ export default function AboutEditor({ pageId, data, setData }: { pageId: string,
                         <div className="space-y-4">
                            <div className="space-y-1.5"><label className={UI.label}>Name</label><input type="text" value={data.story?.founder?.name || ""} onChange={(e) => updateSection("story", "founder", { ...(data.story?.founder || {}), name: e.target.value })} className={UI.input} /></div>
                            <div className="space-y-1.5"><label className={UI.label}>Title</label><input type="text" value={data.story?.founder?.title || ""} onChange={(e) => updateSection("story", "founder", { ...(data.story?.founder || {}), title: e.target.value })} className={UI.input} /></div>
-                           <RichTextEditor
+                           <QuillEditor
                               label="Primary Quote"
                               content={data.story?.founder?.quote || ""}
                               onChange={(html) => updateSection("story", "founder", { ...(data.story?.founder || {}), quote: html })}
                            />
-                           <RichTextEditor
+                           <QuillEditor
                               label="Secondary Quote"
                               content={data.story?.founder?.secondaryQuote || ""}
                               onChange={(html) => updateSection("story", "founder", { ...(data.story?.founder || {}), secondaryQuote: html })}
@@ -246,7 +253,7 @@ export default function AboutEditor({ pageId, data, setData }: { pageId: string,
                            <div className="space-y-1.5"><label className={UI.label}>LinkedIn</label><input type="text" value={data.story?.founder?.social?.linkedin || ""} onChange={(e) => updateSection("story", "founder", { ...(data.story?.founder || {}), social: { ...(data.story?.founder?.social || {}), linkedin: e.target.value } })} className={UI.input} /></div>
                         </div>
                      </div>
-                     <RichTextEditor
+                     <QuillEditor
                         label="Biography"
                         content={typeof data.story?.founder?.bio === 'string' ? data.story.founder.bio : (data.story?.founder?.bio || []).join("")}
                         onChange={(html) => updateSection("story", "founder", { ...(data.story?.founder || {}), bio: html })}
@@ -317,6 +324,17 @@ export default function AboutEditor({ pageId, data, setData }: { pageId: string,
                            onChange={(html) => updateSection("capabilities", "description", html)}
                         />
                         <div className="space-y-1.5"><label className={UI.label}>CTA Text</label><input type="text" value={data.capabilities?.cta || ""} onChange={(e) => updateSection("capabilities", "cta", e.target.value)} className={UI.input} /></div>
+                     </div>
+
+                     <div className="space-y-6 pt-6 border-t border-slate-100">
+                        <h3 className={UI.sectionHeader}>Featured Service Selection</h3>
+                        <p className="text-xs text-slate-500 italic">Select which services to feature in the capabilities section on the public About page. Drag and drop or use the arrows to reorder.</p>
+                        <ContentSelector
+                           type="services"
+                           label="Featured Services"
+                           selectedItems={data.services || []}
+                           onSelect={(items) => updateSection("services", null, items)}
+                        />
                      </div>
                   </div>
                )}

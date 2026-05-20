@@ -1,16 +1,5 @@
 import React from 'react';
-import {
-    Home, Building2, Wrench, Star, Shield, Clock, Mail, Phone,
-    MapPin, Calendar, ArrowRight, Check, X, Menu, ChevronDown,
-    ChevronRight, ChevronLeft, Facebook, Twitter, Instagram, Linkedin,
-    Youtube, Award, Sparkles, Flag, Users, Briefcase, MessageSquare,
-    FileText, Image, CreditCard, DollarSign, ThumbsUp, User, Send,
-    ClipboardCheck, TreePine, Droplets, Hammer, Sun, CloudRain,
-    Layout, Square, Building, Plus, Minus, Search, Infinity,
-    Volume2, VolumeX, Play, Pause, ChevronUp, Quote,
-    CheckCircle, Gem, Globe, Scale, ShieldCheck, Target, TrendingUp, Zap, BadgeCheck,
-    Lock, MessageCircle, Info, ShoppingBag, AlertCircle, Truck, Copyright
-} from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 
 // For Google, we can use a custom icon
 const Google = () => (
@@ -22,35 +11,136 @@ const Google = () => (
     </svg>
 );
 
+// We keep a static map for custom icons, aliases, and direct imports to maintain backwards compatibility
 export const iconMap: Record<string, any> = {
-    Home, Building2, Wrench, Star, Shield, Clock, Mail, Phone,
-    MapPin, Calendar, ArrowRight, Check, X, Menu, ChevronDown,
-    ChevronRight, ChevronLeft, Facebook, Twitter, Instagram, Linkedin,
-    Youtube, Award, Sparkles, Flag, Users, Briefcase, MessageSquare,
-    FileText, Image, CreditCard, DollarSign, ThumbsUp, User, Send,
-    ClipboardCheck, TreePine, Droplets, Hammer, Sun, CloudRain,
-    Layout, Square, Building, Plus, Minus, Search, Infinity,
-    Volume2, VolumeX, Play, Pause, ChevronUp, Google, Quote,
-    CheckCircle, Gem, Globe, Scale, ShieldCheck, Target, TrendingUp, Zap, BadgeCheck,
-    Lock, MessageCircle, Info, ShoppingBag, AlertCircle, Truck, Copyright,
+    Home: LucideIcons.Home,
+    Building2: LucideIcons.Building2,
+    Wrench: LucideIcons.Wrench,
+    Star: LucideIcons.Star,
+    Shield: LucideIcons.Shield,
+    Clock: LucideIcons.Clock,
+    Mail: LucideIcons.Mail,
+    Phone: LucideIcons.Phone,
+    MapPin: LucideIcons.MapPin,
+    Calendar: LucideIcons.Calendar,
+    ArrowRight: LucideIcons.ArrowRight,
+    Check: LucideIcons.Check,
+    X: LucideIcons.X,
+    Menu: LucideIcons.Menu,
+    ChevronDown: LucideIcons.ChevronDown,
+    ChevronRight: LucideIcons.ChevronRight,
+    ChevronLeft: LucideIcons.ChevronLeft,
+    Facebook: LucideIcons.Facebook,
+    Twitter: LucideIcons.Twitter,
+    Instagram: LucideIcons.Instagram,
+    Linkedin: LucideIcons.Linkedin,
+    Youtube: LucideIcons.Youtube,
+    Award: LucideIcons.Award,
+    Sparkles: LucideIcons.Sparkles,
+    Flag: LucideIcons.Flag,
+    Users: LucideIcons.Users,
+    Briefcase: LucideIcons.Briefcase,
+    MessageSquare: LucideIcons.MessageSquare,
+    FileText: LucideIcons.FileText,
+    Image: LucideIcons.Image,
+    CreditCard: LucideIcons.CreditCard,
+    DollarSign: LucideIcons.DollarSign,
+    ThumbsUp: LucideIcons.ThumbsUp,
+    User: LucideIcons.User,
+    Send: LucideIcons.Send,
+    ClipboardCheck: LucideIcons.ClipboardCheck,
+    TreePine: LucideIcons.TreePine,
+    Droplets: LucideIcons.Droplets,
+    Hammer: LucideIcons.Hammer,
+    Sun: LucideIcons.Sun,
+    CloudRain: LucideIcons.CloudRain,
+    Layout: LucideIcons.Layout,
+    Square: LucideIcons.Square,
+    Building: LucideIcons.Building,
+    Plus: LucideIcons.Plus,
+    Minus: LucideIcons.Minus,
+    Search: LucideIcons.Search,
+    Infinity: LucideIcons.Infinity,
+    Volume2: LucideIcons.Volume2,
+    VolumeX: LucideIcons.VolumeX,
+    Play: LucideIcons.Play,
+    Pause: LucideIcons.Pause,
+    ChevronUp: LucideIcons.ChevronUp,
+    Google,
+    Quote: LucideIcons.Quote,
+    CheckCircle: LucideIcons.CheckCircle,
+    Gem: LucideIcons.Gem,
+    Globe: LucideIcons.Globe,
+    Scale: LucideIcons.Scale,
+    ShieldCheck: LucideIcons.ShieldCheck,
+    Target: LucideIcons.Target,
+    TrendingUp: LucideIcons.TrendingUp,
+    Zap: LucideIcons.Zap,
+    BadgeCheck: LucideIcons.BadgeCheck,
+    Lock: LucideIcons.Lock,
+    MessageCircle: LucideIcons.MessageCircle,
+    Info: LucideIcons.Info,
+    ShoppingBag: LucideIcons.ShoppingBag,
+    AlertCircle: LucideIcons.AlertCircle,
+    Truck: LucideIcons.Truck,
+    Copyright: LucideIcons.Copyright,
     // Aliases for alternate naming used in data files
-    Warranty: Shield,
-    LinkedIn: Linkedin,
-    Verified: BadgeCheck,
-    Chat: MessageCircle,
+    Warranty: LucideIcons.Shield,
+    LinkedIn: LucideIcons.Linkedin,
+    Verified: LucideIcons.BadgeCheck,
+    Chat: LucideIcons.MessageCircle,
 };
 
-// Helper component to render icons - Fixed to properly render React components
+// Helper component to render icons - Fixed to properly render React components and support all Lucide icons
 export const Icon = ({ name, className = "w-5 h-5", ...props }: {
     name: string;
     className?: string;
     [key: string]: any;
 }) => {
-    const IconComponent = iconMap[name];
-    if (!IconComponent) {
-        console.warn(`Icon "${name}" not found`);
+    if (!name) {
         return null;
     }
-    // Render the component properly with props
+
+    // Strip "Lucide" or "lucide-" prefixes if present
+    let cleanName = name;
+    if (cleanName.startsWith('Lucide')) {
+        cleanName = cleanName.substring(6);
+    } else if (cleanName.startsWith('lucide-')) {
+        cleanName = cleanName.substring(7);
+        // Convert kebab-case to PascalCase (e.g., cloud-rain -> CloudRain)
+        cleanName = cleanName
+            .split('-')
+            .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+            .join('');
+    }
+
+    // 1. Check custom iconMap
+    let IconComponent = iconMap[cleanName];
+
+    // 2. Check full LucideIcons set
+    if (!IconComponent) {
+        IconComponent = (LucideIcons as any)[cleanName];
+    }
+
+    // 3. Case-insensitive and capitalization fallbacks
+    if (!IconComponent) {
+        const capitalizedName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
+        IconComponent = (LucideIcons as any)[capitalizedName] || iconMap[capitalizedName];
+        
+        if (!IconComponent) {
+            const lowerName = cleanName.toLowerCase();
+            const foundKey = Object.keys(LucideIcons).find(key => key.toLowerCase() === lowerName);
+            if (foundKey) {
+                IconComponent = (LucideIcons as any)[foundKey];
+            }
+        }
+    }
+
+    // 4. Default fallback so it never returns empty/null when an icon is configured
+    if (!IconComponent) {
+        console.warn(`Icon "${name}" (cleaned: "${cleanName}") not found in icons config or lucide-react`);
+        IconComponent = LucideIcons.CircleHelp || LucideIcons.HelpCircle || LucideIcons.Star;
+    }
+
     return React.createElement(IconComponent, { className, ...props });
 };

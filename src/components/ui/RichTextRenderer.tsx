@@ -2,6 +2,7 @@
 
 import React from "react";
 import DOMPurify from "dompurify";
+import { makeLinksDoFollow } from "@/lib/utils";
 
 interface RichTextRendererProps {
   content: string | string[];
@@ -29,7 +30,7 @@ export default function RichTextRenderer({ content, className = "", stripParagra
         {content.map((p, i) => (
           <div 
             key={i} 
-            dangerouslySetInnerHTML={{ __html: safeSanitize(p) }} 
+            dangerouslySetInnerHTML={{ __html: makeLinksDoFollow(safeSanitize(p)) }} 
             className="rich-text-content"
           />
         ))}
@@ -56,7 +57,7 @@ export default function RichTextRenderer({ content, className = "", stripParagra
       .replace(/&lt;\/strong&gt;/gi, '</strong>');
   };
 
-  sanitizedHtml = unescapeLiteralTags(sanitizedHtml);
+  sanitizedHtml = makeLinksDoFollow(unescapeLiteralTags(sanitizedHtml));
 
   // If stripParagraphs is true, remove all P tags (real or just unescaped)
   if (stripParagraphs) {
@@ -75,3 +76,4 @@ export default function RichTextRenderer({ content, className = "", stripParagra
     />
   );
 }
+
