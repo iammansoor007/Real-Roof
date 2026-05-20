@@ -17,6 +17,10 @@ const RichTextEditor = dynamic(() => import("@/components/admin/RichTextEditor")
    ssr: false,
    loading: () => <div className="h-64 bg-[#f6f7f7] animate-pulse border border-[#c3c4c7] rounded-sm flex items-center justify-center text-[#8c8f94] text-xs">Loading Rich Text Editor...</div>
 });
+const QuillEditor = dynamic(() => import("@/components/admin/QuillEditor"), {
+   ssr: false,
+   loading: () => <div className="h-40 bg-[#f6f7f7] animate-pulse border border-[#c3c4c7] rounded-sm flex items-center justify-center text-[#8c8f94] text-xs">Loading editor...</div>
+});
 import { UI } from "./styles";
 
 export default function HomeEditor({ pageId, data, setData }: { pageId: string, data: any, setData: (d: any) => void }) {
@@ -217,7 +221,7 @@ export default function HomeEditor({ pageId, data, setData }: { pageId: string, 
                      </div>
                      <div className="space-y-6">
                         <h3 className={UI.sectionHeader}>2. Brand Narrative</h3>
-                        <RichTextEditor
+                        <QuillEditor
                            label="2. Brand Narrative"
                            content={data.about?.description || ""}
                            onChange={(html) => updateSection("about", "description", html)}
@@ -302,7 +306,7 @@ export default function HomeEditor({ pageId, data, setData }: { pageId: string, 
                            <input type="text" value={data.services?.headline?.highlight || ""} onChange={(e) => updateSection("services", "headline", { ...(data.services?.headline || {}), highlight: e.target.value })} className={UI.input + " font-bold border-[#2271b1]"} />
                            <input type="text" value={data.services?.headline?.suffix || ""} onChange={(e) => updateSection("services", "headline", { ...(data.services?.headline || {}), suffix: e.target.value })} className={UI.input} />
                         </div>
-                        <RichTextEditor
+                        <QuillEditor
                            label="Description Narrative"
                            content={Array.isArray(data.services?.description) ? data.services.description.join("") : (data.services?.description || "")}
                            onChange={(html) => updateSection("services", "description", html)}
@@ -391,7 +395,7 @@ export default function HomeEditor({ pageId, data, setData }: { pageId: string, 
                            <label className={UI.label}>Headline (HTML allowed)</label>
                            <input type="text" value={data.leadership?.section?.headline || ""} onChange={(e) => updateSection("leadership", "section", { ...(data.leadership?.section || {}), headline: e.target.value })} className={UI.inputLarge} />
                         </div>
-                        <RichTextEditor
+                        <QuillEditor
                            label="Description Paragraph"
                            content={data.leadership?.section?.description || ""}
                            onChange={(html) => updateSection("leadership", "section", { ...(data.leadership?.section || {}), description: html })}
@@ -431,13 +435,13 @@ export default function HomeEditor({ pageId, data, setData }: { pageId: string, 
                            </div>
                         </div>
 
-                        <RichTextEditor
+                        <QuillEditor
                            label="Leader Quote"
                            content={data.leadership?.ceo?.quotes?.[0] || ""}
                            onChange={(html) => updateSection("leadership", "ceo", { ...(data.leadership?.ceo || {}), quotes: [html] })}
                         />
 
-                        <RichTextEditor
+                        <QuillEditor
                            label="Full Biography/Description"
                            content={data.leadership?.ceo?.description || ""}
                            onChange={(html) => updateSection("leadership", "ceo", { ...(data.leadership?.ceo || {}), description: html })}
