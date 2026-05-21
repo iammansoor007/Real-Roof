@@ -104,43 +104,6 @@ function IconSelector({ value, onChange }: { value: string, onChange: (v: string
   );
 }
 
-export default function ServicesPageEditor() {
-  const [data, setData] = useState<any>(null);
-  const [saving, setSaving] = useState(false);
-  const [message, setMessage] = useState("");
-  const [activeTab, setActiveTab] = useState("hero");
-
-  // Capability Card State
-  const [editingServiceIdx, setEditingServiceIdx] = useState<number | "new" | null>(null);
-  const [serviceSubTab, setServiceSubTab] = useState("general");
-  const [serviceSearch, setServiceSearch] = useState("");
-  const [serviceSeo, setServiceSeo] = useState<any>({});
-  const [serviceForm, setServiceForm] = useState<any>({
-    title: "", slug: "", tagline: "",
-    description: "",
-    heroDescription: "",
-    breadcrumbText: "",
-    overviewTitlePrefix: "", overviewTitleHighlight: "", overviewTitleSuffix: "",
-    benefitsTitlePrefix: "", benefitsTitleHighlight: "", benefitsTitleSuffix: "",
-    benefitsBadge: "",
-    benefitsDescription: "",
-    processTitlePrefix: "", processTitleHighlight: "", processTitleSuffix: "",
-    processBadge: "",
-    processDescription: "",
-    overview: "", overviewImage: "", overviewStats: [],
-    cta: { text: "Start Your Project", link: "/contact" }, icon: "Layout", tag: "", status: "published", features: [], stats: [], benefits: [], process: [], faq: []
-  });
-
-  useEffect(() => {
-    if (editingServiceIdx !== null && serviceForm.title && !serviceForm.id) { // Only auto-slug for new ones
-      const generatedSlug = serviceForm.title.toLowerCase().replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, "-");
-      if (serviceForm.slug !== generatedSlug) {
-        setServiceForm((prev: any) => ({ ...prev, slug: generatedSlug }));
-      }
-    }
-  }, [serviceForm.title, editingServiceIdx]);
-
-
 const POPULAR_ICONS = [
   "Clock", "Home", "BadgeCheck", "Shield", "Users", "Award", "Star",
   "ThumbsUp", "Trophy", "Wrench", "HardHat", "Sparkles", "Construction"
