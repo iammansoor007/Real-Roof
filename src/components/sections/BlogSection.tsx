@@ -24,57 +24,66 @@ interface BlogSectionProps {
     viewAllLink?: string;
 }
 
+const hasTextContent = (str?: string) => {
+    if (!str) return false;
+    const clean = str.replace(/<[^>]*>?/gm, '').replace(/&nbsp;/g, ' ').trim();
+    return clean.length > 0;
+};
+
 export default function BlogSection({ 
-    title = "Latest from the Blog", 
-    subtitle = "Insights & News", 
-    description = "Stay updated with the latest trends, tips, and news from the roofing and construction industry.",
+    title, 
+    subtitle, 
+    description,
     posts = [],
     viewAllLink = "/blog"
 }: BlogSectionProps) {
     if (!posts || posts.length === 0) return null;
 
+    const displayTitle = hasTextContent(title) ? title! : "Latest from the Blog";
+    const displaySubtitle = hasTextContent(subtitle) ? subtitle! : "Insights & News";
+    const displayDescription = hasTextContent(description) ? description! : "Stay updated with the latest trends, tips, and news from the roofing and construction industry.";
+
+    const words = displayTitle.trim().split(/\s+/);
+    let mainTitle = "";
+    let lastWord = "";
+    if (words.length > 0) {
+        lastWord = words[words.length - 1];
+        mainTitle = words.slice(0, -1).join(" ");
+    }
+
     return (
         <section className="py-24 bg-background relative overflow-hidden">
             {/* Background Accents */}
-            <div className="absolute top-0 right-0 w-1/3 h-1/2 bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-1/4 h-1/3 bg-primary/5 blur-[100px] rounded-full translate-y-1/2 -translate-x-1/4 pointer-events-none" />
+            <div className="absolute top-0 right-0 w-1/3 h-1/2 bg-gradient-to-br from-primary/10 to-transparent blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-1/4 h-1/3 bg-gradient-to-tr from-primary/10 to-transparent blur-[100px] rounded-full translate-y-1/2 -translate-x-1/4 pointer-events-none" />
+            <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{ backgroundImage: "radial-gradient(hsl(var(--primary)) 0.5px, transparent 0.5px)", backgroundSize: "24px 24px" }} />
 
             <div className="max-w-7xl mx-auto px-4 relative z-10">
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-                    <div className="max-w-2xl">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5 }}
-                        >
-                            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest mb-4">
-                                {subtitle}
-                            </span>
-                            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
-                                {title}
-                            </h2>
-                            <div className="text-muted-foreground text-lg leading-relaxed">
-                                <RichTextRenderer content={description} stripParagraphs={true} />
-                            </div>
-                        </motion.div>
-                    </div>
-
+                <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
                     <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
+                        transition={{ duration: 0.5 }}
                     >
-                        <Link 
-                            href={viewAllLink}
-                            className="group flex items-center gap-3 text-foreground font-bold hover:text-primary transition-colors duration-300 no-underline"
-                        >
-                            <span className="text-sm uppercase tracking-widest no-underline">View All Posts</span>
-                            <div className="w-10 h-10 rounded-full border border-border group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground flex items-center justify-center transition-all duration-300">
-                                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                            </div>
-                        </Link>
+                        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                            <div className="w-8 sm:w-12 h-px bg-primary/30" />
+                            <span className="text-[8px] xs:text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase text-primary">
+                                {displaySubtitle}
+                            </span>
+                            <div className="w-8 sm:w-12 h-px bg-primary/30" />
+                        </div>
+                        <h2 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-foreground mb-3 sm:mb-4">
+                            {mainTitle}{" "}
+                            {lastWord && (
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80">
+                                    {lastWord}
+                                </span>
+                            )}
+                        </h2>
+                        <div className="text-muted-foreground text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed">
+                            <RichTextRenderer content={displayDescription} stripParagraphs={true} />
+                        </div>
                     </motion.div>
                 </div>
 
@@ -118,7 +127,7 @@ export default function BlogSection({
                                 </div>
 
                                 <h3 className="text-xl font-bold text-foreground mb-4 line-clamp-2 group-hover:text-primary transition-colors duration-300 no-underline">
-                                    <Link href={`/blog/${post.slug}`} className="no-underline">
+                                    <Link href={`/blog/${post.slug}`} className="no-underline text-foreground group-hover:text-primary transition-colors duration-300">
                                         {post.title}
                                     </Link>
                                 </h3>
@@ -137,6 +146,24 @@ export default function BlogSection({
                             </div>
                         </motion.article>
                     ))}
+                </div>
+
+                {/* View All Posts Button */}
+                <div className="mt-12 sm:mt-16 flex justify-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                    >
+                        <Link href={viewAllLink} className="no-underline hover:no-underline">
+                            <div className="group relative overflow-hidden px-8 py-4 rounded-2xl inline-flex items-center justify-center gap-2.5 text-sm font-bold uppercase tracking-wider bg-primary text-white border border-primary/30 transition-all duration-300 active:scale-[0.98] hover:text-white shadow-lg shadow-primary/10 hover:shadow-primary/20 cursor-pointer">
+                                <span className="relative z-10">View All Posts</span>
+                                <ArrowRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                                <span className="absolute inset-0 bg-gradient-to-r from-white/10 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                            </div>
+                        </Link>
+                    </motion.div>
                 </div>
             </div>
         </section>

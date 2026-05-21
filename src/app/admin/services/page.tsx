@@ -34,9 +34,9 @@ import ImageField from "@/components/admin/ImageField";
 import SeoEditor from "@/components/admin/SeoEditor";
 import BlogSelector from "@/components/admin/BlogSelector";
 import dynamic from "next/dynamic";
-const RichTextEditor = dynamic(() => import("@/components/admin/RichTextEditor"), {
+const QuillEditor = dynamic(() => import("@/components/admin/QuillEditor"), {
   ssr: false,
-  loading: () => <div className="h-64 bg-[#f6f7f7] animate-pulse border border-[#c3c4c7] rounded-sm flex items-center justify-center text-[#8c8f94] text-xs">Loading Rich Text Editor...</div>
+  loading: () => <div className="h-48 bg-[#f6f7f7] animate-pulse border border-[#c3c4c7] rounded-sm flex items-center justify-center text-[#8c8f94] text-xs">Loading Editor...</div>
 });
 
 const ICON_LIST = Array.from(new Set([
@@ -135,7 +135,18 @@ export default function ServicesAdminPage() {
   const [quickEditing, setQuickEditing] = useState<any>(null);
 
   const [form, setForm] = useState<any>({
-    title: "", slug: "", tagline: "", description: "", overviewTitle: "", overview: "", overviewImage: "",
+    title: "", slug: "", tagline: "",
+    description: "",
+    heroDescription: "",
+    breadcrumbText: "",
+    overviewTitlePrefix: "", overviewTitleHighlight: "", overviewTitleSuffix: "",
+    benefitsTitlePrefix: "", benefitsTitleHighlight: "", benefitsTitleSuffix: "",
+    benefitsBadge: "",
+    benefitsDescription: "",
+    processTitlePrefix: "", processTitleHighlight: "", processTitleSuffix: "",
+    processBadge: "",
+    processDescription: "",
+    overview: "", overviewImage: "", overviewStats: [],
     cta: { text: "Start Your Project", link: "/contact" }, icon: "Layout", tag: "", status: "published", features: [], stats: [], benefits: [], process: [], faq: []
   });
 
@@ -194,11 +205,13 @@ export default function ServicesAdminPage() {
     const originalIdx = services.findIndex(orig => orig.id === service.id);
     setForm({
       ...service,
-      features: service.features || [],
+      features: (service.features || []).map((f: any) => typeof f === 'string' ? { text: f, icon: "CheckCircle" } : f),
       stats: service.stats || [],
       benefits: service.benefits || [],
       process: service.process || [],
-      faq: service.faq || []
+      faq: service.faq || [],
+      benefitsDescription: service.benefitsDescription || "",
+      processDescription: service.processDescription || ""
     });
     setSeo(service.seo || {});
     setIsEditing(originalIdx);
@@ -272,7 +285,20 @@ export default function ServicesAdminPage() {
           <button
             onClick={() => {
               setIsEditing(services.length);
-              setForm({ title: "", slug: "", tagline: "", description: "", overviewTitle: "Craftsmanship Without Compromise.", overview: "", overviewImage: "", cta: { text: "Start Your Project", link: "/contact" }, icon: "Layout", tag: "", status: "published", features: [], stats: [], benefits: [], process: [], faq: [] });
+              setForm({
+                title: "", slug: "", tagline: "", description: "",
+                heroDescription: "Professional solutions with military precision and architectural excellence.",
+                breadcrumbText: "",
+                overviewTitlePrefix: "Craftsmanship", overviewTitleHighlight: "Without Compromise", overviewTitleSuffix: ".",
+                benefitsTitlePrefix: "Key", benefitsTitleHighlight: "Benefits", benefitsTitleSuffix: "",
+                benefitsBadge: "The Eagle Edge",
+                benefitsDescription: "Experience the difference with our unwavering commitment to military-grade excellence",
+                processTitlePrefix: "Precision", processTitleHighlight: "In Every Detail", processTitleSuffix: "",
+                processBadge: "Methodology",
+                processDescription: "A battle-tested framework that ensures consistency, quality, and complete satisfaction—from initial consultation to final walkthrough.",
+                overview: "", overviewImage: "", overviewStats: [],
+                cta: { text: "Start Your Project", link: "/contact" }, icon: "Layout", tag: "", status: "published", features: [], stats: [], benefits: [], process: [], faq: []
+              });
               setSeo({});
               setActiveTab("general");
             }}
@@ -340,10 +366,15 @@ export default function ServicesAdminPage() {
                       <input type="text" placeholder="e.g. Expert Solutions" value={form.breadcrumbText || ""} onChange={(e) => setForm({ ...form, breadcrumbText: e.target.value })} className="w-full border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px]" />
                     </div>
                     <div className="space-y-1">
+                      <label className="text-[13px] font-bold">Hero Description / Subtitle</label>
+                      <textarea placeholder="e.g. Professional services with military precision..." value={form.heroDescription || ""} onChange={(e) => setForm({ ...form, heroDescription: e.target.value })} className="w-full border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px] h-20" />
+                    </div>
+                    <div className="space-y-1">
                       <label className="text-[13px] font-bold">Short Description (Card View)</label>
-                      <RichTextEditor
+                      <QuillEditor
                         content={form.description}
                         onChange={(v) => setForm({ ...form, description: v })}
+                        placeholder="Write a short description shown on service cards..."
                       />
                     </div>
                   </div>
@@ -351,24 +382,70 @@ export default function ServicesAdminPage() {
 
                 {activeTab === "content" && (
                   <div className="space-y-6">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-1">
-                        <label className="text-[13px] font-bold">Page Tagline</label>
-                        <input type="text" value={form.tagline} onChange={(e) => setForm({ ...form, tagline: e.target.value })} className="w-full border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px]" />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="text-[13px] font-bold">Overview Heading</label>
-                        <input type="text" value={form.overviewTitle} onChange={(e) => setForm({ ...form, overviewTitle: e.target.value })} className="w-full border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px]" />
-                      </div>
+                    {/* Page Tagline */}
+                    <div className="space-y-1">
+                      <label className="text-[13px] font-bold">Page Tagline <span className="text-[#8c8f94] font-normal">(shown above the overview heading)</span></label>
+                      <input type="text" placeholder="e.g. Expert Roofing Solutions" value={form.tagline} onChange={(e) => setForm({ ...form, tagline: e.target.value })} className="w-full border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px]" />
                     </div>
+
+                    {/* Split Overview Heading */}
+                    <div className="space-y-2 p-3 bg-[#f6f7f7] border border-[#c3c4c7] rounded-sm">
+                      <label className="text-[13px] font-bold">Overview Heading <span className="text-[#8c8f94] font-normal">(split into prefix / highlight / suffix)</span></label>
+                      <div className="grid grid-cols-3 gap-2">
+                        <div className="space-y-0.5">
+                          <label className="text-[11px] text-[#646970]">Prefix</label>
+                          <input type="text" placeholder="e.g. Craftsmanship" value={form.overviewTitlePrefix || ""} onChange={(e) => setForm({ ...form, overviewTitlePrefix: e.target.value })} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" />
+                        </div>
+                        <div className="space-y-0.5">
+                          <label className="text-[11px] text-[#646970]">Highlight <span className="text-[#2271b1]">⚡ gradient</span></label>
+                          <input type="text" placeholder="e.g. Without Compromise" value={form.overviewTitleHighlight || ""} onChange={(e) => setForm({ ...form, overviewTitleHighlight: e.target.value })} className="w-full border border-[#2271b1] px-2 py-1 text-[13px] rounded-[3px]" />
+                        </div>
+                        <div className="space-y-0.5">
+                          <label className="text-[11px] text-[#646970]">Suffix</label>
+                          <input type="text" placeholder="e.g. ." value={form.overviewTitleSuffix || ""} onChange={(e) => setForm({ ...form, overviewTitleSuffix: e.target.value })} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" />
+                        </div>
+                      </div>
+                      <p className="text-[11px] text-[#646970]">Preview: <em>{(form.overviewTitlePrefix || "")} <strong className="text-[#2271b1]">{form.overviewTitleHighlight || ""}</strong>{(form.overviewTitleSuffix || "")}</em></p>
+                    </div>
+
                     <ImageField label="Overview Section Image" value={form.overviewImage || ""} onChange={(v) => setForm({ ...form, overviewImage: v })} />
+
                     <div className="space-y-1">
                       <label className="text-[13px] font-bold">Overview Detailed Text</label>
-                      <RichTextEditor
+                      <QuillEditor
                         content={form.overview}
                         onChange={(v) => setForm({ ...form, overview: v })}
+                        placeholder="Write the full overview text shown on the service detail page..."
                       />
                     </div>
+
+                    {/* Overview Stats (2x2 grid) */}
+                    <div className="space-y-3 pt-4 border-t border-[#c3c4c7]">
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <h3 className="text-[13px] font-bold">Overview Stats Grid <span className="text-[#8c8f94] font-normal">(2×2 grid shown below overview description)</span></h3>
+                          <p className="text-[11px] text-[#646970] mt-0.5">Add up to 4 items — each with an icon and a label text.</p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setForm({ ...form, overviewStats: [...(form.overviewStats || []), { icon: "CheckCircle", label: "" }] })}
+                          className="text-[#2271b1] text-xs underline whitespace-nowrap"
+                        >+ Add Stat</button>
+                      </div>
+                      {(form.overviewStats || []).map((s: any, i: number) => (
+                        <div key={i} className="flex gap-2 items-center bg-white border border-[#c3c4c7] p-2 rounded-sm">
+                          <IconSelector value={s.icon} onChange={(v) => { const ns = [...form.overviewStats]; ns[i] = { ...ns[i], icon: v }; setForm({ ...form, overviewStats: ns }); }} />
+                          <input
+                            placeholder="Label (e.g. 10-Year Warranty)"
+                            value={s.label}
+                            onChange={(e) => { const ns = [...form.overviewStats]; ns[i] = { ...ns[i], label: e.target.value }; setForm({ ...form, overviewStats: ns }); }}
+                            className="flex-1 border border-[#8c8f94] px-2 py-1 text-xs rounded-[2px]"
+                          />
+                          <button type="button" onClick={() => { const ns = (form.overviewStats || []).filter((_: any, idx: number) => idx !== i); setForm({ ...form, overviewStats: ns }); }} className="text-[#d63638] text-xs shrink-0">✕</button>
+                        </div>
+                      ))}
+                    </div>
+
                     <div className="grid grid-cols-2 gap-4 pt-4 border-t border-[#c3c4c7]">
                       <div className="space-y-1">
                         <label className="text-[13px] font-bold">CTA Button Text</label>
@@ -384,13 +461,54 @@ export default function ServicesAdminPage() {
 
                 {activeTab === "features" && (
                   <div className="space-y-8">
+                    {/* Benefits Badge */}
+                    <div className="space-y-1">
+                      <label className="text-[13px] font-bold">Key Benefits Section Badge <span className="text-[#8c8f94] font-normal">(shown above the heading)</span></label>
+                      <input type="text" placeholder="e.g. The Eagle Edge" value={form.benefitsBadge || ""} onChange={(e) => setForm({ ...form, benefitsBadge: e.target.value })} className="w-full border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px]" />
+                    </div>
+
+                    {/* Split Benefits Heading */}
+                    <div className="space-y-2 p-3 bg-[#f6f7f7] border border-[#c3c4c7] rounded-sm">
+                      <label className="text-[13px] font-bold">Key Benefits Heading <span className="text-[#8c8f94] font-normal">(split into prefix / highlight / suffix)</span></label>
+                      <div className="grid grid-cols-3 gap-2">
+                        <div className="space-y-0.5">
+                          <label className="text-[11px] text-[#646970]">Prefix</label>
+                          <input type="text" placeholder="e.g. Key" value={form.benefitsTitlePrefix || ""} onChange={(e) => setForm({ ...form, benefitsTitlePrefix: e.target.value })} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" />
+                        </div>
+                        <div className="space-y-0.5">
+                          <label className="text-[11px] text-[#646970]">Highlight <span className="text-[#2271b1]">⚡ gradient</span></label>
+                          <input type="text" placeholder="e.g. Benefits" value={form.benefitsTitleHighlight || ""} onChange={(e) => setForm({ ...form, benefitsTitleHighlight: e.target.value })} className="w-full border border-[#2271b1] px-2 py-1 text-[13px] rounded-[3px]" />
+                        </div>
+                        <div className="space-y-0.5">
+                          <label className="text-[11px] text-[#646970]">Suffix</label>
+                          <input type="text" placeholder="e.g. ." value={form.benefitsTitleSuffix || ""} onChange={(e) => setForm({ ...form, benefitsTitleSuffix: e.target.value })} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" />
+                        </div>
+                      </div>
+                      <p className="text-[11px] text-[#646970]">Preview: <em>{(form.benefitsTitlePrefix || "")} <strong className="text-[#2271b1]">{form.benefitsTitleHighlight || ""}</strong>{(form.benefitsTitleSuffix || "")}</em></p>
+                    </div>
+
+                    {/* Benefits Description */}
+                    <div className="space-y-1">
+                      <label className="text-[13px] font-bold">Key Benefits Section Description</label>
+                      <textarea
+                        placeholder="e.g. Experience the difference with our unwavering commitment..."
+                        value={form.benefitsDescription || ""}
+                        onChange={(e) => setForm({ ...form, benefitsDescription: e.target.value })}
+                        className="w-full border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px] h-20"
+                      />
+                    </div>
+
                     <div className="space-y-4">
-                      <div className="flex justify-between items-center"><h3 className="text-sm font-bold">Service Stats</h3><button onClick={() => setForm({ ...form, stats: [...(form.stats || []), { value: "", label: "", icon: "Star" }] })} className="text-[#2271b1] text-xs underline">+ Add Stat</button></div>
+                      <div className="flex justify-between items-center"><h3 className="text-sm font-bold">Service Stats</h3><button type="button" onClick={() => setForm({ ...form, stats: [...(form.stats || []), { value: "", label: "", icon: "Star", category: "Impact" }] })} className="text-[#2271b1] text-xs underline">+ Add Stat</button></div>
                       {form.stats?.map((s: any, i: number) => (
-                        <div key={i} className="flex gap-2 bg-[#f6f7f7] p-2 border border-[#c3c4c7]">
-                          <input placeholder="Value" value={s.value} onChange={(e) => { const ns = [...form.stats]; ns[i] = { ...ns[i], value: e.target.value }; setForm({ ...form, stats: ns }); }} className="w-20 border border-[#8c8f94] px-2 py-1 text-xs" />
-                          <input placeholder="Label" value={s.label} onChange={(e) => { const ns = [...form.stats]; ns[i] = { ...ns[i], label: e.target.value }; setForm({ ...form, stats: ns }); }} className="flex-1 border border-[#8c8f94] px-2 py-1 text-xs" />
-                          <button onClick={() => { const ns = form.stats.filter((_: any, idx: number) => idx !== i); setForm({ ...form, stats: ns }); }} className="text-[#d63638] text-xs">Remove</button>
+                        <div key={i} className="flex flex-col sm:flex-row gap-2 bg-[#f6f7f7] p-2 border border-[#c3c4c7] rounded-[3px]">
+                          <div className="flex gap-2 items-center flex-1">
+                            <IconSelector value={s.icon || "Star"} onChange={(v) => { const ns = [...form.stats]; ns[i] = { ...ns[i], icon: v }; setForm({ ...form, stats: ns }); }} />
+                            <input placeholder="Category (e.g. Impact)" value={s.category || ""} onChange={(e) => { const ns = [...form.stats]; ns[i] = { ...ns[i], category: e.target.value }; setForm({ ...form, stats: ns }); }} className="w-32 border border-[#8c8f94] px-2 py-1 text-xs rounded-[2px]" />
+                            <input placeholder="Value" value={s.value} onChange={(e) => { const ns = [...form.stats]; ns[i] = { ...ns[i], value: e.target.value }; setForm({ ...form, stats: ns }); }} className="w-20 border border-[#8c8f94] px-2 py-1 text-xs rounded-[2px]" />
+                            <input placeholder="Label" value={s.label} onChange={(e) => { const ns = [...form.stats]; ns[i] = { ...ns[i], label: e.target.value }; setForm({ ...form, stats: ns }); }} className="flex-1 border border-[#8c8f94] px-2 py-1 text-xs rounded-[2px]" />
+                          </div>
+                          <button onClick={() => { const ns = form.stats.filter((_: any, idx: number) => idx !== i); setForm({ ...form, stats: ns }); }} className="text-[#d63638] text-xs hover:underline self-center shrink-0">Remove</button>
                         </div>
                       ))}
                     </div>
@@ -402,9 +520,10 @@ export default function ServicesAdminPage() {
                             <IconSelector value={b.icon} onChange={(v) => { const nb = [...form.benefits]; nb[i] = { ...nb[i], icon: v }; setForm({ ...form, benefits: nb }); }} />
                             <input placeholder="Title" value={b.title} onChange={(e) => { const nb = [...form.benefits]; nb[i] = { ...nb[i], title: e.target.value }; setForm({ ...form, benefits: nb }); }} className="flex-1 border border-[#8c8f94] px-2 py-1 text-xs" />
                           </div>
-                          <RichTextEditor
+                          <QuillEditor
                             content={b.description}
                             onChange={(v) => { const nb = [...form.benefits]; nb[i] = { ...nb[i], description: v }; setForm({ ...form, benefits: nb }); }}
+                            placeholder="Describe this benefit..."
                           />
                           <button onClick={() => { const nb = form.benefits.filter((_: any, idx: number) => idx !== i); setForm({ ...form, benefits: nb }); }} className="text-[#d63638] text-xs">Remove Benefit</button>
                         </div>
@@ -415,7 +534,44 @@ export default function ServicesAdminPage() {
 
                 {activeTab === "steps" && (
                   <div className="space-y-4">
-                    <button onClick={() => setForm({ ...form, process: [...(form.process || []), { title: "", description: "", icon: "Hammer" }] })} className="text-[#2271b1] text-xs underline font-bold">+ Add Step</button>
+                    {/* Process Badge */}
+                    <div className="space-y-1">
+                      <label className="text-[13px] font-bold">Process Section Badge <span className="text-[#8c8f94] font-normal">(shown above the heading)</span></label>
+                      <input type="text" placeholder="e.g. Methodology" value={form.processBadge || ""} onChange={(e) => setForm({ ...form, processBadge: e.target.value })} className="w-full border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px]" />
+                    </div>
+
+                    {/* Split Process Heading */}
+                    <div className="space-y-2 p-3 bg-[#f6f7f7] border border-[#c3c4c7] rounded-sm">
+                      <label className="text-[13px] font-bold">Process Section Heading <span className="text-[#8c8f94] font-normal">(split into prefix / highlight / suffix)</span></label>
+                      <div className="grid grid-cols-3 gap-2">
+                        <div className="space-y-0.5">
+                          <label className="text-[11px] text-[#646970]">Prefix</label>
+                          <input type="text" placeholder="e.g. Precision" value={form.processTitlePrefix || ""} onChange={(e) => setForm({ ...form, processTitlePrefix: e.target.value })} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" />
+                        </div>
+                        <div className="space-y-0.5">
+                          <label className="text-[11px] text-[#646970]">Highlight <span className="text-[#2271b1]">⚡ gradient</span></label>
+                          <input type="text" placeholder="e.g. In Every Detail" value={form.processTitleHighlight || ""} onChange={(e) => setForm({ ...form, processTitleHighlight: e.target.value })} className="w-full border border-[#2271b1] px-2 py-1 text-[13px] rounded-[3px]" />
+                        </div>
+                        <div className="space-y-0.5">
+                          <label className="text-[11px] text-[#646970]">Suffix</label>
+                          <input type="text" placeholder="e.g. ." value={form.processTitleSuffix || ""} onChange={(e) => setForm({ ...form, processTitleSuffix: e.target.value })} className="w-full border border-[#8c8f94] px-2 py-1 text-[13px] rounded-[3px]" />
+                        </div>
+                      </div>
+                      <p className="text-[11px] text-[#646970]">Preview: <em>{(form.processTitlePrefix || "")} <strong className="text-[#2271b1]">{form.processTitleHighlight || ""}</strong>{(form.processTitleSuffix || "")}</em></p>
+                    </div>
+
+                    {/* Process Description */}
+                    <div className="space-y-1">
+                      <label className="text-[13px] font-bold">Process Section Description</label>
+                      <textarea
+                        placeholder="e.g. A battle-tested framework that ensures consistency..."
+                        value={form.processDescription || ""}
+                        onChange={(e) => setForm({ ...form, processDescription: e.target.value })}
+                        className="w-full border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px] h-20"
+                      />
+                    </div>
+
+                    <button type="button" onClick={() => setForm({ ...form, process: [...(form.process || []), { title: "", description: "", icon: "Hammer" }] })} className="text-[#2271b1] text-xs underline font-bold">+ Add Step</button>
                     {form.process?.map((step: any, i: number) => (
                       <div key={i} className="bg-[#f6f7f7] border border-[#c3c4c7] p-4 flex gap-4">
                         <div className="w-8 h-8 bg-[#2271b1] text-white rounded-full flex items-center justify-center shrink-0 text-xs font-bold">{i + 1}</div>
@@ -424,9 +580,10 @@ export default function ServicesAdminPage() {
                             <IconSelector value={step.icon} onChange={(v) => { const np = [...form.process]; np[i] = { ...np[i], icon: v }; setForm({ ...form, process: np }); }} />
                             <input value={step.title} onChange={(e) => { const np = [...form.process]; np[i] = { ...np[i], title: e.target.value }; setForm({ ...form, process: np }); }} placeholder="Step Title" className="flex-1 border border-[#8c8f94] px-2 py-1 text-xs font-bold" />
                           </div>
-                          <RichTextEditor
+                          <QuillEditor
                             content={step.description}
                             onChange={(v) => { const np = [...form.process]; np[i] = { ...np[i], description: v }; setForm({ ...form, process: np }); }}
+                            placeholder="Describe this process step..."
                           />
                           <button onClick={() => { const np = form.process.filter((_: any, idx: number) => idx !== i); setForm({ ...form, process: np }); }} className="text-[#d63638] text-xs">Remove Step</button>
                         </div>
@@ -441,9 +598,10 @@ export default function ServicesAdminPage() {
                     {form.faq?.map((item: any, i: number) => (
                       <div key={i} className="bg-white border border-[#c3c4c7] p-4 space-y-3 shadow-sm">
                         <input value={item.question} onChange={(e) => { const nf = [...form.faq]; nf[i] = { ...nf[i], question: e.target.value }; setForm({ ...form, faq: nf }); }} placeholder="Question" className="w-full border border-[#8c8f94] px-2 py-1 text-xs font-bold" />
-                        <RichTextEditor
+                        <QuillEditor
                           content={item.answer}
                           onChange={(v) => { const nf = [...form.faq]; nf[i] = { ...nf[i], answer: v }; setForm({ ...form, faq: nf }); }}
+                          placeholder="Write the answer to this FAQ..."
                         />
                         <button onClick={() => { const nf = form.faq.filter((_: any, idx: number) => idx !== i); setForm({ ...form, faq: nf }); }} className="text-[#d63638] text-xs">Remove FAQ</button>
                       </div>
@@ -464,9 +622,10 @@ export default function ServicesAdminPage() {
                       </div>
                       <div className="space-y-1">
                         <label className="text-[13px] font-bold">Blog Section Description</label>
-                        <RichTextEditor
+                        <QuillEditor
                           content={form.blogSection?.description || ""}
                           onChange={(v) => setForm({ ...form, blogSection: { ...(form.blogSection || {}), description: v } })}
+                          placeholder="Write a description for the blog section..."
                         />
                       </div>
                     </div>

@@ -883,7 +883,7 @@ export default function AboutTemplate({ pageData, params }: { pageData?: any, pa
         title={content.blogSection?.title || blogSection?.title}
         subtitle={content.blogSection?.subtitle || blogSection?.subtitle}
         description={content.blogSection?.description || blogSection?.description}
-        posts={allBlogs.filter((p: any) => (content.blogSection?.selectedPosts || blogSection?.selectedPosts || []).includes(p._id))}
+        posts={allBlogs.filter((p: any) => (content.blogSection?.selectedPosts || []).includes(p._id))}
       />
 
     </main>

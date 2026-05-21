@@ -12,15 +12,12 @@ async function main() {
   try {
     await client.connect();
     const db = client.db('eagle_revolution');
-    const contentColl = db.collection('site_contents');
+    const pagesCollection = db.collection('pages');
     
-    const content = await contentColl.findOne({ key: 'complete_data' });
-    if (content && content.data) {
-      console.log("Global keys:", Object.keys(content.data));
-      console.log("Services keys:", Object.keys(content.data.services || {}));
-      console.log("Services blogSection:", content.data.services?.blogSection);
-    } else {
-      console.log("No complete_data found");
+    const pages = await pagesCollection.find({}).toArray();
+    console.log(`Found ${pages.length} total pages in database:`);
+    for (const page of pages) {
+      console.log(`- _id: ${page._id}, title: ${page.title}, slug: ${page.slug}, template: ${page.template}, status: ${page.status}`);
     }
   } finally {
     await client.close();
