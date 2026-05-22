@@ -283,6 +283,19 @@
   }
   .rich-text-content a {
     @apply text-primary no-underline transition-colors;
+    text-decoration: none !important;
+  }
+  .rich-text-content a:hover {
+    @apply text-primary no-underline opacity-80;
+    text-decoration: none !important;
+  }
+  .prose a {
+    @apply text-primary no-underline transition-colors !important;
+    text-decoration: none !important;
+  }
+  .prose a:hover {
+    @apply text-primary no-underline opacity-80 !important;
+    text-decoration: none !important;
   }
 
   /* Prose List Spacing Fixes */

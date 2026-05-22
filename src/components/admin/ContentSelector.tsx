@@ -12,6 +12,7 @@ interface ContentSelectorProps {
 }
 
 export default function ContentSelector({ type, selectedItems = [], onSelect, label }: ContentSelectorProps) {
+  const safeSelectedItems = Array.isArray(selectedItems) ? selectedItems : [];
   const [items, setItems] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -50,20 +51,20 @@ export default function ContentSelector({ type, selectedItems = [], onSelect, la
   const isSelected = (item: any) => {
     const itemKey = getItemKey(item);
     if (!itemKey) return false;
-    return selectedItems.some((s) => getItemKey(s) === itemKey);
+    return safeSelectedItems.some((s) => getItemKey(s) === itemKey);
   };
 
   const toggleSelection = (item: any) => {
     if (isSelected(item)) {
       const itemKey = getItemKey(item);
-      onSelect(selectedItems.filter((s) => getItemKey(s) !== itemKey));
+      onSelect(safeSelectedItems.filter((s) => getItemKey(s) !== itemKey));
     } else {
-      onSelect([...selectedItems, item]);
+      onSelect([...safeSelectedItems, item]);
     }
   };
 
   const moveItem = (index: number, direction: 'up' | 'down') => {
-    const newItems = [...selectedItems];
+    const newItems = [...safeSelectedItems];
     const newIndex = direction === 'up' ? index - 1 : index + 1;
     if (newIndex < 0 || newIndex >= newItems.length) return;
 
@@ -73,7 +74,7 @@ export default function ContentSelector({ type, selectedItems = [], onSelect, la
   };
 
   const removeItem = (index: number) => {
-    const newItems = selectedItems.filter((_, i) => i !== index);
+    const newItems = safeSelectedItems.filter((_, i) => i !== index);
     onSelect(newItems);
   };
 
@@ -89,7 +90,7 @@ export default function ContentSelector({ type, selectedItems = [], onSelect, la
       <div className="flex items-center justify-between">
         <label className="text-[10px] font-medium text-slate-400 uppercase tracking-widest">{label}</label>
         <div className="text-[10px] font-bold text-primary bg-primary/5 px-3 py-1 rounded-full uppercase">
-          {selectedItems.length} Selected
+          {safeSelectedItems.length} Selected
         </div>
       </div>
 
@@ -152,11 +153,11 @@ export default function ContentSelector({ type, selectedItems = [], onSelect, la
         )}
       </div>
 
-      {selectedItems.length > 0 && (
+      {safeSelectedItems.length > 0 && (
         <div className="pt-4 border-t border-slate-100">
           <p className="text-[9px] font-bold text-slate-300 uppercase tracking-widest mb-4">Display Order</p>
           <div className="flex flex-wrap gap-2">
-            {selectedItems.map((s, idx) => (
+            {safeSelectedItems.map((s, idx) => (
               <div key={idx} className="flex items-center gap-2 bg-white border border-slate-200 pl-3 pr-1 py-1 rounded-lg text-[9px] font-bold uppercase tracking-widest text-slate-700 shadow-sm">
                 {s.title || s.question || s.name}
                 <div className="flex items-center gap-0.5">
@@ -170,7 +171,7 @@ export default function ContentSelector({ type, selectedItems = [], onSelect, la
                     </button>
                     <button
                       onClick={() => moveItem(idx, 'down')}
-                      disabled={idx === selectedItems.length - 1}
+                      disabled={idx === safeSelectedItems.length - 1}
                       className="p-0.5 hover:bg-slate-100 rounded disabled:opacity-30"
                     >
                       <ChevronDown className="w-3 h-3 text-slate-500" />

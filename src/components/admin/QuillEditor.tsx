@@ -19,9 +19,11 @@ function normalizeContent(c: any): string {
 export default function QuillEditor({ content, onChange, label, placeholder }: QuillEditorProps) {
   const editorRef = useRef<HTMLDivElement>(null);
   const quillRef = useRef<any>(null);
-  const isMounted = useRef(false);
   const isUpdating = useRef(false);
   const [isHtmlMode, setIsHtmlMode] = React.useState(false);
+
+  const onChangeRef = useRef(onChange);
+  onChangeRef.current = onChange;
 
   const toggleHtmlMode = () => {
     if (isHtmlMode) {
@@ -40,8 +42,7 @@ export default function QuillEditor({ content, onChange, label, placeholder }: Q
   };
 
   useEffect(() => {
-    if (isMounted.current || !editorRef.current) return;
-    isMounted.current = true;
+    if (quillRef.current || !editorRef.current) return;
 
     // Dynamically import Quill to avoid SSR issues
     import("quill").then(({ default: Quill }) => {
@@ -72,32 +73,56 @@ export default function QuillEditor({ content, onChange, label, placeholder }: Q
 
       quillRef.current = quill;
 
-      // Set initial content
+      // Set initial content silently without focus/scrolling
       const initial = normalizeContent(content);
       if (initial) {
-        quill.clipboard.dangerouslyPasteHTML(initial);
+        const delta = quill.clipboard.convert(initial);
+        quill.setContents(delta, "silent");
       }
 
       // Listen for changes
-      quill.on("text-change", () => {
+      const handleTextChange = () => {
         if (isUpdating.current) return;
         const html = editorRef.current?.querySelector(".ql-editor")?.innerHTML || "";
         // Avoid passing empty placeholder content
         const cleaned = html === "<p><br></p>" ? "" : html;
-        onChange(cleaned);
-      });
+        onChangeRef.current(cleaned);
+      };
+
+      quill.on("text-change", handleTextChange);
+
+      quillRef.current._cleanup = () => {
+        quill.off("text-change", handleTextChange);
+      };
     });
 
     return () => {
       // Cleanup
       if (quillRef.current) {
-        quillRef.current.off("text-change");
+        if (typeof quillRef.current._cleanup === "function") {
+          quillRef.current._cleanup();
+        }
         quillRef.current = null;
       }
-      isMounted.current = false;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Only run ONCE on mount — no content sync deps
+  }, []); // Only run ONCE on mount
+
+  // Sync content dynamically if updated externally and editor is not focused
+  useEffect(() => {
+    if (!quillRef.current || isHtmlMode) return;
+    const normalized = normalizeContent(content);
+    const editorEl = editorRef.current?.querySelector(".ql-editor");
+    const currentHtml = editorEl?.innerHTML || "";
+    const cleanedCurrent = currentHtml === "<p><br></p>" ? "" : currentHtml;
+
+    if (cleanedCurrent !== normalized && !quillRef.current.hasFocus()) {
+      isUpdating.current = true;
+      const delta = quillRef.current.clipboard.convert(normalized);
+      quillRef.current.setContents(delta, "silent");
+      isUpdating.current = false;
+    }
+  }, [content, isHtmlMode]);
 
   return (
     <div className="space-y-1.5">

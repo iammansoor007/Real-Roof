@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
+import Link from "@tiptap/extension-link";
+import Underline from "@tiptap/extension-underline";
 import {
   Bold, Italic, Underline as UnderlineIcon, List, ListOrdered,
   Link as LinkIcon, Image as ImageIcon, Heading1, Heading2,
@@ -67,6 +69,9 @@ export default function RichTextEditor({
   const [showOverview, setShowOverview] = useState(false);
   const [isHtmlMode, setIsHtmlMode] = useState(false);
 
+  const onChangeRef = useRef(onChange);
+  onChangeRef.current = onChange;
+
   const toggleHtmlMode = () => {
     if (isHtmlMode) {
       if (editor) {
@@ -77,7 +82,6 @@ export default function RichTextEditor({
   };
 
   // Capture initial content ONCE — editor owns its state after mount.
-  // We do NOT sync content back in via useEffect to avoid infinite loops.
   const initialContent = useRef(normalizeContent(content));
 
   useEffect(() => {
@@ -86,11 +90,16 @@ export default function RichTextEditor({
 
   const editor = useEditor({
     extensions: [
-      // StarterKit v3 already includes Link + Underline — do NOT add them separately
       StarterKit.configure({
         heading: { levels: [1, 2, 3, 4, 5, 6] },
       }),
-      // Image is the only extension NOT in StarterKit — safe to add
+      Underline,
+      Link.configure({
+        openOnClick: false,
+        HTMLAttributes: {
+          class: "text-primary no-underline hover:opacity-80 transition-opacity",
+        },
+      }),
       Image.configure({
         HTMLAttributes: { class: "max-w-full h-auto rounded-lg my-4" },
       }),
@@ -98,7 +107,7 @@ export default function RichTextEditor({
     content: initialContent.current,
     immediatelyRender: false,
     onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
+      onChangeRef.current(editor.getHTML());
     },
     editorProps: {
       attributes: {
@@ -108,9 +117,14 @@ export default function RichTextEditor({
     },
   });
 
-  // NO content sync useEffect — this was the root cause of the crash loop.
-  // AnimatePresence mode="wait" in parent editors already unmounts/remounts
-  // this component on tab switch, so fresh content is always passed via initialContent.
+  // Sync content dynamically when changed externally and editor is not focused
+  useEffect(() => {
+    if (!editor) return;
+    const normalized = normalizeContent(content);
+    if (editor.getHTML() !== normalized && !editor.isFocused) {
+      editor.commands.setContent(normalized, { emitUpdate: false });
+    }
+  }, [content, editor]);
 
   if (!mounted || !editor) return null;
 
@@ -366,7 +380,8 @@ export default function RichTextEditor({
         .ProseMirror h4 { font-size: 1.1em; font-weight: bold; margin-bottom: 0.5em; }
         .ProseMirror ul { list-style-type: disc; padding-left: 1.5em; margin-bottom: 1em; }
         .ProseMirror ol { list-style-type: decimal; padding-left: 1.5em; margin-bottom: 1em; }
-        .ProseMirror a { color: #2271b1; text-decoration: underline; }
+        .ProseMirror a { color: #2430D2; text-decoration: none !important; }
+        .ProseMirror a:hover { text-decoration: none !important; opacity: 0.8; }
         .ProseMirror blockquote { border-left: 3px solid #dcdcde; padding-left: 1em; font-style: italic; margin-bottom: 1em; }
         .ProseMirror p { margin-bottom: 0.75em; }
       `}</style>

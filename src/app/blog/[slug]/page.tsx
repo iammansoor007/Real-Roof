@@ -263,7 +263,7 @@ export default async function BlogPostPage({ params }: Props) {
                 prose-headings:text-slate-900 prose-headings:font-bold prose-headings:tracking-tight
                 prose-h2:text-2xl min-[400px]:text-3xl md:text-4xl prose-h2:mt-12 md:prose-h2:mt-16 prose-h2:mb-6 md:prose-h2:mb-8 prose-h2:border-l-4 prose-h2:border-blue-600 prose-h2:pl-4 md:prose-h2:pl-6
                 prose-p:text-slate-600 prose-p:leading-relaxed prose-p:mb-6 md:prose-p:mb-8 prose-p:text-base md:prose-p:text-lg
-                prose-a:text-blue-600 prose-a:font-bold prose-a:no-underline hover:prose-a:underline
+                prose-a:text-primary prose-a:font-bold prose-a:no-underline hover:prose-a:no-underline
                 prose-ol:my-4 prose-ul:my-4 prose-li:my-0
                 prose-img:rounded-2xl md:prose-img:rounded-3xl prose-img:my-8 md:prose-img:my-16 prose-img:shadow-2xl
                 prose-blockquote:border-l-0 prose-blockquote:bg-blue-600 prose-blockquote:text-white prose-blockquote:p-8 md:prose-blockquote:p-12 prose-blockquote:rounded-2xl md:prose-blockquote:rounded-[2rem] prose-blockquote:not-italic prose-blockquote:text-xl md:prose-blockquote:text-3xl prose-blockquote:font-bold prose-blockquote:shadow-xl prose-blockquote:shadow-blue-600/20"
