@@ -618,11 +618,31 @@ export default function PageInlineFaqs({ faqs }: { faqs?: any[] }) {
     return () => ctx.revert();
   }, [isClient]);
 
-  if (!items || items.length === 0) return null;
-  if (!isClient) return null;
+  const validFaqs = items.filter((item: any) => item && item.question && item.answer);
+
+  if (validFaqs.length === 0) return null;
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": validFaqs.map((item: any) => ({
+      "@type": "Question",
+      "name": item.question.trim(),
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer.trim(),
+      },
+    })),
+  };
 
   return (
-    <section
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      {isClient && (
+        <section
       ref={sectionRef}
       className="relative bg-background py-20 md:py-24 lg:py-28 overflow-hidden"
     >
@@ -693,5 +713,7 @@ export default function PageInlineFaqs({ faqs }: { faqs?: any[] }) {
         </div>
       </div>
     </section>
-  );
+    )}
+  </>
+);
 }

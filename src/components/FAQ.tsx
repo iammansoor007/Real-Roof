@@ -578,10 +578,31 @@ const FAQ = ({ currentPage = "home", hideHeader = false }: { currentPage?: strin
     return () => ctx.revert();
   }, [isClient]);
 
-  if (!isClient) return null;
+  const validFaqs = filteredItems.filter((item: any) => item && item.question && item.answer);
+
+  if (validFaqs.length === 0) return null;
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": validFaqs.map((item: any) => ({
+      "@type": "Question",
+      "name": item.question.trim(),
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer.trim(),
+      },
+    })),
+  };
 
   return (
-    <section
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      {isClient && (
+        <section
       ref={sectionRef}
       className="relative bg-background py-20 md:py-24 lg:py-28 overflow-hidden"
     >
@@ -653,7 +674,9 @@ const FAQ = ({ currentPage = "home", hideHeader = false }: { currentPage?: strin
         </div>
       </div>
     </section>
-  );
+    )}
+  </>
+);
 };
 
 export default FAQ;
