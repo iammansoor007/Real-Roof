@@ -212,9 +212,9 @@ const Hero = ({ content: passedContent }: { content?: any }) => {
         <motion.div style={{ y: y1 }} className="absolute inset-0">
           <Image
             src={hero.bgImage || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070"}
-            alt={hero.bgImageAlt || "Eagle Revolution Interior"}
+            alt={hero.bgImageAlt || "RealRoof Interior"}
             fill
-            quality={100}
+            quality={85}
             className="object-cover opacity-20 sm:opacity-30 scale-110 grayscale-[0.5]"
           />
         </motion.div>
@@ -348,7 +348,7 @@ const FounderPortrait = ({ content }: { content?: any }) => {
             alt={story.portrait?.alt || story.founder?.name || "Founder"}
             className="object-cover"
             fill
-            quality={100}
+            quality={85}
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
             priority
           />
@@ -675,7 +675,7 @@ const ServiceCard = ({ service, index }: { service: any; index: number }) => {
       <Link href={`/services/${service.slug}`} className="block h-full">
         <div className="flex flex-col h-full">
           <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 shadow-lg transition-all duration-700 group-hover:shadow-2xl">
-            <Image src={serviceImage} alt={service.title} fill quality={100} className="object-cover transition-transform duration-1000 group-hover:scale-105" priority={index < 3} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+            <Image src={serviceImage} alt={service.title} fill quality={85} className="object-cover transition-transform duration-1000 group-hover:scale-105" priority={index < 3} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute top-6 left-6 z-10">
               <div className="px-5 py-2.5 bg-white/95 backdrop-blur-md rounded-xl border border-white/30 shadow-lg">

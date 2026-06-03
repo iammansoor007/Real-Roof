@@ -64,7 +64,7 @@ const SMSConsentCheckbox = ({ checked, onChange }: { checked: boolean; onChange:
                     htmlFor="smsConsentQuick"
                     className="flex-1 text-[11px] text-muted-foreground leading-relaxed cursor-pointer"
                 >
-                    I agree to receive informational SMS text messages from Eagle Revolution related to my request, including appointment scheduling and service updates, at the number I provided. Message frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase. Please see{' '}
+                    I agree to receive informational SMS text messages from RealRoof related to my request, including appointment scheduling and service updates, at the number I provided. Message frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase. Please see{' '}
                     <Link href="/privacy" className="text-primary hover:underline transition-colors">Privacy Policy</Link>
                     {' '}and{' '}
                     <Link href="/terms" className="text-primary hover:underline transition-colors">Terms and Conditions</Link>.
@@ -126,7 +126,7 @@ const QuickQuote = () => {
         setIsSubmitting(true);
 
         const emailContent = `
-🔨 NEW QUICK QUOTE REQUEST - EAGLE REVOLUTION
+🔨 NEW QUICK QUOTE REQUEST - RealRoof
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -180,13 +180,13 @@ ${formData.message}
                 console.error('Quick Quote fetch error:', fetchError);
             }
 
-            const mailtoLink = `mailto:banderson@eaglerevolution.com?subject=🔨 Quick Quote - ${formData.name}&body=${encodeURIComponent(emailContent)}`;
+            const mailtoLink = `mailto:banderson@RealRoof.com?subject=🔨 Quick Quote - ${formData.name}&body=${encodeURIComponent(emailContent)}`;
             window.location.href = mailtoLink;
             showSuccess();
 
         } catch (error) {
             console.error('Submission error:', error);
-            alert('Please email us directly at banderson@eaglerevolution.com');
+            alert('Please email us directly at banderson@RealRoof.com');
         } finally {
             setIsSubmitting(false);
         }

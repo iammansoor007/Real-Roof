@@ -140,7 +140,7 @@ export default function ContactEditor() {
                                 type="email"
                                 value={data.contactPage?.info?.email || data.contactPage?.email || ""}
                                 onChange={(e) => setData((prev: any) => ({ ...prev, contactPage: { ...(prev.contactPage || {}), info: { ...(prev.contactPage?.info || {}), email: e.target.value }, email: e.target.value } }))}
-                                placeholder="e.g. hello@eaglerevolution.com"
+                                placeholder="e.g. hello@RealRoof.com"
                                 className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm focus:border-primary/50 focus:outline-none transition-all shadow-inner"
                             />
                         </div>

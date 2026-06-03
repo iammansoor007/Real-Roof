@@ -68,13 +68,11 @@ export default {
                     border: "hsl(var(--sidebar-border))",
                     ring: "hsl(var(--sidebar-ring))",
                 },
-                // American Flag Colors - Direct hex values for custom use
-                american: {
-                    red: "#E32B2B",
-                    navy: "#1A2A4A",
+                // RealRoof Brand Colors
+                realroof: {
+                    primary: "#1E5D9A",
+                    black: "#000000",
                     white: "#FFFFFF",
-                    blue: "#002664", // Deeper navy blue option
-                    scarlet: "#B22234", // Alternative red
                 },
             },
             borderRadius: {

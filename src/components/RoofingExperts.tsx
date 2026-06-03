@@ -201,7 +201,7 @@ export default function AboutSection() {
         <section
             ref={sectionRef}
             className="relative bg-background overflow-hidden py-12 md:py-14 lg:py-16"
-            aria-label="About Eagle Revolution"
+            aria-label="About RealRoof"
         >
             <div className="absolute top-0 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none rotate-180">
                 <svg
@@ -285,10 +285,10 @@ export default function AboutSection() {
                                 {isDynamicImage ? (
                                     <Image
                                         src={image.src}
-                                        alt={image.alt || "About Eagle Revolution"}
+                                        alt={image.alt || "About RealRoof"}
                                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                                         fill
-                                        quality={100}
+                                        quality={85}
                                         priority
                                         loading="eager"
                                         unoptimized={shouldBeUnoptimized}
@@ -296,10 +296,10 @@ export default function AboutSection() {
                                 ) : (
                                     <Image
                                         src={EagleAboutImg}
-                                        alt={image?.alt || "About Eagle Revolution"}
+                                        alt={image?.alt || "About RealRoof"}
                                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                                         fill
-                                        quality={100}
+                                        quality={85}
                                         priority
                                         loading="eager"
                                     />

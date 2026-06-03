@@ -116,11 +116,11 @@ export default function Leadership() {
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-primary/20 to-primary/20 rounded-2xl sm:rounded-3xl blur-lg group-hover:blur-xl transition-all duration-700" />
                 <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl shadow-gray-300/50 h-[350px] xs:h-[400px] sm:h-[450px] md:h-[500px] lg:h-[600px]">
                   <Image
-                    src={ceo.image?.src || "/eagle-logo.png"}
+                    src={ceo.image?.src || "/realrooflogo.webp"}
                     alt={ceo.alt || ceo.name || "CEO"}
                     className="object-cover"
                     fill
-                    quality={100}
+                    quality={85}
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-secondary/20 to-transparent" />

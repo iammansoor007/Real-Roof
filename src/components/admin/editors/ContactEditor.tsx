@@ -31,7 +31,7 @@ export default function ContactEditor({ pageId, data, setData }: { pageId: strin
              { name: "phone", label: "Phone Number", type: "tel", required: false, icon: "Phone" },
              { name: "message", label: "Your Message", type: "textarea", required: true, icon: "MessageSquare" }
            ],
-           info: { address: "St. Louis, MO", phone: "314-XXX-XXXX", email: "info@eaglerevolution.com", hours: "Mon-Fri: 8am-6pm" },
+           info: { address: "St. Louis, MO", phone: "314-XXX-XXXX", email: "info@RealRoof.com", hours: "Mon-Fri: 8am-6pm" },
            social: { facebook: "#", instagram: "#", linkedin: "#" }
          }
        });

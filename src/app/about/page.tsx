@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: seo.ogTitle || seo.metaTitle || aboutData?.hero?.headline || "About Us",
       description: seo.ogDescription || seo.metaDescription || aboutData?.hero?.description,
       url: pageUrl,
-      siteName: "Eagle Revolution",
+      siteName: "RealRoof",
       type: "website",
       images: seo.featuredImage ? [{ url: seo.featuredImage }] : [],
     },

@@ -68,17 +68,18 @@ const Hero = () => {
           {images?.[0]?.startsWith('http') ? (
             <img
               src={images[0]}
-              alt={hero.bgImageAlt || "Eagle Revolution Roofing"}
+              alt={hero.bgImageAlt || "RealRoof Roofing"}
               className="w-full h-full object-cover scale-105"
             />
           ) : (
             <Image
               src={images?.[0] || bgfair}
-              alt={hero.bgImageAlt || "Eagle Revolution Roofing"}
+              alt={hero.bgImageAlt || "RealRoof Roofing"}
               className="w-full h-full object-cover scale-105"
               fill
-              quality={100}
+              quality={85}
               priority
+              unoptimized
             />
           )}
         </div>
@@ -88,13 +89,14 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/20 via-transparent to-transparent" />
 
         <motion.div
-          className="absolute top-[10%] right-[10%] w-[50rem] h-[50rem] bg-primary/10 rounded-full blur-[90px]"
+          className="absolute top-[10%] right-[10%] w-[50rem] h-[50rem] rounded-full pointer-events-none"
           animate={{
             scale: [1, 1.05, 1],
             opacity: [0.1, 0.15, 0.1],
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
           style={{
+            background: "radial-gradient(circle, rgba(30, 93, 154, 0.4) 0%, rgba(30, 93, 154, 0) 70%)",
             x: parallaxX,
             y: parallaxY,
             willChange: "transform, opacity"

@@ -11,8 +11,8 @@ export const useContent = () => {
     const footer = getSafe(completeData, 'footer');
     const footerServices = getSafe(footer, 'services', { title: "Our Services", materials: { title: "Premium Materials", items: [] } });
     const footerContact = getSafe(footer, 'contact', { title: "Contact Us", email: "", phone: "", address: "", emergency: "", areas: "" });
-    const footerCompany = getSafe(footer, 'company', { name: "Eagle Revolution", tagline: "Veteran Owned & Operated", description: "", logo: "" });
-    const footerBottom = getSafe(footer, 'bottom', { copyright: "© 2026 Eagle Revolution", rights: "All Rights Reserved", tagline: "", links: [] });
+    const footerCompany = getSafe(footer, 'company', { name: "RealRoof", tagline: "Veteran Owned & Operated", description: "", logo: "" });
+    const footerBottom = getSafe(footer, 'bottom', { copyright: "© 2026 RealRoof", rights: "All Rights Reserved", tagline: "", links: [] });
     const footerMarquee = getSafe(footer, 'marquee', { texts: [], speed: 30, repeats: 8 });
     const footerCertifications = getSafe(footer, 'certifications', []);
 
@@ -104,7 +104,7 @@ export const useContent = () => {
             ...(completeData?.recognition ? { recognition: completeData.recognition } : {}),
         },
         images: getSafe(completeData, 'images', {}),
-        loader: getSafe(completeData, 'loader', { company: { name: "Eagle Revolution", tagline: "Veteran Owned" }, phases: { simpleDark: 200, roofDraw: 300, logoText: 400, ready: 100 } }),
+        loader: getSafe(completeData, 'loader', { company: { name: "RealRoof", tagline: "Veteran Owned" }, phases: { simpleDark: 200, roofDraw: 300, logoText: 400, ready: 100 } }),
         quickQuote: getSafe(completeData, 'quickQuote', {
             title: "",
             description: "",
@@ -125,7 +125,7 @@ export const useContent = () => {
             items: []
         }),
         serviceDetailPage: getSafe(completeData, 'serviceDetailPage'),
-        settings: completeData?.settings || { siteTitle: "Eagle Revolution", siteTemplate: "%s | Eagle Revolution", favicon: "/eagle-logo.png" },
+        settings: completeData?.settings || { siteTitle: "RealRoof", siteTemplate: "%s | RealRoof", favicon: "/realrooflogo.webp" },
         faqPage: getSafe(completeData, 'faqPage'),
         blogSection: getSafe(completeData, 'blogSection', {
             title: "Latest from the Blog",

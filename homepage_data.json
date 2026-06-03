@@ -1,0 +1,3007 @@
+{
+  "navbar": {
+    "services": [
+      {
+        "title": "WINDOWS & DOORS",
+        "description": "Energy-efficient vinyl windows and premium doors that enhance beauty and insulation",
+        "icon": "Layout",
+        "items": [
+          "Vinyl Windows",
+          "Double-Hung Windows",
+          "Casement Windows",
+          "Sliding Patio Doors",
+          "Entry Doors"
+        ],
+        "features": [
+          "Energy Efficient",
+          "Lifetime Warranty",
+          "Professional Installation"
+        ]
+      },
+      {
+        "title": "DECKS & OUTDOOR LIVING",
+        "description": "Custom decks and outdoor living spaces designed for lasting beauty and durability",
+        "icon": "TreePine",
+        "items": [
+          "Composite Decking",
+          "Pressure Treated Wood",
+          "Custom Designs",
+          "Covered Decks",
+          "Pergolas"
+        ],
+        "features": [
+          "Wolf Home Products Certified",
+          "50-Year Warranty",
+          "Low Maintenance"
+        ]
+      },
+      {
+        "title": "RESIDENTIAL ROOFING",
+        "description": "Expert roofing services with premium materials and 10-year workmanship guarantee",
+        "icon": "Home",
+        "items": [
+          "Asphalt Shingles",
+          "Metal Roofing",
+          "Roof Replacement",
+          "Roof Repairs",
+          "Roof Inspections"
+        ],
+        "features": [
+          "IKO Certified Pro",
+          "CertainTeed Certified",
+          "50-Year Transferable Warranty"
+        ]
+      }
+    ],
+    "companyLinks": [
+      {
+        "label": "Services",
+        "href": "/services",
+        "icon": "Info",
+        "subLinks": [
+          {
+            "label": "Residential Roofing",
+            "href": "/services/residential-roofing",
+            "icon": "ChevronRight",
+            "pageId": "residential-roofing"
+          },
+          {
+            "label": "Windows & Doors",
+            "href": "/services/windows-doors",
+            "icon": "ChevronRight",
+            "pageId": "windows-doors"
+          },
+          {
+            "label": "Custom Decks",
+            "href": "/services/custom-decks",
+            "icon": "ChevronRight",
+            "pageId": "custom-decks"
+          },
+          {
+            "label": "Siding, Soffit & Fascia",
+            "href": "/services/siding-soffit-fascia",
+            "icon": "ChevronRight",
+            "pageId": "siding-soffit-fascia"
+          },
+          {
+            "label": "Commercial Roofing",
+            "href": "/services/commercial-roofing",
+            "icon": "ChevronRight",
+            "pageId": "commercial-roofing"
+          },
+          {
+            "label": "Gutters & Protection",
+            "href": "/services/gutters-protection",
+            "icon": "ChevronRight",
+            "pageId": "gutters-protection"
+          },
+          {
+            "label": "Vinyl and aluminum Fencing ",
+            "href": "/services/vinyl-and-aluminum-fencing",
+            "icon": "Construction",
+            "pageId": "vinyl-and-aluminum-fencing"
+          }
+        ],
+        "pageId": "69fb395f3d4223c476965fde",
+        "useMegaMenu": true
+      },
+      {
+        "label": "About",
+        "href": "/about-us",
+        "icon": "Users",
+        "subLinks": [
+          {
+            "label": "Our Team",
+            "href": "/about/our-team",
+            "icon": "Users",
+            "pageId": "6a034a2cb444ee84b4adbdd4"
+          },
+          {
+            "label": "Career",
+            "href": "/about/careers",
+            "icon": "Star",
+            "pageId": ""
+          }
+        ],
+        "pageId": "69fb3b7b3d4223c476965fe7"
+      },
+      {
+        "label": "Gallery",
+        "href": "/gallery",
+        "icon": "Image"
+      },
+      {
+        "label": "Reviews",
+        "href": "/reviews",
+        "icon": "Star"
+      },
+      {
+        "label": "FAQ",
+        "href": "/faq",
+        "icon": "MessageSquare"
+      },
+      {
+        "label": "Contact Us",
+        "href": "/contact",
+        "icon": "Info",
+        "subLinks": [],
+        "pageId": "69fcb5e5f559ecaafaebcb8a"
+      }
+    ],
+    "stats": [
+      {
+        "value": "500+",
+        "label": "Projects",
+        "icon": "ClipboardCheck"
+      },
+      {
+        "value": "50+",
+        "label": "Years Experience",
+        "icon": "Star"
+      },
+      {
+        "value": "24/7",
+        "label": "Support",
+        "icon": "Clock"
+      },
+      {
+        "value": "Lifetime",
+        "label": "Warranty",
+        "icon": "Shield"
+      }
+    ],
+    "cta": {
+      "title": "Get Your Free Quote",
+      "description": "Book your free consultation today and save 15%",
+      "buttonText": "Get Preapproved Now",
+      "buttonLink": "#quote"
+    },
+    "ctaText": "Contact Us",
+    "ctaLink": "https://RealRoof.com/contact-us",
+    "logo": "https://res.cloudinary.com/dytytwyp6/image/upload/v1778168204/fjkt7bak60idj3un8ujh.webp"
+  },
+  "hero": {
+    "badge": "Veteran Owned & Operated",
+    "headlines": [
+      {
+        "text": "Welcome to the New",
+        "highlight": false
+      },
+      {
+        "text": " RealRoof Database!",
+        "highlight": true
+      }
+    ],
+    "description": "One of the Top Window, Deck, and Roofing Companies in St. Louis. Veteran owned and operated with easy financing options and long-lasting transferable warranties.",
+    "buttons": [
+      {
+        "text": "Book a FREE Quote Now",
+        "href": "#contact",
+        "primary": true,
+        "icon": "ArrowRight"
+      },
+      {
+        "text": "View Our Work",
+        "href": "#portfolio",
+        "primary": false,
+        "icon": "ArrowRight"
+      }
+    ],
+    "stats": [
+      {
+        "value": "25+",
+        "label": "Years Experience",
+        "icon": "Building2"
+      },
+      {
+        "value": "Veteran",
+        "label": "Owned",
+        "icon": "Star"
+      },
+      {
+        "value": "50-Year",
+        "label": "Warranty",
+        "icon": "ThumbsUp"
+      }
+    ],
+    "images": {
+      "background": "/src/assets/bgfair.jpg"
+    },
+    "title": "Welcome to the New RealRoof Database!",
+    "subtitle": "This subtitle proves you are connected to the completely new MongoDB cluster."
+  },
+  "about": {
+    "badge": "Over 50 years combined experience",
+    "headline": {
+      "prefix": "Soaring Beyond",
+      "highlight": "Expectations",
+      "suffix": ""
+    },
+    "description": "RealRoof was founded to do more than just build roofs, windows, decks, and siding. We are here to build a movement. Born in OΓÇÖFallon, Missouri, RealRoof was launched by Brandon Anderson, a U.S. Army veteran and globally licensed combat sports official who brings battlefield discipline and boardroom precision to every project.",
+    "image": {
+      "src": "RealRoofTeam",
+      "alt": "RealRoof team - Veteran owned roofing and exterior remodeling company",
+      "badge": "Veteran Owned"
+    },
+    "stats": [
+      {
+        "value": 500,
+        "suffix": "+",
+        "label": "Projects Completed"
+      },
+      {
+        "value": 100,
+        "suffix": "%",
+        "label": "Client Satisfaction"
+      },
+      {
+        "value": 50,
+        "suffix": "+",
+        "label": "Years Combined Experience"
+      }
+    ],
+    "buttons": [
+      {
+        "text": "GET FREE ESTIMATE",
+        "href": "#contact",
+        "primary": true,
+        "icon": "ArrowRight"
+      },
+      {
+        "text": "VIEW GALLERY",
+        "href": "#portfolio",
+        "primary": false,
+        "icon": "ArrowRight"
+      }
+    ],
+    "trustBadges": {
+      "happyClients": 500,
+      "emergency": "24/7"
+    },
+    "coreValues": [
+      "Customer First",
+      "Integrity",
+      "Extreme Ownership",
+      "Gratitude",
+      "Growth"
+    ]
+  },
+  "services": {
+    "badge": "Premium Exterior Remodeling",
+    "headline": {
+      "prefix": "St. Louis's Trusted",
+      "highlight": "Exterior Remodeling",
+      "suffix": "Company"
+    },
+    "description": [
+      "RealRoof provides expert exterior remodeling services for homes and businesses. From windows and doors to roofing and decks, our team delivers quality craftsmanship with military precision."
+    ],
+    "stats": [
+      {
+        "value": 500,
+        "suffix": "+",
+        "label": "Projects"
+      },
+      {
+        "value": 50,
+        "suffix": "+",
+        "label": "Years Combined"
+      },
+      {
+        "value": 4.9,
+        "suffix": "",
+        "label": "Rating"
+      },
+      {
+        "value": 10,
+        "suffix": "",
+        "label": "Year Workmanship Guarantee"
+      }
+    ],
+    "services": [
+      {
+        "number": "01",
+        "title": "Residential Roofing",
+        "description": "Expert roofing services for homes using premium materials from IKO and CertainTeed. Full replacement, repairs, and inspections with 50-year transferable warranties.",
+        "icon": "Home",
+        "tag": "Roofing",
+        "features": [
+          "Asphalt Shingles",
+          "Metal Roofing",
+          "Roof Replacement",
+          "Emergency Repairs"
+        ],
+        "slug": "residential-roofing",
+        "tagline": "Military Grade Protection",
+        "overview": "Professional residential roofing services that combine military precision with architectural excellence. We specialize in high-performance asphalt shingles, architectural roofing systems, and durable weather-proofing solutions tailored for Missouri's diverse climate.",
+        "stats": [
+          {
+            "value": "50",
+            "label": "Year Warranty",
+            "icon": "Shield"
+          },
+          {
+            "value": "1,200",
+            "label": "Roofs Built",
+            "icon": "Home"
+          },
+          {
+            "value": "130",
+            "label": "Wind Rating MPH",
+            "icon": "Trophy"
+          },
+          {
+            "value": "100%",
+            "label": "Leak-Free Rating",
+            "icon": "ThumbsUp"
+          }
+        ],
+        "benefits": [
+          {
+            "icon": "Shield",
+            "title": "50-Year Warranty",
+            "description": "Our premium installations come with industry-leading, fully transferable 50-year manufacturer warranties."
+          },
+          {
+            "icon": "Award",
+            "title": "Certified Experts",
+            "description": "IKO Certified Pro and CertainTeed Certified Shingle Masters executing with battlefield discipline."
+          },
+          {
+            "icon": "CheckCircle",
+            "title": "Storm Ready",
+            "description": "Class 4 impact-resistant shingles available to protect your home against severe midwestern hail."
+          },
+          {
+            "icon": "ThumbsUp",
+            "title": "Ventilation Focus",
+            "description": "Advanced ridge-venting systems designed to drastically lower your summer cooling costs."
+          }
+        ],
+        "process": [
+          {
+            "icon": "FileText",
+            "title": "Drone Inspection",
+            "description": "We utilize advanced drone imagery to thoroughly map your roof's condition without disturbing the surface."
+          },
+          {
+            "icon": "ClipboardCheck",
+            "title": "Action Plan",
+            "description": "A comprehensive brief is provided outlining our exact material choices and the underlying structural strategy."
+          },
+          {
+            "icon": "Truck",
+            "title": "Material Drop",
+            "description": "Materials arrive securely, taking care to protect your driveway and surrounding landscaping."
+          },
+          {
+            "icon": "Hammer",
+            "title": "Tactical Tear-off",
+            "description": "Old roofing is stripped down to the decking. We inspect and replace any compromised plywood."
+          },
+          {
+            "icon": "CheckCircle",
+            "title": "Precision Install",
+            "description": "Ice and water shields are deployed followed by architectural shingles layered flawlessly."
+          },
+          {
+            "icon": "Award",
+            "title": "Magnetic Sweep",
+            "description": "Final 6-point inspection and a thorough magnetic sweep of your property to ensure zero nails are left behind."
+          }
+        ],
+        "faq": [
+          {
+            "question": "How long does a roof replacement take?",
+            "answer": "Thanks to our disciplined crews, most residential roofs are completely replaced and cleaned up in just 1-2 days."
+          },
+          {
+            "question": "Can you help with insurance claims?",
+            "answer": "Yes. We work closely with insurance adjusters following severe storm damage to ensure you get fully covered for full replacements."
+          },
+          {
+            "question": "Do you install over old shingles?",
+            "answer": "Never. We believe in doing the job right the first time. We always tear off old material to inspect the underlying wood decking."
+          },
+          {
+            "question": "How do I know if I need a replacement vs. repair?",
+            "answer": "We provide honest assessments. If your roof is less than 15 years old and the damage is localized, repairs are often the strategic choice."
+          }
+        ],
+        "seo": {
+          "canonicalUrl": "https://RealRoof.com/services/residential-roofing",
+          "metaRobotsIndex": "noindex",
+          "metaRobotsFollow": "nofollow"
+        },
+        "id": "1778260522913"
+      },
+      {
+        "number": "02",
+        "title": "Windows & Doors",
+        "description": "Energy-efficient vinyl windows and premium doors that enhance curb appeal and reduce energy costs. ProVia Certified Installer.",
+        "icon": "Layout",
+        "tag": "Windows",
+        "features": [
+          {
+            "text": "Vinyl Windows",
+            "icon": "CheckCircle"
+          },
+          {
+            "text": "Patio Doors",
+            "icon": "CheckCircle"
+          },
+          {
+            "text": "Entry Doors",
+            "icon": "CheckCircle"
+          },
+          {
+            "text": "Energy Efficient",
+            "icon": "CheckCircle"
+          }
+        ],
+        "slug": "windows-doors",
+        "tagline": "Crystal Clear Efficiency",
+        "overview": "Our window and door solutions offer the perfect blend of structural integrity and modern design. We install high-efficiency vinyl and wood windows along with secure, insulated entry doors that reduce energy costs and increase your property's value.",
+        "stats": [
+          {
+            "value": "35",
+            "label": "% Energy Savings",
+            "icon": "TrendingUp"
+          },
+          {
+            "value": "99",
+            "label": "Year Glass Warranty",
+            "icon": "Shield"
+          },
+          {
+            "value": "800",
+            "label": "Homes Upgraded",
+            "icon": "Home"
+          },
+          {
+            "value": "0",
+            "label": "Draft Guarantees",
+            "icon": "CheckCircle"
+          }
+        ],
+        "benefits": [
+          {
+            "icon": "TrendingUp",
+            "title": "Drastic Energy Savings",
+            "description": "Low-E glass and argon gas fills create a thermal barrier that massively lowers utility bills."
+          },
+          {
+            "icon": "Shield",
+            "title": "Maximum Security",
+            "description": "Multi-point locking systems on our doors ensure your family remains safe against forced entry."
+          },
+          {
+            "icon": "Minus",
+            "title": "Noise Reduction",
+            "description": "Acoustic-grade insulated glass significantly mutes outside noise from traffic and neighbors."
+          },
+          {
+            "icon": "Layout",
+            "title": "Curb Appeal Boost",
+            "description": "Custom color matching and intricate trim designs transform the front facade of your property."
+          }
+        ],
+        "process": [
+          {
+            "icon": "FileText",
+            "title": "Design Consult",
+            "description": "We analyze your home's architecture to recommend the perfect grid patterns and window styles."
+          },
+          {
+            "icon": "Minus",
+            "title": "Laser Measurement",
+            "description": "Every opening is measured down to the millimeter for a perfect, draft-free custom fit."
+          },
+          {
+            "icon": "Truck",
+            "title": "Custom Fabrication",
+            "description": "Your windows are custom-built in state-of-the-art facilities using premium materials."
+          },
+          {
+            "icon": "Hammer",
+            "title": "Careful Extraction",
+            "description": "We strategically remove the old frames without damaging your existing interior drywall or trim."
+          },
+          {
+            "icon": "CheckCircle",
+            "title": "Level Installation",
+            "description": "Windows are shimmed, leveled, and sealed with high-performance exterior grade caulking."
+          },
+          {
+            "icon": "Award",
+            "title": "Function Test",
+            "description": "We verify all locks, sashes, and seals operate effortlessly before walking you through the final reveal."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why should I upgrade my windows?",
+            "answer": "New windows eliminate drafts, lower heating/cooling bills by up to 35%, and vastly improve the ambient sound dampening of your home."
+          },
+          {
+            "question": "Are your windows energy star rated?",
+            "answer": "Yes, we exclusively install Energy Star rated products utilizing Low-E coatings and argon gas technology."
+          },
+          {
+            "question": "Can I finance my window replacement?",
+            "answer": "Absolutely. We offer tailored financing packages ensuring you can upgrade your home's efficiency without a huge upfront burden."
+          },
+          {
+            "question": "Does installation make a mess?",
+            "answer": "We deploy drop cloths internally and clean the exterior flawlessly. We leave your home cleaner than we found it."
+          }
+        ],
+        "seo": {
+          "canonicalUrl": "https://RealRoof.com/windows-doors",
+          "metaRobotsFollow": "nofollow",
+          "metaRobotsIndex": "noindex"
+        },
+        "id": "1778266200140",
+        "benefitsDescription": "",
+        "processDescription": ""
+      },
+      {
+        "number": "03",
+        "title": "Custom Decks",
+        "description": "Beautiful, low-maintenance decks designed for outdoor living.  Wolf Home Products Certified installers for premium composite decking.",
+        "icon": "TreePine",
+        "tag": "Decks",
+        "features": [
+          "Wolf Serenity Decking",
+          "Custom Designs",
+          "Pergolas",
+          "Covered Decks"
+        ],
+        "slug": "custom-decks",
+        "tagline": "Professional windows & doors services with military precision and architectural excellence.",
+        "overview": "<p>Transform your backyard into a luxury retreat. We offer two premium decking paths: Low-Maintenance Composite for wood-like aesthetics with zero upkeep, and Structural PVC Decking for ultimate durability, moisture resistance, and lighter color retention. Both systems are designed to withstand the elements while providing elegance for your family. We bring military-grade discipline and architectural beauty to every project. Our mission is your property's long-term protection and value enhancement.</p>",
+        "stats": [
+          {
+            "value": "50",
+            "label": "Year Fade Warranty",
+            "icon": "Shield"
+          },
+          {
+            "value": "100%",
+            "label": "Splinter Free",
+            "icon": "ThumbsUp"
+          },
+          {
+            "value": "300+",
+            "label": "Decks Constructed",
+            "icon": "TreePine"
+          },
+          {
+            "value": "5X",
+            "label": "Stronger Framing",
+            "icon": "Hammer"
+          }
+        ],
+        "benefits": [
+          {
+            "icon": "TreePine",
+            "title": "Material Choice",
+            "description": "Choose between capped composite (wood/plastic blend) or cellular PVC (100% polymer) depending on your shade preference and moisture exposure."
+          },
+          {
+            "icon": "Shield",
+            "title": "Load-Bearing Integrity",
+            "description": "We over-engineer our footings and joists, exceeding local codes to ensure absolute structural safety."
+          },
+          {
+            "icon": "Layout",
+            "title": "Custom Enhancements",
+            "description": "Integrate low-voltage LED stair lighting, outdoor kitchens, or customized railing architectures."
+          },
+          {
+            "icon": "CheckCircle",
+            "title": "Cool-Touch Tech",
+            "description": "Select decking lines feature advanced heat-mitigating technology to keep barefoot paths comfortable in July."
+          }
+        ],
+        "process": [
+          {
+            "icon": "FileText",
+            "title": "3D CAD Rendering",
+            "description": "We design your deck in a 3D environment so you visualize the footprint and railing styles before we build."
+          },
+          {
+            "icon": "ClipboardCheck",
+            "title": "Code Permitting",
+            "description": "We secure all required municipal permits and handle neighborhood HOA approvals on your behalf."
+          },
+          {
+            "icon": "Hammer",
+            "title": "Foundation Pour",
+            "description": "Deep concrete footers are poured below the frost line to prevent any winter heaving."
+          },
+          {
+            "icon": "Building",
+            "title": "Robust Framing",
+            "description": "Treated lumber framing is erected using heavy-duty galvanized structural brackets."
+          },
+          {
+            "icon": "CheckCircle",
+            "title": "Toe Nail Screw",
+            "description": "Deck boards are installed using toe nail screw systems for a flawless, nail-free walking surface."
+          },
+          {
+            "icon": "Award",
+            "title": "Safety Audit",
+            "description": "Final inspection of all stair risers, railing tensions, and gate latches to ensure code compliance."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Wood vs Composite vs PVC?",
+            "answer": "Wood requires bi-annual maintenance. Composite offers a wood-like look with no upkeep. PVC decking is lighter in weight, resists moisture more effectively, and is the best choice for pool decks or deep shade."
+          },
+          {
+            "question": "Do you handle the city permits?",
+            "answer": "Yes, we handle the entire bureaucratic process. From rendering blueprints to meeting city inspectors on site."
+          },
+          {
+            "question": "Can you build over my old foundation?",
+            "answer": "It depends on age and code compliance. We perform a structural audit on your existing joists before making a recommendation."
+          },
+          {
+            "question": "How long does a deck build take?",
+            "answer": "Most custom decks take 1-2 weeks from the day we break ground, dependent on size and municipal inspection delays."
+          }
+        ],
+        "seo": {
+          "canonicalUrl": "https://RealRoof.com/custom-decks",
+          "metaRobotsIndex": "noindex",
+          "metaRobotsFollow": "nofollow"
+        },
+        "id": "1778266211324",
+        "overviewTitle": "Craftsmanship Without Compromise.",
+        "cta": {
+          "text": "Start Your Project",
+          "link": "https://RealRoof.com/contact"
+        }
+      },
+      {
+        "number": "04",
+        "title": "Siding, Soffit & Fascia",
+        "description": "Protect your home and enhance curb appeal with professional siding, soffit, and fascia installation and repair services.",
+        "icon": "Building2",
+        "tag": "Siding",
+        "features": [
+          "Vinyl Siding",
+          "Soffit Installation",
+          "Fascia Repair",
+          "Gutter Systems"
+        ],
+        "slug": "siding-soffit-fascia",
+        "tagline": "Aesthetic Exterior Defense",
+        "overview": "Siding is the armor of your home. We install premium vinyl and composite siding systems engineered to resist high winds, repel moisture, and eliminate the need for future exterior painting.",
+        "stats": [
+          {
+            "value": "200+",
+            "label": "Wind MPS Resistance",
+            "icon": "Shield"
+          },
+          {
+            "value": "100%",
+            "label": "Maintenance Free",
+            "icon": "ThumbsUp"
+          },
+          {
+            "value": "500",
+            "label": "Color Options",
+            "icon": "Layout"
+          },
+          {
+            "value": "R-10",
+            "label": "Insulated Upgrade",
+            "icon": "TrendingUp"
+          }
+        ],
+        "benefits": [
+          {
+            "icon": "Layout",
+            "title": "Flawless Aesthetics",
+            "description": "Vibrant, fade-resistant color palettes combined with authentic woodgrain textures elevate your property value."
+          },
+          {
+            "icon": "Shield",
+            "title": "Moisture Management",
+            "description": "Vented soffit systems ensure your attic breathes, preventing toxic mold from forming."
+          },
+          {
+            "icon": "CheckCircle",
+            "title": "Termite Proof",
+            "description": "Modern vinyl systems absolutely guarantee you will never deal with wood-boring insects or rotting."
+          },
+          {
+            "icon": "TrendingUp",
+            "title": "Thermal Enclosure",
+            "description": "Insulated siding options wrap your home's studs in a continuous blanket, eliminating thermal bridging."
+          }
+        ],
+        "process": [
+          {
+            "icon": "FileText",
+            "title": "Design Mockup",
+            "description": "Select from hundreds of colors, profiles, and board & batten accents."
+          },
+          {
+            "icon": "Hammer",
+            "title": "Exterior Strip",
+            "description": "Existing siding is removed; underlying studs and sheathing are inspected for rot."
+          },
+          {
+            "icon": "Shield",
+            "title": "Weather Wrap",
+            "description": "High-performance breathable house wrap is installed to block water but allow vapor escape."
+          },
+          {
+            "icon": "Building2",
+            "title": "Fascia Capping",
+            "description": "Custom bent aluminum is applied to all exposed wood fascia, eliminating painting forever."
+          },
+          {
+            "icon": "CheckCircle",
+            "title": "Siding Click-Lock",
+            "description": "Panels are hung securely with precision expansion joints to allow for seasonal temperature shifts."
+          },
+          {
+            "icon": "Award",
+            "title": "Seal & Clean",
+            "description": "Premium caulking is applied around all windows and doors for a weatherproof final seal."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why replace Soffit and Fascia?",
+            "answer": "These elements protect your roofline. Rotting wood allows pests into your attic and restricts necessary airflow. Wrapping them in aluminum solves this permanently."
+          },
+          {
+            "question": "Will insulated siding save me money?",
+            "answer": "Yes. It acts as an exterior thermal blanket, covering the exposed wood studs that traditional fiberglass interior insulation cannot reach."
+          },
+          {
+            "question": "How long will vinyl siding last?",
+            "answer": "High-quality premium vinyl can last 30-50 years or longer, maintaining its color without needing to be repainted."
+          },
+          {
+            "question": "Can you match my existing trim?",
+            "answer": "Yes, we custom bend our own aluminum on site to perfectly match or contrast your existing window and door trims."
+          }
+        ],
+        "seo": {
+          "canonicalUrl": "https://RealRoof.com/siding-soffit-fascia",
+          "metaRobotsIndex": "noindex",
+          "metaRobotsFollow": "nofollow"
+        },
+        "id": "1778266270428"
+      },
+      {
+        "number": "05",
+        "title": "Commercial Roofing",
+        "description": "Specialized commercial roofing solutions including TPO and EPDM systems. Installation, repair, and maintenance for businesses.",
+        "icon": "Building",
+        "tag": "Commercial",
+        "features": [
+          "TPO Roofing",
+          "EPDM Systems",
+          "Maintenance Programs",
+          "Large Scale Projects"
+        ],
+        "slug": "commercial-roofing",
+        "tagline": "Industrial Grade Defense",
+        "overview": "Protect your inventory, equipment, and employees with military-precision commercial roofing systems. We specialize in TPO, EPDM, and flat-roof coatings tailored for high-durability and energy reflection.",
+        "stats": [
+          {
+            "value": "20",
+            "label": "Year NDL Warranty",
+            "icon": "Shield"
+          },
+          {
+            "value": "50000+",
+            "label": "SqFt Installed",
+            "icon": "Building"
+          },
+          {
+            "value": "24",
+            "label": "Hour Availability",
+            "icon": "Clock"
+          },
+          {
+            "value": "100%",
+            "label": "Code Compliance",
+            "icon": "CheckCircle"
+          }
+        ],
+        "benefits": [
+          {
+            "icon": "TrendingUp",
+            "title": "Cool Roof Energy Savings",
+            "description": "White TPO membranes reflect harmful UV rays, drastically decreasing warehouse and office cooling costs."
+          },
+          {
+            "icon": "Shield",
+            "title": "Seam Welded Security",
+            "description": "Hot-air welded seams bind TPO sheets together creating a monolithic, impermeable barrier."
+          },
+          {
+            "icon": "Clock",
+            "title": "Zero Downtime",
+            "description": "We schedule staging and logistics strictly to ensure your daily business operations are never interrupted."
+          },
+          {
+            "icon": "Building2",
+            "title": "Complex Flashing",
+            "description": "Expert sealing around complex commercial HVAC units, parapet walls, and ventilation pipes."
+          }
+        ],
+        "process": [
+          {
+            "icon": "FileText",
+            "title": "Core Testing",
+            "description": "We take core samples of your existing membrane and insulation to detect hidden moisture mapping."
+          },
+          {
+            "icon": "ClipboardCheck",
+            "title": "Logistical Staging",
+            "description": "Cranes and dumpsters are positioned to minimize impact on your employee parking and shipping docks."
+          },
+          {
+            "icon": "Hammer",
+            "title": "Substrate Repair",
+            "description": "Damaged ISO boards and decking are removed to ensure a solid foundational deck."
+          },
+          {
+            "icon": "TrendingUp",
+            "title": "Tapered Insulation",
+            "description": "We install custom tapered insulation systems to correct any pre-existing standing water or drainage issues."
+          },
+          {
+            "icon": "CheckCircle",
+            "title": "Membrane Welding",
+            "description": "Rolls are laid and robotic hot-air welders are used to fuse the seams permanently."
+          },
+          {
+            "icon": "Award",
+            "title": "Manufacturer Walk",
+            "description": "Final walks are completed alongside the manufacturer representative to issue the No Dollar Limit warranty."
+          }
+        ],
+        "faq": [
+          {
+            "question": "TPO vs EPDM?",
+            "answer": "TPO is heat-reflective and welded for superior seam strength. EPDM (rubber) is highly durable against impacts but absorbs heat. We recommend TPO for most applications."
+          },
+          {
+            "question": "Are your crews certified?",
+            "answer": "We maintain top-tier certifications with leading commercial manufacturers, allowing us to offer elite NDL warranties."
+          },
+          {
+            "question": "What is an NDL warranty?",
+            "answer": "A No Dollar Limit warranty covers all labor and materials required to fix a leak during the warranty span, backed directly by the manufacturer."
+          },
+          {
+            "question": "Do you offer preventative maintenance?",
+            "answer": "Yes. Proactive bi-annual maintenance programs drastically extend the life of a commercial roof by catching issues early."
+          }
+        ],
+        "seo": {
+          "canonicalUrl": "https://RealRoof.com/commercial-roofing",
+          "metaRobotsIndex": "noindex",
+          "metaRobotsFollow": "nofollow"
+        },
+        "id": "1778266284019"
+      },
+      {
+        "number": "06",
+        "title": "Gutters & Protection",
+        "description": "Professional gutter installation and gutter protection systems to prevent water damage and maintain proper drainage.",
+        "icon": "Droplets",
+        "tag": "Gutters",
+        "features": [
+          "Seamless Gutters",
+          "Gutter Guards",
+          "Downspouts",
+          "Leaf Protection"
+        ],
+        "slug": "gutters-protection",
+        "tagline": "Controlled Drainage Execution",
+        "overview": "Effective water management is critical for your home's structural integrity. We fabricate seamless 5-inch and 6-inch aluminum gutters right on your property, paired with the industry's highest-quality leaf guard systems.",
+        "stats": [
+          {
+            "value": "100%",
+            "label": "Seamless Design",
+            "icon": "CheckCircle"
+          },
+          {
+            "value": "10K",
+            "label": "Rain Gal/Hr Cap",
+            "icon": "Droplets"
+          },
+          {
+            "value": "0",
+            "label": "Clogs Guaranteed",
+            "icon": "Shield"
+          },
+          {
+            "value": "24h",
+            "label": "Turnaround",
+            "icon": "Clock"
+          }
+        ],
+        "benefits": [
+          {
+            "icon": "Droplets",
+            "title": "Foundation Protection",
+            "description": "Moving massive volumes of roof water away from your foundation prevents basement flooding and hydraulic pressure."
+          },
+          {
+            "icon": "Layout",
+            "title": "On-Site Extrusion",
+            "description": "Gutters are formed perfectly to fit the length of your home with zero weak seams or joints in the middle."
+          },
+          {
+            "icon": "Shield",
+            "title": "Micro-Mesh Defense",
+            "description": "Our premium guards block leaves, pine needles, and shingle grit, while allowing torrential rain to flow through."
+          },
+          {
+            "icon": "CheckCircle",
+            "title": "Heavy Duty Brackets",
+            "description": "Hidden hangers screwed directly into fascia board ensure your gutters never sag under the weight of winter ice."
+          }
+        ],
+        "process": [
+          {
+            "icon": "FileText",
+            "title": "Pitch Mapping",
+            "description": "We analyze your roofline to determine the correct slope ratios and exactly where downspouts must be placed."
+          },
+          {
+            "icon": "Hammer",
+            "title": "Removal",
+            "description": "Old failing gutters are detached and disposed of. Fascia boards are checked for water rot."
+          },
+          {
+            "icon": "Truck",
+            "title": "Extrusion",
+            "description": "Using our mobile machine, heavy-gauge aluminum is rolled into perfectly seamless gutters tailored to your home's specific measurements."
+          },
+          {
+            "icon": "Building",
+            "title": "Installation",
+            "description": "Heavy-duty hidden brackets attach securely to the fascia ensuring maximum load-bearing capability against snow and ice."
+          },
+          {
+            "icon": "CheckCircle",
+            "title": "Guard Placement",
+            "description": "Micro-mesh leaf protection is snapped securely into place over the entire system."
+          },
+          {
+            "icon": "Award",
+            "title": "Water Test",
+            "description": "We test the flow dynamics to ensure rapid drainage leaving no standing water or weak points."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why 6-inch gutters over 5-inch?",
+            "answer": "6-inch gutters hold roughly 40% more water. With the severity of midwestern storms, the added capacity prevents devastating overflow."
+          },
+          {
+            "question": "Do I really need leaf guards?",
+            "answer": "If you have trees within 100 feet of your property, absolutely. Gutters filled with debris stop working entirely, causing water to rot your roof deck and flood your basement."
+          },
+          {
+            "question": "How do seamless gutters work?",
+            "answer": "We bring a machine to your house that rolls out a single piece of aluminum cut to the exact length of your roof edge. No seams means no mid-run leaks."
+          },
+          {
+            "question": "Can gutters cause ice dams?",
+            "answer": "Gutters don't cause ice dams (poor attic ventilation does), but clogged gutters can exacerbate them by trapping freezing water."
+          }
+        ],
+        "seo": {
+          "canonicalUrl": "https://RealRoof.com/gutters-protection",
+          "metaRobotsIndex": "noindex",
+          "metaRobotsFollow": "nofollow"
+        },
+        "id": "1778266296275"
+      },
+      {
+        "title": "Vinyl & Aluminum Fencing ",
+        "slug": "vinyl-and-aluminum-fencing",
+        "tagline": "Vinyl & Aluminum Fencing ",
+        "description": "<p>Professional vinyl and aluminum fencing services designed to deliver security, privacy, and long-lasting curb appeal. We specialize in durable, low-maintenance fencing solutions built to handle Missouri’s changing weather conditions while enhancing the beauty and value of your property.</p>",
+        "overviewTitle": "Strength That Defines Boundaries.",
+        "overview": "<p>Professional vinyl and aluminum fencing services designed to deliver security, privacy, and long-lasting curb appeal. We specialize in durable, low-maintenance fencing solutions built to handle Missouri’s changing weather conditions while enhancing the beauty and value of your property.</p><p></p>",
+        "overviewImage": "https://res.cloudinary.com/dytytwyp6/image/upload/v1778246904/gscsxlx9oqcb2s2lfli5.jpg",
+        "cta": {
+          "text": "Start Your Project",
+          "link": "/contact"
+        },
+        "icon": "Layout",
+        "tag": "Vinyl & Aluminum Fencing  ",
+        "status": "published",
+        "features": [],
+        "stats": [
+          {
+            "value": "50",
+            "label": "Year Warranty",
+            "icon": "Star"
+          },
+          {
+            "value": "300",
+            "label": "Fencing Built",
+            "icon": "Star"
+          },
+          {
+            "value": "130",
+            "label": "Wind Rating MPH",
+            "icon": "Star"
+          },
+          {
+            "value": "100%",
+            "label": "Damage-Free Rating",
+            "icon": "Star"
+          }
+        ],
+        "benefits": [
+          {
+            "title": "Durable Materials",
+            "description": "<p>High-quality vinyl and aluminum fencing built to withstand harsh weather, rust, fading, and everyday wear.</p><h3></h3><p></p>",
+            "icon": "Shield"
+          },
+          {
+            "title": "Low Maintenance",
+            "description": "<p>Enjoy a clean, modern fence with minimal upkeep — no painting, staining, or frequent repairs required.</p><h3></h3><p></p>",
+            "icon": "Layout"
+          },
+          {
+            "title": "Enhanced Security",
+            "description": "<p>Strong and reliable fencing solutions designed to improve privacy, safety, and property protection.</p><h3></h3><p></p>",
+            "icon": "Sun"
+          },
+          {
+            "title": "Custom Styles",
+            "description": "<p>Choose from a variety of colors, heights, and designs to match your home’s style and curb appeal.</p>",
+            "icon": "Ruler"
+          }
+        ],
+        "process": [
+          {
+            "title": "Property Assessment",
+            "description": "<p>We inspect your property layout, measurements, and installation requirements to recommend the best fencing solution.</p><h3></h3><p></p>",
+            "icon": "Hammer"
+          },
+          {
+            "title": "Design Selection",
+            "description": "<p>Choose from a variety of vinyl and aluminum fence styles, colors, heights, and customization options.</p><h3></h3><p></p>",
+            "icon": "Hammer"
+          },
+          {
+            "title": "Material Delivery",
+            "description": "<p>All fencing materials are delivered safely and prepared for a smooth, organized installation process.</p><h3></h3><p></p>",
+            "icon": "Mountain"
+          },
+          {
+            "title": "Site Preparation",
+            "description": "<p>Our team prepares the installation area by marking boundaries and ensuring proper alignment and stability.</p><h3></h3><p></p>",
+            "icon": "Ruler"
+          },
+          {
+            "title": "Precision Installation",
+            "description": "<p>Your fence is professionally installed with attention to durability, security, and clean finishing details.</p><h3></h3><p></p>",
+            "icon": "Hammer"
+          },
+          {
+            "title": "Final Inspection",
+            "description": "<p>We complete a full quality check and walkthrough to ensure your new fence meets our craftsmanship standards.</p>",
+            "icon": "Building2"
+          }
+        ],
+        "faq": [
+          {
+            "question": "How long does vinyl or aluminum fencing last?",
+            "answer": "<p>Vinyl and aluminum fences are highly durable and can last 20–30 years or more with proper installation and minimal maintenance.</p><h3></h3><p></p>"
+          },
+          {
+            "question": "Which fencing option is better for low maintenance?",
+            "answer": "<p>Vinyl fencing requires very little maintenance since it does not rust, rot, or require painting.</p><h3></h3><p></p>"
+          },
+          {
+            "question": "Is aluminum fencing good for security?",
+            "answer": "<p>Yes, aluminum fencing is strong, weather-resistant, and provides excellent security while maintaining an elegant appearance.</p><h3></h3><p></p>"
+          },
+          {
+            "question": "Can I customize the style and color of my fence?",
+            "answer": "<p>Absolutely. We offer multiple colors, heights, and design options to match your property’s style and needs.</p><h3></h3><p></p>"
+          },
+          {
+            "question": "How long does fence installation take?",
+            "answer": "<p>Most residential fencing projects are completed within a few days, depending on the property size and project complexity.</p>"
+          }
+        ],
+        "seo": {
+          "canonicalUrl": "https://RealRoof.com/vinyl-and-aluminum-fencing",
+          "metaRobotsIndex": "noindex",
+          "metaRobotsFollow": "nofollow"
+        },
+        "id": "1778178610920",
+        "number": "07",
+        "breadcrumbImage": "https://res.cloudinary.com/dytytwyp6/image/upload/v1778246883/nwjdfoekcyqt4tjxgadd.jpg",
+        "breadcrumbText": "Vinyl and Aluminum Fencing ",
+        "overviewTitlePrefix": "Strength That",
+        "overviewTitleHighlight": "Defines Boundaries.",
+        "overviewStats": [
+          {
+            "icon": "Star",
+            "value": "100%",
+            "label": "Durable Materials"
+          },
+          {
+            "icon": "Star",
+            "value": "",
+            "label": "Low Maintenance"
+          },
+          {
+            "icon": "Star",
+            "value": "",
+            "label": "Custom Styles"
+          },
+          {
+            "icon": "Star",
+            "value": "",
+            "label": "Enhanced Security"
+          }
+        ],
+        "benefitsTitlePrefix": "Engineered To ",
+        "benefitsTitleHighlight": "Outlast",
+        "processTitlePrefix": "Precision in ",
+        "processTitleHighlight": "every detail",
+        "processBadge": "Methodology",
+        "benefitsBadge": "The RealRoof Edge",
+        "heroDescription": "Professional vinyl and aluminum fencing services designed to deliver security, privacy, and long-lasting curb appeal. We specialize in durable, low-maintenance fencing solutions built to handle Missouri’s changing weather conditions while enhancing the beauty and value of your property.\n\n",
+        "benefitsDescription": "",
+        "processDescription": "",
+        "blogSection": {
+          "description": "<p>Blogs</p>",
+          "selectedPosts": [
+            "6a0ef621bbc9d7bda26baeb9"
+          ],
+          "title": "Blogs",
+          "subtitle": "Latest Insights"
+        }
+      },
+      {
+        "title": "PVC Decking",
+        "slug": "pvc-decking",
+        "tagline": "Premium Decking",
+        "description": "<p>100% synthetic decking engineered for superior moisture resistance and lighter, cooler surfaces.</p>",
+        "heroDescription": "Professional pvc decking services with military precision and architectural excellence.",
+        "breadcrumbText": "",
+        "overviewTitlePrefix": "Craftsmanship",
+        "overviewTitleHighlight": "Without Compromise.",
+        "overviewTitleSuffix": "",
+        "benefitsTitlePrefix": "Engineered To",
+        "benefitsTitleHighlight": "Outlast",
+        "benefitsTitleSuffix": "",
+        "benefitsBadge": "The RealRoof Edge",
+        "benefitsDescription": "Experience the difference with our unwavering commitment to military-grade excellence.",
+        "processTitlePrefix": "Precision in",
+        "processTitleHighlight": "Every Detail",
+        "processTitleSuffix": "",
+        "processBadge": "The RealRoof Edge",
+        "processDescription": "Experience the difference with our unwavering commitment to military-grade excellence.",
+        "overview": "<p><span style=\"color: rgb(115, 115, 115);\">Our PVC decking solutions represent the pinnacle of synthetic deck technology. Unlike composite which contains wood flour, cellular PVC is 100% polymer. This provides unparalleled resistance to moisture, rot, and insects. It is the ideal solution for pool surrounds, heavily shaded lots, or homeowners who prefer lighter, cooler deck colors that never absorb water. We bring military-grade discipline and architectural beauty to every project. Our mission is your property's long-term protection and value enhancement.</span></p>",
+        "overviewImage": "",
+        "overviewStats": [
+          {
+            "icon": "CheckCircle",
+            "label": "100% Waterproof Core"
+          },
+          {
+            "icon": "CheckCircle",
+            "label": "Lighter Color Options"
+          },
+          {
+            "icon": "CheckCircle",
+            "label": "Mold & Mildew Proof"
+          },
+          {
+            "icon": "CheckCircle",
+            "label": "Lighter Weight Material"
+          }
+        ],
+        "cta": {
+          "text": "Start Your Project",
+          "link": "/contact"
+        },
+        "icon": "Droplets",
+        "tag": "Premium Decking",
+        "status": "published",
+        "features": [],
+        "stats": [
+          {
+            "value": "50",
+            "label": "Year Rot Warranty",
+            "icon": "Shield",
+            "category": "Impact"
+          },
+          {
+            "value": "30%",
+            "label": "Lighter than Composite",
+            "icon": "BadgeCheck",
+            "category": "Impact"
+          },
+          {
+            "value": "0",
+            "label": "Water Absorption",
+            "icon": "Droplets",
+            "category": "Impact"
+          },
+          {
+            "value": "50+",
+            "label": "Years of Life",
+            "icon": "Clock",
+            "category": "Impact"
+          }
+        ],
+        "benefits": [
+          {
+            "title": "Pool-Ready Design",
+            "description": "<p>Since PVC contains zero organic material, it will never swell, cup, or rot from standing water or pool splashing.</p>",
+            "icon": "Droplets"
+          },
+          {
+            "title": "Brighter Aesthetics",
+            "description": "<p>PVC can achieve true, crisp whites and light coastal grays that are difficult to produce with darker composite materials.</p><p><br></p>",
+            "icon": "Layout"
+          },
+          {
+            "title": "Superior Mold Resistance",
+            "description": "<p>The dense, non-porous surface prevents mold spores and mildew from ever taking root, ideal for damp, shaded backyards.</p><p><br></p>",
+            "icon": "Shield"
+          },
+          {
+            "title": "Stable Dimensions",
+            "description": "<p>PVC experiences less thermal expansion and contraction than composite, allowing for tighter miters and cleaner lines.</p>",
+            "icon": "TrendingUp"
+          }
+        ],
+        "process": [
+          {
+            "title": "Color Matching",
+            "description": "<p>Since PVC contains zero organic material, it will never swell, cup, or rot from standing water or pool splashing.</p><p><br></p>",
+            "icon": "FileText"
+          },
+          {
+            "title": "Framing Prep",
+            "description": "<p>PVC can achieve true, crisp whites and light coastal grays that are difficult to produce with darker composite materials.</p><p><br></p>",
+            "icon": "ClipboardCheck"
+          },
+          {
+            "title": "Foundation Pour",
+            "description": "<p>The dense, non-porous surface prevents mold spores and mildew from ever taking root, ideal for damp, shaded backyards.</p><p><br></p>",
+            "icon": "Hammer"
+          },
+          {
+            "title": "Robust Framing",
+            "description": "<p>Pressure-treated framing is installed with premium tape on all joist tops to create a barrier between wood and PVC.</p><p><br></p>",
+            "icon": "Building"
+          },
+          {
+            "title": "PVC Fastening",
+            "description": "<p>Specialized pneumatic fasteners or Cortex hidden screws are used to secure the 100% synthetic boards flawlessly.</p><p><br></p>",
+            "icon": "CheckCircle"
+          },
+          {
+            "title": "Final Trim",
+            "description": "<p>PVC fascia and riser boards are applied for a cohesive, fully synthetic envelope that requires zero paint.</p><p><br></p>",
+            "icon": "Award"
+          }
+        ],
+        "faq": [
+          {
+            "question": "What is the difference between PVC and Composite decking?",
+            "answer": "<p>Composite is a blend of wood fibers and plastic; it's heavy and can absorb trace moisture. PVC is pure plastic (polymer). It's lighter, fully waterproof, and stays cooler in the sun than traditional dark composites.</p><p><br></p>"
+          },
+          {
+            "question": "Is PVC decking slippery when wet?",
+            "answer": "<p>Premium PVC brands feature an embossed wood-grain texture that provides excellent traction, even around pools. We recommend specific lines for wet applications.</p><p><br></p>"
+          },
+          {
+            "question": "Will PVC decking fade?",
+            "answer": "<p>PVC is highly color stable. Unlike early generation composites, modern PVC features UV-stabilized capstock that resists fading significantly better, especially in lighter color tones.</p><p><br></p>"
+          },
+          {
+            "question": "Does PVC decking require special framing?",
+            "answer": "<p>Because it is lighter and slightly more flexible, we adhere to stricter joist spacing (typically 12\" on center) to ensure the deck feels as solid as a hardwood floor.</p>"
+          }
+        ],
+        "seo": {},
+        "id": "1779459800462",
+        "number": "08"
+      }
+    ],
+    "cta": {
+      "title": "Ready for Your Free Estimate?",
+      "description": "Transform your home with St. Louis's expert builders. Contact us today for quality craftsmanship and unparalleled service.",
+      "buttonText": "Get Free Estimate",
+      "buttonLink": "#contact"
+    },
+    "hero": {
+      "headline": {
+        "prefix": "St. Louis's Trusted",
+        "highlight": "Exterior Remodeling",
+        "suffix": "Company"
+      },
+      "description": [
+        "RealRoof provides expert exterior remodeling services for homes and businesses. From windows and doors to roofing and decks, our team delivers quality craftsmanship with military precision.",
+        "<span class=\"font-semibold text-primary\">Veteran Owned ΓÇó Licensed ΓÇó Bonded & Insured</span>"
+      ]
+    },
+    "statsSection": {
+      "badge": "Our Impact",
+      "headline": "Trusted by Homeowners <span class=\"text-primary\">Across the Region</span>",
+      "description": "Numbers speak louder than words. Here's what we've achieved together with our valued customers."
+    },
+    "gridSection": {
+      "badge": "Expertise",
+      "headline": "World Class <span class=\"text-primary\">Capabilities</span>",
+      "description": "Every detail matters when it comes to structural integrity. Our team brings military-grade standards to every project across the St. Louis area."
+    },
+    "highlightText": "Veteran Owned • Licensed • Bonded & Insured"
+  },
+  "leadership": {
+    "section": {
+      "badge": "Our Leadership",
+      "headline": "Veteran-Owned & <span class=\"font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80\">Mission-Driven</span>",
+      "description": "Battlefield discipline meets boardroom precision. RealRoof brings honor, integrity, and craftsmanship back to the remodeling industry."
+    },
+    "ceo": {
+      "name": "Brandon Anderson",
+      "title": "Founder ΓÇó U.S. Army Veteran ΓÇó Globally Licensed Combat Sports Official",
+      "image": "brandon",
+      "alt": "Brandon Anderson - Founder, RealRoof",
+      "badges": {
+        "top": "VETERAN OWNED",
+        "bottom": "ProVia ΓÇó IKO ΓÇó CertainTeed ΓÇó Wolf"
+      },
+      "quotes": [
+        "RealRoof was built to be more than just a remodeling company. It was built to lead a movement."
+      ],
+      "description": [
+        "Based in O'Fallon, Missouri, RealRoof was founded by Brandon Anderson, an Army veteran and globally licensed combat sports official who brings discipline, precision, and accountability to every project. With years of leadership experience at some of the largest home improvement companies in North America, Brandon saw firsthand how the industry had shifted away from homeowners and toward profits, leaving people with high prices, poor communication, and broken trust.",
+        "He knew it didn't have to be that way. RealRoof was created to restore what the industry lostΓÇötrust, craftsmanship, and doing the job right the first time. Today, we stand as a local company built to compete with the biggest names in the country, not through gimmicks, but through transparency, quality work, and a relentless commitment to our customers.",
+        "Our systems are built for precision, but our strength is our peopleΓÇödriven professionals who take ownership, communicate clearly, and treat every home like their own."
+      ],
+      "social": {
+        "linkedin": "#",
+        "email": "banderson@RealRoof.com"
+      }
+    }
+  },
+  "team": {
+    "section": {
+      "badge": "Our Leadership",
+      "headline": "Guiding with vision & integrity",
+      "description": "Experienced leadership committed to excellence in every project, partnership, and promise."
+    },
+    "members": [
+      {
+        "id": "brandon-anderson",
+        "name": "Brandon Anderson",
+        "role": "Founder & CEO",
+        "image": "BrandonAnderson",
+        "badge1": "FOUNDER & CEO",
+        "badge2": "VISION ΓÇó INTEGRITY",
+        "description": [
+          "Originally from Nashville, Tennessee, Brandon was raised in Southern Illinois. Growing up in a difficult home environment, he faced challenges that forced him to mature quickly. Later, his grandparents stepped in to raise him and his two brothers, teaching him what it truly means to show up for family and build something stronger than what you were given.",
+          "Brandon carried those lessons into his service in the United States Army, where he developed discipline, resilience, and the ability to perform under pressure. The military reinforced a mindset that still defines him today. No excuses. No shortcuts. Just execution.",
+          "After his service, he pursued a career in high-performance environments, earning multiple promotions and working with top-tier organizations."
+        ]
+      },
+      {
+        "id": "chrissy-long",
+        "name": "Chrissy Long",
+        "role": "Executive Assistant",
+        "image": "ChrissyLong",
+        "badge1": "EXECUTIVE ASSISTANT",
+        "badge2": "RELIABLE ΓÇó PURPOSEFUL",
+        "description": [
+          "Say hello to the newest powerhouse at RealRoof- our amazing new executive assistant, Chrissy Long! She is the backbone that ensures nothing falls through the cracks - because every great company needs a reliable teammate, and every great customer deserves amazing work!",
+          "Here is a little bit about Chrissy and what she has to say about working at RealRoof:",
+          "\" I have found my home, a place with genuine people who really care about their customers and employees, which today is sometimes rare. I truly believe my calling in life is to help others, and this job is exactly that, purposeful and fulfilling. It also gives me the opportunity to live a better-tuned life, take care of my daughters, and still have time for the hobbies I enjoy. When I'm not at work; I am either napping, training for a kickboxing match, serving at my local church, or enjoying time with my family. I really love a simplistic, peaceful lifestyle and I hope to bring those attributes into my work life. \""
+        ]
+      },
+      {
+        "id": "austin",
+        "name": "Austin",
+        "role": "Canvas Manager",
+        "image": "Austin",
+        "badge1": "CANVAS MANAGER",
+        "badge2": "GROWTH ΓÇó MINDFULNESS",
+        "alignRight": true,
+        "description": [
+          "Drumroll, please! ≡ƒÑü It's time for you to meet the dream team behind RealRoof!≡ƒªà",
+          "First up is our amazing canvas manager, Austin! We are so grateful to have a leader who brings creativity, care, and amazing organization to every project.",
+          "Here's what Austin has to say about working for the company:",
+          "\"As a Canvas Manager at RealRoof, going on 5 months I'm proud and grateful to be part of a team where growth isn't just encouraged-it's built into everything we do. That mindset doesn't stop at work; it flows into how I live. I thrive outdoors; whether I'm at the park with my kids, exploring nature, or enjoying a sporting event. I truly believe connection, movement, and joy go hand in hand. Yoga and mindfulness practices keep me grounded, but I'm always reaching forward, learning, and evolving. At work and in life, I believe growth isn't a destination-it's a daily practice, shaped by purpose, presence and the courage to keep showing up, fully.\"",
+          "Thank you Austin for all you do for the team!"
+        ]
+      },
+      {
+        "id": "brandon-sales",
+        "name": "Brandon",
+        "role": "Construction Sales Professional",
+        "image": "BrandonSales",
+        "badge1": "SALES PROFESSIONAL",
+        "badge2": "KNOWLEDGE ΓÇó HONESTY",
+        "description": [
+          "Brandon is a construction sales professional with over 12 years of experience specializing in windows, doors, and roofing. He's known for his straightforward approach, strong product knowledge, and commitment to helping customers find the right solutions for their homes.",
+          "As an Illinois resident, Brandon takes pride in serving his local community with honesty and dependable service. Outside of work, Brandon is a dedicated softball dad and enjoys spending his free time on the golf course."
+        ]
+      }
+    ]
+  },
+  "aboutPage": {
+    "hero": {
+      "headline": {
+        "line1": "SOARING",
+        "line2": "BEYOND",
+        "line3": "EXPECTATIONS."
+      },
+      "description": "Born in O'Fallon, Missouri. Built on military precision. Driven by integrity.",
+      "cta": "Contact Now",
+      "phone": "636-449-9714",
+      "phoneLabel": "Call for Free Estimate",
+      "trustLabel": "Trusted by 500+ Homeowners",
+      "stats": [
+        {
+          "label": "Veteran Owned",
+          "val": "USA",
+          "icon": "ShieldCheck"
+        },
+        {
+          "label": "Quality Guarantee",
+          "val": "Lifetime",
+          "icon": "Zap"
+        },
+        {
+          "label": "Support",
+          "val": "24/7",
+          "icon": "Globe"
+        }
+      ]
+    },
+    "recognition": [
+      "ProVia Certified",
+      "IKO Pro",
+      "Shingle Master",
+      "TimberTech",
+      "Veteran Owned",
+      "Contractor Excellence",
+      "Wolf Home Products Certified"
+    ],
+    "story": {
+      "badge": "Our Story",
+      "headline": "Soaring Beyond Expectations",
+      "highlight": "Expectations",
+      "description": "Born in O'Fallon, Missouri. Built on military precision. Driven by integrity.",
+      "portrait": {
+        "badgeLeft": "VETERAN OWNED",
+        "badgeRight": "ProVia ΓÇó IKO ΓÇó CertainTeed ΓÇó Wolf"
+      },
+      "founder": {
+        "name": "Brandon Anderson",
+        "title": "Founder ΓÇó U.S. Army Veteran ΓÇó Globally Licensed Combat Sports Official",
+        "quote": "RealRoof was built to be more than just a remodeling company. It was built to lead a movement.",
+        "bio": [
+          "Based in O'Fallon, Missouri, RealRoof was founded by Brandon Anderson, an Army veteran and globally licensed combat sports official who brings discipline, precision, and accountability to every project. With years of leadership experience at some of the largest home improvement companies in North America, Brandon saw firsthand how the industry had shifted away from homeowners and toward profits, leaving people with high prices, poor communication, and broken trust.",
+          "He knew it didn't have to be that way. RealRoof was created to restore what the industry lostΓÇötrust, craftsmanship, and doing the job right the first time. Today, we stand as a local company built to compete with the biggest names in the country, not through gimmicks, but through transparency, quality work, and a relentless commitment to our customers.",
+          "Our systems are built for precision, but our strength is our peopleΓÇödriven professionals who take ownership, communicate clearly, and treat every home like their own."
+        ],
+        "secondaryQuote": "This is freedom in construction formΓÇöfreedom from overpriced corporate contractors, freedom from broken promises, and freedom to expect more from your remodeler.",
+        "footer": "ΓÇö Brandon Anderson, CEO",
+        "email": "banderson@RealRoof.com",
+        "social": {
+          "linkedin": "https://www.linkedin.com/company/realroof/people/"
+        }
+      }
+    },
+    "stats": {
+      "badge": "Our Impact",
+      "headline": "Trusted by Homeowners Across the Region",
+      "description": "Numbers speak louder than words. Here's what we've achieved together with our valued customers.",
+      "items": [
+        {
+          "value": 50,
+          "label": "Years Combined Experience",
+          "suffix": "+",
+          "icon": "Clock",
+          "description": "Industry expertise across our team"
+        },
+        {
+          "value": 1000,
+          "label": "Homes Transformed",
+          "suffix": "+",
+          "icon": "Home",
+          "description": "Satisfied homeowners"
+        },
+        {
+          "value": 100,
+          "label": "Veteran Owned",
+          "suffix": "%",
+          "icon": "BadgeCheck",
+          "description": "Proudly serving our community"
+        },
+        {
+          "value": 10,
+          "label": "Year Workmanship Guarantee",
+          "suffix": "YR",
+          "icon": "Shield",
+          "description": "Peace of mind guaranteed"
+        }
+      ],
+      "trustBadges": [
+        {
+          "text": "500+ 5-Star Reviews",
+          "icon": "Users"
+        },
+        {
+          "text": "A+ BBB Rating",
+          "icon": "Award"
+        },
+        {
+          "text": "Top Rated Contractor",
+          "icon": "Star"
+        }
+      ]
+    },
+    "mission": {
+      "badge": "Mission",
+      "headline": "Our Mission",
+      "highlight": "Mission",
+      "description": "To revolutionize the remodeling industry by putting people firstΓÇörestoring trust through transparency, exceptional craftsmanship, and an unwavering commitment to doing whatΓÇÖs right.",
+      "stats": [
+        {
+          "value": "100%",
+          "label": "Customer First"
+        },
+        {
+          "value": "0%",
+          "label": "Hidden Agendas"
+        },
+        {
+          "value": "Γê₧",
+          "label": "Commitment"
+        }
+      ],
+      "principles": [
+        {
+          "title": "Fairness",
+          "desc": "Honest pricing with zero hidden agendas. Every quote is transparent, every invoice is exactΓÇöbuilding trust through radical transparency.",
+          "val": "01",
+          "icon": "Scale"
+        },
+        {
+          "title": "Honesty",
+          "desc": "Transparent communication at every milestone. No surprises, no shortcutsΓÇöjust unwavering integrity that defines our character.",
+          "val": "02",
+          "icon": "Gem"
+        },
+        {
+          "title": "Hard Work",
+          "desc": "Relentless pursuit of perfection until excellence is achieved. We measure success by your satisfaction, not by the clock.",
+          "val": "03",
+          "icon": "Zap"
+        },
+        {
+          "title": "Precision",
+          "desc": "Military-grade accuracy in every detail. From initial measurements to final executionΓÇöwhere craftsmanship meets mathematical certainty.",
+          "val": "04",
+          "icon": "Target"
+        }
+      ]
+    },
+    "capabilities": {
+      "badge": "RealRoof",
+      "headline": "World Class Capabilities",
+      "highlight": "Capabilities",
+      "description": "Every detail matters when it comes to structural integrity. Our team brings military-grade standards to every project across the St. Louis area.",
+      "cta": "View All Services"
+    },
+    "values": {
+      "badge": "Our Core Values",
+      "headline": "Built on Unshakable Principles",
+      "highlight": "Built on",
+      "description": "Six principles that guide every decision, every interaction, and every project we undertake.",
+      "items": [
+        {
+          "title": "Customer First",
+          "description": "Our customers always come first here at RealRoof. We ensure that our customers can have complete confidence in the quality of our work, knowing that we will always act in their best interests and stand behind our products and services with unwavering dedication.",
+          "number": "01",
+          "stat": "500+",
+          "statLabel": "Happy Clients",
+          "icon": "BadgeCheck"
+        },
+        {
+          "title": "Integrity",
+          "description": "In the remodeling industry, integrity means consistently doing what is right, even when no one is watching. We believe in keeping our promises, providing accurate estimates, and delivering on our commitments without cutting corners.",
+          "number": "02",
+          "stat": "0%",
+          "statLabel": "Hidden Fees",
+          "icon": "CheckCircle"
+        },
+        {
+          "title": "Extreme Ownership",
+          "description": "By embracing this mindset, we ensure that we always act in the best interests of our clients, driving continuous improvement and achieving excellence in every project we undertake. We are not perfect by any means, but we are perfect at fixing any mistake along the way.",
+          "number": "03",
+          "stat": "100%",
+          "statLabel": "Accountability",
+          "icon": "Shield"
+        },
+        {
+          "title": "Gratitude",
+          "description": "By expressing gratitude, we build lasting relationships and create a positive impact, ensuring every interaction is rooted in kindness and acknowledgment. We believe that a thankful mindset inspires excellence in service and craftsmanship, making every project a shared celebration.",
+          "number": "04",
+          "stat": "100%",
+          "statLabel": "Grateful",
+          "icon": "Sparkles"
+        },
+        {
+          "title": "Growth",
+          "description": "We believe that growth is essential not only for individual team members but also for the company as a whole. This core value drives us to seek out new learning opportunities, embrace innovation, and stay up-to-date with industry trends and best practices.",
+          "number": "05",
+          "stat": "Γê₧",
+          "statLabel": "Continuous",
+          "icon": "TrendingUp"
+        }
+      ]
+    },
+    "ctaBanner": {
+      "badge": "Get Preapproved",
+      "headline": "Ready to Start Your Revolution?",
+      "highlight": "Revolution?",
+      "description": "Get preapproved in seconds and take the first step toward transforming your home with military precision and unwavering integrity.",
+      "features": [
+        "No Obligation",
+        "Free Estimate",
+        "5 Year Guarantee"
+      ],
+      "primaryCta": "Get Preapproved",
+      "secondaryCta": "Contact Us"
+    }
+  },
+  "careers": {
+    "section": {
+      "badge": "Join RealRoof",
+      "headline": "Construct your future with absolute precision",
+      "description": "We are seeking driven professionals who refuse to take shortcuts. Bring your expertise to a team that values craft, integrity, and long-term growth."
+    },
+    "roles": [
+      {
+        "value": "Project Manager",
+        "label": "Project Manager"
+      },
+      {
+        "value": "Lead Contractor",
+        "label": "Lead Contractor"
+      },
+      {
+        "value": "Sales Representative",
+        "label": "Sales Representative"
+      },
+      {
+        "value": "Roofing/Exterior Specialist",
+        "label": "Roofing & Exterior Specialist"
+      },
+      {
+        "value": "Administrative Support",
+        "label": "Administrative Support"
+      },
+      {
+        "value": "Other",
+        "label": "Other Inquiry"
+      }
+    ],
+    "success": {
+      "title": "Application Submitted!",
+      "description": "Thank you for your interest in joining RealRoof. Our operations team will review your CV and be in touch shortly."
+    },
+    "labels": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "role": "Position Applying For",
+      "summary": "Professional Summary",
+      "attachment": "Resume / CV Attachment",
+      "submit": "SUBMIT APPLICATION",
+      "submitting": "SECURELY SENDING..."
+    }
+  },
+  "portfolio": {
+    "section": {
+      "badge": "Our Work",
+      "headline": "Precision & <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/70\">Craftsmanship</span>"
+    },
+    "projects": [
+      {
+        "number": "01",
+        "title": "St. Charles Custom Deck",
+        "category": "Deck Installation",
+        "image": "https://res.cloudinary.com/dytytwyp6/image/upload/v1779286981/wtriclxyf3wgy6pgqc4g.webp",
+        "location": "St. Charles, MO",
+        "year": "2024",
+        "accent": "from-primary to-primary/80",
+        "scope": "Composite Decking",
+        "desc": "Beautiful Wolf Home Products composite deck with custom pergola and built-in seating for outdoor entertaining.",
+        "architect": "RealRoof"
+      },
+      {
+        "number": "02",
+        "title": "Window Replacement Project",
+        "category": "Windows",
+        "image": "https://res.cloudinary.com/dytytwyp6/image/upload/v1779286986/kdks6tvjbyqunh6knzdj.webp",
+        "location": "O'Fallon, MO",
+        "year": "2024",
+        "accent": "from-primary to-primary/70",
+        "scope": "30+ Windows",
+        "desc": "Complete vinyl window replacement for energy efficiency and improved curb appeal.",
+        "architect": "RealRoof"
+      },
+      {
+        "number": "03",
+        "title": "Residential Roof Replacement",
+        "category": "Roofing",
+        "image": "https://res.cloudinary.com/dytytwyp6/image/upload/v1779286990/ydoptak4gn9bdnafcrwj.webp",
+        "location": "St. Louis, MO",
+        "year": "2024",
+        "accent": "from-primary/90 to-primary/60",
+        "scope": "Full Replacement",
+        "desc": "Complete roof replacement using CertainTeed architectural shingles with 50-year warranty.",
+        "architect": "RealRoof"
+      },
+      {
+        "number": "04",
+        "title": "Commercial TPO Roof",
+        "category": "Commercial",
+        "image": "https://res.cloudinary.com/dytytwyp6/image/upload/v1779286995/htwgx5kgomhkmq4umhzd.webp",
+        "location": "St. Charles, MO",
+        "year": "2023",
+        "accent": "from-primary to-primary/80",
+        "scope": "TPO Installation",
+        "desc": "Large-scale commercial TPO roofing system for enhanced energy efficiency and durability.",
+        "architect": "RealRoof"
+      },
+      {
+        "number": "05",
+        "title": "Siding & Gutter Upgrade",
+        "category": "Exterior",
+        "image": "https://res.cloudinary.com/dytytwyp6/image/upload/v1779287000/czzgk8quvjmtem6crbnl.webp",
+        "location": "St. Louis County, MO",
+        "year": "2024",
+        "accent": "from-primary/80 to-primary/60",
+        "scope": "Full Exterior",
+        "desc": "Complete siding, soffit, fascia, and gutter replacement for improved protection and aesthetics.",
+        "architect": "RealRoof"
+      }
+    ],
+    "button": {
+      "text": "View All Projects",
+      "link": "#portfolio"
+    }
+  },
+  "testimonials": {
+    "section": {
+      "badge": "Client Testimonials",
+      "headline": "What Our Clients Say",
+      "description": "Real stories from real clients about their experience with RealRoof",
+      "featured": "Rated on Google"
+    },
+    "testimonials": [
+      {
+        "id": 1,
+        "name": "Jason K.",
+        "position": "Homeowner",
+        "company": "St. Louis",
+        "avatar": "JK",
+        "videoId": null,
+        "duration": null,
+        "views": null,
+        "text": "RealRoof is top-notch. The owner is one of the hardest-working, most professional people you'll meet. His attention to detail and pride in his work really stand out ΓÇö you can tell he truly cares about doing things the right way. He's reliable, respectful, and easy to work with ΓÇö the kind of person you can trust to get the job done right."
+      },
+      {
+        "id": 2,
+        "name": "Nathan Gearing",
+        "position": "Homeowner",
+        "company": "St. Charles",
+        "avatar": "NG",
+        "videoId": null,
+        "duration": null,
+        "views": null,
+        "text": "I had the pleasure of working with RealRoof for a recent construction project, and I couldn't be more impressed with their professionalism, quality of work, and attention to detail. From the initial consultation to project completion, the team was communicative, punctual, and dedicated to getting the job done right."
+      },
+      {
+        "id": 3,
+        "name": "Lucas Barth",
+        "position": "Homeowner",
+        "company": "O'Fallon",
+        "avatar": "LB",
+        "videoId": null,
+        "duration": null,
+        "views": null,
+        "text": "RealRoof did a great job at my house with over 30 window replacements. There was clear, transparent and timely communication through the entire process and the installation went really well. I will recommend Brandon and RealRoof to anyone looking for windows."
+      },
+      {
+        "id": 4,
+        "name": "Sarah Mitchell",
+        "position": "Homeowner",
+        "company": "St. Louis County",
+        "avatar": "SM",
+        "videoId": null,
+        "duration": null,
+        "views": null,
+        "text": "Brandon and his team replaced our roof after storm damage. They handled everything with the insurance company and made the process stress-free. The quality of work is outstanding and the new roof looks amazing!"
+      },
+      {
+        "id": 5,
+        "name": "Mike Thompson",
+        "position": "Business Owner",
+        "company": "St. Peters",
+        "avatar": "MT",
+        "videoId": null,
+        "duration": null,
+        "views": null,
+        "text": "We hired RealRoof for a commercial TPO roof installation. Professional, on time, and within budget. Highly recommend their commercial roofing services."
+      }
+    ],
+    "videos": [],
+    "stats": {
+      "subscribers": "500+",
+      "views": "100K+",
+      "totalVideos": "50"
+    }
+  },
+  "whyChooseUs": {
+    "section": {
+      "badge": "WHY CHOOSE RealRoof",
+      "headline": "The Trusted Choice for <span class=\"text-primary\">Exterior Remodeling</span>",
+      "description": "Customers choose RealRoof for their exterior remodeling projects because they trust a local, veteran-owned and operated company that prioritizes quality and reliability."
+    },
+    "features": [
+      {
+        "icon": "Veteran",
+        "title": "Veteran-Owned & Operated",
+        "description": "We bring military precision, discipline, and integrity to every job. Battlefield discipline meets boardroom precision."
+      },
+      {
+        "icon": "Experience",
+        "title": "50+ Years Combined Experience",
+        "description": "Our leadership and crews deliver consistent excellence across every project with decades of industry expertise."
+      },
+      {
+        "icon": "Warranty",
+        "title": "Lifetime & Transferable Warranties",
+        "description": "Premium products backed by 50-year transferable warranties and a Ten-Year Workmanship Guarantee on every project."
+      },
+      {
+        "icon": "Financing",
+        "title": "Easy & Affordable Financing",
+        "description": "Flexible financing options and payment plans make high-quality exterior upgrades accessible for all homeowners."
+      },
+      {
+        "icon": "Certified",
+        "title": "Certified Expertise",
+        "description": "ProVia Certified Installer, IKO Certified Pro, CertainTeed Certified Shingle Master, and Wolf Home Products Certified Installers."
+      },
+      {
+        "icon": "Community",
+        "title": "Community Commitment",
+        "description": "We give back through local initiatives and donate a free roof every year to a family in need."
+      }
+    ],
+    "stats": [
+      {
+        "value": "500",
+        "suffix": "+",
+        "label": "Projects"
+      },
+      {
+        "value": "50",
+        "suffix": "+",
+        "label": "Years Combined"
+      },
+      {
+        "value": "100",
+        "suffix": "%",
+        "label": "Satisfaction"
+      },
+      {
+        "value": "Lifetime",
+        "suffix": "",
+        "label": "Warranty"
+      }
+    ],
+    "cta": {
+      "badge": "15% OFF",
+      "title": "Book Your Free Quote <span class=\"text-primary block mt-2\">By End of Month!</span>",
+      "description": "Transform your home with St. Louis's expert builders. Contact us today for quality craftsmanship and unparalleled service.",
+      "trustBadges": [
+        "Veteran Owned",
+        "Licensed",
+        "Bonded",
+        "Insured"
+      ],
+      "buttons": [
+        {
+          "text": "Get Free Estimate",
+          "href": "#contact",
+          "primary": true
+        },
+        {
+          "text": "View Gallery",
+          "href": "#portfolio",
+          "primary": false
+        }
+      ]
+    }
+  },
+  "faq": {
+    "section": {
+      "badge": "Knowledge Base",
+      "headline": "Frequently Asked Questions",
+      "description": "Answers to common questions about our exterior remodeling services in St. Louis."
+    },
+    "labels": {
+      "noResults": "No questions found matching your criteria.",
+      "clearFilters": "Clear filters",
+      "searchPlaceholder": "Search questions..."
+    },
+    "categories": [
+      {
+        "id": "all",
+        "label": "All Questions",
+        "icon": null
+      },
+      {
+        "id": "general",
+        "label": "General",
+        "icon": "Home"
+      },
+      {
+        "id": "roofing",
+        "label": "Roofing",
+        "icon": "Home"
+      },
+      {
+        "id": "windows",
+        "label": "Windows & Doors",
+        "icon": "Layout"
+      },
+      {
+        "id": "decks",
+        "label": "Decks",
+        "icon": "TreePine"
+      }
+    ],
+    "items": [
+      {
+        "id": 1,
+        "category": "general",
+        "question": "What services do you offer?",
+        "answer": "We offer a range of services including residential roofing, commercial roofing, vinyl windows, entry doors, custom decks, siding, soffit, fascia, and gutters. We're your complete exterior remodeling solution in St. Louis.",
+        "metadata": [
+          {
+            "label": "Services",
+            "value": "Roofing, Windows, Decks, Siding"
+          }
+        ],
+        "links": [
+          {
+            "label": "View all services",
+            "url": "/services"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "category": "general",
+        "question": "Do you provide free estimates?",
+        "answer": "Yes, we provide free inspections and estimates for all projects. Book your free quote today and get 15% off your project if you schedule by the end of the month!",
+        "metadata": [
+          {
+            "label": "Service",
+            "value": "Free estimates"
+          }
+        ],
+        "links": [
+          {
+            "label": "Get free estimate",
+            "url": "/estimate"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "category": "general",
+        "question": "Are you licensed and insured?",
+        "answer": "Absolutely. We are fully licensed, bonded, and insured to ensure you receive professional and secure services. We're also IKO Certified Pro, CertainTeed Certified Shingle Master, and ProVia Certified Installers.",
+        "metadata": [
+          {
+            "label": "Status",
+            "value": "Licensed  & Bonded & Insured"
+          }
+        ],
+        "links": []
+      },
+      {
+        "id": 4,
+        "category": "general",
+        "question": "Do you offer financing or payment plans?",
+        "answer": "Yes, we offer flexible financing options and convenient payment plans to make your project affordable and stress-free. We partner with some of the largest financing companies in the country to provide easy approval options.",
+        "metadata": [
+          {
+            "label": "Financing",
+            "value": "Available"
+          }
+        ],
+        "links": [
+          {
+            "label": "Get preapproved",
+            "url": "/financing"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "category": "roofing",
+        "question": "How long does a roof replacement take?",
+        "answer": "Most residential roof replacements are completed within 1-3 days, depending on the size of your home and weather conditions. Larger or commercial projects may take longer. We'll provide a detailed timeline during your free estimate.",
+        "metadata": [
+          {
+            "label": "Timeline",
+            "value": "1-3 days"
+          }
+        ],
+        "links": []
+      },
+      {
+        "id": 6,
+        "category": "roofing",
+        "question": "What warranties do you offer on roofing?",
+        "answer": "We install premium materials backed by 50-year transferable manufacturer warranties. Additionally, every project includes our Ten-Year Workmanship Guarantee, giving you peace of mind long after installation.",
+        "metadata": [
+          {
+            "label": "Warranty",
+            "value": "50-year + Workmanship"
+          }
+        ],
+        "links": []
+      },
+      {
+        "id": 7,
+        "category": "windows",
+        "question": "What types of windows do you install?",
+        "answer": "We install premium vinyl windows including double-hung, casement, sliding, and bay windows. As ProVia Certified Installers, we ensure professional installation and energy-efficient products that reduce your utility bills.",
+        "metadata": [
+          {
+            "label": "Types",
+            "value": "Vinyl, Double-hung, Casement"
+          }
+        ],
+        "links": []
+      },
+      {
+        "id": 8,
+        "category": "decks",
+        "question": "What decking materials do you use?",
+        "answer": "As  Wolf Home Products Certified installers, we specialize in premium composite decking that offers durability, low maintenance, and beautiful aesthetics. We also offer pressure-treated wood options for traditional decks.",
+        "metadata": [
+          {
+            "label": "Materials",
+            "value": "Composite, Wood"
+          }
+        ],
+        "links": []
+      },
+      {
+        "id": 9,
+        "category": "general",
+        "question": "What areas do you serve?",
+        "answer": "We serve Missouri (St. Louis County, St. Louis City, St. Charles County, Jefferson County, Franklin County) and Illinois (Saint Clair County, Monroe County, Madison County).",
+        "metadata": [
+          {
+            "label": "Service Area",
+            "value": "Greater St. Louis Region"
+          }
+        ],
+        "links": []
+      },
+      {
+        "id": 10,
+        "category": "general",
+        "question": "Can you handle large-scale projects?",
+        "answer": "Yes, we have the expertise and resources to handle both small and large-scale construction projects. We have a proven track record working with large federal roofing and construction projects.",
+        "metadata": [
+          {
+            "label": "Capacity",
+            "value": "Small to Large Scale"
+          }
+        ],
+        "links": []
+      }
+    ]
+  },
+  "quote": {
+    "section": {
+      "badge": "GET PREAPPROVED IN SECONDS",
+      "headline": "Request Your <span class=\"font-black text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-primary/80\">Free Estimate</span>",
+      "description": "Book your free consultation today and save 15% on your next project. Veteran-owned, quality guaranteed."
+    },
+    "services": [
+      {
+        "id": 1,
+        "title": "Residential Roofing",
+        "desc": "Asphalt shingles, metal roofing",
+        "icon": "Γîù"
+      },
+      {
+        "id": 2,
+        "title": "Windows & Doors",
+        "desc": "Energy-efficient vinyl windows",
+        "icon": "ΓÄö"
+      },
+      {
+        "id": 3,
+        "title": "Custom Decks",
+        "desc": "Composite & wood decking",
+        "icon": "Γîû"
+      },
+      {
+        "id": 4,
+        "title": "Siding & Gutters",
+        "desc": "Full exterior protection",
+        "icon": "Γîÿ"
+      },
+      {
+        "id": 5,
+        "title": "Commercial Roofing",
+        "desc": "TPO, EPDM systems",
+        "icon": "ΓÜí"
+      },
+      {
+        "id": 6,
+        "title": "Free Inspection",
+        "desc": "No obligation consultation",
+        "icon": "Γùê"
+      }
+    ],
+    "projectTypes": [
+      {
+        "value": "roofing",
+        "label": "Residential Roofing"
+      },
+      {
+        "value": "windows",
+        "label": "Windows & Doors"
+      },
+      {
+        "value": "decks",
+        "label": "Custom Deck"
+      },
+      {
+        "value": "siding",
+        "label": "Siding & Gutters"
+      },
+      {
+        "value": "commercial",
+        "label": "Commercial Roofing"
+      }
+    ],
+    "timelines": [
+      {
+        "value": "urgent",
+        "label": "Urgent (within 2 weeks)"
+      },
+      {
+        "value": "standard",
+        "label": "Standard (1-3 months)"
+      },
+      {
+        "value": "planned",
+        "label": "Planned (3-6 months)"
+      },
+      {
+        "value": "future",
+        "label": "Future (6+ months)"
+      }
+    ],
+    "email": "banderson@RealRoof.com",
+    "success": {
+      "title": "Request Received",
+      "message": "Thank you for choosing RealRoof.",
+      "response": "We'll contact you within 24 hours to schedule your free estimate.",
+      "buttonText": "Close"
+    }
+  },
+  "footer": {
+    "company": {
+      "name": "RealRoof",
+      "tagline": "SOARING BEYOND EXPECTATIONS",
+      "description": "Veteran-owned and operated exterior remodeling company serving St. Louis and surrounding areas. We specialize in roofing, windows, doors, decks, and siding with premium materials and lifetime warranties."
+    },
+    "services": {
+      "title": "Our Services",
+      "main": [
+        {
+          "label": "Residential Roofing",
+          "href": "/services/residential-roofing",
+          "icon": "Home"
+        },
+        {
+          "label": "Windows & Doors",
+          "href": "/services/windows-doors",
+          "icon": "Layout"
+        },
+        {
+          "label": "Custom Decks",
+          "href": "/services/custom-decks",
+          "icon": "TreePine"
+        },
+        {
+          "label": "Siding, Soffit & Fascia",
+          "href": "/services/siding-soffit-fascia",
+          "icon": "Building2"
+        },
+        {
+          "label": "Commercial Roofing",
+          "href": "/services/commercial-roofing",
+          "icon": "Building"
+        },
+        {
+          "label": "Gutters & Protection",
+          "href": "/services/gutters-protection",
+          "icon": "Droplets"
+        }
+      ],
+      "materials": {
+        "title": "Company",
+        "items": [
+          {
+            "label": "About Us",
+            "href": "/about"
+          },
+          {
+            "label": "Gallery",
+            "href": "/gallery"
+          },
+          {
+            "label": "Reviews",
+            "href": "/reviews"
+          },
+          {
+            "label": "FAQ",
+            "href": "/faq"
+          }
+        ]
+      }
+    },
+    "contact": {
+      "title": "Contact Us",
+      "email": "banderson@RealRoof.com",
+      "phone": "636-449-9714",
+      "address": "1077 E Terra Ln, O'fallon, MO 63366",
+      "emergency": "24/7 Emergency Service Available",
+      "areas": "Serving Missouri: St. Louis County, St. Louis City, St. Charles County, Jefferson County, Franklin County • Illinois: Saint Clair County, Monroe County, Madison County"
+    },
+    "certifications": [
+      {
+        "cert": "Veteran Owned",
+        "number": "U.S. Army",
+        "icon": "Star"
+      },
+      {
+        "cert": "ProVia",
+        "number": "Certified Installer",
+        "icon": "Warranty"
+      },
+      {
+        "cert": "IKO",
+        "number": "Certified Pro",
+        "icon": "Warranty"
+      },
+      {
+        "cert": "CertainTeed",
+        "number": "SELECT ShingleMaster",
+        "icon": "Warranty"
+      },
+      {
+        "cert": "Wolf",
+        "number": "Home Products Certified",
+        "icon": "Warranty"
+      },
+      {
+        "cert": "NRCA",
+        "number": "Member",
+        "icon": "Warranty"
+      }
+    ],
+    "quickLinks": [
+      {
+        "label": "About Us",
+        "href": "/about",
+        "icon": "Users"
+      },
+      {
+        "label": "Gallery",
+        "href": "/gallery",
+        "icon": "Image"
+      },
+      {
+        "label": "Reviews",
+        "href": "/reviews",
+        "icon": "Star"
+      },
+      {
+        "label": "FAQ",
+        "href": "/faq",
+        "icon": "MessageSquare"
+      },
+      {
+        "label": "Contact",
+        "href": "/contact",
+        "icon": "Phone"
+      }
+    ],
+    "social": [
+      {
+        "platform": "Facebook",
+        "icon": "Facebook",
+        "href": "https://www.facebook.com/profile.php?id=61564977483096"
+      },
+      {
+        "platform": "Instagram",
+        "icon": "Instagram",
+        "href": "https://www.instagram.com/eagle_revolutionllc"
+      },
+      {
+        "platform": "LinkedIn",
+        "icon": "Linkedin",
+        "href": "https://www.linkedin.com/company/realroof/people/"
+      },
+      {
+        "platform": "X (Twitter)",
+        "icon": "Twitter",
+        "href": "https://x.com/Eagle_Rev_LLC"
+      }
+    ],
+    "bottom": {
+      "copyright": "┬⌐ 2026 RealRoof",
+      "rights": "Veteran Owned & Operated. All rights reserved.",
+      "links": [
+        {
+          "label": "Privacy Policy",
+          "href": "/privacy"
+        },
+        {
+          "label": "Terms of Service",
+          "href": "/terms"
+        }
+      ],
+      "tagline": "VETERAN OWNED ΓÇó INTEGRITY ΓÇó CRAFTSMANSHIP"
+    },
+    "marquee": {
+      "texts": [
+        "VETERAN OWNED & OPERATED",
+        "SOARING BEYOND EXPECTATIONS",
+        "50-YEAR TRANSFERABLE WARRANTIES",
+        "FREE ESTIMATES"
+      ],
+      "speed": 30,
+      "repeats": 8
+    },
+    "newsletter": {
+      "placeholder": "Enter your email",
+      "buttonText": "Subscribe"
+    }
+  },
+  "hours": {
+    "monday": "09:00 AM - 05:00 PM",
+    "tuesday": "09:00 AM ΓÇô 05:00 PM",
+    "wednesday": "09:00 AM ΓÇô 05:00 PM",
+    "thursday": "09:00 AM ΓÇô 05:00 PM",
+    "friday": "09:00 AM ΓÇô 05:00 PM",
+    "saturday": "Closed",
+    "sunday": "Closed"
+  },
+  "images": {
+    "logo": "/src/assets/eaglelogo.png",
+    "hero": "/src/assets/bgfair.jpg",
+    "about": "/src/assets/fairabout.png",
+    "services": "/src/assets/fairservice.png",
+    "ceo": "/src/assets/ownerupdatedimage.jpeg",
+    "contact": {
+      "office": "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
+      "exterior": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+    },
+    "footer": {
+      "bg1": "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
+      "bg2": "https://images.unsplash.com/photo-1502691876148-a84978e59af8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+    },
+    "aboutPage": {
+      "hero": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070",
+      "pattern": "https://images.unsplash.com/photo-1502691876148-a84978e59af8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      "studio": "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80"
+    },
+    "gallery": {
+      "commercialroof": "/src/assets/commercial-tpo.png",
+      "decks": "/src/assets/outdoor-sitting-desk.png",
+      "deck2": "/src/assets/decks2 (2).jpg",
+      "deck3": "/src/assets/decks2 (1).jpg",
+      "door": "/src/assets/DOORS-20260414T184740Z-3-001/DOORS/DOOR1.jpg",
+      "residental1": "/src/assets/roof1.jpg.jpeg",
+      "residental2": "/src/assets/residentalroofing2ndimage.jpg",
+      "siding": "/src/assets/siding5.jpg.jpeg",
+      "windowImg": "/src/assets/window5.jpeg",
+      "gutter": "/src/assets/gutterinstallation.jpg.jpeg",
+      "pvc": "/src/assets/pvcdecks.jpg.jpeg",
+      "window2": "/src/assets/windowimage.jpg"
+    },
+    "portfolio": {
+      "home1": "/src/assets/portfolio1.png",
+      "home2": "/src/assets/portfolio2.jpg",
+      "home3": "/src/assets/portfolio3.jpg",
+      "home4": "/src/assets/portfolio4.jpg",
+      "home5": "/src/assets/portfolio5.jpg",
+      "home6": "/src/assets/portfolio7.jpg",
+      "home7": "/src/assets/portfolio1.png",
+      "home8": "/src/assets/portfolio2.jpg",
+      "home9": "/src/assets/portfolio3.jpg",
+      "home10": "/src/assets/portfolio4.jpg"
+    },
+    "team": {
+      "BrandonAnderson": "/src/assets/ownerupdatedimage.jpeg",
+      "ChrissyLong": "/src/assets/Chrissyteam.jpeg",
+      "Austin": "/src/assets/Austinteam.jpeg",
+      "BrandonSales": "/src/assets/allenteam.jpeg",
+      "Pattern": "https://images.unsplash.com/photo-1502691876148-a84978e59af8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      "Studio": "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80"
+    },
+    "servicesGrid": {
+      "Residential Roofing": "/src/assets/roof1.jpg.jpeg",
+      "Windows & Doors": "/src/assets/window5.jpeg",
+      "Custom Decks": "/src/assets/outdoor-sitting-desk.png",
+      "Commercial Roofing": "/src/assets/commercial-tpo.png",
+      "Siding, Soffit & Fascia": "/src/assets/siding5.jpg.jpeg",
+      "Gutters & Protection": "/src/assets/gutterinstallation.jpg.jpeg",
+      "PVC Decking": "/src/assets/pvcdecks.jpg.jpeg"
+    }
+  },
+  "loader": {
+    "company": {
+      "name": "RealRoof",
+      "tagline": "Veteran Owned & Operated"
+    },
+    "phases": {
+      "simpleDark": 700,
+      "roofDraw": 800,
+      "logoText": 900,
+      "ready": 400
+    }
+  },
+  "quickQuote": {
+    "button": {
+      "text": "Get Free Quote"
+    },
+    "title": "Quick Quote",
+    "description": "Get your free estimate in minutes",
+    "steps": [
+      "Details",
+      "Project",
+      "Message"
+    ],
+    "projectTypes": [
+      {
+        "value": "roofing",
+        "label": "Residential Roofing"
+      },
+      {
+        "value": "windows",
+        "label": "Windows & Doors"
+      },
+      {
+        "value": "decks",
+        "label": "Custom Decks"
+      },
+      {
+        "value": "siding",
+        "label": "Siding & Gutters"
+      },
+      {
+        "value": "commercial",
+        "label": "Commercial Roofing"
+      },
+      {
+        "value": "emergency",
+        "label": "Emergency Service"
+      }
+    ],
+    "formLabels": {
+      "name": "Your Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "projectType": "Project Type",
+      "message": "Tell us about your project",
+      "submit": "Get Quote"
+    },
+    "badges": [
+      {
+        "text": "Free estimate",
+        "icon": "Check"
+      },
+      {
+        "text": "4-8h response",
+        "icon": "Clock"
+      },
+      {
+        "text": "Veteran owned",
+        "icon": "Flag"
+      }
+    ]
+  },
+  "contactPage": {
+    "header": {
+      "badge": "Contact Us",
+      "headline": "Let's Start a Conversation",
+      "highlight": "Conversation",
+      "description": "Whether you have a question about our services, need a quote, or want to discuss a project, our team is ready to help. Reach out and we'll get back to you within 4-8 hours."
+    },
+    "infoCards": [
+      {
+        "type": "email",
+        "title": "Email Us",
+        "description": "Send us a message and we'll respond within 4-8 hours",
+        "value": "banderson@RealRoof.com",
+        "label": "24/7 Support Available",
+        "icon": "Mail"
+      },
+      {
+        "type": "phone",
+        "title": "Call Us",
+        "description": "Speak directly with our team during business hours",
+        "value": "+1 (636) 449-9714",
+        "label": "Mon-Fri: 9am - 6pm CST",
+        "icon": "Phone"
+      },
+      {
+        "type": "location",
+        "title": "Visit Us",
+        "description": "Veteran-owned and operated from the heart of Texas",
+        "value": "OΓÇÖFallon, Missouri 63366",
+        "label": "Virtual meetings available",
+        "subLabel": "United States",
+        "icon": "MapPin"
+      }
+    ],
+    "form": {
+      "labels": {
+        "name": "Full name",
+        "email": "Email address",
+        "phone": "Phone number",
+        "subject": "Subject",
+        "message": "How can we help you?",
+        "submit": "Send Message",
+        "submitting": "Sending..."
+      },
+      "footer": {
+        "veteran": "Veteran owned & operated",
+        "confidential": "100% confidential",
+        "response": "Response within 4-8 hours"
+      }
+    },
+    "successModal": {
+      "title": "Message Sent Successfully!",
+      "description": "Thank you for reaching out to RealRoof.",
+      "responseLabel": "We'll respond within 4-8 hours.",
+      "button": "Close"
+    },
+    "smsConsent": {
+      "text": "I agree to receive informational SMS text messages from RealRoof related to my request, including appointment scheduling and service updates, at the number I provided. Message frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase. Please see ",
+      "privacyLabel": "Privacy Policy",
+      "termsLabel": "Terms and Conditions"
+    }
+  },
+  "galleryPage": {
+    "header": {
+      "badge": "Our Portfolio",
+      "headline": "Featured Projects",
+      "highlight": "Projects",
+      "description": "A curated collection of our finest installations across Missouri"
+    },
+    "labels": {
+      "all": "All",
+      "noResults": "No projects found in this category",
+      "viewAll": "View all projects",
+      "inquire": "Inquire About This Project",
+      "imageUnavailable": "Image Unavailable",
+      "featured": "Γÿà Featured",
+      "specs": {
+        "sqft": "Sq Ft",
+        "duration": "Duration",
+        "warranty": "Warranty"
+      }
+    },
+    "categories": [
+      "All",
+      "Custom Decks",
+      "PVC Decking",
+      "Windows & Doors",
+      "Residential Roofing",
+      "Commercial Roofing",
+      "Siding, Soffit & Fascia",
+      "Gutters & Protection"
+    ],
+    "projects": [
+      {
+        "id": 1,
+        "title": "Lakeside Composite Deck",
+        "subtitle": "Premium Outdoor Living",
+        "category": "Custom Decks",
+        "location": "Lake Ozark, MO",
+        "year": "2024",
+        "description": "Expansive composite deck with built-in lighting, custom pergola, and glass railings overlooking the lake. Features hidden fasteners and premium weather-resistant materials.",
+        "image": "decks",
+        "featured": true,
+        "size": "large",
+        "specs": {
+          "sqft": "850",
+          "duration": "12 days",
+          "warranty": "25 Year"
+        }
+      },
+      {
+        "id": 2,
+        "title": "Multi-Level Entertainment Deck",
+        "subtitle": "Architectural Masterpiece",
+        "category": "Custom Decks",
+        "location": "Chesterfield, MO",
+        "year": "2023",
+        "description": "Three-tier deck system with integrated hot tub platform, outdoor kitchen area, and custom cable railing system for unobstructed views.",
+        "image": "deck2",
+        "featured": true,
+        "size": "wide",
+        "specs": {
+          "sqft": "1,200",
+          "duration": "18 days",
+          "warranty": "25 Year"
+        }
+      },
+      {
+        "id": 3,
+        "title": "Cedar Deck with Pergola",
+        "subtitle": "Natural Wood Beauty",
+        "category": "Custom Decks",
+        "location": "Wildwood, MO",
+        "year": "2024",
+        "description": "Premium cedar deck with custom-built pergola, built-in bench seating, and ambient LED lighting throughout for evening entertaining.",
+        "image": "deck3",
+        "featured": false,
+        "size": "normal",
+        "specs": {
+          "sqft": "450",
+          "duration": "8 days",
+          "warranty": "Lifetime"
+        }
+      },
+      {
+        "id": 4,
+        "title": "Poolside PVC Paradise",
+        "subtitle": "Waterproof Performance",
+        "category": "PVC Decking",
+        "location": "Town & Country, MO",
+        "year": "2024",
+        "description": "100% polymer PVC decking surrounding an infinity pool. Features cool-touch technology and superior slip resistance for wet conditions.",
+        "image": "pvc",
+        "featured": true,
+        "size": "tall",
+        "specs": {
+          "sqft": "620",
+          "duration": "10 days",
+          "warranty": "Lifetime"
+        }
+      },
+      {
+        "id": 6,
+        "title": "Whole-Home Window Transformation",
+        "subtitle": "Energy Efficiency Upgrade",
+        "category": "Windows & Doors",
+        "location": "Clayton, MO",
+        "year": "2024",
+        "description": "Complete window replacement with Energy Star rated vinyl windows featuring Low-E glass and argon gas fills. 35% energy savings achieved.",
+        "image": "windowImg",
+        "featured": true,
+        "size": "wide",
+        "specs": {
+          "sqft": "N/A",
+          "duration": "5 days",
+          "warranty": "Lifetime"
+        }
+      },
+      {
+        "id": 7,
+        "title": "Custom Entry Door System",
+        "subtitle": "Security & Curb Appeal",
+        "category": "Windows & Doors",
+        "location": "Ladue, MO",
+        "year": "2024",
+        "description": "Premium fiberglass entry door with multi-point locking system, decorative glass inserts, and custom sidelights for maximum curb appeal.",
+        "image": "door",
+        "featured": true,
+        "size": "tall",
+        "specs": {
+          "sqft": "N/A",
+          "duration": "2 days",
+          "warranty": "Lifetime"
+        }
+      },
+      {
+        "id": 8,
+        "title": "Patio Door Installation",
+        "subtitle": "Indoor-Outdoor Flow",
+        "category": "Windows & Doors",
+        "location": "Creve Coeur, MO",
+        "year": "2023",
+        "description": "Premium sliding patio door with UV protection glass and smooth-glide track system. Dramatically improves natural light and access.",
+        "image": "window2",
+        "featured": false,
+        "size": "normal",
+        "specs": {
+          "sqft": "N/A",
+          "duration": "1 day",
+          "warranty": "20 Year"
+        }
+      },
+      {
+        "id": 9,
+        "title": "Presidential TL Estate",
+        "subtitle": "Luxury Asphalt Roofing",
+        "category": "Residential Roofing",
+        "location": "Frontenac, MO",
+        "year": "2024",
+        "description": "GAF Presidential TL shingles with copper flashing, premium ridge ventilation, and full ice & water shield underlayment. 50-year warranty.",
+        "image": "residental1",
+        "featured": true,
+        "size": "large",
+        "specs": {
+          "sqft": "4,200",
+          "duration": "4 days",
+          "warranty": "50 Year"
+        }
+      },
+      {
+        "id": 10,
+        "title": "Storm Damage Restoration",
+        "subtitle": "Insurance Claim Specialist",
+        "category": "Residential Roofing",
+        "location": "O'Fallon, MO",
+        "year": "2024",
+        "description": "Complete roof replacement due to hail damage. We coordinated directly with insurance for full coverage. Class 4 impact-resistant shingles installed.",
+        "image": "residental2",
+        "featured": true,
+        "size": "normal",
+        "specs": {
+          "sqft": "2,800",
+          "duration": "2 days",
+          "warranty": "Lifetime"
+        }
+      },
+      {
+        "id": 12,
+        "title": "Meridian Business Park",
+        "subtitle": "TPO Commercial System",
+        "category": "Commercial Roofing",
+        "location": "Maryland Heights, MO",
+        "year": "2024",
+        "description": "80mil TPO membrane with tapered insulation system across 45,000 sq ft of commercial space. Energy-efficient white surface reduces cooling costs.",
+        "image": "commercialroof",
+        "featured": true,
+        "size": "wide",
+        "specs": {
+          "sqft": "45,000",
+          "duration": "21 days",
+          "warranty": "20 Year NDL"
+        }
+      },
+      {
+        "id": 15,
+        "title": "Complete Exterior Renovation",
+        "subtitle": "Vinyl Siding Transformation",
+        "category": "Siding, Soffit & Fascia",
+        "location": "Ballwin, MO",
+        "year": "2024",
+        "description": "Full premium vinyl siding installation with insulated backing. Includes all new aluminum fascia wrap and vented soffit system for proper attic ventilation.",
+        "image": "siding",
+        "featured": true,
+        "size": "large",
+        "specs": {
+          "sqft": "2,800",
+          "duration": "7 days",
+          "warranty": "Lifetime"
+        }
+      },
+      {
+        "id": 18,
+        "title": "6-Inch Seamless Gutter System",
+        "subtitle": "Commercial Grade Drainage",
+        "category": "Gutters & Protection",
+        "location": "St. Peters, MO",
+        "year": "2024",
+        "description": "Complete 6-inch seamless gutter installation with micro-mesh leaf guards. Heavy-duty hidden hangers and oversized downspouts for maximum flow capacity.",
+        "image": "gutter",
+        "featured": true,
+        "size": "wide",
+        "specs": {
+          "sqft": "N/A",
+          "duration": "2 days",
+          "warranty": "Lifetime"
+        }
+      }
+    ]
+  },
+  "brandStore": {
+    "url": "https://gbrandusa.chipply.com/RealRoof/?action=viewall",
+    "badge": "Official Store ΓÇó Limited Collection",
+    "headline": {
+      "prefix": "REP THE",
+      "highlight": "REVOLUTION"
+    },
+    "description": "Premium hoodies ΓÇó Tees ΓÇó Hats ΓÇó Bags<br />Made to order ΓÇó Veteran owned"
+  },
+  "serviceDetailPage": {
+    "trustBanner": {
+      "badge": "Why Choose Us",
+      "headline": "America's #1 Rated Home Improvement Team",
+      "description": "Join thousands of satisfied homeowners who trusted us with their most valuable investment.",
+      "badges": [
+        "A+ BBB Rating",
+        "24/7 Support",
+        "Free Estimates"
+      ],
+      "cta": {
+        "primary": "Get Free Quote",
+        "secondary": "Call Now: 636-449-9714",
+        "phone": "636-449-9714"
+      }
+    },
+    "methodology": {
+      "badge": "Methodology",
+      "headline": "Precision in every detail",
+      "description": "A battle-tested framework that ensures consistency, quality, and complete satisfactionΓÇöfrom initial consultation to final walkthrough."
+    },
+    "faq": {
+      "badge": "FAQ",
+      "headline": "Your Questions, Answered"
+    },
+    "explore": {
+      "badge": "Our Portfolio",
+      "headline": "Explore More Services",
+      "description": "Discover our full range of premium home improvement solutions",
+      "cta": "Learn More",
+      "viewAll": "View All Services"
+    },
+    "deckComparison": {
+      "badge": "Compare & Choose",
+      "headline": "Find Your Perfect Material",
+      "description": "Side-by-side comparison of our premium decking solutions",
+      "composite": {
+        "title": "Capped Composite",
+        "subtitle": "Wood fiber + polymer blend",
+        "features": [
+          {
+            "feature": "Natural wood look and feel",
+            "highlight": true
+          },
+          {
+            "feature": "25+ year fade and stain warranty"
+          },
+          {
+            "feature": "Realistic wood grain patterns"
+          },
+          {
+            "feature": "Lower cost than premium PVC"
+          },
+          {
+            "feature": "Excellent for full sun exposure"
+          },
+          {
+            "feature": "Scratch and stain resistant capstock"
+          }
+        ],
+        "priceLabel": "Starting at",
+        "priceValue": "Competitive Pricing"
+      },
+      "pvc": {
+        "title": "Cellular PVC",
+        "subtitle": "100% pure polymer",
+        "features": [
+          {
+            "feature": "Zero organic material - never rots",
+            "highlight": true
+          },
+          {
+            "feature": "Lifetime rot and insect warranty",
+            "highlight": true
+          },
+          {
+            "feature": "Lighter, cooler surface in direct sun"
+          },
+          {
+            "feature": "Ideal for pools and shaded areas"
+          },
+          {
+            "feature": "Superior moisture resistance"
+          },
+          {
+            "feature": "Never absorbs water or swells"
+          }
+        ],
+        "priceLabel": "Premium Investment",
+        "priceValue": "Worth Every Penny"
+      }
+    },
+    "deckFeatures": [
+      {
+        "icon": "Zap",
+        "title": "Cool-Touch Technology",
+        "description": "Advanced heat-mitigating capstock keeps surfaces cooler than traditional composites",
+        "color": "from-amber-500/20 to-orange-500/10"
+      },
+      {
+        "icon": "Palette",
+        "title": "Premium Color Range",
+        "description": "Multi-tonal streaking and authentic wood grain patterns that never fade",
+        "color": "from-blue-500/20 to-purple-500/10"
+      },
+      {
+        "icon": "Shield",
+        "title": "Lifetime Protection",
+        "description": "Industry-leading warranties backed by our military-grade installation",
+        "color": "from-green-500/20 to-emerald-500/10"
+      }
+    ]
+  },
+  "settings": {
+    "siteTitle": "RealRoof",
+    "siteTemplate": "%s | RealRoof",
+    "favicon": "//realrooflogo.webp",
+    "homepageId": "69fb1c081f5a51c8e483c600"
+  }
+}

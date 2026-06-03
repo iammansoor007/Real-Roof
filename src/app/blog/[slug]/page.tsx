@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       modifiedTime: (post.updatedAt || post.publishedAt)?.toISOString(),
       images: [
         {
-          url: post.seo?.ogImage || post.featuredImage || `${BASE_URL}/eagle-logo.png`,
+          url: post.seo?.ogImage || post.featuredImage || `${BASE_URL}/realrooflogo.webp`,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -52,9 +52,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title: post.seo?.ogTitle || post.title,
       description: post.seo?.ogDescription || post.excerpt,
-      images: [post.seo?.ogImage || post.featuredImage || `${BASE_URL}/eagle-logo.png`],
-      site: "@EagleRevolution",
-      creator: "@EagleRevolution",
+      images: [post.seo?.ogImage || post.featuredImage || `${BASE_URL}/realrooflogo.webp`],
+      site: "@RealRoof",
+      creator: "@RealRoof",
     },
     robots: {
       index: post.seo?.metaRobotsIndex !== 'noindex',
@@ -252,7 +252,7 @@ export default async function BlogPostPage({ params }: Props) {
                 </div>
                 <div>
                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 mb-1 block">Article Strategist</span>
-                  <h4 className="text-xl font-bold text-slate-900 leading-tight">{post.author?.name || 'Eagle Revolution'}</h4>
+                  <h4 className="text-xl font-bold text-slate-900 leading-tight">{post.author?.name || 'RealRoof'}</h4>
                   <p className="text-slate-500 text-sm mt-0.5">Industry Expert & Lead Contributor</p>
                 </div>
               </div>

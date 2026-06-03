@@ -671,7 +671,7 @@ const WhyChooseUs = () => {
         <section
             ref={sectionRef}
             className="relative bg-background py-20 md:py-24 lg:py-32 overflow-hidden"
-            aria-label="Why Choose Eagle Revolution"
+            aria-label="Why Choose RealRoof"
         >
             <CinematicBackground isClient={isClient} />
 

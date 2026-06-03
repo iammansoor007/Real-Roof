@@ -291,7 +291,7 @@ export default function ServicesAdminPage() {
                 breadcrumbText: "",
                 overviewTitlePrefix: "Craftsmanship", overviewTitleHighlight: "Without Compromise", overviewTitleSuffix: ".",
                 benefitsTitlePrefix: "Key", benefitsTitleHighlight: "Benefits", benefitsTitleSuffix: "",
-                benefitsBadge: "The Eagle Edge",
+                benefitsBadge: "The RealRoof Edge",
                 benefitsDescription: "Experience the difference with our unwavering commitment to military-grade excellence",
                 processTitlePrefix: "Precision", processTitleHighlight: "In Every Detail", processTitleSuffix: "",
                 processBadge: "Methodology",
@@ -464,7 +464,7 @@ export default function ServicesAdminPage() {
                     {/* Benefits Badge */}
                     <div className="space-y-1">
                       <label className="text-[13px] font-bold">Key Benefits Section Badge <span className="text-[#8c8f94] font-normal">(shown above the heading)</span></label>
-                      <input type="text" placeholder="e.g. The Eagle Edge" value={form.benefitsBadge || ""} onChange={(e) => setForm({ ...form, benefitsBadge: e.target.value })} className="w-full border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px]" />
+                      <input type="text" placeholder="e.g. The RealRoof Edge" value={form.benefitsBadge || ""} onChange={(e) => setForm({ ...form, benefitsBadge: e.target.value })} className="w-full border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px]" />
                     </div>
 
                     {/* Split Benefits Heading */}

@@ -26,15 +26,15 @@
     --popover-foreground: 0 0% 0%;
     /* Black */
 
-    /* Primary - #2430D2 Blue */
-    --primary: 235 70% 48%;
-    /* #2430D2 */
+    /* Primary - #1E5D9A Blue */
+    --primary: 210 67% 36%;
+    /* #1E5D9A */
     --primary-foreground: 0 0% 100%;
     /* White text on blue */
 
     /* Secondary - Darker blue variant */
-    --secondary: 235 70% 40%;
-    /* Darker shade of #2430D2 */
+    --secondary: 210 67% 26%;
+    /* Darker shade of #1E5D9A */
     --secondary-foreground: 0 0% 100%;
     /* White text */
 
@@ -44,7 +44,7 @@
     /* Medium gray */
 
     /* Accent - Same blue for highlights */
-    --accent: 235 70% 48%;
+    --accent: 210 67% 36%;
     --accent-foreground: 0 0% 100%;
 
     /* Destructive */
@@ -54,26 +54,26 @@
     /* Borders */
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 235 70% 48%;
+    --ring: 210 67% 36%;
     /* Blue ring focus */
 
     --radius: 0.5rem;
 
     /* Deep - Blue for dark backgrounds */
-    --deep: 235 70% 48%;
+    --deep: 210 67% 36%;
     --surface: 0 0% 98%;
     --surface-light: 0 0% 100%;
     --text-dark: 0 0% 0%;
 
     /* Sidebar - Blue */
-    --sidebar-background: 235 70% 48%;
+    --sidebar-background: 210 67% 36%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 235 70% 48%;
+    --sidebar-primary: 210 67% 36%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 235 70% 40%;
+    --sidebar-accent: 210 67% 26%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 235 70% 40%;
-    --sidebar-ring: 235 70% 48%;
+    --sidebar-border: 210 67% 26%;
+    --sidebar-ring: 210 67% 36%;
 
     /* Fonts */
     --font-heading: 'Space Grotesk', sans-serif;
@@ -82,23 +82,23 @@
 
   /* Optional dark mode if needed */
   .dark {
-    --background: 235 70% 10%;
+    --background: 210 30% 10%;
     --foreground: 0 0% 100%;
-    --card: 235 70% 12%;
+    --card: 210 30% 12%;
     --card-foreground: 0 0% 100%;
-    --popover: 235 70% 12%;
+    --popover: 210 30% 12%;
     --popover-foreground: 0 0% 100%;
-    --primary: 235 70% 48%;
+    --primary: 210 67% 36%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 235 70% 30%;
+    --secondary: 210 67% 26%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 235 70% 20%;
+    --muted: 210 30% 20%;
     --muted-foreground: 0 0% 70%;
-    --accent: 235 70% 48%;
+    --accent: 210 67% 36%;
     --accent-foreground: 0 0% 100%;
-    --border: 235 70% 25%;
-    --input: 235 70% 25%;
-    --ring: 235 70% 48%;
+    --border: 210 30% 25%;
+    --input: 210 30% 25%;
+    --ring: 210 67% 36%;
   }
 }
 
@@ -199,7 +199,7 @@
 
   /* Blue to black gradient for special text */
   .text-gradient {
-    background: linear-gradient(135deg, #2430D2 0%, #000000 100%);
+    background: linear-gradient(135deg, #1E5D9A 0%, #000000 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -207,18 +207,18 @@
 
   /* Blue gradient for CTAs */
   .bg-gradient-cta {
-    background: linear-gradient(135deg, #2430D2 0%, #1A24A8 100%);
+    background: linear-gradient(135deg, #1E5D9A 0%, #143C64 100%);
     color: white;
   }
 
   /* Blue gradient for dark sections */
-  .bg-patriotic {
-    background: linear-gradient(135deg, #2430D2 0%, #1A24A8 100%);
+  .bg-brand-gradient {
+    background: linear-gradient(135deg, #1E5D9A 0%, #143C64 100%);
     color: white;
   }
 
-  .border-american {
-    border-color: #2430D2;
+  .border-brand {
+    border-color: #1E5D9A;
   }
 
   .hover-lift {
@@ -232,19 +232,19 @@
 
   /* Text color utilities */
   .text-navy {
-    color: #2430D2;
+    color: #1E5D9A;
   }
 
-  .text-american-red {
-    color: #2430D2;
+  .text-brand {
+    color: #1E5D9A;
   }
 
   .bg-navy {
-    background-color: #2430D2;
+    background-color: #1E5D9A;
   }
 
   .bg-american-red {
-    background-color: #2430D2;
+    background-color: #1E5D9A;
   }
 
   .glass {

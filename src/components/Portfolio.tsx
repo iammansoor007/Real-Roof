@@ -145,7 +145,7 @@ const MarqueeItem = ({ project }: { project: Project }) => {
             alt={project.title}
             className="object-cover"
             fill
-            quality={100}
+            quality={85}
             style={{
               transform: isHovered ? "scale(1.1)" : "scale(1)",
               transition: "transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1)",
@@ -219,7 +219,7 @@ const MarqueeItem = ({ project }: { project: Project }) => {
                       Architect
                     </span>
                     <p className="text-white/90 text-[8px] sm:text-[10px] font-light truncate max-w-[80px] sm:max-w-none">
-                      {project.architect || "Eagle Revolution"}
+                      {project.architect || "RealRoof"}
                     </p>
                   </div>
 
@@ -371,7 +371,7 @@ const PremiumLightbox = ({
           alt="Project preview"
           className="object-contain rounded-xl sm:rounded-2xl shadow-2xl"
           fill
-          quality={100}
+          quality={85}
           sizes="90vw"
         />
       </div>

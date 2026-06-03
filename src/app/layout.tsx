@@ -38,21 +38,21 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(BASE_URL),
     icons: {
-      icon: settings.favicon || `${BASE_URL}/eagle-logo.png`,
-      apple: settings.favicon || `${BASE_URL}/eagle-logo.png`,
+      icon: settings.favicon || `${BASE_URL}/realrooflogo.webp`,
+      apple: settings.favicon || `${BASE_URL}/realrooflogo.webp`,
     },
     facebook: {
-      appId: "Eagle-Revolution-61564977483096",
+      appId: "realroof-61564977483096",
     },
     title: {
       default: settings.siteTitle,
       template: settings.siteTemplate,
     },
     description: settings.siteDescription,
-    keywords: settings.siteKeywords || ["Eagle Revolution"],
-    authors: [{ name: "Eagle Revolution", url: BASE_URL }],
-    creator: "Eagle Revolution",
-    publisher: "Eagle Revolution",
+    keywords: settings.siteKeywords || ["RealRoof"],
+    authors: [{ name: "RealRoof", url: BASE_URL }],
+    creator: "RealRoof",
+    publisher: "RealRoof",
 
     // ── Robots & Canonical ──
     robots: {
@@ -71,15 +71,15 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       locale: "en_US",
       url: BASE_URL,
-      siteName: "Eagle Revolution",
+      siteName: "RealRoof",
       title: settings.siteTitle,
       description: settings.siteDescription,
       images: [
         {
-          url: settings.favicon || `${BASE_URL}/eagle-logo.png`,
+          url: settings.favicon || `${BASE_URL}/realrooflogo.webp`,
           width: 1200,
           height: 630,
-          alt: "Eagle Revolution – Veteran Owned Roofing & Home Improvement",
+          alt: "RealRoof – Veteran Owned Roofing & Home Improvement",
           type: "image/png",
         },
       ],
@@ -90,9 +90,9 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: settings.siteTitle,
       description: settings.siteDescription,
-      images: [settings.favicon || `${BASE_URL}/eagle-logo.png`],
-      creator: "@EagleRevolution",
-      site: "@EagleRevolution",
+      images: [settings.favicon || `${BASE_URL}/realrooflogo.webp`],
+      creator: "@RealRoof",
+      site: "@RealRoof",
     },
 
     other: {
@@ -113,7 +113,7 @@ export default async function RootLayout({
   let siteScripts: SiteScript[] = [];
   try {
     await connectToDatabase();
-    const doc = await SiteContent.findOne({ key: 'site_scripts_v2' });
+    const doc = await SiteContent.findOne({ key: 'site_scripts_v2' }).lean();
     if (Array.isArray(doc?.data)) siteScripts = doc.data;
   } catch (e) {
     // Non-fatal — site renders fine without CMS scripts
@@ -128,7 +128,7 @@ export default async function RootLayout({
   let initialBlogs = [];
   try {
     const [globalContent, blogPosts] = await Promise.all([
-      SiteContent.findOne({ key: 'complete_data' }),
+      SiteContent.findOne({ key: 'complete_data' }).lean(),
       import('@/models/Post').then(m => m.default.find({ status: 'published', isTrashed: { $ne: true } }).sort({ date: -1 }).limit(10).lean())
     ]);
 

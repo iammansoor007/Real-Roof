@@ -46,9 +46,9 @@ export default function ForgotPasswordPage() {
         {/* Logo Section */}
         <div className="flex flex-col items-center mb-8">
           <div className="w-20 h-20 bg-white rounded-2xl shadow-xl flex items-center justify-center mb-4 border border-slate-100 p-2">
-             <img src="/eagle-logo.png" alt="Logo" className="w-full h-full object-contain" />
+             <img src="/realrooflogo.webp" alt="Logo" className="w-full h-full object-contain" />
           </div>
-          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Eagle Revolution</h1>
+          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">RealRoof</h1>
           <p className="text-slate-500 text-sm mt-1">Admin Control Center</p>
         </div>
 
@@ -92,7 +92,7 @@ export default function ForgotPasswordPage() {
                         required 
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="admin@eaglerevolution.com"
+                        placeholder="admin@RealRoof.com"
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3.5 pl-12 pr-4 text-slate-900 outline-none focus:ring-2 focus:ring-[#2430d2]/20 focus:border-[#2430d2] transition-all"
                       />
                     </div>
@@ -133,7 +133,7 @@ export default function ForgotPasswordPage() {
         </div>
 
         <p className="text-center mt-8 text-slate-400 text-xs">
-          &copy; {new Date().getFullYear()} Eagle Revolution. All rights reserved.
+          &copy; {new Date().getFullYear()} RealRoof. All rights reserved.
         </p>
       </div>
     </div>

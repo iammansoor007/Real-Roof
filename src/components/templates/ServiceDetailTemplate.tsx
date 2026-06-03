@@ -484,7 +484,7 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
               <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6">
                 <div className="w-8 sm:w-12 h-px bg-primary/30" />
                 <span className="text-[8px] xs:text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase text-primary">
-                  {service.benefitsBadge || "The Eagle Edge"}
+                  {service.benefitsBadge || "The RealRoof Edge"}
                 </span>
                 <div className="w-8 sm:w-12 h-px bg-primary/30" />
               </div>

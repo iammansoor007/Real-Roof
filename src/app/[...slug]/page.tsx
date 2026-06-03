@@ -57,11 +57,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: seo.ogTitle || seo.metaTitle || page.title,
       description: seo.ogDescription || seo.metaDescription,
       url: pageUrl,
-      siteName: "Eagle Revolution",
+      siteName: "RealRoof",
       type: "website",
       images: [
         {
-          url: getAbsoluteUrl(seo.featuredImage || seo.ogImage) || `${BASE_URL}/eagle-logo.png`,
+          url: getAbsoluteUrl(seo.featuredImage || seo.ogImage) || `${BASE_URL}/realrooflogo.webp`,
           width: 1200,
           height: 630,
           alt: page.title,
@@ -72,9 +72,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: seo.twitterTitle || seo.ogTitle || seo.metaTitle || page.title,
       description: seo.twitterDescription || seo.ogDescription || seo.metaDescription,
-      images: [getAbsoluteUrl(seo.featuredImage || seo.twitterImage || seo.ogImage) || `${BASE_URL}/eagle-logo.png`],
-      site: "@EagleRevolution",
-      creator: "@EagleRevolution",
+      images: [getAbsoluteUrl(seo.featuredImage || seo.twitterImage || seo.ogImage) || `${BASE_URL}/realrooflogo.webp`],
+      site: "@RealRoof",
+      creator: "@RealRoof",
     },
   };
 }

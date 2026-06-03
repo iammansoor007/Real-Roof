@@ -418,7 +418,7 @@ const Footer = () => {
   const sectionRef = useRef(null);
   const [isClient, setIsClient] = useState(false);
 
-  const company = footer?.company || { name: "Eagle Revolution", tagline: "", description: "" };
+  const company = footer?.company || { name: "RealRoof", tagline: "", description: "" };
   const quickLinks = footer?.quickLinks || [];
   const bottom = footer?.bottom || { copyright: "", rights: "", links: [], tagline: "" };
 
@@ -478,7 +478,7 @@ const Footer = () => {
             src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80"
             alt="Abstract architecture"
             fill
-            quality={100}
+            quality={85}
             className="object-cover opacity-[0.02]"
           />
         </div>
@@ -490,7 +490,7 @@ const Footer = () => {
             src="https://images.unsplash.com/photo-1502691876148-a84978e59af8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
             alt="Heritage pattern"
             fill
-            quality={100}
+            quality={85}
             className="object-cover opacity-[0.02]"
           />
         </div>

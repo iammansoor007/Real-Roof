@@ -21,7 +21,7 @@ function LoginForm() {
 
   useEffect(() => { 
     setMounted(true); 
-    document.title = "Login ‹ Eagle Dashboard Mohsin Design";
+    document.title = "Login ‹ RealRoof Dashboard Mohsin Design";
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -137,7 +137,7 @@ function LoginForm() {
         {/* Links */}
         <div className="mt-4 flex flex-col gap-2 text-[13px] text-[#2271b1]">
            <Link href="/admin/forgot-password" title="Lost your password?" className="hover:text-[#135e96]">Lost your password?</Link>
-           <Link href="/" title="Go to Eagle Revolution" className="hover:text-[#135e96]">← Go to Eagle Revolution</Link>
+           <Link href="/" title="Go to RealRoof" className="hover:text-[#135e96]">← Go to RealRoof</Link>
         </div>
       </div>
     </div>

@@ -94,11 +94,11 @@ const Navbar = () => {
               <div className="h-12 sm:h-14 md:h-16 lg:h-18 w-24 sm:w-28 md:w-32 lg:w-36 flex items-center justify-center overflow-hidden relative">
                 <Image
                   src={navbar.logo || logo}
-                  alt={navbar.siteTitle || "Eagle Revolution Logo"}
+                  alt={navbar.siteTitle || "RealRoof Logo"}
                   className="object-contain"
                   fill
                   priority
-                  quality={100}
+                  quality={85}
                 />
 
               </div>
@@ -275,7 +275,7 @@ const Navbar = () => {
             >
               <div className="p-6 border-b border-border flex items-center justify-between">
                 <div className="relative h-10 w-24">
-                  <Image src={navbar.logo || logo} alt="Logo" className="object-contain" fill quality={100} />
+                  <Image src={navbar.logo || logo} alt="Logo" className="object-contain" fill quality={85} />
                 </div>
                 <button onClick={() => setIsMenuOpen(false)} className="p-2 text-foreground">
                   <Icon name="X" />

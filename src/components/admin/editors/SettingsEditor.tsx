@@ -40,17 +40,17 @@ export default function SettingsEditor({ pageId, data, setData }: { pageId: stri
   useEffect(() => {
     if (data && Object.keys(data).length === 0) {
        setData({
-         settings: { siteTitle: "Eagle Revolution", siteTemplate: "%s | Eagle Revolution", favicon: "" },
-         navbar: { logo: "", siteTitle: "Eagle Revolution", ctaText: "Book Now", ctaLink: "/contact", companyLinks: [] },
+         settings: { siteTitle: "RealRoof", siteTemplate: "%s | RealRoof", favicon: "" },
+         navbar: { logo: "", siteTitle: "RealRoof", ctaText: "Book Now", ctaLink: "/contact", companyLinks: [] },
          footer: { 
-           company: { name: "Eagle Revolution", tagline: "Heritage. Integrity. Precision.", description: "", logo: "" },
+           company: { name: "RealRoof", tagline: "Heritage. Integrity. Precision.", description: "", logo: "" },
            newsletter: { placeholder: "Enter your email", buttonText: "Subscribe" },
            services: { title: "Our Expertise", materials: { title: "Premium Materials", items: [] } },
            contact: { title: "Contact Us", email: "", phone: "", address: "", emergency: "", areas: "" },
            certifications: [],
            social: [],
            marquee: { speed: 30, repeats: 8, texts: ["Heritage", "Precision", "Integrity"] },
-           bottom: { copyright: "© 2024 Eagle Revolution", rights: "All Rights Reserved", tagline: "Crafted with Precision", links: [] }
+           bottom: { copyright: "© 2024 RealRoof", rights: "All Rights Reserved", tagline: "Crafted with Precision", links: [] }
          },
          hours: { monday: "8am - 6pm", saturday: "9am - 3pm", sunday: "Closed" }
        });
