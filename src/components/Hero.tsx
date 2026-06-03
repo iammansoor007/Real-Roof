@@ -248,13 +248,23 @@ const Hero = () => {
                       </svg>
                     </div>
 
-                    <div className="text-center">
-                      <h4 className="text-white font-bold text-xl mb-1">Financing Available</h4>
-                      <p className="text-white/70 text-sm">Quick prequalification • Soft credit check</p>
+                    <div className="text-center w-full">
+                      <h4 className="text-white font-bold text-xl mb-3">Financing Available</h4>
+                      
+                      <div className="flex flex-col gap-2 mb-4">
+                        <div className="bg-white/5 rounded-lg p-2 border border-white/10">
+                          <div className="text-primary text-xs font-bold uppercase tracking-wider mb-0.5">Residential</div>
+                          <div className="text-white text-sm font-semibold">Up to $500,000</div>
+                        </div>
+                        <div className="bg-white/5 rounded-lg p-2 border border-white/10">
+                          <div className="text-primary text-xs font-bold uppercase tracking-wider mb-0.5">Commercial</div>
+                          <div className="text-white text-sm font-semibold">Up to $1,000,000</div>
+                        </div>
+                      </div>
                     </div>
 
-                    <span className="text-white font-semibold flex items-center gap-2 group-hover:gap-3 transition-all mt-2">
-                      Check Your Options
+                    <span className="w-full bg-primary text-slate-900 font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 group-hover:bg-white transition-all">
+                      Apply Now
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                       </svg>

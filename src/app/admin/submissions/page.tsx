@@ -20,7 +20,7 @@ export default function SubmissionsPage() {
     try {
       const res = await fetch("/api/admin/submissions");
       const data = await res.json();
-      setSubmissions(data);
+      setSubmissions(Array.isArray(data) ? data : (data.submissions || []));
     } catch (e) {
       console.error(e);
     } finally {
