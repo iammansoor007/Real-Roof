@@ -1,21 +1,19 @@
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import { useRef, useEffect, useState, useCallback, useMemo, memo } from "react";
-import { Icon } from "../config/icons";
+import { useRef, useEffect, useState, memo } from "react";
 import { useContent } from "../hooks/useContent";
 import Link from "next/link";
 import EagleAboutImg from "@/assets/fairabout.png";
 import RichTextRenderer from "./ui/RichTextRenderer";
+import { Icon } from "../config/icons";
 
 const Counter = memo(({ value, suffix = "", duration = 1.8 }: { value: number; suffix?: string; duration?: number }) => {
     const ref = useRef(null);
-    // Coerce value to a safe number — DB may return strings or null
     const safeValue = typeof value === 'number' && !isNaN(value) ? value : parseFloat(String(value)) || 0;
     const [display, setDisplay] = useState(0);
     const inView = useInView(ref, { once: true, margin: "-50px" });
     const shouldReduceMotion = useReducedMotion();
     const hasAnimatedRef = useRef(false);
-    const animationFrameRef = useRef<number | null>(null);
 
     useEffect(() => {
         if (!inView || hasAnimatedRef.current) return;
@@ -27,31 +25,22 @@ const Counter = memo(({ value, suffix = "", duration = 1.8 }: { value: number; s
         }
 
         let startTime: number;
-        const startValue = 0;
-        const endValue = safeValue;
         const durationMs = duration * 1000;
 
         const animate = (timestamp: number) => {
             if (!startTime) startTime = timestamp;
             const progress = Math.min((timestamp - startTime) / durationMs, 1);
             const eased = 1 - Math.pow(1 - progress, 4);
-            const current = Math.floor(startValue + (endValue - startValue) * eased);
-            setDisplay(current);
+            setDisplay(Math.floor(safeValue * eased));
 
             if (progress < 1) {
-                animationFrameRef.current = requestAnimationFrame(animate);
+                requestAnimationFrame(animate);
             } else {
-                setDisplay(endValue);
+                setDisplay(safeValue);
             }
         };
 
-        animationFrameRef.current = requestAnimationFrame(animate);
-
-        return () => {
-            if (animationFrameRef.current) {
-                cancelAnimationFrame(animationFrameRef.current);
-            }
-        };
+        requestAnimationFrame(animate);
     }, [inView, safeValue, duration, shouldReduceMotion]);
 
     return (
@@ -61,424 +50,170 @@ const Counter = memo(({ value, suffix = "", duration = 1.8 }: { value: number; s
         </span>
     );
 });
-
 Counter.displayName = "Counter";
-
-const ParticlesBackground = memo(() => {
-    const particlesInit = useCallback(async (engine: any) => {
-        const { loadSlim } = await import("tsparticles-slim");
-        await loadSlim(engine);
-    }, []);
-
-    const options = useMemo(
-        () => ({
-            fullScreen: { enable: false },
-            particles: {
-                number: {
-                    value: 12,
-                    density: { enable: true, area: 800 },
-                },
-                color: { value: ["hsl(var(--primary))", "hsl(var(--primary)/80)"] },
-                shape: { type: "circle" },
-                opacity: {
-                    value: 0.15,
-                    random: true,
-                    animation: { enable: true, speed: 0.5, minimumValue: 0.05 },
-                },
-                size: {
-                    value: { min: 0.5, max: 2 },
-                    random: true,
-                    animation: { enable: true, speed: 2, minimumValue: 0.5 },
-                },
-                move: {
-                    enable: true,
-                    speed: 0.3,
-                    direction: "top" as const,
-                    random: true,
-                    straight: false,
-                    outModes: { default: "out" as const },
-                },
-                links: {
-                    enable: true,
-                    distance: 150,
-                    color: "hsl(var(--primary))",
-                    opacity: 0.1,
-                    width: 0.5,
-                },
-            },
-            detectRetina: true,
-            fpsLimit: 30,
-        }),
-        []
-    );
-
-    const [ParticlesComponent, setParticlesComponent] = useState<any>(null);
-
-    useEffect(() => {
-        import("react-tsparticles").then((module) => {
-            setParticlesComponent(() => module.default);
-        });
-    }, []);
-
-    const containerRef = useRef(null);
-    const isInView = useInView(containerRef, { margin: "200px" });
-
-    if (!ParticlesComponent) return null;
-
-    return (
-        <div ref={containerRef} className="absolute inset-0 pointer-events-none">
-            {isInView && (
-                <ParticlesComponent
-                    id="roofing-particles"
-                    init={particlesInit}
-                    options={options}
-                    className="w-full h-full"
-                />
-            )}
-        </div>
-    );
-});
-
-ParticlesBackground.displayName = "ParticlesBackground";
-
-const StatCard = memo(({ value, suffix, label }: { value: number; suffix: string; label: string }) => {
-    return (
-        <motion.div
-            whileHover={{ y: -4 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="relative bg-card p-4 rounded-2xl border border-border shadow-lg hover:shadow-xl hover:shadow-primary/10 transition-all duration-300"
-        >
-            <div className="relative">
-                <span className="text-3xl md:text-4xl font-black text-primary">
-                    <Counter value={value} suffix={suffix} />
-                </span>
-                <div className="absolute -bottom-2 left-0 w-12 h-0.5 bg-primary rounded-full" />
-            </div>
-            <p className="text-xs md:text-sm font-semibold text-muted-foreground mt-3">{label}</p>
-        </motion.div>
-    );
-});
-
-StatCard.displayName = "StatCard";
 
 export default function AboutSection() {
     const { about } = useContent();
     const sectionRef = useRef<HTMLElement>(null);
-    const shouldReduceMotion = useReducedMotion();
 
-    const {
-        badge = "",
-        headline = { prefix: "", highlight: "", suffix: "" },
-        description = "",
-        image = {},
-        stats = [],
-        buttons = [],
-        trustBadges = [],
-        coreValues = []
-    } = about || {};
+    const defaultAbout = {
+        badge: "Our Company",
+        headline: { prefix: "Built on", highlight: "Trust", suffix: "& Quality" },
+        description: "With years of experience in the roofing industry, we have built a reputation for excellence. We specialize in providing high-quality, durable, and aesthetically pleasing roofing solutions for both residential and commercial properties. Our commitment to craftsmanship and customer satisfaction sets us apart.",
+        image: { src: EagleAboutImg.src, alt: "Professional roofing team at work" },
+        stats: [
+            { value: 15, suffix: "+", label: "Years Experience" },
+            { value: 5000, suffix: "+", label: "Roofs Completed" },
+            { value: 100, suffix: "%", label: "Satisfaction Guarantee" }
+        ],
+        buttons: [
+            { text: "Learn More About Us", primary: true, link: "/about" },
+            { text: "Meet Our Team", primary: false, link: "/team" }
+        ],
+        coreValues: ["Uncompromising Quality", "Transparent Pricing", "Certified Experts", "Lifetime Warranties"]
+    };
+
+    const badge = about?.badge || defaultAbout.badge;
+    const headline = about?.headline || defaultAbout.headline;
+    const description = about?.description || defaultAbout.description;
+    const image = about?.image || defaultAbout.image;
+    const stats = about?.stats && about.stats.length > 0 ? about.stats : defaultAbout.stats;
+    const buttons = about?.buttons && about.buttons.length > 0 ? about.buttons : defaultAbout.buttons;
+    const coreValues = about?.coreValues && about.coreValues.length > 0 ? about.coreValues : defaultAbout.coreValues;
 
     const isDynamicImage = !!(image?.src && (image.src.startsWith('/') || image.src.startsWith('http')));
     const isCloudinaryOrUnsplash = !!(image?.src && (image.src.includes('res.cloudinary.com') || image.src.includes('images.unsplash.com')));
     const shouldBeUnoptimized = isDynamicImage && image.src.startsWith('http') && !isCloudinaryOrUnsplash;
 
-    const variants = useMemo(
-        () => ({
-            hidden: { opacity: 0, y: 30 },
-            visible: (custom: number) => ({
-                opacity: 1,
-                y: 0,
-                transition: {
-                    delay: custom * 0.15,
-                    duration: 0.7,
-                    ease: "easeOut" as const,
-                },
-            }),
-        }),
-        []
-    );
-
     return (
         <section
             ref={sectionRef}
-            className="relative bg-background overflow-hidden py-12 md:py-14 lg:py-16"
+            className="relative bg-slate-50 dark:bg-slate-950 py-24 md:py-32 overflow-x-clip"
             aria-label="About RealRoof"
         >
-            <div className="absolute top-0 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none rotate-180">
-                <svg
-                    viewBox="0 0 1440 120"
-                    className="relative block w-full h-[50px] sm:h-[70px] md:h-[90px]"
-                    preserveAspectRatio="none"
-                    aria-hidden="true"
-                >
-                    <defs>
-                        <linearGradient id="premium-divider-header" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
-                            <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
-                            <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
-                        </linearGradient>
-                    </defs>
-                    <path
-                        fill="url(#premium-divider-header)"
-                        d="M0,64L60,69.3C120,75,240,85,360,80C480,75,600,53,720,48C840,43,960,53,1080,58.7C1200,64,1320,64,1380,64L1440,64L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
-                    />
-                </svg>
-            </div>
-
-            <div className="absolute inset-0">
-                <ParticlesBackground />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_hsl(var(--primary)/0.02)_0%,_transparent_50%)]" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_hsl(var(--primary)/0.02)_0%,_transparent_50%)]" />
-                <div
-                    className="absolute inset-0 opacity-[0.02]"
-                    style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='grid' patternUnits='userSpaceOnUse' width='60' height='60'%3E%3Cpath d='M 60 0 L 0 0 0 60' fill='none' stroke='hsl(var(--primary))' stroke-width='0.5'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grid)'/%3E%3C/svg%3E")`,
-                    }}
-                />
-            </div>
-
-            {!shouldReduceMotion && (
-                <>
-                    <motion.div
-                        animate={{
-                            x: [0, 40, 0],
-                            y: [0, -40, 0],
-                            scale: [1, 1.2, 1],
-                        }}
-                        transition={{
-                            duration: 20,
-                            repeat: Infinity,
-                            ease: "linear",
-                        }}
-                        className="absolute -top-40 -left-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
-                    />
-                    <motion.div
-                        animate={{
-                            x: [0, -40, 0],
-                            y: [0, 40, 0],
-                            scale: [1, 1.2, 1],
-                        }}
-                        transition={{
-                            duration: 25,
-                            repeat: Infinity,
-                            ease: "linear",
-                            delay: 2,
-                        }}
-                        className="absolute -bottom-40 -right-40 w-[30rem] h-[30rem] bg-primary/5 rounded-full blur-3xl"
-                    />
-                </>
-            )}
-
+            {/* Background elements */}
+            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+            
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-24 items-center">
-                    <motion.div
-                        variants={variants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, margin: "-50px" }}
-                        custom={0}
-                        className="relative group"
-                    >
-                        <div className="absolute -inset-4 bg-gradient-to-r from-primary/10 to-primary/5 rounded-3xl opacity-0 group-hover:opacity-100 blur-2xl transition-all duration-700" />
-
-                        <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-gray-300/50">
-                            <div className="relative aspect-[4/5] lg:aspect-[3/4]">
+                <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
+                    
+                    {/* Image Column */}
+                    <div className="w-full lg:w-5/12 relative">
+                        <div className="relative pb-12 sm:pb-16 max-w-md lg:max-w-none mx-auto">
+                            {/* Accent border frame - mirrors the exact dimensions of the image */}
+                            <div className="absolute top-4 left-4 right-[-16px] bottom-[32px] md:top-6 md:left-6 md:right-[-24px] md:bottom-[40px] border-2 border-primary rounded-3xl pointer-events-none" />
+                            
+                            {/* Main Image Container */}
+                            <div className="relative w-full aspect-[4/5] bg-slate-200 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl z-10 border border-slate-200/50 dark:border-slate-800/50">
                                 {isDynamicImage ? (
                                     <Image
                                         src={image.src}
                                         alt={image.alt || "About RealRoof"}
-                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                        className="object-cover absolute inset-0 w-full h-full"
                                         fill
-                                        quality={85}
-                                        priority
-                                        loading="eager"
+                                        sizes="(max-width: 1024px) 100vw, 50vw"
+                                        quality={90}
                                         unoptimized={shouldBeUnoptimized}
                                     />
                                 ) : (
                                     <Image
                                         src={EagleAboutImg}
                                         alt={image?.alt || "About RealRoof"}
-                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                        className="object-cover absolute inset-0 w-full h-full"
                                         fill
-                                        quality={85}
-                                        priority
-                                        loading="eager"
+                                        sizes="(max-width: 1024px) 100vw, 50vw"
+                                        quality={90}
                                     />
                                 )}
-
-                                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-transparent" />
-
-                                <motion.div
-                                    initial={{ x: -20, opacity: 0 }}
-                                    animate={{ x: 0, opacity: 1 }}
-                                    transition={{ delay: 0.8, duration: 0.6 }}
-                                    className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6"
-                                >
-                                    <div className="bg-card/95 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-xl border border-border">
-                                        <span className="flex items-center gap-2 text-sm font-bold text-primary">
-                                            {image?.badge || "Veteran Owned & Operated"}
-                                        </span>
-                                    </div>
-                                </motion.div>
                             </div>
+                            
+                             {/* Floating Stats Card — styled as a premium light-themed seal */}
+                            {stats && stats.length > 0 && (
+                                <div className="absolute bottom-0 right-4 sm:-right-4 bg-white dark:bg-slate-900 text-slate-900 dark:text-white px-6 py-5 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.3)] z-20 flex flex-col items-center justify-center border border-slate-100 dark:border-slate-800 min-w-[150px]">
+                                    <div className="w-10 h-10 rounded-full bg-primary/10 dark:bg-primary/5 flex items-center justify-center text-primary mb-2.5">
+                                        <Icon name="Award" className="w-5 h-5" />
+                                    </div>
+                                    <div className="text-4xl md:text-5xl font-extrabold tracking-tight text-primary leading-none">
+                                        <Counter value={stats[0].value} suffix={stats[0].suffix} />
+                                    </div>
+                                    <div className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mt-2 text-center whitespace-nowrap">
+                                        {stats[0].label}
+                                    </div>
+                                </div>
+                            )}
                         </div>
-                    </motion.div>
+                    </div>
 
-                    <motion.div
-                        variants={variants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, margin: "-50px" }}
-                        custom={1}
-                        className="space-y-4"
-                    >
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.2, duration: 0.6 }}
-                            className="inline-flex items-center gap-2 bg-primary/5 px-4 py-2 rounded-full border border-primary/10"
-                        >
-                            <span className="text-primary text-lg">⚡</span>
+                    {/* Content Column */}
+                    <div className="w-full lg:w-7/12 flex flex-col justify-center">
+                        <div className="inline-flex items-center gap-3 mb-6">
+                            <div className="h-px w-12 bg-primary" />
                             {badge && (
                                 <span className="text-primary uppercase tracking-[0.2em] text-xs sm:text-sm font-bold">{badge}</span>
                             )}
-                        </motion.div>
-
-                        <div className="space-y-4">
-                            <motion.h2
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.3, duration: 0.6 }}
-                                className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight"
-                            >
-                                <span className="block text-foreground">{headline.prefix}</span>
-                                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80">{headline.highlight}</span>
-                                <span className="block text-foreground">{headline.suffix}</span>
-                            </motion.h2>
-
-                            <motion.div
-                                initial={{ scaleX: 0 }}
-                                whileInView={{ scaleX: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.4, duration: 0.6 }}
-                                className="w-24 h-1.5 bg-gradient-to-r from-primary to-primary/60 rounded-full origin-left"
-                            />
                         </div>
 
-                        <div className="text-muted-foreground text-lg md:text-xl leading-relaxed">
+                        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] text-slate-900 dark:text-white mb-8 tracking-tight">
+                            {typeof headline === 'string' ? (
+                                <span>{headline}</span>
+                            ) : (
+                                <>
+                                    {headline?.prefix} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/70">{headline?.highlight}</span> {headline?.suffix}
+                                </>
+                            )}
+                        </h2>
+
+                        <div className="text-slate-600 dark:text-slate-400 text-lg sm:text-xl leading-relaxed mb-10 border-l-2 border-slate-200 dark:border-slate-800 pl-6">
                             <RichTextRenderer content={description} stripParagraphs={true} />
                         </div>
 
-                        {coreValues && (
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.55, duration: 0.6 }}
-                                className="flex flex-wrap gap-2 pt-2"
-                            >
-                                {coreValues.map((value: string, i: number) => (
-                                    <span
-                                        key={`value-${i}`}
-                                        className="px-3 py-1.5 bg-secondary/10 text-secondary text-xs font-medium rounded-full border border-secondary/20"
-                                    >
-                                        {value}
-                                    </span>
+                        {coreValues && coreValues.length > 0 && (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 mb-12">
+                                {(coreValues || []).map((value: string, i: number) => (
+                                    <div key={i} className="flex items-center gap-4 group">
+                                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                                        </div>
+                                        <span className="font-semibold text-slate-900 dark:text-slate-100 text-lg group-hover:text-primary transition-colors duration-300">{value}</span>
+                                    </div>
                                 ))}
-                            </motion.div>
+                            </div>
                         )}
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.6, duration: 0.6 }}
-                            className="pt-2 w-full"
-                        >
-                            <div className="flex flex-row flex-wrap sm:flex-nowrap items-center gap-3 sm:gap-4 w-full">
-                                {buttons.map((button: any, idx: number) =>
-                                    button.primary ? (
-                                        <Link key={`btn-p-${idx}`} href={button.href}>
-                                            <motion.div
-                                                whileHover={{ scale: 1.03, y: -2 }}
-                                                whileTap={{ scale: 0.98 }}
-                                                className="group relative overflow-hidden flex-1 sm:flex-initial min-w-[150px] sm:min-w-[180px] px-5 sm:px-8 py-3.5 sm:py-4 rounded-2xl inline-flex items-center justify-center gap-2 bg-primary text-white border border-primary font-semibold sm:font-bold text-sm sm:text-base shadow-primary/90 transition-all duration-300 hover:bg-primary hover:border-primary hover:text-white hover:shadow-primary/50 cursor-pointer"
-                                            >
-                                                <span className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-white/20 via-transparent to-white/10 transition-opacity duration-300" />
-                                                <span className="relative z-10 flex items-center gap-2">
-                                                    {button.text}
-                                                    <svg
-                                                        className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1"
-                                                        fill="none"
-                                                        viewBox="0 0 24 24"
-                                                        stroke="currentColor"
-                                                    >
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                                    </svg>
-                                                </span>
-                                            </motion.div>
-                                        </Link>
-                                    ) : (
-                                        <Link key={`btn-s-${idx}`} href={button.href || button.link || '#'}>
-                                            <motion.div
-                                                whileHover={{ scale: 1.03, y: -2 }}
-                                                whileTap={{ scale: 0.98 }}
-                                                className="group relative overflow-hidden flex-1 sm:flex-initial min-w-[150px] sm:min-w-[180px] px-5 sm:px-8 py-3.5 sm:py-4 rounded-2xl inline-flex items-center justify-center gap-2 bg-white text-[#333333] border-2 border-primary font-semibold sm:font-bold text-sm sm:text-base shadow-[0_10px_25px_rgba(0,0,0,0.08)] transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary hover:shadow-primary/50 cursor-pointer"
-                                            >
-                                                <span className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-white/10 via-transparent to-white/5 transition-opacity duration-300" />
-                                                <span className="relative z-10 flex items-center gap-2">
-                                                    {button.text}
-                                                    <svg
-                                                        className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1"
-                                                        fill="none"
-                                                        viewBox="0 0 24 24"
-                                                        stroke="currentColor"
-                                                    >
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                                    </svg>
-                                                </span>
-                                            </motion.div>
-                                        </Link>
-                                    )
-                                )}
+                        {/* Remaining Stats Row */}
+                        {stats && stats.length > 1 && (
+                            <div className="flex flex-wrap items-center gap-10 mb-12 pt-10 border-t border-slate-200 dark:border-slate-800">
+                                {stats.slice(1).map((stat: any, i: number) => (
+                                    <div key={i} className="flex flex-col">
+                                        <div className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tighter mb-1">
+                                            <Counter value={stat.value} suffix={stat.suffix} />
+                                        </div>
+                                        <div className="text-slate-500 font-medium uppercase tracking-wider text-xs">
+                                            {stat.label}
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                        </motion.div>
+                        )}
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.7, duration: 0.6 }}
-                            className="grid grid-cols-3 gap-4 pt-8"
-                        >
-                            {stats.map((stat: any, idx: number) => (
-                                <StatCard key={`stat-${idx}`} {...stat} />
+                        {/* Buttons */}
+                        <div className="flex flex-wrap items-center gap-4">
+                            {buttons?.map((btn: any, i: number) => (
+                                <Link 
+                                    key={i} 
+                                    href={btn.link}
+                                    className={`px-8 py-4 font-bold text-sm uppercase tracking-widest transition-all duration-300 ${
+                                        btn.primary 
+                                        ? "bg-primary text-white hover:bg-primary/90 shadow-lg hover:shadow-primary/25" 
+                                        : "bg-transparent text-slate-900 dark:text-white border-2 border-slate-200 dark:border-slate-800 hover:border-primary hover:text-primary"
+                                    }`}
+                                >
+                                    {btn.text}
+                                </Link>
                             ))}
-                        </motion.div>
-                    </motion.div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
-                <svg
-                    viewBox="0 0 1440 120"
-                    className="relative block w-full h-[50px] sm:h-[70px] md:h-[90px]"
-                    preserveAspectRatio="none"
-                    aria-hidden="true"
-                >
-                    <defs>
-                        <linearGradient id="premium-divider-footer" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
-                            <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
-                            <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
-                        </linearGradient>
-                    </defs>
-                    <path
-                        fill="url(#premium-divider-footer)"
-                        d="M0,64L60,69.3C120,75,240,85,360,80C480,75,600,53,720,48C840,43,960,53,1080,58.7C1200,64,1320,64,1380,64L1440,64L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
-                    />
-                </svg>
             </div>
         </section>
     );

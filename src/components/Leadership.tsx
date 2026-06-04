@@ -116,7 +116,7 @@ export default function Leadership() {
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-primary/20 to-primary/20 rounded-2xl sm:rounded-3xl blur-lg group-hover:blur-xl transition-all duration-700" />
                 <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl shadow-gray-300/50 h-[350px] xs:h-[400px] sm:h-[450px] md:h-[500px] lg:h-[600px]">
                   <Image
-                    src={ceo.image?.src || "/realrooflogo.webp"}
+                    src={(ceo.image?.src && (ceo.image.src.startsWith('http') || ceo.image.src.startsWith('/'))) ? ceo.image.src : "/realrooflogo.webp"}
                     alt={ceo.alt || ceo.name || "CEO"}
                     className="object-cover"
                     fill
@@ -129,7 +129,7 @@ export default function Leadership() {
                 {ceo.badges?.top && (
                   <div className="absolute top-3 sm:top-4 md:top-6 left-3 sm:left-4 md:left-6 z-10">
                     <div className="bg-card/95 backdrop-blur-sm px-2 sm:px-3 md:px-5 py-1 sm:py-2 md:py-2.5 rounded-full shadow-xl border border-border">
-                      <span className="flex items-center gap-1 sm:gap-2 text-[8px] sm:text-[10px] md:text-xs font-bold text-primary">
+                      <span suppressHydrationWarning className="flex items-center gap-1 sm:gap-2 text-[8px] sm:text-[10px] md:text-xs font-bold text-primary">
                         <Icon name="Flag" className="w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4" />
                         {ceo.badges.top}
                       </span>
@@ -140,7 +140,7 @@ export default function Leadership() {
                 {ceo.badges?.bottom && (
                   <div className="absolute bottom-3 sm:bottom-4 md:bottom-6 right-3 sm:right-4 md:right-6 z-10">
                     <div className="bg-card/95 backdrop-blur-sm px-2 sm:px-3 md:px-5 py-1 sm:py-2 md:py-2.5 rounded-full shadow-xl border border-border">
-                      <span className="flex items-center gap-1 sm:gap-2 text-[8px] sm:text-[10px] md:text-xs font-bold text-primary">
+                      <span suppressHydrationWarning className="flex items-center gap-1 sm:gap-2 text-[8px] sm:text-[10px] md:text-xs font-bold text-primary">
                         <Icon name="Award" className="w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4" />
                         {ceo.badges.bottom}
                       </span>

@@ -34,17 +34,11 @@ const SMSConsentCheckbox = ({ checked, onChange }: { checked: boolean; onChange:
                         className="absolute opacity-0 w-5 h-5 cursor-pointer"
                     />
                     <motion.div
-                        animate={checked ? {
-                            backgroundColor: "hsl(var(--primary))",
-                            borderColor: "hsl(var(--primary))"
-                        } : {
-                            backgroundColor: "transparent",
-                            borderColor: "hsl(var(--border))"
-                        }}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className={`
                             w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all duration-300
+                            ${checked ? 'bg-primary border-primary' : 'bg-transparent border-border'}
                             ${isHovered && !checked ? 'border-primary/50' : ''}
                         `}
                     >

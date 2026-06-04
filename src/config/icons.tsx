@@ -89,6 +89,9 @@ export const iconMap: Record<string, any> = {
     LinkedIn: LucideIcons.Linkedin,
     Verified: LucideIcons.BadgeCheck,
     Chat: LucideIcons.MessageCircle,
+    BuildingOffice2Icon: LucideIcons.Building2,
+    HomeModernIcon: LucideIcons.Home,
+    UserGroupIcon: LucideIcons.Users,
 };
 
 // Helper component to render icons - Fixed to properly render React components and support all Lucide icons

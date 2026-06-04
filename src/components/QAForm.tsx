@@ -291,12 +291,8 @@ const StageIndicator = ({ currentStep }: { currentStep: number }) => {
             <motion.div
               animate={currentStep >= stage.number ? {
                 scale: 1.1,
-                backgroundColor: "hsl(var(--primary))",
-                borderColor: "hsl(var(--primary))",
               } : {
                 scale: 1,
-                backgroundColor: "hsl(var(--background))",
-                borderColor: "hsl(var(--border))",
               }}
               className={`
                 relative w-10 h-10 sm:w-14 sm:h-14 rounded-full border-2 
@@ -477,17 +473,11 @@ const SMSConsentCheckbox = ({ checked, onChange, showError }: { checked: boolean
             className="absolute opacity-0 w-5 h-5 cursor-pointer"
           />
           <motion.div
-            animate={checked ? {
-              backgroundColor: "hsl(var(--primary))",
-              borderColor: "hsl(var(--primary))"
-            } : {
-              backgroundColor: "transparent",
-              borderColor: showError ? "hsl(0, 84%, 60%)" : "hsl(var(--border))"
-            }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={`
               w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all duration-300
+              ${checked ? 'bg-primary border-primary' : (showError ? 'bg-transparent border-red-500' : 'bg-transparent border-border')}
               ${isHovered && !checked ? 'border-primary/50' : ''}
             `}
           >
@@ -749,6 +739,7 @@ ${formData.message}
             src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80"
             alt=""
             fill
+            sizes="50vw"
             quality={85}
             className="object-cover opacity-[0.03]"
           />
@@ -761,6 +752,7 @@ ${formData.message}
             src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
             alt=""
             fill
+            sizes="33vw"
             quality={85}
             className="object-cover opacity-[0.03]"
           />

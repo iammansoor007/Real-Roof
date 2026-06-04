@@ -13,6 +13,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Icon } from "../config/icons";
 import { useContent } from "../hooks/useContent";
 import Link from "next/link";
+import Script from "next/script";
 import RichTextRenderer from "./ui/RichTextRenderer";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -597,7 +598,8 @@ const FAQ = ({ currentPage = "home", hideHeader = false }: { currentPage?: strin
 
   return (
     <>
-      <script
+      <Script
+        id="faq-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />

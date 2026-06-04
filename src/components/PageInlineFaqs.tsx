@@ -14,6 +14,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Icon } from "../config/icons";
 import { useContent } from "../hooks/useContent";
 import Link from "next/link";
+import Script from "next/script";
 import RichTextRenderer from "./ui/RichTextRenderer";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -269,16 +270,10 @@ const AccordionItem = ({
                     ? {
                         rotate: 180,
                         scale: 1.1,
-                        backgroundColor: "hsl(var(--primary))",
-                        borderColor: "hsl(var(--primary))",
                       }
                     : {
                         rotate: 0,
                         scale: 1,
-                        backgroundColor: "hsl(var(--background))",
-                        borderColor: isHovered
-                          ? "hsl(var(--primary))"
-                          : "hsl(var(--border))",
                       }
                 }
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -286,7 +281,7 @@ const AccordionItem = ({
                   w-10 h-10 md:w-12 md:h-12 rounded-full border-2
                   flex items-center justify-center
                   transition-all duration-300
-                  ${isOpen ? "bg-primary border-primary" : "bg-background"}
+                  ${isOpen ? "bg-primary border-primary" : (isHovered ? "bg-background border-primary" : "bg-background border-border")}
                 `}
               >
                 <motion.svg
@@ -295,16 +290,10 @@ const AccordionItem = ({
                   viewBox="0 0 24 24"
                   fill="none"
                   animate={isOpen ? { rotate: 180 } : { rotate: 0 }}
+                  className={isOpen ? "stroke-white" : (isHovered ? "stroke-primary" : "stroke-muted-foreground")}
                 >
                   <motion.path
                     d={isOpen ? "M5 12h14" : "M12 5v14M5 12h14"}
-                    stroke={
-                      isOpen
-                        ? "white"
-                        : isHovered
-                        ? "hsl(var(--primary))"
-                        : "hsl(var(--muted-foreground))"
-                    }
                     strokeWidth="1.8"
                     strokeLinecap="round"
                     animate={isOpen ? { d: "M5 12h14" } : { d: "M12 5v14M5 12h14" }}
@@ -637,7 +626,8 @@ export default function PageInlineFaqs({ faqs }: { faqs?: any[] }) {
 
   return (
     <>
-      <script
+      <Script
+        id="faq-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />

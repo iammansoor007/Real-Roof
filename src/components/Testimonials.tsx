@@ -1,430 +1,221 @@
-import { useRef, useEffect, useState, useCallback } from "react";
-import {
-  motion,
-  AnimatePresence,
-} from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef, useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
+import useEmblaCarousel from "embla-carousel-react";
 import { Icon } from "../config/icons";
 import { useContent } from "../hooks/useContent";
 import RichTextRenderer from "./ui/RichTextRenderer";
-
-gsap.registerPlugin(ScrollTrigger);
-
-const TestimonialCard = ({ testimonial, isActive }: { testimonial: any; isActive?: boolean }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const cardRef = useRef(null);
-
-  if (!testimonial) return null;
-
-  return (
-    <motion.div
-      ref={cardRef}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="relative w-full"
-    >
-      <motion.div
-        className={`
-          relative bg-gradient-to-br from-card to-card/80 backdrop-blur-sm
-          rounded-2xl p-8 lg:p-10
-          border transition-all duration-500
-          min-h-[400px] lg:min-h-[440px]
-          flex flex-col
-          ${isActive
-            ? 'border-primary/40 shadow-2xl shadow-primary/20'
-            : 'border-primary/10 shadow-xl hover:shadow-2xl'
-          }
-        `}
-        animate={{
-          boxShadow: isHovered ? '0 25px 50px -12px rgba(0, 0, 0, 0.25)' : '0 10px 30px -15px rgba(0, 0, 0, 0.1)'
-        }}
-      >
-        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
-
-        <div className="mb-6 relative">
-          <Icon name="Quote" className="w-12 h-12 text-primary/30" />
-        </div>
-
-        <div className="flex-1 mb-6 overflow-y-auto pr-2 custom-scrollbar">
-          <div className="text-foreground/90 text-lg lg:text-xl leading-relaxed font-light italic">
-            <RichTextRenderer content={testimonial.text} stripParagraphs={true} />
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between gap-4 mt-auto pt-4 border-t border-primary/10">
-          <div className="flex items-center gap-4 min-w-0">
-            <div className="relative flex-shrink-0">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/50 rounded-full blur-md opacity-50" />
-              <div className="relative w-12 h-12 lg:w-14 lg:h-14 rounded-full overflow-hidden bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center text-primary font-semibold text-lg border border-primary/20">
-                {testimonial.avatar && (testimonial.avatar.startsWith('http') || testimonial.avatar.startsWith('/uploads')) ? (
-                  <img src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover" />
-                ) : (
-                  testimonial.avatar || testimonial.name.charAt(0)
-                )}
-              </div>
-            </div>
-
-            <div className="min-w-0">
-              <div className="flex items-center gap-2 flex-wrap">
-                <h4 className="font-semibold text-foreground text-base lg:text-lg truncate">
-                  {testimonial.name}
-                </h4>
-                <span className="flex-shrink-0">
-                  <Icon name="Verified" className="w-5 h-5 text-primary" />
-                </span>
-              </div>
-              <p className="text-sm text-muted-foreground truncate">
-                {testimonial.position}, {testimonial.company}
-              </p>
-              <div className="flex items-center gap-1 mt-1">
-                {[...Array(5)].map((_, i) => (
-                  <Icon key={i} name="Star" className={`w-4 h-4 ${i < (testimonial.rating || 5) ? "text-primary fill-primary" : "text-primary/20 fill-transparent"}`} />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="absolute top-6 right-6 w-8 h-8 border-t-2 border-r-2 border-primary/20" />
-        <div className="absolute bottom-6 left-6 w-8 h-8 border-b-2 border-l-2 border-primary/20" />
-      </motion.div>
-    </motion.div>
-  );
-};
-
-const scrollbarStyles = `
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 4px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: hsl(var(--muted));
-    border-radius: 4px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: hsl(var(--primary));
-    border-radius: 4px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--primary)/0.8);
-  }
-`;
 
 const Testimonials = () => {
   const { testimonials: testimonialsData } = useContent();
   const sectionRef = useRef(null);
   const [isClient, setIsClient] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
-
-  const { 
-    section = { badge: '', headline: '', description: '', featured: '' }, 
-    testimonials = [], 
-    stats = { subscribers: '0' } 
-  } = testimonialsData || {};
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center", skipSnaps: false });
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
-    const style = document.createElement('style');
-    style.textContent = scrollbarStyles;
-    document.head.appendChild(style);
-    return () => style.remove();
+      setIsClient(true);
   }, []);
 
-  const nextTestimonial = useCallback(() => {
-    setActiveIndex((prev) => (prev + 1) % testimonials.length);
-  }, [testimonials.length]);
-
-  const prevTestimonial = useCallback(() => {
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  }, [testimonials.length]);
-
-  const toggleAutoPlay = () => {
-    setIsAutoPlaying(!isAutoPlaying);
-  };
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi, setSelectedIndex]);
 
   useEffect(() => {
-    if (isAutoPlaying && testimonials.length > 0) {
-      autoPlayRef.current = setInterval(() => {
-        nextTestimonial();
-      }, 5000);
-    }
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+  }, [emblaApi, onSelect]);
 
-    return () => {
-      if (autoPlayRef.current) {
-        clearInterval(autoPlayRef.current);
+  const defaultData = {
+    section: { badge: 'Testimonials', headline: 'Client Success Stories', description: 'Hear directly from our partners and homeowners about their experience working with our premium exterior specialists.' },
+    testimonials: [
+      {
+        name: "John Smith",
+        position: "Homeowner",
+        rating: 5,
+        text: "<p>The team at RealRoof completely transformed our home. They were professional, on time, and the new roof looks absolutely stunning. I highly recommend them to anyone looking for top-tier service.</p>",
+      },
+      {
+        name: "Sarah Johnson",
+        position: "Property Manager",
+        rating: 5,
+        text: "<p>We have used RealRoof for multiple properties and they never disappoint. Their attention to detail and commitment to quality is unmatched in the industry.</p>",
+      },
+      {
+        name: "Michael Brown",
+        position: "Commercial Developer",
+        rating: 5,
+        text: "<p>After a severe storm, we needed immediate commercial roofing repairs. They responded quickly, provided a fair quote, and finished the job ahead of schedule. Exceptional work.</p>",
       }
-    };
-  }, [isAutoPlaying, nextTestimonial, testimonials.length]);
-
-  const handleMouseEnter = () => {
-    if (autoPlayRef.current) {
-      clearInterval(autoPlayRef.current);
-    }
+    ],
+    stats: { subscribers: '500' }
   };
 
-  const handleMouseLeave = () => {
-    if (isAutoPlaying) {
-      autoPlayRef.current = setInterval(() => {
-        nextTestimonial();
-      }, 5000);
-    }
-  };
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  useEffect(() => {
-    if (!sectionRef.current || !isClient) return;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo('.reveal-element',
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.12,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [isClient]);
+  const section = testimonialsData?.section || defaultData.section;
+  const testimonials = testimonialsData?.testimonials && testimonialsData.testimonials.length > 0 ? testimonialsData.testimonials : defaultData.testimonials;
 
   if (!isClient) return null;
 
   return (
     <section
       ref={sectionRef}
-      className="relative bg-background py-20 md:py-28 lg:py-32 overflow-hidden"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      className="relative bg-white py-28 lg:py-40 overflow-hidden"
     >
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 opacity-[0.03]">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `
-                repeating-linear-gradient(45deg, hsl(var(--primary)) 0px, hsl(var(--primary)) 1px, transparent 1px, transparent 40px),
-                repeating-linear-gradient(135deg, hsl(var(--primary)) 0px, hsl(var(--primary)) 1px, transparent 1px, transparent 40px)
-              `,
-            }}
-          />
-        </div>
+      {/* Subtle dot grid pattern */}
+      <div className="absolute inset-0 [background-image:radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none opacity-60" />
+      <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-primary/5 rounded-full blur-[90px] pointer-events-none -translate-y-1/2 translate-x-1/4" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[70px] pointer-events-none translate-y-1/2 -translate-x-1/4" />
 
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
+        
+        {/* Top Stats Bar */}
         <motion.div
-          animate={{
-            x: [0, 100, 0, -100, 0],
-            y: [0, -50, 100, 50, 0],
-          }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/4 -left-1/4 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl"
-        />
-
-        <motion.div
-          animate={{
-            x: [0, -100, 50, 100, 0],
-            y: [0, 50, -100, -50, 0],
-          }}
-          transition={{ duration: 35, repeat: Infinity, ease: "linear", delay: 2 }}
-          className="absolute bottom-1/4 -right-1/4 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl"
-        />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-16 md:mb-20 reveal-element">
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-4"
-          >
-            <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-primary">
-              {section?.badge}
-            </span>
-          </motion.div>
-
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 tracking-tight">
-            {(section?.headlinePrefix || section?.headlineHighlight || section?.headlineSuffix) ? (
-              <>
-                {section?.headlinePrefix && (
-                  <span>{section.headlinePrefix} </span>
-                )}
-                {section?.headlineHighlight && (
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80">
-                    {section.headlineHighlight}
-                  </span>
-                )}
-                {section?.headlineSuffix && (
-                  <span> {section.headlineSuffix}</span>
-                )}
-              </>
-            ) : (
-              <span>{section.headline}</span>
-            )}
-          </h2>
-
-          <div className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            <RichTextRenderer content={section.description} stripParagraphs={true} />
-          </div>
-
-          <div className="flex items-center justify-center gap-3 mt-6">
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-card/50 rounded-full border border-primary/10">
-              <Icon name="Google" className="w-5 h-5" />
-              <span className="text-xs text-muted-foreground">{section.featured}</span>
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="flex flex-wrap items-center justify-center lg:justify-between gap-8 mb-20 p-8 bg-slate-50 rounded-3xl border border-slate-100"
+        >
+          {[
+            { value: "500+", label: "Happy Clients", icon: "Users" },
+            { value: "5.0", label: "Average Rating", icon: "Star" },
+            { value: "12+", label: "Years of Trust", icon: "Award" },
+            { value: "98%", label: "Satisfaction Rate", icon: "BadgeCheck" },
+          ].map((stat, i) => (
+            <div key={i} className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                <Icon name={stat.icon} className="w-6 h-6" />
+              </div>
+              <div>
+                <div className="text-3xl font-extrabold text-slate-900 tracking-tight leading-none">{stat.value}</div>
+                <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">{stat.label}</div>
+              </div>
             </div>
-            <div className="w-px h-4 bg-primary/20" />
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Icon key={i} name="Star" className="w-4 h-4 text-primary fill-primary" />
-              ))}
-              <span className="text-xs font-medium text-foreground ml-1">{stats.subscribers}</span>
+          ))}
+        </motion.div>
+
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 lg:mb-24">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-3 mb-6">
+              <div className="h-[2px] w-12 bg-primary" />
+              <span className="text-primary uppercase tracking-[0.2em] text-xs sm:text-sm font-extrabold">
+                {section.badge}
+              </span>
+            </div>
+            
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 mb-6 leading-[1.05] tracking-tighter">
+              {section.headline}
+            </h2>
+            
+            <div className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-lg">
+              {section.description}
             </div>
           </div>
-
-          <div className="w-20 h-0.5 bg-gradient-to-r from-primary to-primary/40 mx-auto mt-8 rounded-full" />
+          
+          <div className="flex items-center gap-3 hidden md:flex">
+            <button 
+                onClick={() => emblaApi?.scrollPrev()}
+                className="w-14 h-14 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 shadow-sm hover:shadow-lg group"
+            >
+                <Icon name="ArrowLeft" className="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" />
+            </button>
+            <button 
+                onClick={() => emblaApi?.scrollNext()}
+                className="w-14 h-14 rounded-full bg-slate-900 text-white hover:bg-primary transition-all duration-300 shadow-sm hover:shadow-lg group flex items-center justify-center"
+            >
+                <Icon name="ArrowRight" className="w-6 h-6 group-hover:translate-x-0.5 transition-transform" />
+            </button>
+          </div>
         </div>
 
-        {testimonials.length > 0 && (
-          <div className="max-w-5xl mx-auto mb-16 lg:mb-20 reveal-element">
-            <div className="relative">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeIndex}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
+        {/* Embla Carousel */}
+        <div className="overflow-hidden px-4 py-8 -mx-4 -my-8" ref={emblaRef}>
+          <div className="flex -ml-5 touch-pan-y items-stretch">
+            {testimonials.map((testimonial: any, idx: number) => (
+              <div key={idx} className="flex-none w-[90%] sm:w-[75%] md:w-[52%] lg:w-[36%] pl-5">
+                <div
+                  className="h-full flex flex-col bg-gradient-to-br from-slate-50/80 via-white to-primary/[0.02] hover:from-white hover:via-primary/[0.03] hover:to-primary/[0.08] rounded-3xl p-8 sm:p-10 shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.05)] border border-slate-100/80 hover:border-primary/20 transition-all duration-400 relative overflow-hidden group"
                 >
-                  <TestimonialCard
-                    testimonial={testimonials[activeIndex]}
-                    isActive={true}
-                  />
-                </motion.div>
-              </AnimatePresence>
+                  {/* Decorative top-left accent */}
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary via-primary/40 to-transparent rounded-l-2xl z-20" />
 
-              <div className="flex items-center justify-between mt-8">
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl font-mono font-bold text-primary">
-                      {String(activeIndex + 1).padStart(2, '0')}
-                    </span>
-                    <span className="text-sm font-mono text-muted-foreground">/</span>
-                    <span className="text-sm font-mono text-muted-foreground">
-                      {String(testimonials.length).padStart(2, '0')}
-                    </span>
+                  {/* Dynamic gradient background glows */}
+                  <div className="absolute -right-16 -top-16 w-32 h-32 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors duration-500 pointer-events-none" />
+                  <div className="absolute -left-16 -bottom-16 w-32 h-32 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors duration-500 pointer-events-none" />
+                  
+                  {/* Subtle dot grid overlay */}
+                  <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
+
+                  {/* Subtle quote watermark */}
+                  <Icon name="Quote" className="w-10 h-10 text-primary/5 group-hover:text-primary/10 absolute top-6 right-6 pointer-events-none transform -rotate-12 group-hover:scale-110 transition-all duration-500 z-10" />
+
+                  {/* Top Row: User info and Google badge */}
+                  <div className="flex items-center justify-between gap-4 mb-6 relative z-10">
+                    <div className="flex items-center gap-3">
+                      {/* Avatar */}
+                      <div className="w-12 h-12 rounded-full shrink-0 overflow-hidden bg-primary/10 text-primary flex items-center justify-center font-bold text-lg border border-primary/20 shadow-inner">
+                        {testimonial.avatar && (testimonial.avatar.startsWith('http') || testimonial.avatar.startsWith('/uploads')) ? (
+                          <img src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover" />
+                        ) : (
+                          <span>{testimonial.name.charAt(0).toUpperCase()}</span>
+                        )}
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 text-sm sm:text-base leading-tight tracking-tight">{testimonial.name}</h4>
+                        <p className="text-slate-500 text-xs sm:text-sm mt-0.5 font-medium">{testimonial.position}</p>
+                      </div>
+                    </div>
+                    {/* Google Icon Badge */}
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white text-slate-600 border border-slate-100 shadow-sm">
+                      <Icon name="Google" className="w-3.5 h-3.5 text-primary" />
+                      <span>Review</span>
+                    </div>
                   </div>
 
-                  <div className="w-px h-6 bg-primary/20 mx-2" />
+                  {/* Rating Stars */}
+                  <div className="flex gap-1 mb-4 relative z-10">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className={`w-4 h-4 ${i < (testimonial.rating || 5) ? "text-amber-400 fill-amber-400" : "text-slate-200 fill-slate-200"}`} viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                      </svg>
+                    ))}
+                  </div>
 
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={toggleAutoPlay}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-card/50 border border-primary/10 hover:border-primary/30 transition-all"
-                  >
-                    {isAutoPlaying ? <Icon name="Pause" className="w-4 h-4" /> : <Icon name="Play" className="w-4 h-4" />}
-                    <span className="text-xs text-muted-foreground">
-                      {isAutoPlaying ? 'Auto' : 'Manual'}
-                    </span>
-                  </motion.button>
-                </div>
-
-                <div className="flex gap-3">
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={prevTestimonial}
-                    className="w-10 h-10 rounded-full border border-primary/20 bg-card/50 hover:bg-primary hover:border-primary hover:text-white transition-all duration-300 flex items-center justify-center"
-                  >
-                    <Icon name="ChevronLeft" className="w-5 h-5" />
-                  </motion.button>
-
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={nextTestimonial}
-                    className="w-10 h-10 rounded-full border border-primary/20 bg-card/50 hover:bg-primary hover:border-primary hover:text-white transition-all duration-300 flex items-center justify-center"
-                  >
-                    <Icon name="ChevronRight" className="w-5 h-5" />
-                  </motion.button>
+                  {/* Review text */}
+                  <div className="text-slate-600 text-base sm:text-[17px] leading-[1.75] flex-1 font-medium relative z-10 line-clamp-6">
+                    <RichTextRenderer content={testimonial.text} stripParagraphs={true} />
+                  </div>
                 </div>
               </div>
-
-              <div className="absolute -bottom-12 left-0 right-0">
-                <div className="flex gap-1 justify-center">
-                  {(testimonials as any[]).map((_: any, idx: number) => (
-                    <motion.button
-                      key={`dot-${idx}`}
-                      onClick={() => setActiveIndex(idx)}
-                      className="group cursor-pointer"
-                    >
-                      <div
-                        className={`
-                          h-1 rounded-full transition-all duration-300
-                          ${idx === activeIndex
-                            ? 'w-8 bg-primary'
-                            : 'w-4 bg-primary/20 group-hover:bg-primary/40'
-                          }
-                        `}
-                      />
-                    </motion.button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-8 border-t border-primary/10 reveal-element">
-          <div className="flex items-center gap-3">
-            <div className="flex -space-x-2">
-              {testimonials.slice(0, 5).map((t: any, i: number) => (
-                <motion.div
-                  key={`avatar-${i}`}
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: i * 0.05 }}
-                  className="w-8 h-8 rounded-full overflow-hidden bg-gradient-to-br from-primary/20 to-primary/10 border-2 border-card flex items-center justify-center text-primary text-xs font-medium shadow-sm"
-                >
-                  {t.avatar && (t.avatar.startsWith('http') || t.avatar.startsWith('/uploads')) ? (
-                    <img src={t.avatar} alt={t.name} className="w-full h-full object-cover" />
-                  ) : (
-                    t.avatar || t.name.charAt(0)
-                  )}
-                </motion.div>
-              ))}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              <span className="font-semibold text-foreground">{stats.subscribers}</span> satisfied customers
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 text-sm">
-            <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              <span className="text-muted-foreground">Veteran Owned Business</span>
-            </div>
-            <div className="w-px h-4 bg-primary/20" />
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Icon key={i} name="Star" className="w-4 h-4 text-primary fill-primary" />
-              ))}
-              <span className="font-semibold text-foreground ml-1">5.0</span>
-            </div>
+            ))}
           </div>
         </div>
+
+        {/* Progress / Dot indicators */}
+        <div className="flex items-center justify-between mt-10">
+          <div className="flex items-center gap-2">
+             {testimonials.map((_: any, idx: number) => (
+                <button
+                    key={idx}
+                    onClick={() => emblaApi?.scrollTo(idx)}
+                    className={`h-2 transition-all duration-300 rounded-full ${idx === selectedIndex ? 'w-10 bg-slate-900' : 'w-2 bg-slate-200 hover:bg-slate-400'}`}
+                    aria-label={`Go to slide ${idx + 1}`}
+                />
+             ))}
+          </div>
+          <div className="flex gap-2 md:hidden">
+            <button onClick={() => emblaApi?.scrollPrev()} className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-900 shadow-sm">
+                <Icon name="ArrowLeft" className="w-5 h-5" />
+            </button>
+            <button onClick={() => emblaApi?.scrollNext()} className="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center shadow-sm">
+                <Icon name="ArrowRight" className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
       </div>
     </section>
   );

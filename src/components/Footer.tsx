@@ -430,21 +430,7 @@ const Footer = () => {
     if (!sectionRef.current || !isClient) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo('.footer-reveal',
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 95%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
+      // Intentionally left blank or can add other footer animations here
     }, sectionRef);
 
     return () => ctx.revert();
@@ -478,6 +464,7 @@ const Footer = () => {
             src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80"
             alt="Abstract architecture"
             fill
+            sizes="50vw"
             quality={85}
             className="object-cover opacity-[0.02]"
           />
@@ -490,6 +477,7 @@ const Footer = () => {
             src="https://images.unsplash.com/photo-1502691876148-a84978e59af8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
             alt="Heritage pattern"
             fill
+            sizes="33vw"
             quality={85}
             className="object-cover opacity-[0.02]"
           />

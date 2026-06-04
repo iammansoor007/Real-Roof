@@ -93,10 +93,11 @@ const Navbar = () => {
             >
               <div className="h-12 sm:h-14 md:h-16 lg:h-18 w-24 sm:w-28 md:w-32 lg:w-36 flex items-center justify-center overflow-hidden relative">
                 <Image
-                  src={navbar.logo || logo}
+                  src={typeof navbar.logo === 'string' && navbar.logo.includes('realrooflogo') ? '/realrooflogo.webp' : (navbar.logo || logo)}
                   alt={navbar.siteTitle || "RealRoof Logo"}
                   className="object-contain"
                   fill
+                  sizes="(max-width: 640px) 96px, (max-width: 768px) 112px, (max-width: 1024px) 128px, 144px"
                   priority
                   quality={85}
                 />
@@ -274,8 +275,15 @@ const Navbar = () => {
               className="fixed top-0 right-0 h-full w-full max-w-sm bg-white z-50 lg:hidden shadow-2xl flex flex-col"
             >
               <div className="p-6 border-b border-border flex items-center justify-between">
-                <div className="relative h-10 w-24">
-                  <Image src={navbar.logo || logo} alt="Logo" className="object-contain" fill quality={85} />
+                <div className="h-10 w-24 relative flex items-center justify-center">
+                  <Image 
+                    src={typeof navbar.logo === 'string' && navbar.logo.includes('realrooflogo') ? '/realrooflogo.webp' : (navbar.logo || logo)} 
+                    alt="Logo" 
+                    className="object-contain" 
+                    fill 
+                    sizes="96px"
+                    quality={85} 
+                  />
                 </div>
                 <button onClick={() => setIsMenuOpen(false)} className="p-2 text-foreground">
                   <Icon name="X" />

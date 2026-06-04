@@ -7,6 +7,7 @@ import connectToDatabase from "@/lib/mongodb";
 import SiteContent from "@/models/Content";
 import Post from "@/models/Post";
 import { BASE_URL } from "@/lib/constants";
+import ScriptInjector from "@/components/ScriptInjector";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -149,13 +150,13 @@ export default async function RootLayout({
         <link rel="preconnect" href="https://images.unsplash.com" />
         {/* ── CMS-managed <head> scripts ── */}
         {headScripts.map((s) => (
-          <script key={s.id} dangerouslySetInnerHTML={{ __html: s.code.replace(/<script[^>]*>|<\/script>/gi, '').trim() }} />
+          <ScriptInjector key={s.id} code={s.code} target="head" />
         ))}
       </head>
       <body className={`${spaceGrotesk.variable} ${dmSans.variable} antialiased`}>
         {/* ── CMS-managed body_start scripts ── */}
         {bodyStartScripts.map((s) => (
-          <div key={s.id} dangerouslySetInnerHTML={{ __html: s.code }} />
+          <ScriptInjector key={s.id} code={s.code} target="body" />
         ))}
         <ContentProvider initialData={initialGlobalData} initialBlogs={initialBlogs}>
           <Providers>
@@ -181,7 +182,7 @@ export default async function RootLayout({
 
         {/* ── CMS-managed body_end scripts ── */}
         {bodyEndScripts.map((s) => (
-          <div key={s.id} dangerouslySetInnerHTML={{ __html: s.code }} />
+          <ScriptInjector key={s.id} code={s.code} target="body" />
         ))}
       </body>
     </html>

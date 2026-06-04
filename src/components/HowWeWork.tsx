@@ -305,8 +305,7 @@ const FeatureCard = ({ feature, index }: { feature: any; index: number }) => {
                             <div className="absolute inset-0 flex items-center justify-center">
                                 <motion.div
                                     animate={{
-                                        scale: isHovered ? 1.1 : 1,
-                                        color: isHovered ? 'hsl(var(--primary))' : 'hsl(var(--primary))'
+                                        scale: isHovered ? 1.1 : 1
                                     }}
                                     transition={{ duration: 0.3 }}
                                     className="text-primary"
@@ -351,10 +350,9 @@ const FeatureCard = ({ feature, index }: { feature: any; index: number }) => {
                     />
 
                     <motion.div
-                        className="absolute bottom-4 right-4 text-7xl font-black text-muted-foreground/20 select-none"
+                        className={`absolute bottom-4 right-4 text-7xl font-black select-none transition-colors duration-300 ${isHovered ? 'text-primary/10' : 'text-muted-foreground/10'}`}
                         animate={{
-                            scale: isHovered ? 1.1 : 1,
-                            color: isHovered ? 'hsl(var(--primary)/0.1)' : 'hsl(var(--muted-foreground)/0.05)'
+                            scale: isHovered ? 1.1 : 1
                         }}
                     >
                         {(index + 1).toString().padStart(2, '0')}
@@ -368,11 +366,7 @@ const FeatureCard = ({ feature, index }: { feature: any; index: number }) => {
                             Explore
                         </span>
                         <motion.div
-                            className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden"
-                            animate={{
-                                backgroundColor: isHovered ? 'hsl(var(--primary))' : 'hsl(var(--primary)/0.1)',
-                                width: '28px'
-                            }}
+                            className={`h-7 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 ${isHovered ? 'bg-primary w-7' : 'bg-primary/10 w-7'}`}
                         >
                             <motion.div
                                 animate={{ x: isHovered ? 3 : 0 }}
