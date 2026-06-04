@@ -5,18 +5,18 @@ import Hero from "@/components/Hero";
 import AggressiveRoofingSection from "@/components/RoofingExperts";
 import Services from "@/components/Services";
 
-const Portfolio = dynamic(() => import("@/components/Portfolio"));
-const Leadership = dynamic(() => import("@/components/Leadership"));
-const BrandStore = dynamic(() => import("@/components/BrandStore"), { ssr: false });
-const Testimonials = dynamic(() => import("@/components/Testimonials"), { ssr: false });
-const HowWeWork = dynamic(() => import("@/components/HowWeWork"), { ssr: false });
-const QAForm = dynamic(() => import("@/components/QAForm"), { ssr: false });
-const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: false });
-const QuickQuote = dynamic(() => import("@/components/QuickQuote"), { ssr: false });
-const BlogSection = dynamic(() => import("@/components/sections/BlogSection"), { ssr: false });
-const InteractiveQuoteTool = dynamic(() => import("@/components/InteractiveQuoteTool"), { ssr: false });
+import Portfolio from "@/components/Portfolio";
+import Leadership from "@/components/Leadership";
+import BrandStore from "@/components/BrandStore";
+import Testimonials from "@/components/Testimonials";
+import HowWeWork from "@/components/HowWeWork";
+import QAForm from "@/components/QAForm";
+import FAQ from "@/components/FAQ";
+import QuickQuote from "@/components/QuickQuote";
+import BlogSection from "@/components/sections/BlogSection";
+import InteractiveQuoteTool from "@/components/InteractiveQuoteTool";
+
 const ServiceAreaMap = dynamic(() => import("@/components/ServiceAreaMap"), { ssr: false });
-const BookingCalendar = dynamic(() => import("@/components/BookingCalendar"), { ssr: false });
 
 import { useContent } from "@/hooks/useContent";
 import PageInlineFaqs from "@/components/PageInlineFaqs";

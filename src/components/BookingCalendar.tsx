@@ -125,10 +125,11 @@ export default function BookingCalendar() {
                     <label className="block text-sm font-semibold text-slate-700 mb-2">Service Type</label>
                     <select className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all bg-slate-50 focus:bg-white"
                       value={formData.serviceType} onChange={e => setFormData({...formData, serviceType: e.target.value})}>
-                      <option>Free Roof Inspection</option>
-                      <option>Storm Damage Evaluation</option>
-                      <option>Commercial Bid Request</option>
-                      <option>Multi-Family Consultation</option>
+                      <option>Commercial Roofing</option>
+                      <option>Multi-Family Roofing</option>
+                      <option>Storm Restoration & Claims</option>
+                      <option>Installation Partnerships</option>
+                      <option>Free Roof Inspection (General)</option>
                     </select>
                   </div>
                 </div>

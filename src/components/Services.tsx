@@ -485,6 +485,7 @@ const Services = () => {
                             src={servicesData.image.src}
                             alt={servicesData.image.alt || "RealRoof Services"}
                             fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
                             className="object-cover"
                             priority
                             quality={85}
@@ -495,6 +496,7 @@ const Services = () => {
                           src={serviceDetail}
                           alt="RealRoof Services"
                           fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
                           className="object-cover"
                           priority
                           quality={85}

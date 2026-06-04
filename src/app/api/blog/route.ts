@@ -18,6 +18,6 @@ export async function GET() {
     return NextResponse.json(posts);
   } catch (error: any) {
     console.error('Public Blog API Error:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json({ error: 'Internal Server Error', details: error.message, stack: error.stack }, { status: 500 });
   }
 }
