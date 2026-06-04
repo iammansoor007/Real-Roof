@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Icon } from "../config/icons";
 import { useContent } from "../hooks/useContent";
 import Image from "next/image";
@@ -12,6 +12,26 @@ import bgfair from "../assets/bgfair.jpg";
 const Hero = () => {
   const { hero } = useContent();
   const sectionRef = useRef<HTMLElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    const loadVideo = () => {
+      if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+        window.requestIdleCallback(() => {
+          setTimeout(() => setIsMounted(true), 1500); // 1.5s delay during idle time
+        });
+      } else {
+        setTimeout(() => setIsMounted(true), 2500); // Fallback timeout
+      }
+    };
+
+    if (document.readyState === 'complete') {
+      loadVideo();
+    } else {
+      window.addEventListener('load', loadVideo);
+      return () => window.removeEventListener('load', loadVideo);
+    }
+  }, []);
 
   const {
     badge = "Premium Exterior Solutions",
@@ -29,23 +49,24 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-slate-900/80 sm:bg-slate-900/70 z-10" />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/60 to-transparent z-10" />
-        {images?.[0]?.startsWith('http') ? (
-          <img
-            src={images[0]}
-            alt={hero.bgImageAlt || "Hero Background"}
+        {isMounted ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            poster="/realrooflogo.webp"
             className="w-full h-full object-cover object-center"
-            fetchPriority="high"
-          />
+          >
+            <source src="/RealRoof.mp4" type="video/mp4" />
+            <source src="/RealRoof.mp4.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         ) : (
-          <Image
-            src={images?.[0] || bgfair}
-            alt={hero.bgImageAlt || "Hero Background"}
-            className="w-full h-full object-cover object-center"
-            fill
-            quality={90}
-            priority
-            unoptimized
-          />
+          <div className="w-full h-full bg-slate-950 flex items-center justify-center">
+            <img src="/realrooflogo.webp" alt="RealRoof Logo" className="w-48 h-auto object-contain opacity-25 animate-pulse" />
+          </div>
         )}
       </div>
 

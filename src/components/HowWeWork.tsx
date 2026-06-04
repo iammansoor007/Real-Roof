@@ -11,7 +11,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Icon } from "../config/icons";
 import { useContent } from "../hooks/useContent";
 import Link from "next/link";
+import Image from "next/image";
 import RichTextRenderer from "./ui/RichTextRenderer";
+import robinKutesa from "../assets/robin-kutesa-wmhhsI7GUQ8-unsplash.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -519,8 +521,22 @@ const AwardCTABanner = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="relative mt-20 overflow-hidden"
         >
-            <div className="relative bg-card border border-border rounded-2xl">
-                <div className="absolute inset-0 overflow-hidden">
+            <div className="relative bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden z-10">
+                {/* Background Image with Dark Overlay */}
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src={robinKutesa}
+                        alt="Robin Kutesa Background"
+                        className="w-full h-full object-cover object-center"
+                        fill
+                        placeholder="blur"
+                        quality={85}
+                        priority
+                    />
+                    <div className="absolute inset-0 bg-slate-950/45 z-10" />
+                </div>
+
+                <div className="absolute inset-0 overflow-hidden z-20 pointer-events-none">
                     <motion.div
                         className="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rotate-12"
                         animate={{ rotate: [12, 15, 12] }}
@@ -534,20 +550,20 @@ const AwardCTABanner = () => {
                 </div>
 
                 <motion.div
-                    className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"
+                    className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent z-20"
                     animate={{ x: ["-100%", "100%"] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                 />
                 <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent z-20"
                     animate={{ x: ["100%", "-100%"] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                 />
 
-                <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-primary/30" />
-                <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-primary/30" />
-                <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-primary/30" />
-                <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-primary/30" />
+                <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-primary/30 z-20" />
+                <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-primary/30 z-20" />
+                <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-primary/30 z-20" />
+                <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-primary/30 z-20" />
 
                 <div className="relative px-8 py-16 md:px-20 md:py-20 flex flex-col lg:flex-row items-center justify-between gap-10 z-30">
                     <div className="max-w-2xl">
@@ -566,20 +582,20 @@ const AwardCTABanner = () => {
                         )}
 
                         <h3
-                            className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 leading-tight"
+                            className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight [&_.text-primary]:text-sky-400"
                             dangerouslySetInnerHTML={{ __html: cta?.title || "" }}
                         />
 
                         <RichTextRenderer 
                             content={cta?.description || ""} 
-                            className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-lg"
+                            className="text-slate-200 text-base md:text-lg leading-relaxed max-w-lg"
                         />
 
                         <div className="flex items-center gap-6 mt-6">
                             {(cta?.trustBadges || []).map((badge: string, i: number) => (
                                 <div key={i} className="flex items-center gap-2">
                                     <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                                    <span className="text-xs text-muted-foreground">{badge}</span>
+                                    <span className="text-xs text-slate-300">{badge}</span>
                                 </div>
                             ))}
                         </div>
@@ -587,14 +603,19 @@ const AwardCTABanner = () => {
 
                  <div className="flex flex-col sm:flex-row gap-4">
     {(cta?.buttons || []).map((button: any, idx: number) => {
-        const links = ["/gallery", "/contact"];
+        const links = ["/contact", "/gallery"];
+        const isPrimary = idx === 0;
 
         return (
             <Link key={idx} href={links[idx] || "#"}>
                 <motion.div
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
-                    className="relative px-8 py-4 bg-white text-primary border-2 border-primary font-bold rounded-full shadow-sm hover:bg-primary hover:text-white hover:shadow-md transition-all duration-300 overflow-hidden flex items-center justify-center gap-2 cursor-pointer"
+                    className={`relative px-8 py-4 font-bold rounded-full shadow-md transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
+                        isPrimary
+                            ? "bg-white text-slate-950 hover:bg-slate-100"
+                            : "border-2 border-white/80 text-white bg-transparent hover:bg-white hover:text-slate-950"
+                    }`}
                 >
                     <span className="relative z-10 flex items-center gap-2 text-sm md:text-base">
                         {button.text}
