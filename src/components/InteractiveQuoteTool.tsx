@@ -87,7 +87,7 @@ export default function InteractiveQuoteTool() {
     <section 
       id="quote" 
       onMouseMove={handleMouseMove}
-      className="relative py-24 lg:py-32 overflow-hidden bg-white group"
+      className="relative py-12 sm:py-20 lg:py-32 overflow-hidden bg-white group"
       style={{
         '--mouse-x': `${coords.x}px`,
         '--mouse-y': `${coords.y}px`
@@ -115,26 +115,26 @@ export default function InteractiveQuoteTool() {
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
 
         {/* Dynamic Split Screen Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
 
           {/* Left Column: High-End Informational Panel (5 Cols) */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className="space-y-4">
+          <div className="lg:col-span-5 space-y-6 lg:space-y-8">
+            <div className="space-y-3 lg:space-y-4">
               <div className="inline-flex items-center gap-2.5 bg-primary/8 border border-primary/10 text-primary text-[10px] font-extrabold uppercase tracking-[0.25em] px-4 py-2 rounded-full">
                 <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
                 Vetted Estimates
               </div>
-              <h2 className="text-4xl md:text-5xl font-black text-slate-900 leading-[1.1] tracking-tight font-heading">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-[1.1] tracking-tight font-heading">
                 Instant Roof <br />
                 <span className="text-primary relative inline-block">Estimator<span className="absolute bottom-1.5 left-0 right-0 h-1.5 bg-primary/10 -rotate-1 rounded-full" /></span>
               </h2>
-              <p className="text-slate-500 leading-relaxed font-medium text-base max-w-md">
+              <p className="text-slate-500 leading-relaxed font-medium text-sm sm:text-base max-w-md">
                 Get an immediate data-driven cost bracket for your project. Our system cross-references material specifications with local Southeast labor logs.
               </p>
             </div>
 
             {/* Premium Workflow Steps Checklist */}
-            <div className="space-y-4 bg-slate-50/50 p-6 rounded-3xl border border-slate-100/80 relative overflow-hidden">
+            <div className="space-y-4 bg-slate-50/50 p-5 sm:p-6 rounded-3xl border border-slate-100/80 relative overflow-hidden">
               <div className="absolute -right-8 -top-8 w-24 h-24 bg-primary/5 rounded-full blur-2xl" />
               <h4 className="text-xs font-black text-slate-800 uppercase tracking-widest mb-2 flex items-center gap-2">
                 <Icon name="ClipboardCheck" className="w-4 h-4 text-primary" />
@@ -144,7 +144,7 @@ export default function InteractiveQuoteTool() {
               {[
                 { s: "01", t: "Specify Deck Dimensions", d: "Select presets or enter your square footage." },
                 { s: "02", t: "Choose Material Grade", d: "Tailor shingles, metal, TPO, or flat options." },
-                { s: "03", t: "Instant Price Appraisal", d: "Receive an direct local cost bracket." }
+                { s: "03", t: "Instant Price Appraisal", d: "Receive a direct local cost bracket." }
               ].map((stepItem, i) => (
                 <div key={i} className="flex gap-4">
                   <div className="text-xs font-black text-primary/40 pt-0.5">{stepItem.s}</div>
@@ -157,31 +157,31 @@ export default function InteractiveQuoteTool() {
             </div>
 
             {/* Vetted Trust Indicators */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 bg-white/60 backdrop-blur-sm border border-slate-100 rounded-2xl">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="p-3.5 sm:p-4 bg-white/60 backdrop-blur-sm border border-slate-100 rounded-2xl">
                 <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
                   <Icon name="Lock" className="w-4.5 h-4.5 text-primary" />
                 </div>
-                <h5 className="font-extrabold text-slate-900 text-xs uppercase tracking-wider">Secured</h5>
-                <p className="text-[10px] text-slate-400 mt-1 font-medium leading-normal">Encryption protocol active</p>
+                <h5 className="font-extrabold text-slate-900 text-[10px] sm:text-xs uppercase tracking-wider">Secured</h5>
+                <p className="text-[9px] sm:text-[10px] text-slate-400 mt-1 font-medium leading-normal">Encryption protocol active</p>
               </div>
 
-              <div className="p-4 bg-white/60 backdrop-blur-sm border border-slate-100 rounded-2xl">
+              <div className="p-3.5 sm:p-4 bg-white/60 backdrop-blur-sm border border-slate-100 rounded-2xl">
                 <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
                   <Icon name="Award" className="w-4.5 h-4.5 text-primary" />
                 </div>
-                <h5 className="font-extrabold text-slate-900 text-xs uppercase tracking-wider">Licensed</h5>
-                <p className="text-[10px] text-slate-400 mt-1 font-medium leading-normal">Vetted across 4 states</p>
+                <h5 className="font-extrabold text-slate-900 text-[10px] sm:text-xs uppercase tracking-wider">Licensed</h5>
+                <p className="text-[9px] sm:text-[10px] text-slate-400 mt-1 font-medium leading-normal">Vetted across 4 states</p>
               </div>
             </div>
           </div>
 
           {/* Right Column: Interactive Estimator Form Card (7 Cols) */}
           <div className="lg:col-span-7">
-            <div className="relative bg-slate-50/50 p-1.5 rounded-[2.5rem] border border-slate-100/80 shadow-[0_32px_64px_-24px_rgba(30,93,154,0.18)]">
+            <div className="relative bg-slate-50/50 p-1 sm:p-1.5 rounded-3xl sm:rounded-[2.5rem] border border-slate-100/80 shadow-[0_32px_64px_-24px_rgba(30,93,154,0.18)]">
               
               {/* Main Card */}
-              <div className="relative bg-white border border-slate-100 rounded-[2.2rem] overflow-hidden">
+              <div className="relative bg-white border border-slate-100 rounded-2xl sm:rounded-[2.2rem] overflow-hidden">
                 
                 {/* Elegant Header Progress Stripe */}
                 <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent" />
@@ -190,7 +190,7 @@ export default function InteractiveQuoteTool() {
                 <div className="absolute -left-16 -bottom-16 w-40 h-40 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
 
                 {/* Header Stage Tracker */}
-                <div className="px-8 pt-8 pb-6 bg-slate-50/50 border-b border-slate-100">
+                <div className="px-4 sm:px-8 pt-6 sm:pt-8 pb-4 sm:pb-6 bg-slate-50/50 border-b border-slate-100">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-[0.2em]">
                       {step === 4 ? 'Analysis Complete' : `Configuration Step ${step} of 3`}
@@ -216,64 +216,79 @@ export default function InteractiveQuoteTool() {
                 </div>
 
                 {/* Step Panel Wrapper */}
-                <div className="p-8 md:p-10 relative">
+                <div className="p-4 sm:p-8 md:p-10 relative">
 
                   {/* ── STEP 1 ── */}
                   {step === 1 && (
                     <div className="space-y-6 animate-in fade-in duration-500">
                       <div>
-                        <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight">Property Dimensions</h3>
-                        <p className="text-slate-400 text-sm mt-1">Select a common configuration or input your exact square footage.</p>
+                        <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Property Dimensions</h3>
+                        <p className="text-slate-400 text-xs sm:text-sm mt-1">Select a common configuration or input your exact square footage.</p>
                       </div>
 
-                      {/* Preset Helper Tags */}
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                        {presets.map((preset, i) => (
-                          <button
-                            key={i}
-                            type="button"
-                            onClick={() => setFormData({ ...formData, sqft: preset.size })}
-                            className={`p-3 rounded-xl border text-center transition-all duration-300 ${
-                              formData.sqft === preset.size
-                                ? 'border-primary bg-primary/5 text-primary ring-1 ring-primary/20'
-                                : 'border-slate-100 text-slate-600 hover:border-slate-300 hover:bg-slate-50 bg-slate-50/50'
-                            }`}
-                          >
-                            <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">{preset.label}</div>
-                            <div className="text-xs font-black mt-0.5">{preset.size} SQFT</div>
-                          </button>
-                        ))}
-                      </div>
-
-                      <div className="space-y-2.5">
-                        <label htmlFor="sqft" className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider">
-                          Or Enter Custom Square Footage <span className="text-primary">*</span>
-                        </label>
-                        <div className="relative group/input flex items-center">
-                          <div className="absolute left-4 text-slate-400">
-                            <Icon name="Square" className="w-5 h-5 text-slate-400" />
-                          </div>
-                          <input
-                            id="sqft"
-                            type="number"
-                            placeholder="e.g. 2500"
-                            className="w-full border border-slate-200 rounded-xl pl-12 pr-16 py-3.5 text-slate-900 font-bold focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300 bg-slate-50/50 hover:border-slate-300"
-                            value={formData.sqft}
-                            onChange={(e) => setFormData({ ...formData, sqft: e.target.value })}
-                          />
-                          <span className="absolute right-4 text-xs font-extrabold text-slate-400 uppercase">SQFT</span>
-                          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent scale-x-0 group-focus-within/input:scale-x-100 transition-transform duration-300 rounded-b-xl" />
+                      <div className="text-center">
+                        <span className="text-[10px] font-extrabold text-primary uppercase tracking-[0.2em]">Estimate Size</span>
+                        <div className="flex items-baseline justify-center mt-2 gap-1.5">
+                          <span className="text-4xl sm:text-5xl md:text-6xl font-black text-primary tracking-tighter">
+                            {parseInt(formData.sqft || '2500').toLocaleString()}
+                          </span>
+                          <span className="text-sm font-extrabold text-slate-400 uppercase tracking-widest">SQFT</span>
                         </div>
-                        <p className="text-[11px] text-slate-400 font-medium">Input your overall roof deck size (minimum 100 sq ft).</p>
+                      </div>
+
+                      {/* Sliding Tape Measure Rule */}
+                      <div className="space-y-4">
+                        <div className="relative pt-4">
+                          <input 
+                            type="range" 
+                            min="500" 
+                            max="8000" 
+                            step="100"
+                            value={formData.sqft || '2500'}
+                            onChange={(e) => setFormData({ ...formData, sqft: e.target.value })}
+                            className="w-full h-2.5 bg-slate-100 rounded-lg appearance-none cursor-ew-resize accent-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                            style={{
+                              background: `linear-gradient(to right, #1E5D9A 0%, #1E5D9A ${((parseInt(formData.sqft || '2500') - 500) / 7500) * 100}%, #f1f5f9 ${((parseInt(formData.sqft || '2500') - 500) / 7500) * 100}%, #f1f5f9 100%)`
+                            }}
+                          />
+                          {/* Visual Ruler Ticks */}
+                          <div className="flex justify-between text-[9px] sm:text-[10px] text-slate-300 font-extrabold px-1 mt-2.5 select-none">
+                            <span>500</span>
+                            <span>2k</span>
+                            <span>3.5k</span>
+                            <span>5k</span>
+                            <span>6.5k</span>
+                            <span>8k+</span>
+                          </div>
+                        </div>
+
+                        {/* Presets Cards */}
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
+                          {presets.map((preset, i) => (
+                            <button
+                              key={i}
+                              type="button"
+                              onClick={() => setFormData({ ...formData, sqft: preset.size })}
+                              className={`py-2 px-1 rounded-xl border text-center transition-all duration-300 ${
+                                formData.sqft === preset.size
+                                  ? 'border-primary bg-primary/5 text-primary font-bold'
+                                  : 'border-slate-100 text-slate-500 hover:border-slate-200 bg-slate-50/40 text-xs'
+                              }`}
+                            >
+                              <div className="text-[8px] font-bold uppercase tracking-wider text-slate-400">{preset.label}</div>
+                              <div className="text-xs font-black mt-0.5">{preset.size}</div>
+                            </button>
+                          ))}
+                        </div>
                       </div>
 
                       <div className="pt-6 border-t border-slate-100 flex justify-end">
                         <button
                           onClick={handleNext}
                           disabled={!formData.sqft || parseInt(formData.sqft) < 100}
-                          className="relative overflow-hidden bg-primary text-white font-extrabold text-sm uppercase tracking-wider px-8 py-4 rounded-xl disabled:opacity-40 hover:bg-primary/95 transition-all duration-300 shadow-[0_8px_20px_-6px_rgba(30,93,154,0.4)] hover:-translate-y-0.5 group/btn"
+                          className="relative overflow-hidden w-full sm:w-auto bg-primary text-white font-extrabold text-sm uppercase tracking-wider px-8 py-4 rounded-xl disabled:opacity-40 hover:bg-primary/95 transition-all duration-300 shadow-[0_8px_20px_-6px_rgba(30,93,154,0.4)] hover:-translate-y-0.5 group/btn"
                         >
-                          <span className="relative z-10 flex items-center gap-2">Continue <Icon name="ArrowRight" className="w-4 h-4 text-white" /></span>
+                          <span className="relative z-10 flex items-center justify-center gap-2">Continue <Icon name="ArrowRight" className="w-4 h-4 text-white" /></span>
                           <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
                         </button>
                       </div>
@@ -282,10 +297,10 @@ export default function InteractiveQuoteTool() {
 
                   {/* ── STEP 2 ── */}
                   {step === 2 && (
-                    <div className="space-y-8 animate-in fade-in duration-500">
+                    <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-500">
                       <div>
-                        <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight">Material & Division</h3>
-                        <p className="text-slate-400 text-sm mt-1">Vetting service scale and product grade multipliers.</p>
+                        <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Material & Division</h3>
+                        <p className="text-slate-400 text-xs sm:text-sm mt-1">Vetting service scale and product grade multipliers.</p>
                       </div>
 
                       <div className="space-y-6">
@@ -299,27 +314,27 @@ export default function InteractiveQuoteTool() {
                               <button
                                 key={s.id}
                                 onClick={() => setFormData({ ...formData, service: s.id })}
-                                className={`p-4 rounded-2xl border text-left transition-all duration-300 flex gap-4 group/opt ${
+                                className={`p-3.5 sm:p-4 rounded-2xl border text-left transition-all duration-300 flex gap-3 sm:gap-4 group/opt ${
                                   formData.service === s.id
                                     ? 'border-primary bg-primary/5 shadow-[0_4px_16px_rgba(30,93,154,0.08)]'
                                     : 'border-slate-100 text-slate-700 hover:border-slate-300 hover:bg-slate-50 bg-slate-50/50'
                                 }`}
                               >
-                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+                                <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
                                   formData.service === s.id ? 'bg-primary text-white' : 'bg-slate-100 text-slate-500'
                                 }`}>
-                                  <Icon name={s.icon} className="w-5 h-5" />
+                                  <Icon name={s.icon} className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <div className="flex items-center justify-between">
-                                    <h4 className="font-extrabold text-slate-900 text-sm tracking-tight">{s.label}</h4>
+                                    <h4 className="font-extrabold text-slate-900 text-xs sm:text-sm tracking-tight">{s.label}</h4>
                                     <span className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
-                                      formData.service === s.id ? 'bg-primary border-primary text-white text-[10px]' : 'border-slate-200'
+                                      formData.service === s.id ? 'bg-primary border-primary text-white text-[9px]' : 'border-slate-200'
                                     }`}>
                                       {formData.service === s.id && '✓'}
                                     </span>
                                   </div>
-                                  <p className="text-xs text-slate-400 mt-1 font-medium leading-relaxed">{s.desc}</p>
+                                  <p className="text-[11px] sm:text-xs text-slate-400 mt-1 font-medium leading-relaxed">{s.desc}</p>
                                 </div>
                               </button>
                             ))}
@@ -336,27 +351,27 @@ export default function InteractiveQuoteTool() {
                               <button
                                 key={r.id}
                                 onClick={() => setFormData({ ...formData, roofType: r.id })}
-                                className={`p-4 rounded-2xl border text-left transition-all duration-300 flex gap-4 group/opt ${
+                                className={`p-3.5 sm:p-4 rounded-2xl border text-left transition-all duration-300 flex gap-3 sm:gap-4 group/opt ${
                                   formData.roofType === r.id
                                     ? 'border-primary bg-primary/5 shadow-[0_4px_16px_rgba(30,93,154,0.08)]'
                                     : 'border-slate-100 text-slate-700 hover:border-slate-300 hover:bg-slate-50 bg-slate-50/50'
                                 }`}
                               >
-                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+                                <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
                                   formData.roofType === r.id ? 'bg-primary text-white' : 'bg-slate-100 text-slate-500'
                                 }`}>
-                                  <Icon name={r.icon} className="w-5 h-5" />
+                                  <Icon name={r.icon} className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <div className="flex items-center justify-between">
-                                    <h4 className="font-extrabold text-slate-900 text-sm tracking-tight">{r.label}</h4>
+                                    <h4 className="font-extrabold text-slate-900 text-xs sm:text-sm tracking-tight">{r.label}</h4>
                                     <span className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
-                                      formData.roofType === r.id ? 'bg-primary border-primary text-white text-[10px]' : 'border-slate-200'
+                                      formData.roofType === r.id ? 'bg-primary border-primary text-white text-[9px]' : 'border-slate-200'
                                     }`}>
                                       {formData.roofType === r.id && '✓'}
                                     </span>
                                   </div>
-                                  <p className="text-xs text-slate-400 mt-1 font-medium leading-relaxed">{r.desc}</p>
+                                  <p className="text-[11px] sm:text-xs text-slate-400 mt-1 font-medium leading-relaxed">{r.desc}</p>
                                 </div>
                               </button>
                             ))}
@@ -364,16 +379,16 @@ export default function InteractiveQuoteTool() {
                         </div>
                       </div>
 
-                      <div className="pt-6 border-t border-slate-100 flex justify-between">
-                        <button onClick={handleBack} className="text-slate-500 font-extrabold text-xs uppercase tracking-wider px-6 py-4 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors">
+                      <div className="pt-6 border-t border-slate-100 flex flex-col-reverse sm:flex-row justify-between gap-3">
+                        <button onClick={handleBack} className="w-full sm:w-auto text-slate-500 font-extrabold text-xs uppercase tracking-wider px-6 py-4 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors">
                           ← Back
                         </button>
                         <button
                           onClick={handleNext}
                           disabled={!formData.service || !formData.roofType}
-                          className="relative overflow-hidden bg-primary text-white font-extrabold text-sm uppercase tracking-wider px-8 py-4 rounded-xl disabled:opacity-40 hover:bg-primary/95 transition-all duration-300 shadow-[0_8px_20px_-6px_rgba(30,93,154,0.4)] hover:-translate-y-0.5 group/btn"
+                          className="relative overflow-hidden w-full sm:w-auto bg-primary text-white font-extrabold text-sm uppercase tracking-wider px-8 py-4 rounded-xl disabled:opacity-40 hover:bg-primary/95 transition-all duration-300 shadow-[0_8px_20px_-6px_rgba(30,93,154,0.4)] hover:-translate-y-0.5 group/btn"
                         >
-                          <span className="relative z-10 flex items-center gap-2">Continue <Icon name="ArrowRight" className="w-4 h-4 text-white" /></span>
+                          <span className="relative z-10 flex items-center justify-center gap-2">Continue <Icon name="ArrowRight" className="w-4 h-4 text-white" /></span>
                           <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
                         </button>
                       </div>
@@ -384,8 +399,8 @@ export default function InteractiveQuoteTool() {
                   {step === 3 && (
                     <form onSubmit={handleCalculate} className="space-y-6 animate-in fade-in duration-500">
                       <div>
-                        <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight">Contact Information</h3>
-                        <p className="text-slate-400 text-sm mt-1">Specify destination coordinates for your estimate schedule.</p>
+                        <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Contact Information</h3>
+                        <p className="text-slate-400 text-xs sm:text-sm mt-1">Specify destination coordinates for your estimate schedule.</p>
                       </div>
 
                       <div className="space-y-4">
@@ -406,7 +421,7 @@ export default function InteractiveQuoteTool() {
                                 id={field.id}
                                 type={field.type}
                                 required
-                                className="w-full border border-slate-200 rounded-xl pl-12 pr-4 py-3.5 text-slate-900 font-bold focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300 bg-slate-50/50 hover:border-slate-300"
+                                className="w-full border border-slate-200 rounded-xl pl-12 pr-4 py-3 sm:py-3.5 text-slate-900 font-bold focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300 bg-slate-50/50 hover:border-slate-300"
                                 value={formData[field.key]}
                                 onChange={e => setFormData({ ...formData, [field.key]: e.target.value })}
                               />
@@ -416,15 +431,15 @@ export default function InteractiveQuoteTool() {
                         ))}
                       </div>
 
-                      <div className="pt-6 border-t border-slate-100 flex justify-between">
-                        <button type="button" onClick={handleBack} className="text-slate-500 font-extrabold text-xs uppercase tracking-wider px-6 py-4 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors">
+                      <div className="pt-6 border-t border-slate-100 flex flex-col-reverse sm:flex-row justify-between gap-3">
+                        <button type="button" onClick={handleBack} className="w-full sm:w-auto text-slate-500 font-extrabold text-xs uppercase tracking-wider px-6 py-4 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors">
                           ← Back
                         </button>
                         <button
                           type="submit"
-                          className="relative overflow-hidden bg-primary text-white font-extrabold text-sm uppercase tracking-wider px-8 py-4 rounded-xl hover:bg-primary/95 transition-all duration-300 shadow-[0_8px_20px_-6px_rgba(30,93,154,0.4)] hover:-translate-y-0.5 group/btn"
+                          className="relative overflow-hidden w-full sm:w-auto bg-primary text-white font-extrabold text-sm uppercase tracking-wider px-8 py-4 rounded-xl hover:bg-primary/95 transition-all duration-300 shadow-[0_8px_20px_-6px_rgba(30,93,154,0.4)] hover:-translate-y-0.5 group/btn"
                         >
-                          <span className="relative z-10 flex items-center gap-2">Generate Quote <Icon name="Zap" className="w-4 h-4 text-white" /></span>
+                          <span className="relative z-10 flex items-center justify-center gap-2">Generate Quote <Icon name="Zap" className="w-4 h-4 text-white" /></span>
                           <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
                         </button>
                       </div>
@@ -436,28 +451,28 @@ export default function InteractiveQuoteTool() {
                     <div className="text-center py-4 animate-in fade-in duration-500">
                       
                       {/* Decorative Success Ring */}
-                      <div className="mx-auto w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mb-6 relative">
+                      <div className="mx-auto w-16 h-16 sm:w-20 sm:h-20 bg-primary/5 rounded-full flex items-center justify-center mb-6 relative">
                         <div className="absolute inset-0 rounded-full border border-primary/20 animate-ping opacity-75" />
-                        <div className="w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center shadow-[0_8px_24px_-6px_rgba(30,93,154,0.5)]">
-                          <Icon name="Check" className="w-6 h-6 text-white" />
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 bg-primary text-white rounded-full flex items-center justify-center shadow-[0_8px_24px_-6px_rgba(30,93,154,0.5)]">
+                          <Icon name="Check" className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                         </div>
                       </div>
 
-                      <h3 className="text-3xl font-black text-slate-900 tracking-tight">Estimate Generated</h3>
-                      <p className="text-slate-500 text-sm mt-1 max-w-sm mx-auto leading-relaxed">
+                      <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Estimate Generated</h3>
+                      <p className="text-slate-500 text-xs sm:text-sm mt-1 max-w-sm mx-auto leading-relaxed px-2">
                         Based on local regional labor schedules and material logistics, here is your project cost range:
                       </p>
 
                       {/* High-End Quote Ticket */}
-                      <div className="relative bg-gradient-to-br from-primary/5 via-white to-primary/[0.08] border border-primary/20 rounded-[2rem] p-8 my-8 max-w-md mx-auto overflow-hidden shadow-sm">
+                      <div className="relative bg-gradient-to-br from-primary/5 via-white to-primary/[0.08] border border-primary/20 rounded-2xl sm:rounded-[2rem] p-5 sm:p-8 my-6 sm:my-8 max-w-md mx-auto overflow-hidden shadow-sm">
                         {/* decorative overlay grid */}
                         <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(30,93,154,0.03)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
                         
                         <div className="relative z-10">
                           <p className="text-[10px] font-extrabold text-primary/60 uppercase tracking-[0.25em] mb-2">Projected Budget Bracket</p>
                           
-                          <div className="text-5xl font-black text-primary tracking-tight">
-                            ${(estimate.min / 1000).toFixed(1)}k <span className="text-2xl font-bold text-slate-400 tracking-normal mx-1">/</span> ${(estimate.max / 1000).toFixed(1)}k
+                          <div className="text-3xl xs:text-4xl sm:text-5xl font-black text-primary tracking-tight">
+                            ${(estimate.min / 1000).toFixed(1)}k <span className="text-xl sm:text-2xl font-bold text-slate-400 tracking-normal mx-1">/</span> ${(estimate.max / 1000).toFixed(1)}k
                           </div>
                           
                           {/* Detailed parameter checklist */}
@@ -481,7 +496,7 @@ export default function InteractiveQuoteTool() {
                       <div className="space-y-3 max-w-sm mx-auto">
                         <a
                           href="#contact"
-                          className="relative overflow-hidden block w-full bg-primary text-white font-extrabold text-sm uppercase tracking-wider px-6 py-4 rounded-xl hover:bg-primary/95 transition-all duration-300 shadow-[0_8px_20px_-6px_rgba(30,93,154,0.4)] hover:-translate-y-0.5 group/btn"
+                          className="relative overflow-hidden block w-full bg-primary text-white font-extrabold text-sm uppercase tracking-wider px-6 py-4 rounded-xl hover:bg-primary/95 transition-all duration-300 shadow-[0_8px_20px_-6px_rgba(30,93,154,0.4)] hover:-translate-y-0.5 group/btn text-center"
                         >
                           <span className="relative z-10">Schedule Formal Inspection</span>
                           <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
@@ -492,18 +507,17 @@ export default function InteractiveQuoteTool() {
                           className="w-full text-primary font-bold text-xs uppercase tracking-wider px-6 py-4 rounded-xl border border-primary/30 hover:bg-primary/5 transition-all duration-300"
                         >
                           Configure New Estimate
-                    </button>
-                  </div>
-                </div>
-              )}
+                        </button>
+                      </div>
+                    </div>
+                  )}
 
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      </div>
-    </div>
     </section>
   );
 }
