@@ -151,6 +151,12 @@ export default async function Index() {
     }).lean();
     if (pageDoc) {
       const page = JSON.parse(JSON.stringify(pageDoc));
+      const pageContent = { ...(page.content || {}) };
+      delete pageContent.services;
+      delete pageContent.navbar;
+      delete pageContent.footer;
+      delete pageContent.settings;
+
       const schema = generateSchema({
         title: page.seo?.metaTitle || page.title,
         description: page.seo?.metaDescription || "",
@@ -168,7 +174,7 @@ export default async function Index() {
               ...page,
               content: {
                 ...(content?.data || {}),
-                ...(page.content || {})
+                ...pageContent
               }
             }} 
             params={Promise.resolve({ slug: ['/'] })} 

@@ -142,6 +142,12 @@ export default async function DynamicPage({ params }: PageProps) {
   // Use TemplateWrapper to handle local content context overrides
   const { TemplateWrapper } = await import('@/components/templates/TemplateRegistry');
 
+  const pageContent = { ...(page.content || {}) };
+  delete pageContent.services;
+  delete pageContent.navbar;
+  delete pageContent.footer;
+  delete pageContent.settings;
+
   return (
     <main>
       <Script
@@ -155,7 +161,7 @@ export default async function DynamicPage({ params }: PageProps) {
           ...page,
           content: {
             ...globalData,
-            ...(page.content || {})
+            ...pageContent
           }
         }}
         params={resolvedParams}
