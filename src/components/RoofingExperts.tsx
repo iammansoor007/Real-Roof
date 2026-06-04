@@ -420,7 +420,7 @@ export default function AboutSection() {
                                             </motion.div>
                                         </Link>
                                     ) : (
-                                        <Link key={`btn-s-${idx}`} href={button.href}>
+                                        <Link key={`btn-s-${idx}`} href={button.href || button.link || '#'}>
                                             <motion.div
                                                 whileHover={{ scale: 1.03, y: -2 }}
                                                 whileTap={{ scale: 0.98 }}

@@ -70,6 +70,7 @@ const Hero = () => {
               src={images[0]}
               alt={hero.bgImageAlt || "RealRoof Roofing"}
               className="w-full h-full object-cover scale-105"
+              fetchPriority="high"
             />
           ) : (
             <Image
@@ -170,7 +171,7 @@ const Hero = () => {
                 <div className="flex flex-row flex-wrap sm:flex-nowrap items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full">
                   {buttons.map((button: any, idx: number) => {
                     return button.primary ? (
-                      <Link key={idx} href={button.href}>
+                      <Link key={idx} href={button.href || button.link || '#'}>
                         <motion.div
                           className="group relative overflow-hidden min-w-[150px] sm:min-w-[170px] flex-1 sm:flex-initial px-5 sm:px-7 py-3.5 rounded-2xl inline-flex items-center justify-center gap-2 text-sm sm:text-base font-semibold tracking-wide bg-primary text-primary-foreground border border-primary/30 shadow-[0_10px_30px_rgba(0,0,0,0.15)] transition-all duration-300 hover:bg-white hover:text-primary hover:border-white/70 hover:shadow-[0_16px_40px_rgba(255,255,255,0.18)] active:scale-[0.98] backdrop-blur-xl cursor-pointer"
                           whileHover={{ scale: 1.03, y: -2 }}
@@ -182,7 +183,7 @@ const Hero = () => {
                         </motion.div>
                       </Link>
                     ) : (
-                      <Link key={idx} href={button.href}>
+                      <Link key={idx} href={button.href || button.link || '#'}>
                         <motion.div
                           className="group relative overflow-hidden min-w-[150px] sm:min-w-[170px] flex-1 sm:flex-initial px-5 sm:px-7 py-3.5 rounded-2xl inline-flex items-center justify-center gap-2 text-sm sm:text-base font-semibold tracking-wide backdrop-blur-xl bg-white/10 text-white border border-white/20 shadow-[0_10px_30px_rgba(0,0,0,0.12)] transition-all duration-300 hover:bg-white hover:text-slate-900 hover:border-white hover:shadow-[0_16px_40px_rgba(255,255,255,0.16)] active:scale-[0.98] cursor-pointer"
                           whileHover={{ scale: 1.03, y: -2 }}

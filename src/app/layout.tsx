@@ -5,6 +5,7 @@ import { Providers } from "@/components/Providers";
 import SiteLayout from "@/components/SiteLayout";
 import connectToDatabase from "@/lib/mongodb";
 import SiteContent from "@/models/Content";
+import Post from "@/models/Post";
 import { BASE_URL } from "@/lib/constants";
 
 const spaceGrotesk = Space_Grotesk({
@@ -129,7 +130,7 @@ export default async function RootLayout({
   try {
     const [globalContent, blogPosts] = await Promise.all([
       SiteContent.findOne({ key: 'complete_data' }).lean(),
-      import('@/models/Post').then(m => m.default.find({ status: 'published', isTrashed: { $ne: true } }).sort({ date: -1 }).limit(10).lean())
+      Post.find({ status: 'published', isTrashed: { $ne: true } }).sort({ date: -1 }).limit(10).lean()
     ]);
 
     if (globalContent?.data) initialGlobalData = globalContent.data;

@@ -28,15 +28,17 @@ const deepMerge = (target: any, source: any) => {
 };
 
 export const ContentProvider = ({ children, initialData, initialBlogs }: { children: React.ReactNode, initialData?: any, initialBlogs?: any[] }) => {
+  const outerContext = useContext(ContentContext);
+  
   // Initialize with server-provided data to eliminate "loading" states on mount
   const [content, setContent] = useState<any>(initialData || {});
-  const [blogs, setBlogs] = useState<any[]>(initialBlogs || []);
+  const [blogs, setBlogs] = useState<any[]>(initialBlogs || outerContext?.allBlogs || []);
   const [isLoading, setIsLoading] = useState(!initialData);
 
   useEffect(() => {
     // Only fetch if initialData is missing (fallback)
     // In production, RootLayout should always provide initialData
-    if (initialData && initialBlogs && initialBlogs.length > 0) {
+    if (initialData) {
       setIsLoading(false);
       return;
     }
