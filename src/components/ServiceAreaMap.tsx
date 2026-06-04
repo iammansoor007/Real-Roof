@@ -88,7 +88,7 @@ export default function ServiceAreaMap() {
           .bindPopup(`
             <div style="padding: 4px; font-family: sans-serif;">
               <strong style="color: #1E5D9A; font-size: 14px;">${loc.name}</strong><br/>
-              <span style="color: #64748b; font-size: 12px; font-weight: 500;">${loc.status}</span>
+              <span style="color: #64748b; font-size: 11px; font-weight: 500;">${loc.status}</span>
             </div>
           `);
       });
@@ -128,40 +128,55 @@ export default function ServiceAreaMap() {
   return (
     <section 
       onMouseMove={handleMouseMove}
-      className="py-24 lg:py-32 bg-white relative border-b border-slate-100 group"
+      className="py-24 lg:py-32 bg-white relative border-b border-slate-100 group overflow-hidden"
       style={{
         '--mouse-x': `${coords.x}px`,
         '--mouse-y': `${coords.y}px`
       } as React.CSSProperties}
     >
-      {/* ── Background Decors matching Estimator ── */}
+      {/* ── Background Decors ── */}
       {/* Dot Grid */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(30,93,154,0.07)_1.5px,transparent_1.5px)] [background-size:28px_28px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(30,93,154,0.06)_1.5px,transparent_1.5px)] [background-size:28px_28px] pointer-events-none" />
       
       {/* Interactive mouse follow radial spotlight */}
       <div 
         className="absolute inset-0 pointer-events-none transition-opacity duration-500 opacity-0 group-hover:opacity-100"
         style={{
-          background: `radial-gradient(600px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(30, 93, 154, 0.08), transparent 80%)`
+          background: `radial-gradient(600px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(30, 93, 154, 0.06), transparent 80%)`
         }}
       />
       
       {/* Glow Orbs */}
-      <div className="absolute -top-48 -right-48 w-96 h-96 bg-primary/6 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute -bottom-48 -left-48 w-96 h-96 bg-primary/5 rounded-full blur-[90px] pointer-events-none" />
+      <div className="absolute -top-48 -right-48 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute -bottom-48 -left-48 w-96 h-96 bg-primary/4 rounded-full blur-[90px] pointer-events-none" />
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
         <div className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-16">
           
-          {/* Left Content Area */}
-          <div className="lg:w-[45%] flex flex-col justify-between py-2">
+          {/* Left Column: Map (Swapped to Left) */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="lg:w-[55%] w-full h-[500px] lg:h-auto min-h-[500px] relative rounded-[2rem] shadow-[0_32px_64px_-20px_rgba(30,93,154,0.15)] border border-slate-100 overflow-hidden z-0 bg-slate-50 order-2 lg:order-1"
+          >
+            <div className="absolute inset-0 bg-slate-50 animate-pulse pointer-events-none" />
+            <div ref={mapContainerRef} className="w-full h-full absolute inset-0 z-0 bg-white" />
+            
+            {/* Elegant Map Vignette */}
+            <div className="absolute inset-0 shadow-[inset_0_0_50px_rgba(0,0,0,0.06)] pointer-events-none border border-slate-100 rounded-[2rem]" />
+          </motion.div>
+
+          {/* Right Column: Content & Location Selector (Swapped to Right) */}
+          <div className="lg:w-[45%] flex flex-col justify-between py-2 order-1 lg:order-2">
             
             <div className="space-y-6">
               <span className="inline-flex items-center gap-2 bg-primary/8 border border-primary/20 text-primary text-xs font-extrabold uppercase tracking-[0.2em] px-5 py-2 rounded-full">
                 <span className="w-1.5 h-1.5 bg-primary rounded-full animate-ping" />
                 Live Network & Logistics
               </span>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight tracking-tight">
+              <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight tracking-tight font-heading">
                 Southeast Coverage <br />
                 <span className="text-primary">Without Limits</span>
               </h2>
@@ -183,9 +198,9 @@ export default function ServiceAreaMap() {
                   }`}
                 >
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
-                    activeLocIndex === idx ? 'bg-primary text-white' : 'bg-slate-100 text-slate-500 group-hover/item:bg-primary/10 group-hover/item:text-primary'
+                    activeLocIndex === idx ? 'bg-primary text-white' : 'bg-slate-100 text-slate-500'
                   }`}>
-                    <Icon name={idx === 0 ? "Building2" : "MapPin"} className="w-5 h-5" />
+                    <Icon name="MapPin" className="w-5 h-5" />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
@@ -202,7 +217,7 @@ export default function ServiceAreaMap() {
               ))}
             </div>
 
-            {/* Performance Stats Counters to fill blank space */}
+            {/* Performance Stats Counters to fill space */}
             <div className="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-slate-100">
               {[
                 { val: "2hr", desc: "Dispatch Time" },
@@ -217,21 +232,6 @@ export default function ServiceAreaMap() {
             </div>
 
           </div>
-
-          {/* Right Map Visualization */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.98 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:w-[55%] w-full h-[500px] lg:h-auto min-h-[500px] relative rounded-[2rem] shadow-[0_32px_64px_-20px_rgba(30,93,154,0.15)] border border-slate-100 overflow-hidden z-0 bg-slate-50 group/map"
-          >
-            <div className="absolute inset-0 bg-slate-50 animate-pulse pointer-events-none" />
-            <div ref={mapContainerRef} className="w-full h-full absolute inset-0 z-0 bg-white" />
-            
-            {/* Elegant Map Vignette & Border overlay */}
-            <div className="absolute inset-0 shadow-[inset_0_0_50px_rgba(0,0,0,0.06)] pointer-events-none border border-slate-100 rounded-[2rem]" />
-          </motion.div>
 
         </div>
       </div>

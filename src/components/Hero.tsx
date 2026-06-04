@@ -13,18 +13,18 @@ const Hero = () => {
   const { hero } = useContent();
   const sectionRef = useRef<HTMLElement>(null);
 
-  const { 
-    badge = "Premium Exterior Solutions", 
-    headlines = [], 
-    description = "", 
-    buttons = [], 
-    stats = [], 
-    images = [] 
+  const {
+    badge = "Premium Exterior Solutions",
+    headlines = [],
+    description = "",
+    buttons = [],
+    stats = [],
+    images = []
   } = hero || {};
 
   return (
-    <section ref={sectionRef} className="relative min-h-[85vh] lg:min-h-[90vh] flex flex-col pt-[104px] lg:pt-[130px]">
-      
+    <section ref={sectionRef} className="relative min-h-[85vh] lg:min-h-[90vh] flex flex-col md:pt-8 lg:pt-12 ">
+
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-slate-900/80 sm:bg-slate-900/70 z-10" />
@@ -52,7 +52,7 @@ const Hero = () => {
       {/* Main Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20 flex-1 flex flex-col justify-center pb-16 lg:pb-24">
         <div className="max-w-3xl">
-          
+
           <motion.div
             className="inline-flex items-center gap-2 bg-primary px-4 py-1 mb-6"
             initial={{ opacity: 0, y: 20 }}
@@ -82,10 +82,10 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <RichTextRenderer 
-              content={description} 
+            <RichTextRenderer
+              content={description}
               stripParagraphs={true}
-              className="text-lg sm:text-xl text-slate-200 leading-relaxed" 
+              className="text-lg sm:text-xl text-slate-200 leading-relaxed"
             />
           </motion.div>
 
@@ -120,7 +120,7 @@ const Hero = () => {
       <div className="relative z-20 bg-slate-900 border-t border-slate-800">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-between py-6 gap-6">
-            
+
             {/* Stats */}
             <div className="flex items-center gap-8 md:gap-12 flex-wrap justify-center lg:justify-start">
               {stats.map((stat: any, idx: number) => (
@@ -137,7 +137,7 @@ const Hero = () => {
                 <Image src={bbblogo} alt="BBB A+" className="h-10 w-auto object-contain brightness-0 invert" />
                 <Image src={goodcontracterlist} alt="Good Contractors" className="h-10 w-auto object-contain brightness-0 invert" />
               </div>
-              
+
               <a
                 href="https://www.greensky.com/prequal/gs/prequalify-for-loan?merchant=81115616&channel=External-Button-Prequal"
                 target="_blank"
