@@ -17,15 +17,15 @@ export default function InteractiveQuoteTool() {
   const roofTypes = [
     { id: 'shingle', label: 'Architectural Shingle', basePrice: 4.5, icon: 'Home', desc: 'Highly popular, cost-effective, classic shingle aesthetics.' },
     { id: 'metal', label: 'Standing Seam Metal', basePrice: 12.0, icon: 'ShieldCheck', desc: 'Premium architectural metal panels with ultimate storm defense.' },
-    { id: 'tpo', label: 'Commercial TPO', basePrice: 8.5, icon: 'Building2', desc: 'Energy-efficient, reflective single-ply membrane flat roof.' },
-    { id: 'flat', label: 'Modified Bitumen / Flat', basePrice: 7.0, icon: 'Building', desc: 'Heavy-duty multi-ply built-up system for commercial structures.' }
+    { id: 'tpo', label: 'Commercial TPO', basePrice: 8.5, icon: 'Sun', desc: 'Energy-efficient, reflective single-ply membrane flat roof.' },
+    { id: 'flat', label: 'Modified Bitumen / Flat', basePrice: 7.0, icon: 'Layers', desc: 'Heavy-duty multi-ply built-up system for commercial structures.' }
   ];
 
   const services = [
     { id: 'commercial', label: 'Commercial Roofing', multiplier: 1.2, icon: 'Building2', desc: 'Full-scale logistics, crane operations, and commercial safety.' },
-    { id: 'multi-family', label: 'Multi-Family Roofing', multiplier: 1.1, icon: 'UserGroupIcon', desc: 'Tenant-conscious scheduling for apartments, HOAs, and condos.' },
-    { id: 'storm', label: 'Storm Restoration', multiplier: 1.3, icon: 'CloudRain', desc: 'Insurance claims assistance, storm damage appraisal & repair.' },
-    { id: 'installation', label: 'Installation Partnerships', multiplier: 0.9, icon: 'Wrench', desc: 'Subcontracted structural assistance and builder collaborations.' }
+    { id: 'multi-family', label: 'Multi-Family Roofing', multiplier: 1.1, icon: 'Users', desc: 'Tenant-conscious scheduling for apartments, HOAs, and condos.' },
+    { id: 'storm', label: 'Storm Restoration', multiplier: 1.3, icon: 'CloudLightning', desc: 'Insurance claims assistance, storm damage appraisal & repair.' },
+    { id: 'installation', label: 'Installation Partnerships', multiplier: 0.9, icon: 'Handshake', desc: 'Subcontracted structural assistance and builder collaborations.' }
   ];
 
   const handleCalculate = async (e: React.FormEvent) => {
@@ -124,9 +124,12 @@ export default function InteractiveQuoteTool() {
                 <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
                 Vetted Estimates
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-[1.1] tracking-tight font-heading">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-[1.1] tracking-tight font-heading">
                 Instant Roof <br />
-                <span className="text-primary relative inline-block">Estimator<span className="absolute bottom-1.5 left-0 right-0 h-1.5 bg-primary/10 -rotate-1 rounded-full" /></span>
+                <span className="bg-gradient-to-r from-primary via-blue-600 to-primary bg-clip-text text-transparent relative inline-block">
+                  Estimator
+                  <span className="absolute bottom-1.5 left-0 right-0 h-1 bg-primary/10 -rotate-1 rounded-full" />
+                </span>
               </h2>
               <p className="text-slate-500 leading-relaxed font-medium text-sm sm:text-base max-w-md">
                 Get an immediate data-driven cost bracket for your project. Our system cross-references material specifications with local Southeast labor logs.
@@ -134,43 +137,63 @@ export default function InteractiveQuoteTool() {
             </div>
 
             {/* Premium Workflow Steps Checklist */}
-            <div className="space-y-4 bg-slate-50/50 p-5 sm:p-6 rounded-3xl border border-slate-100/80 relative overflow-hidden">
-              <div className="absolute -right-8 -top-8 w-24 h-24 bg-primary/5 rounded-full blur-2xl" />
-              <h4 className="text-xs font-black text-slate-800 uppercase tracking-widest mb-2 flex items-center gap-2">
-                <Icon name="ClipboardCheck" className="w-4 h-4 text-primary" />
-                Vetting Pipeline
-              </h4>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h4 className="text-xs font-black text-slate-800 uppercase tracking-widest flex items-center gap-2">
+                  <Icon name="ClipboardCheck" className="w-4 h-4 text-primary" />
+                  Configuration Pipeline
+                </h4>
+                <span className="text-[9px] font-extrabold text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+                  Live Sync Active
+                </span>
+              </div>
               
-              {[
-                { s: "01", t: "Specify Deck Dimensions", d: "Select presets or enter your square footage." },
-                { s: "02", t: "Choose Material Grade", d: "Tailor shingles, metal, TPO, or flat options." },
-                { s: "03", t: "Instant Price Appraisal", d: "Receive a direct local cost bracket." }
-              ].map((stepItem, i) => (
-                <div key={i} className="flex gap-4">
-                  <div className="text-xs font-black text-primary/40 pt-0.5">{stepItem.s}</div>
-                  <div>
-                    <h5 className="font-extrabold text-slate-900 text-sm tracking-tight">{stepItem.t}</h5>
-                    <p className="text-xs text-slate-400 mt-0.5 font-medium leading-relaxed">{stepItem.d}</p>
+              <div className="space-y-3">
+                {[
+                  { s: "01", t: "Dimensions", d: "Adjust the visual slider to select square footage.", icon: "Layout" },
+                  { s: "02", t: "Materials & Class", d: "Specify the material grade and service category.", icon: "Sparkles" },
+                  { s: "03", t: "Immediate Bracket", d: "Obtain a direct local budget cost projection.", icon: "TrendingUp" }
+                ].map((stepItem, i) => (
+                  <div 
+                    key={i} 
+                    className="group/step relative p-5 rounded-2xl bg-white border border-slate-100/80 hover:border-primary/20 hover:shadow-[0_12px_32px_rgba(30,93,154,0.04)] hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4 overflow-hidden"
+                  >
+                    {/* Left Accent line that expands on hover */}
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-slate-100 group-hover/step:w-1.5 group-hover/step:bg-primary transition-all duration-300" />
+                    
+                    {/* Icon Badge container */}
+                    <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100/50 group-hover/step:bg-primary/5 group-hover/step:border-primary/25 transition-all duration-300">
+                      <Icon name={stepItem.icon} className="w-5 h-5 text-slate-400 group-hover/step:text-primary transition-colors duration-300" />
+                    </div>
+
+                    <div className="flex-1 min-w-0 pr-4">
+                      <div className="flex items-center justify-between">
+                        <h5 className="font-extrabold text-slate-900 text-sm tracking-tight group-hover/step:text-primary transition-colors duration-300">{stepItem.t}</h5>
+                        <span className="text-[9px] font-mono font-bold text-slate-300 group-hover/step:text-primary/30 transition-colors">Step {stepItem.s}</span>
+                      </div>
+                      <p className="text-xs text-slate-400 mt-1 font-medium leading-relaxed">{stepItem.d}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
             {/* Vetted Trust Indicators */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              <div className="p-3.5 sm:p-4 bg-white/60 backdrop-blur-sm border border-slate-100 rounded-2xl">
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
-                  <Icon name="Lock" className="w-4.5 h-4.5 text-primary" />
+              <div className="p-3.5 sm:p-4 bg-white/60 backdrop-blur-sm border border-slate-100 rounded-2xl group/trust hover:shadow-md hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300">
+                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mb-3 group-hover/trust:scale-110 transition-transform duration-300">
+                  <Icon name="Lock" className="w-4 h-4 text-primary" />
                 </div>
-                <h5 className="font-extrabold text-slate-900 text-[10px] sm:text-xs uppercase tracking-wider">Secured</h5>
+                <h5 className="font-extrabold text-slate-900 text-[10px] sm:text-xs uppercase tracking-wider group-hover/trust:text-primary transition-colors">Secured</h5>
                 <p className="text-[9px] sm:text-[10px] text-slate-400 mt-1 font-medium leading-normal">Encryption protocol active</p>
               </div>
 
-              <div className="p-3.5 sm:p-4 bg-white/60 backdrop-blur-sm border border-slate-100 rounded-2xl">
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
-                  <Icon name="Award" className="w-4.5 h-4.5 text-primary" />
+              <div className="p-3.5 sm:p-4 bg-white/60 backdrop-blur-sm border border-slate-100 rounded-2xl group/trust hover:shadow-md hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300">
+                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mb-3 group-hover/trust:scale-110 transition-transform duration-300">
+                  <Icon name="Award" className="w-4 h-4 text-primary" />
                 </div>
-                <h5 className="font-extrabold text-slate-900 text-[10px] sm:text-xs uppercase tracking-wider">Licensed</h5>
+                <h5 className="font-extrabold text-slate-900 text-[10px] sm:text-xs uppercase tracking-wider group-hover/trust:text-primary transition-colors">Licensed</h5>
                 <p className="text-[9px] sm:text-[10px] text-slate-400 mt-1 font-medium leading-normal">Vetted across 4 states</p>
               </div>
             </div>
@@ -215,74 +238,76 @@ export default function InteractiveQuoteTool() {
                   </div>
                 </div>
 
-                {/* Step Panel Wrapper */}
-                <div className="p-4 sm:p-8 md:p-10 relative">
+                {/* Step Panel Wrapper with locked fixed height to prevent layout jumps between wizard steps */}
+                <div className="p-4 sm:p-6 md:p-8 relative h-[920px] sm:h-[640px] lg:h-[600px] flex flex-col justify-between overflow-y-auto sm:overflow-y-visible">
 
                   {/* ── STEP 1 ── */}
                   {step === 1 && (
-                    <div className="space-y-6 animate-in fade-in duration-500">
-                      <div>
-                        <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Property Dimensions</h3>
-                        <p className="text-slate-400 text-xs sm:text-sm mt-1">Select a common configuration or input your exact square footage.</p>
-                      </div>
-
-                      <div className="text-center">
-                        <span className="text-[10px] font-extrabold text-primary uppercase tracking-[0.2em]">Estimate Size</span>
-                        <div className="flex items-baseline justify-center mt-2 gap-1.5">
-                          <span className="text-4xl sm:text-5xl md:text-6xl font-black text-primary tracking-tighter">
-                            {parseInt(formData.sqft || '2500').toLocaleString()}
-                          </span>
-                          <span className="text-sm font-extrabold text-slate-400 uppercase tracking-widest">SQFT</span>
+                    <div className="animate-in fade-in duration-500 flex-1 flex flex-col justify-center space-y-8 py-2">
+                      <div className="space-y-6">
+                        <div>
+                          <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Property Dimensions</h3>
+                          <p className="text-slate-400 text-xs sm:text-sm mt-1">Select a common configuration or input your exact square footage.</p>
                         </div>
-                      </div>
 
-                      {/* Sliding Tape Measure Rule */}
-                      <div className="space-y-4">
-                        <div className="relative pt-4">
-                          <input 
-                            type="range" 
-                            min="500" 
-                            max="8000" 
-                            step="100"
-                            value={formData.sqft || '2500'}
-                            onChange={(e) => setFormData({ ...formData, sqft: e.target.value })}
-                            className="w-full h-2.5 bg-slate-100 rounded-lg appearance-none cursor-ew-resize accent-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-                            style={{
-                              background: `linear-gradient(to right, #1E5D9A 0%, #1E5D9A ${((parseInt(formData.sqft || '2500') - 500) / 7500) * 100}%, #f1f5f9 ${((parseInt(formData.sqft || '2500') - 500) / 7500) * 100}%, #f1f5f9 100%)`
-                            }}
-                          />
-                          {/* Visual Ruler Ticks */}
-                          <div className="flex justify-between text-[9px] sm:text-[10px] text-slate-300 font-extrabold px-1 mt-2.5 select-none">
-                            <span>500</span>
-                            <span>2k</span>
-                            <span>3.5k</span>
-                            <span>5k</span>
-                            <span>6.5k</span>
-                            <span>8k+</span>
+                        <div className="text-center">
+                          <span className="text-[10px] font-extrabold text-primary uppercase tracking-[0.2em]">Estimate Size</span>
+                          <div className="flex items-baseline justify-center mt-2 gap-1.5">
+                            <span className="text-4xl sm:text-5xl md:text-6xl font-black text-primary tracking-tighter">
+                              {parseInt(formData.sqft || '2500').toLocaleString()}
+                            </span>
+                            <span className="text-sm font-extrabold text-slate-400 uppercase tracking-widest">SQFT</span>
                           </div>
                         </div>
 
-                        {/* Presets Cards */}
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
-                          {presets.map((preset, i) => (
-                            <button
-                              key={i}
-                              type="button"
-                              onClick={() => setFormData({ ...formData, sqft: preset.size })}
-                              className={`py-2 px-1 rounded-xl border text-center transition-all duration-300 ${
-                                formData.sqft === preset.size
-                                  ? 'border-primary bg-primary/5 text-primary font-bold'
-                                  : 'border-slate-100 text-slate-500 hover:border-slate-200 bg-slate-50/40 text-xs'
-                              }`}
-                            >
-                              <div className="text-[8px] font-bold uppercase tracking-wider text-slate-400">{preset.label}</div>
-                              <div className="text-xs font-black mt-0.5">{preset.size}</div>
-                            </button>
-                          ))}
+                        {/* Sliding Tape Measure Rule */}
+                        <div className="space-y-4">
+                          <div className="relative pt-4">
+                            <input 
+                              type="range" 
+                              min="500" 
+                              max="8000" 
+                              step="100"
+                              value={formData.sqft || '2500'}
+                              onChange={(e) => setFormData({ ...formData, sqft: e.target.value })}
+                              className="w-full h-2.5 bg-slate-100 rounded-lg appearance-none cursor-ew-resize accent-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                              style={{
+                                background: `linear-gradient(to right, #1E5D9A 0%, #1E5D9A ${((parseInt(formData.sqft || '2500') - 500) / 7500) * 100}%, #f1f5f9 ${((parseInt(formData.sqft || '2500') - 500) / 7500) * 100}%, #f1f5f9 100%)`
+                              }}
+                            />
+                            {/* Visual Ruler Ticks */}
+                            <div className="flex justify-between text-[9px] sm:text-[10px] text-slate-300 font-extrabold px-1 mt-2.5 select-none">
+                              <span>500</span>
+                              <span>2k</span>
+                              <span>3.5k</span>
+                              <span>5k</span>
+                              <span>6.5k</span>
+                              <span>8k+</span>
+                            </div>
+                          </div>
+
+                          {/* Presets Cards */}
+                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
+                            {presets.map((preset, i) => (
+                              <button
+                                key={i}
+                                type="button"
+                                onClick={() => setFormData({ ...formData, sqft: preset.size })}
+                                className={`py-2 px-1 rounded-xl border text-center transition-all duration-300 ${
+                                  formData.sqft === preset.size
+                                    ? 'border-primary bg-primary/5 text-primary font-bold'
+                                    : 'border-slate-100 text-slate-500 hover:border-slate-200 bg-slate-50/40 text-xs'
+                                }`}
+                              >
+                                <div className="text-[8px] font-bold uppercase tracking-wider text-slate-400">{preset.label}</div>
+                                <div className="text-xs font-black mt-0.5">{preset.size}</div>
+                              </button>
+                            ))}
+                          </div>
                         </div>
                       </div>
 
-                      <div className="pt-6 border-t border-slate-100 flex justify-end">
+                      <div className="pt-4 border-t border-slate-100 flex justify-end">
                         <button
                           onClick={handleNext}
                           disabled={!formData.sqft || parseInt(formData.sqft) < 100}
@@ -297,89 +322,119 @@ export default function InteractiveQuoteTool() {
 
                   {/* ── STEP 2 ── */}
                   {step === 2 && (
-                    <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-500">
-                      <div>
-                        <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Material & Division</h3>
-                        <p className="text-slate-400 text-xs sm:text-sm mt-1">Vetting service scale and product grade multipliers.</p>
-                      </div>
-
-                      <div className="space-y-6">
-                        {/* Services Required */}
+                    <div className="animate-in fade-in duration-500 flex-1 flex flex-col justify-center space-y-8 py-2">
+                      <div className="space-y-4">
                         <div>
-                          <label className="block text-[11px] font-extrabold text-slate-400 uppercase tracking-wider mb-3">
-                            Service Class Selection <span className="text-primary">*</span>
-                          </label>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            {services.map(s => (
-                              <button
-                                key={s.id}
-                                onClick={() => setFormData({ ...formData, service: s.id })}
-                                className={`p-3.5 sm:p-4 rounded-2xl border text-left transition-all duration-300 flex gap-3 sm:gap-4 group/opt ${
-                                  formData.service === s.id
-                                    ? 'border-primary bg-primary/5 shadow-[0_4px_16px_rgba(30,93,154,0.08)]'
-                                    : 'border-slate-100 text-slate-700 hover:border-slate-300 hover:bg-slate-50 bg-slate-50/50'
-                                }`}
-                              >
-                                <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
-                                  formData.service === s.id ? 'bg-primary text-white' : 'bg-slate-100 text-slate-500'
-                                }`}>
-                                  <Icon name={s.icon} className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <div className="flex items-center justify-between">
-                                    <h4 className="font-extrabold text-slate-900 text-xs sm:text-sm tracking-tight">{s.label}</h4>
-                                    <span className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
-                                      formData.service === s.id ? 'bg-primary border-primary text-white text-[9px]' : 'border-slate-200'
-                                    }`}>
-                                      {formData.service === s.id && '✓'}
-                                    </span>
-                                  </div>
-                                  <p className="text-[11px] sm:text-xs text-slate-400 mt-1 font-medium leading-relaxed">{s.desc}</p>
-                                </div>
-                              </button>
-                            ))}
-                          </div>
+                          <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Material & Division</h3>
+                          <p className="text-slate-400 text-xs sm:text-sm mt-0.5">Vetting service scale and product grade multipliers.</p>
                         </div>
 
-                        {/* Material Grades */}
-                        <div>
-                          <label className="block text-[11px] font-extrabold text-slate-400 uppercase tracking-wider mb-3">
-                            Material System Specification <span className="text-primary">*</span>
-                          </label>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            {roofTypes.map(r => (
-                              <button
-                                key={r.id}
-                                onClick={() => setFormData({ ...formData, roofType: r.id })}
-                                className={`p-3.5 sm:p-4 rounded-2xl border text-left transition-all duration-300 flex gap-3 sm:gap-4 group/opt ${
-                                  formData.roofType === r.id
-                                    ? 'border-primary bg-primary/5 shadow-[0_4px_16px_rgba(30,93,154,0.08)]'
-                                    : 'border-slate-100 text-slate-700 hover:border-slate-300 hover:bg-slate-50 bg-slate-50/50'
-                                }`}
-                              >
-                                <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
-                                  formData.roofType === r.id ? 'bg-primary text-white' : 'bg-slate-100 text-slate-500'
-                                }`}>
-                                  <Icon name={r.icon} className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <div className="flex items-center justify-between">
-                                    <h4 className="font-extrabold text-slate-900 text-xs sm:text-sm tracking-tight">{r.label}</h4>
-                                    <span className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
-                                      formData.roofType === r.id ? 'bg-primary border-primary text-white text-[9px]' : 'border-slate-200'
-                                    }`}>
-                                      {formData.roofType === r.id && '✓'}
-                                    </span>
+                        <div className="space-y-3.5">
+                          {/* Services Required */}
+                          <div>
+                            <label className="flex items-center gap-1.5 text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
+                              <span className="w-1 h-1 bg-primary rounded-full" />
+                              Service Class Selection <span className="text-primary">*</span>
+                            </label>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                              {services.map(s => (
+                                <button
+                                  key={s.id}
+                                  onClick={() => setFormData({ ...formData, service: s.id })}
+                                  className={`p-2.5 rounded-xl border text-left transition-all duration-300 flex items-center gap-2.5 group/opt relative overflow-hidden ${
+                                    formData.service === s.id
+                                      ? 'border-primary bg-gradient-to-br from-primary/5 to-transparent shadow-[0_8px_20px_-6px_rgba(30,93,154,0.12)] -translate-y-0.5'
+                                      : 'border-slate-100 text-slate-700 hover:border-slate-200 hover:bg-slate-50/80 bg-slate-50/50 hover:-translate-y-0.5 hover:shadow-sm'
+                                  }`}
+                                >
+                                  {/* Left accent bar on hover/active */}
+                                  <div className={`absolute left-0 top-0 bottom-0 w-1 transition-all duration-300 ${
+                                    formData.service === s.id ? 'bg-primary' : 'bg-transparent group-hover/opt:bg-slate-200'
+                                  }`} />
+
+                                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 ${
+                                    formData.service === s.id 
+                                      ? 'bg-gradient-to-br from-primary to-blue-600 text-white shadow-md shadow-primary/20 scale-105' 
+                                      : 'bg-white text-slate-400 border border-slate-100 shadow-sm group-hover/opt:text-primary group-hover/opt:border-primary/25'
+                                  }`}>
+                                    <Icon name={s.icon} className="w-4 h-4" />
                                   </div>
-                                  <p className="text-[11px] sm:text-xs text-slate-400 mt-1 font-medium leading-relaxed">{r.desc}</p>
-                                </div>
-                              </button>
-                            ))}
+                                  <div className="flex-1 min-w-0 flex items-center justify-between pl-1">
+                                    <h4 className={`font-extrabold text-xs sm:text-sm tracking-tight truncate pr-2 transition-colors duration-300 ${
+                                      formData.service === s.id ? 'text-slate-900' : 'text-slate-700 group-hover/opt:text-slate-900'
+                                    }`}>{s.label}</h4>
+                                    
+                                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 transition-all duration-300 ${
+                                      formData.service === s.id 
+                                        ? 'bg-primary border-primary shadow-sm scale-110' 
+                                        : 'border-slate-200 bg-white group-hover/opt:border-slate-300'
+                                    }`}>
+                                      {formData.service === s.id ? (
+                                        <Icon name="Check" className="w-2.5 h-2.5 text-white stroke-[3px]" />
+                                      ) : (
+                                        <div className="w-1 h-1 rounded-full bg-transparent group-hover/opt:bg-slate-100" />
+                                      )}
+                                    </div>
+                                  </div>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Material Grades */}
+                          <div>
+                            <label className="flex items-center gap-1.5 text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
+                              <span className="w-1 h-1 bg-primary rounded-full" />
+                              Material System Specification <span className="text-primary">*</span>
+                            </label>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                              {roofTypes.map(r => (
+                                <button
+                                  key={r.id}
+                                  onClick={() => setFormData({ ...formData, roofType: r.id })}
+                                  className={`p-2.5 rounded-xl border text-left transition-all duration-300 flex items-center gap-2.5 group/opt relative overflow-hidden ${
+                                    formData.roofType === r.id
+                                      ? 'border-primary bg-gradient-to-br from-primary/5 to-transparent shadow-[0_8px_20px_-6px_rgba(30,93,154,0.12)] -translate-y-0.5'
+                                      : 'border-slate-100 text-slate-700 hover:border-slate-200 hover:bg-slate-50/80 bg-slate-50/50 hover:-translate-y-0.5 hover:shadow-sm'
+                                  }`}
+                                >
+                                  {/* Left accent bar on hover/active */}
+                                  <div className={`absolute left-0 top-0 bottom-0 w-1 transition-all duration-300 ${
+                                    formData.roofType === r.id ? 'bg-primary' : 'bg-transparent group-hover/opt:bg-slate-200'
+                                  }`} />
+
+                                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 ${
+                                    formData.roofType === r.id 
+                                      ? 'bg-gradient-to-br from-primary to-blue-600 text-white shadow-md shadow-primary/20 scale-105' 
+                                      : 'bg-white text-slate-400 border border-slate-100 shadow-sm group-hover/opt:text-primary group-hover/opt:border-primary/25'
+                                  }`}>
+                                    <Icon name={r.icon} className="w-4 h-4" />
+                                  </div>
+                                  <div className="flex-1 min-w-0 flex items-center justify-between pl-1">
+                                    <h4 className={`font-extrabold text-xs sm:text-sm tracking-tight truncate pr-2 transition-colors duration-300 ${
+                                      formData.roofType === r.id ? 'text-slate-900' : 'text-slate-700 group-hover/opt:text-slate-900'
+                                    }`}>{r.label}</h4>
+                                    
+                                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 transition-all duration-300 ${
+                                      formData.roofType === r.id 
+                                        ? 'bg-primary border-primary shadow-sm scale-110' 
+                                        : 'border-slate-200 bg-white group-hover/opt:border-slate-300'
+                                    }`}>
+                                      {formData.roofType === r.id ? (
+                                        <Icon name="Check" className="w-2.5 h-2.5 text-white stroke-[3px]" />
+                                      ) : (
+                                        <div className="w-1 h-1 rounded-full bg-transparent group-hover/opt:bg-slate-100" />
+                                      )}
+                                    </div>
+                                  </div>
+                                </button>
+                              ))}
+                            </div>
                           </div>
                         </div>
                       </div>
 
-                      <div className="pt-6 border-t border-slate-100 flex flex-col-reverse sm:flex-row justify-between gap-3">
+                      <div className="pt-4 border-t border-slate-100 flex flex-col-reverse sm:flex-row justify-between gap-3">
                         <button onClick={handleBack} className="w-full sm:w-auto text-slate-500 font-extrabold text-xs uppercase tracking-wider px-6 py-4 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors">
                           ← Back
                         </button>
@@ -397,41 +452,43 @@ export default function InteractiveQuoteTool() {
 
                   {/* ── STEP 3 ── */}
                   {step === 3 && (
-                    <form onSubmit={handleCalculate} className="space-y-6 animate-in fade-in duration-500">
-                      <div>
-                        <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Contact Information</h3>
-                        <p className="text-slate-400 text-xs sm:text-sm mt-1">Specify destination coordinates for your estimate schedule.</p>
-                      </div>
+                    <form onSubmit={handleCalculate} className="animate-in fade-in duration-500 flex-1 flex flex-col justify-center space-y-8 py-2">
+                      <div className="space-y-6">
+                        <div>
+                          <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Contact Information</h3>
+                          <p className="text-slate-400 text-xs sm:text-sm mt-1">Specify destination coordinates for your estimate schedule.</p>
+                        </div>
 
-                      <div className="space-y-4">
-                        {[
-                          { id: 'name', label: 'Full Name', type: 'text', icon: 'User', key: 'name' as const },
-                          { id: 'email', label: 'Email Address', type: 'email', icon: 'Mail', key: 'email' as const },
-                          { id: 'phone', label: 'Phone Number', type: 'tel', icon: 'Phone', key: 'phone' as const },
-                        ].map(field => (
-                          <div key={field.id} className="space-y-1.5">
-                            <label htmlFor={field.id} className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider">
-                              {field.label} <span className="text-primary">*</span>
-                            </label>
-                            <div className="relative group/input flex items-center">
-                              <div className="absolute left-4 text-slate-400">
-                                <Icon name={field.icon} className="w-4.5 h-4.5 text-slate-400" />
+                        <div className="space-y-4">
+                          {[
+                            { id: 'name', label: 'Full Name', type: 'text', icon: 'User', key: 'name' as const },
+                            { id: 'email', label: 'Email Address', type: 'email', icon: 'Mail', key: 'email' as const },
+                            { id: 'phone', label: 'Phone Number', type: 'tel', icon: 'Phone', key: 'phone' as const },
+                          ].map(field => (
+                            <div key={field.id} className="space-y-1.5">
+                              <label htmlFor={field.id} className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider">
+                                {field.label} <span className="text-primary">*</span>
+                              </label>
+                              <div className="relative group/input flex items-center">
+                                <div className="absolute left-4 text-slate-400">
+                                  <Icon name={field.icon} className="w-4 h-4" />
+                                </div>
+                                <input
+                                  id={field.id}
+                                  type={field.type}
+                                  required
+                                  className="w-full border border-slate-200 rounded-xl pl-12 pr-4 py-3 sm:py-3.5 text-slate-900 font-bold focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300 bg-slate-50/50 hover:border-slate-300"
+                                  value={formData[field.key]}
+                                  onChange={e => setFormData({ ...formData, [field.key]: e.target.value })}
+                                />
+                                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent scale-x-0 group-focus-within/input:scale-x-100 transition-transform duration-300 rounded-b-xl" />
                               </div>
-                              <input
-                                id={field.id}
-                                type={field.type}
-                                required
-                                className="w-full border border-slate-200 rounded-xl pl-12 pr-4 py-3 sm:py-3.5 text-slate-900 font-bold focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300 bg-slate-50/50 hover:border-slate-300"
-                                value={formData[field.key]}
-                                onChange={e => setFormData({ ...formData, [field.key]: e.target.value })}
-                              />
-                              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent scale-x-0 group-focus-within/input:scale-x-100 transition-transform duration-300 rounded-b-xl" />
                             </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
 
-                      <div className="pt-6 border-t border-slate-100 flex flex-col-reverse sm:flex-row justify-between gap-3">
+                      <div className="pt-4 border-t border-slate-100 flex flex-col-reverse sm:flex-row justify-between gap-3">
                         <button type="button" onClick={handleBack} className="w-full sm:w-auto text-slate-500 font-extrabold text-xs uppercase tracking-wider px-6 py-4 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors">
                           ← Back
                         </button>
@@ -448,66 +505,68 @@ export default function InteractiveQuoteTool() {
 
                   {/* ── STEP 4 (RESULTS) ── */}
                   {step === 4 && estimate && (
-                    <div className="text-center py-4 animate-in fade-in duration-500">
-                      
-                      {/* Decorative Success Ring */}
-                      <div className="mx-auto w-16 h-16 sm:w-20 sm:h-20 bg-primary/5 rounded-full flex items-center justify-center mb-6 relative">
-                        <div className="absolute inset-0 rounded-full border border-primary/20 animate-ping opacity-75" />
-                        <div className="w-12 h-12 sm:w-14 sm:h-14 bg-primary text-white rounded-full flex items-center justify-center shadow-[0_8px_24px_-6px_rgba(30,93,154,0.5)]">
-                          <Icon name="Check" className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                    <div className="animate-in fade-in duration-500 flex-1 flex flex-col justify-center space-y-8 py-2">
+                      <div className="space-y-4">
+                        {/* Compact Success Indicator */}
+                        <div className="flex items-center justify-center gap-3 pt-2">
+                          <div className="w-10 h-10 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0 shadow-sm">
+                            <Icon name="Check" className="w-5 h-5 text-emerald-500" />
+                          </div>
+                          <div>
+                            <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight text-left">Estimate Generated</h3>
+                            <p className="text-slate-400 text-xs text-left">Data cross-referenced with Southeast labor logs</p>
+                          </div>
+                        </div>
+
+                        {/* High-End Compact Quote Ticket */}
+                        <div className="relative bg-gradient-to-br from-primary/5 via-white to-primary/[0.08] border border-primary/20 rounded-2xl p-5 my-4 max-w-md mx-auto overflow-hidden shadow-sm">
+                          {/* decorative overlay grid */}
+                          <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(30,93,154,0.03)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+                          
+                          <div className="relative z-10">
+                            <p className="text-[9px] font-extrabold text-primary/60 uppercase tracking-[0.2em] mb-1">Projected Budget Bracket</p>
+                            
+                            <div className="text-3xl sm:text-4xl font-black text-primary tracking-tight">
+                              ${(estimate.min / 1000).toFixed(1)}k <span className="text-lg font-bold text-slate-400 tracking-normal mx-0.5">/</span> ${(estimate.max / 1000).toFixed(1)}k
+                            </div>
+                            
+                            {/* Detailed parameter checklist */}
+                            <div className="mt-4 pt-4 border-t border-primary/10 text-xs text-slate-600 text-left space-y-2">
+                              <div className="flex items-center justify-between">
+                                <span className="font-semibold text-slate-400 uppercase tracking-wide text-[8px]">Project Scope:</span>
+                                <span className="font-bold text-slate-900 text-xs">{formData.sqft} Sq.Ft.</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="font-semibold text-slate-400 uppercase tracking-wide text-[8px]">Material Grade:</span>
+                                <span className="font-bold text-slate-900 text-xs">{roofTypes.find(r => r.id === formData.roofType)?.label}</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="font-semibold text-slate-400 uppercase tracking-wide text-[8px]">Service Division:</span>
+                                <span className="font-bold text-slate-900 text-xs">{services.find(s => s.id === formData.service)?.label}</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
 
-                      <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Estimate Generated</h3>
-                      <p className="text-slate-500 text-xs sm:text-sm mt-1 max-w-sm mx-auto leading-relaxed px-2">
-                        Based on local regional labor schedules and material logistics, here is your project cost range:
-                      </p>
-
-                      {/* High-End Quote Ticket */}
-                      <div className="relative bg-gradient-to-br from-primary/5 via-white to-primary/[0.08] border border-primary/20 rounded-2xl sm:rounded-[2rem] p-5 sm:p-8 my-6 sm:my-8 max-w-md mx-auto overflow-hidden shadow-sm">
-                        {/* decorative overlay grid */}
-                        <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(30,93,154,0.03)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
-                        
-                        <div className="relative z-10">
-                          <p className="text-[10px] font-extrabold text-primary/60 uppercase tracking-[0.25em] mb-2">Projected Budget Bracket</p>
+                      {/* Side-by-side action buttons */}
+                      <div className="pt-4 border-t border-slate-100 w-full">
+                        <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto w-full">
+                          <a
+                            href="#contact"
+                            className="relative overflow-hidden flex-1 bg-primary text-white font-extrabold text-xs uppercase tracking-wider px-6 py-4 rounded-xl hover:bg-primary/95 transition-all duration-300 shadow-[0_8px_20px_-6px_rgba(30,93,154,0.4)] hover:-translate-y-0.5 group/btn text-center flex items-center justify-center"
+                          >
+                            <span className="relative z-10">Schedule Inspection</span>
+                            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
+                          </a>
                           
-                          <div className="text-3xl xs:text-4xl sm:text-5xl font-black text-primary tracking-tight">
-                            ${(estimate.min / 1000).toFixed(1)}k <span className="text-xl sm:text-2xl font-bold text-slate-400 tracking-normal mx-1">/</span> ${(estimate.max / 1000).toFixed(1)}k
-                          </div>
-                          
-                          {/* Detailed parameter checklist */}
-                          <div className="mt-6 pt-6 border-t border-primary/10 text-xs text-slate-600 text-left space-y-2.5">
-                            <div className="flex items-center justify-between">
-                              <span className="font-semibold text-slate-400 uppercase tracking-wide text-[9px]">Project Scope:</span>
-                              <span className="font-bold text-slate-900">{formData.sqft} Sq.Ft.</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="font-semibold text-slate-400 uppercase tracking-wide text-[9px]">Material Grade:</span>
-                              <span className="font-bold text-slate-900">{roofTypes.find(r => r.id === formData.roofType)?.label}</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="font-semibold text-slate-400 uppercase tracking-wide text-[9px]">Service Division:</span>
-                              <span className="font-bold text-slate-900">{services.find(s => s.id === formData.service)?.label}</span>
-                            </div>
-                          </div>
+                          <button
+                            onClick={() => { setStep(1); setFormData({ ...formData, sqft: '', roofType: '', service: '' }); setEstimate(null); }}
+                            className="flex-1 text-primary font-bold text-xs uppercase tracking-wider px-6 py-4 rounded-xl border border-primary/30 hover:bg-primary/5 transition-all duration-300"
+                          >
+                            New Estimate
+                          </button>
                         </div>
-                      </div>
-
-                      <div className="space-y-3 max-w-sm mx-auto">
-                        <a
-                          href="#contact"
-                          className="relative overflow-hidden block w-full bg-primary text-white font-extrabold text-sm uppercase tracking-wider px-6 py-4 rounded-xl hover:bg-primary/95 transition-all duration-300 shadow-[0_8px_20px_-6px_rgba(30,93,154,0.4)] hover:-translate-y-0.5 group/btn text-center"
-                        >
-                          <span className="relative z-10">Schedule Formal Inspection</span>
-                          <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
-                        </a>
-                        
-                        <button
-                          onClick={() => { setStep(1); setFormData({ ...formData, sqft: '', roofType: '', service: '' }); setEstimate(null); }}
-                          className="w-full text-primary font-bold text-xs uppercase tracking-wider px-6 py-4 rounded-xl border border-primary/30 hover:bg-primary/5 transition-all duration-300"
-                        >
-                          Configure New Estimate
-                        </button>
                       </div>
                     </div>
                   )}
