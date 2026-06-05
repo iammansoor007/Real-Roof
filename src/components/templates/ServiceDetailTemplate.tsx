@@ -347,7 +347,7 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
               </h1>
               <div className="w-16 sm:w-20 h-0.5 sm:h-1 bg-primary mb-4 sm:mb-6" />
               <p className="text-white/80 text-sm xs:text-base sm:text-xl max-w-2xl">
-                {service.heroDescription || "Professional solutions with military precision and architectural excellence."}
+                {service.heroDescription || "Professional solutions with uncompromising discipline and architectural excellence."}
               </p>
             </div>
           </div>
@@ -511,7 +511,7 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
                 )}
               </h2>
               <p className="text-muted-foreground text-sm sm:text-base lg:text-lg">
-                {service.benefitsDescription || `Experience the difference with our unwavering commitment to military-grade excellence`}
+                {service.benefitsDescription || `Experience the difference with our unwavering commitment to elite quality excellence`}
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">

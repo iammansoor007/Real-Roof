@@ -139,7 +139,7 @@ ${formData.message}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⏱️ Submitted: ${new Date().toLocaleString()}
 🌐 Source: Quick Quote Widget
-🇺🇸 Veteran Owned & Operated
+🏡 Locally Owned & Operated
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     `;
 
@@ -174,13 +174,13 @@ ${formData.message}
                 console.error('Quick Quote fetch error:', fetchError);
             }
 
-            const mailtoLink = `mailto:banderson@RealRoof.com?subject=🔨 Quick Quote - ${formData.name}&body=${encodeURIComponent(emailContent)}`;
+            const mailtoLink = `mailto:esellers@RealRoof.com?subject=🔨 Quick Quote - ${formData.name}&body=${encodeURIComponent(emailContent)}`;
             window.location.href = mailtoLink;
             showSuccess();
 
         } catch (error) {
             console.error('Submission error:', error);
-            alert('Please email us directly at banderson@RealRoof.com');
+            alert('Please email us directly at esellers@RealRoof.com');
         } finally {
             setIsSubmitting(false);
         }
@@ -740,7 +740,7 @@ ${formData.message}
                                                 {(quickQuote.badges || [
                                                     { text: "Free estimate", icon: "Check" },
                                                     { text: "4-8h response", icon: "Clock" },
-                                                    { text: "Veteran owned", icon: "Flag" }
+                                                    { text: "Locally owned", icon: "Home" }
                                                 ]).map((badge: any, idx: number) => (
                                                     <div key={idx} className="flex items-center gap-2">
                                                         <div className="w-1.5 h-1.5 bg-primary rounded-full" />

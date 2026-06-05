@@ -89,7 +89,7 @@ export async function POST(request: Request) {
     }
 
     // Fetch dynamic email from Content CMS
-    let receiverEmail = 'banderson@RealRoof.com';
+    let receiverEmail = 'esellers@RealRoof.com';
     try {
       const contentDoc = await Content.findOne({ key: "complete_data" }).lean() as any;
       if (contentDoc && contentDoc.data) {
@@ -106,7 +106,7 @@ export async function POST(request: Request) {
     }
 
     if (!receiverEmail || !receiverEmail.includes('@')) {
-      receiverEmail = 'banderson@RealRoof.com';
+      receiverEmail = 'esellers@RealRoof.com';
     }
 
     const to = receiverEmail;
@@ -150,7 +150,7 @@ export async function POST(request: Request) {
     html += `
         <p style="font-size: 12px; color: #666; margin-top: 30px; border-top: 1px solid #eee; padding-top: 10px;">
           ⏱️ Submitted: ${new Date().toLocaleString()}<br>
-          🇺🇸 Veteran Owned & Operated
+          🏡 Locally Owned & Operated
         </p>
       </div>
     `;

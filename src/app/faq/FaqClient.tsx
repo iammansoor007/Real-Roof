@@ -46,7 +46,7 @@ export default function FAQPage() {
               transition={{ delay: 0.2 }}
               className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 max-w-2xl"
             >
-              {faqPage?.description || "Find clear answers to common questions about our services, processes, and military-grade standards."}
+              {faqPage?.description || "Find clear answers to common questions about our services, processes, and elite quality standards."}
             </motion.p>
 
             <motion.div

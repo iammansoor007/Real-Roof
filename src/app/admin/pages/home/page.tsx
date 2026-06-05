@@ -410,7 +410,7 @@ export default function HomeEditor() {
                       type="text"
                       value={(data.about?.coreValues || []).join(", ")}
                       onChange={(e) => updateSection("about", "coreValues", e.target.value.split(",").map((s: any) => s.trim()).filter(Boolean))}
-                      placeholder="Licensed, Insured, Veteran Owned..."
+                      placeholder="Licensed, Insured, Locally Owned..."
                       className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none shadow-sm transition-all"
                     />
                   </div>
@@ -554,7 +554,7 @@ export default function HomeEditor() {
                           value={data.services?.image?.badge || ""}
                           onChange={(e) => setData((prev: any) => ({ ...prev, services: { ...prev.services, image: { ...prev.services.image, badge: e.target.value } } }))}
                           className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none shadow-sm transition-all transition-colors"
-                          placeholder="e.g. 🇺🇸 Veteran Owned & Operated"
+                          placeholder="e.g. 🏡 Locally Owned & Operated"
                         />
                       </div>
                       <div className="space-y-3">
@@ -626,7 +626,7 @@ export default function HomeEditor() {
                         value={data.services?.highlightText || ""}
                         onChange={(e) => updateSection("services", "highlightText", e.target.value)}
                         className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none shadow-sm transition-all"
-                        placeholder="e.g. Veteran Owned • Licensed • Bonded & Insured"
+                        placeholder="e.g. Locally Owned • Licensed • Bonded & Insured"
                       />
                       <p className="text-xs text-slate-500 italic">This text will be displayed with primary highlight styles right below the description paragraphs on the public site.</p>
                     </div>
@@ -1250,7 +1250,7 @@ export default function HomeEditor() {
                             }}
                             className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:border-primary/50 focus:outline-none"
                           >
-                            <option value="Veteran">Veteran (Custom)</option>
+                            <option value="Veteran">Locally Owned (Custom)</option>
                             <option value="Experience">Experience (Custom)</option>
                             <option value="Warranty">Warranty (Custom)</option>
                             <option value="Financing">Financing (Custom)</option>

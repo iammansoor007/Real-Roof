@@ -44,7 +44,7 @@ export function generateSchema(options: SchemaOptions) {
     "name": "RealRoof",
     "image": `${BASE_URL}/realrooflogo.webp`,
     "telePhone": "636-449-9714",
-    "email": "banderson@RealRoof.com",
+    "email": "esellers@RealRoof.com",
     "url": BASE_URL,
     "address": {
       "@type": "PostalAddress",

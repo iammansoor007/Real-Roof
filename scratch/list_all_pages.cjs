@@ -6,7 +6,7 @@ dotenv.config({ path: path.join(process.cwd(), '.env.local') });
 
 async function listAllPages() {
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(process.env.MONGODB_URI, { dbName: process.env.MONGODB_DB });
     const Page = mongoose.connection.db.collection('pages');
     const pages = await Page.find({}).toArray();
     

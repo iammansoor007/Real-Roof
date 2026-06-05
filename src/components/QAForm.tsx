@@ -610,7 +610,7 @@ ${formData.message}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⏱️ Submitted: ${new Date().toLocaleString()}
-🇺🇸 Veteran Owned & Operated
+🏡 Locally Owned & Operated
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     `;
 
@@ -658,13 +658,13 @@ ${formData.message}
         return;
       } else {
         console.error('API submission failed, falling back to mailto');
-        const mailtoLink = `mailto:banderson@RealRoof.com?subject=Quote Request - ${formData.name}&body=${encodeURIComponent(emailContent)}`;
+        const mailtoLink = `mailto:esellers@RealRoof.com?subject=Quote Request - ${formData.name}&body=${encodeURIComponent(emailContent)}`;
         window.location.href = mailtoLink;
         setShowSuccess(true);
       }
     } catch (error) {
       console.error('Final submission error:', error);
-      const mailtoLink = `mailto:banderson@RealRoof.com?subject=Quote Request - ${formData.name}&body=${encodeURIComponent(emailContent)}`;
+      const mailtoLink = `mailto:esellers@RealRoof.com?subject=Quote Request - ${formData.name}&body=${encodeURIComponent(emailContent)}`;
       window.location.href = mailtoLink;
       setShowSuccess(true);
     } finally {
@@ -1115,7 +1115,7 @@ ${formData.message}
                 <div className="hidden xs:block w-px h-4 sm:h-6 bg-border" />
                 <div className="text-[10px] sm:text-xs font-mono text-primary flex items-center gap-1 sm:gap-2">
                   <span className="animate-pulse">●</span>
-                  <span>Veteran owned & operated</span>
+                  <span>Locally owned & operated</span>
                 </div>
               </div>
             </div>

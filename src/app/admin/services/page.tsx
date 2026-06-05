@@ -287,15 +287,15 @@ export default function ServicesAdminPage() {
               setIsEditing(services.length);
               setForm({
                 title: "", slug: "", tagline: "", description: "",
-                heroDescription: "Professional solutions with military precision and architectural excellence.",
+                heroDescription: "Professional solutions with uncompromising discipline and architectural excellence.",
                 breadcrumbText: "",
                 overviewTitlePrefix: "Craftsmanship", overviewTitleHighlight: "Without Compromise", overviewTitleSuffix: ".",
                 benefitsTitlePrefix: "Key", benefitsTitleHighlight: "Benefits", benefitsTitleSuffix: "",
                 benefitsBadge: "The RealRoof Edge",
-                benefitsDescription: "Experience the difference with our unwavering commitment to military-grade excellence",
+                benefitsDescription: "Experience the difference with our unwavering commitment to elite quality excellence",
                 processTitlePrefix: "Precision", processTitleHighlight: "In Every Detail", processTitleSuffix: "",
                 processBadge: "Methodology",
-                processDescription: "A battle-tested framework that ensures consistency, quality, and complete satisfaction—from initial consultation to final walkthrough.",
+                processDescription: "A proven framework that ensures consistency, quality, and complete satisfaction—from initial consultation to final walkthrough.",
                 overview: "", overviewImage: "", overviewStats: [],
                 cta: { text: "Start Your Project", link: "/contact" }, icon: "Layout", tag: "", status: "published", features: [], stats: [], benefits: [], process: [], faq: []
               });
@@ -367,7 +367,7 @@ export default function ServicesAdminPage() {
                     </div>
                     <div className="space-y-1">
                       <label className="text-[13px] font-bold">Hero Description / Subtitle</label>
-                      <textarea placeholder="e.g. Professional services with military precision..." value={form.heroDescription || ""} onChange={(e) => setForm({ ...form, heroDescription: e.target.value })} className="w-full border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px] h-20" />
+                      <textarea placeholder="e.g. Professional services with elite precision..." value={form.heroDescription || ""} onChange={(e) => setForm({ ...form, heroDescription: e.target.value })} className="w-full border border-[#8c8f94] px-3 py-1.5 text-[14px] rounded-[3px] h-20" />
                     </div>
                     <div className="space-y-1">
                       <label className="text-[13px] font-bold">Short Description (Card View)</label>

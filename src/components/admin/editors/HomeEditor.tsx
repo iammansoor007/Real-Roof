@@ -319,7 +319,7 @@ export default function HomeEditor({ pageId, data, setData }: { pageId: string, 
                               value={data.services?.highlightText || ""}
                               onChange={(e) => updateSection("services", "highlightText", e.target.value)}
                               className={UI.input}
-                              placeholder="e.g. Veteran Owned • Licensed • Bonded & Insured"
+                              placeholder="e.g. Locally Owned • Licensed • Bonded & Insured"
                            />
                            <p className="text-[11px] text-[#646970] italic">
                               This text will be displayed with primary highlight styles right below the description paragraphs on the public site.

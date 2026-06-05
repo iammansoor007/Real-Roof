@@ -12,7 +12,7 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import PageInlineFaqs from "@/components/PageInlineFaqs";
-import brandon from '@/assets/ownerteam.jpeg'
+import elisha from '@/assets/ownerteam.jpeg'
 import chrissy from '@/assets/Chrissyteam.jpeg'
 import austin from '@/assets/Austinteam.jpeg'
 import brandonsutton from '@/assets/suttonteam.jpeg'
@@ -23,7 +23,7 @@ if (typeof window !== "undefined") {
 }
 
 const Images = {
-  BrandonAnderson: brandon.src,
+  ElishaSellers: elisha.src,
   ChrissyLong: chrissy.src,
   Austin: austin.src,
   BrandonSales: brandonsutton.src,
@@ -217,8 +217,8 @@ export default function TeamTemplate({ pageData, params }: { pageData?: any, par
                       member.image ? (
                         (member.image.startsWith('/') || member.image.startsWith('http'))
                           ? member.image
-                          : (Images[member.image as keyof typeof Images] || Images.BrandonAnderson)
-                      ) : Images.BrandonAnderson
+                          : (Images[member.image as keyof typeof Images] || Images.ElishaSellers)
+                      ) : Images.ElishaSellers
                     }
                     title={`${member.name} - ${member.role}`}
                     badge1={member.badge1}

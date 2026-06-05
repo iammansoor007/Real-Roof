@@ -3,7 +3,7 @@ require('dotenv').config({ path: '.env.local' });
 
 async function run() {
   const uri = process.env.MONGODB_URI;
-  await mongoose.connect(uri);
+  await mongoose.connect(uri, { dbName: process.env.MONGODB_DB });
   const db = mongoose.connection.db;
   const docs = await db.collection('site_contents').find({}).project({ key: 1 }).toArray();
   console.log("site_contents keys:", docs);

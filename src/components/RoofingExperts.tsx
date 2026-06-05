@@ -203,7 +203,7 @@ export default function AboutSection() {
                                     key={i}
                                     href={btn.link}
                                     className={`px-8 py-4 font-bold text-sm uppercase tracking-widest transition-all duration-300 ${btn.primary
-                                        ? "bg-primary text-white hover:bg-primary/90 shadow-lg hover:shadow-primary/25"
+                                        ? "bg-primary text-white hover:bg-primary/90 hover:text-white"
                                         : "bg-transparent text-slate-900 dark:text-white border-2 border-slate-200 dark:border-slate-800 hover:border-primary hover:text-primary"
                                         }`}
                                 >

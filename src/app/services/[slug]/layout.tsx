@@ -20,7 +20,7 @@ const seoMap: Record<
     title:
       "Residential Roofing St. Louis MO | Roof Replacement & Repair | RealRoof",
     description:
-      "Expert residential roof replacement & repair in St. Louis, MO. 50-year warranty, Class 4 impact-resistant shingles, IKO & CertainTeed certified. Veteran-owned. Free drone inspection. Hail & storm damage specialists. Call 636-449-9714.",
+      "Expert residential roof replacement & repair in St. Louis, MO. 50-year warranty, Class 4 impact-resistant shingles, IKO & CertainTeed certified. Locally-owned. Free drone inspection. Hail & storm damage specialists. Call 636-449-9714.",
     keywords: [
       "residential roofing St. Louis MO",
       "roof replacement St. Louis",
@@ -38,7 +38,7 @@ const seoMap: Record<
       "free roofing estimate St. Louis",
       "best roofer St. Louis MO",
       "top rated roofing company Missouri",
-      "veteran owned roofing company St. Louis",
+      "locally owned roofing company St. Louis",
       "roof insurance claim help Missouri",
       "will insurance cover roof replacement",
       "how much does a roof replacement cost St. Louis",
@@ -240,7 +240,7 @@ const seoMap: Record<
     title:
       "Custom Deck Builder St. Louis MO | Composite & PVC Decks | RealRoof",
     description:
-      "Expert custom deck builder in St. Louis, MO. Premium composite & PVC decking, pergolas, built-in lighting & outdoor kitchens. Free 3D CAD design. 50-year fade warranty. Permit handling included. Veteran-owned. Call 636-449-9714.",
+      "Expert custom deck builder in St. Louis, MO. Premium composite & PVC decking, pergolas, built-in lighting & outdoor kitchens. Free 3D CAD design. 50-year fade warranty. Permit handling included. Locally-owned. Call 636-449-9714.",
     keywords: [
       "custom deck builder St. Louis MO",
       "composite deck installation Missouri",
@@ -274,7 +274,7 @@ const seoMap: Record<
       "deck financing options Missouri",
       "does a deck add value to home Missouri",
       "best deck builder near me St. Louis",
-      "veteran owned deck contractor Missouri",
+      "locally owned deck contractor Missouri",
       "deck building permit requirements Missouri",
       "frost line deck footings Missouri",
       "Trex Transcend installer St. Louis",
@@ -450,7 +450,7 @@ const seoMap: Record<
     title:
       "Siding, Soffit & Fascia Installation St. Louis MO | RealRoof",
     description:
-      "Premium vinyl & composite siding installation in St. Louis, MO. 500+ color options, 200+ MPH wind rating, insulated upgrade R-10. Soffit & fascia aluminum capping. Veteran-owned. Free estimate. Call 636-449-9714.",
+      "Premium vinyl & composite siding installation in St. Louis, MO. 500+ color options, 200+ MPH wind rating, insulated upgrade R-10. Soffit & fascia aluminum capping. Locally-owned. Free estimate. Call 636-449-9714.",
     keywords: [
       "siding installation St. Louis MO",
       "vinyl siding contractor Missouri",
@@ -519,7 +519,7 @@ const seoMap: Record<
     title:
       "Window & Door Replacement St. Louis MO | Energy Star Rated | RealRoof",
     description:
-      "Energy Star rated window & door replacement in St. Louis, MO. Save up to 35% on energy bills. Low-E glass, argon gas, custom vinyl options. Sound-reducing insulation. Multi-point door locks. Veteran-owned. Call 636-449-9714.",
+      "Energy Star rated window & door replacement in St. Louis, MO. Save up to 35% on energy bills. Low-E glass, argon gas, custom vinyl options. Sound-reducing insulation. Multi-point door locks. Locally-owned. Call 636-449-9714.",
     keywords: [
       "window replacement St. Louis MO",
       "energy efficient windows Missouri",
@@ -588,7 +588,7 @@ const seoMap: Record<
     title:
       "Seamless Gutter Installation St. Louis MO | Leaf Guards | RealRoof",
     description:
-      "Seamless aluminum gutter installation & micro-mesh leaf guards in St. Louis, MO. On-site fabrication, 6-inch capacity, zero-clog guarantee. Foundation protection specialist. Veteran-owned. 24h turnaround. Call 636-449-9714.",
+      "Seamless aluminum gutter installation & micro-mesh leaf guards in St. Louis, MO. On-site fabrication, 6-inch capacity, zero-clog guarantee. Foundation protection specialist. Locally-owned. 24h turnaround. Call 636-449-9714.",
     keywords: [
       "gutter installation St. Louis MO",
       "seamless gutter contractor Missouri",

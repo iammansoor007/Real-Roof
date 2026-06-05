@@ -181,7 +181,7 @@
     "logo": "https://res.cloudinary.com/dytytwyp6/image/upload/v1778168204/fjkt7bak60idj3un8ujh.webp"
   },
   "hero": {
-    "badge": "Veteran Owned & Operated",
+    "badge": "Locally Owned & Operated",
     "headlines": [
       {
         "text": "Welcome to the New",
@@ -192,7 +192,7 @@
         "highlight": true
       }
     ],
-    "description": "One of the Top Window, Deck, and Roofing Companies in St. Louis. Veteran owned and operated with easy financing options and long-lasting transferable warranties.",
+    "description": "One of the Top Window, Deck, and Roofing Companies in St. Louis. Locally owned and operated with easy financing options and long-lasting transferable warranties.",
     "buttons": [
       {
         "text": "Book a FREE Quote Now",
@@ -214,9 +214,9 @@
         "icon": "Building2"
       },
       {
-        "value": "Veteran",
+        "value": "Locally",
         "label": "Owned",
-        "icon": "Star"
+        "icon": "BadgeCheck"
       },
       {
         "value": "50-Year",
@@ -237,11 +237,11 @@
       "highlight": "Expectations",
       "suffix": ""
     },
-    "description": "RealRoof was founded to do more than just build roofs, windows, decks, and siding. We are here to build a movement. Born in OΓÇÖFallon, Missouri, RealRoof was launched by Brandon Anderson, a U.S. Army veteran and globally licensed combat sports official who brings battlefield discipline and boardroom precision to every project.",
+    "description": "RealRoof was founded to do more than just build roofs, windows, decks, and siding. We are here to build a movement. Born in OΓÇÖFallon, Missouri, RealRoof was launched by Elisha Sellers, a experienced roofing professional and globally licensed combat sports official who brings uncompromising discipline and executive precision to every project.",
     "image": {
       "src": "RealRoofTeam",
-      "alt": "RealRoof team - Veteran owned roofing and exterior remodeling company",
-      "badge": "Veteran Owned"
+      "alt": "RealRoof team - Locally owned roofing and exterior remodeling company",
+      "badge": "Locally owned"
     },
     "stats": [
       {
@@ -294,7 +294,7 @@
       "suffix": "Company"
     },
     "description": [
-      "RealRoof provides expert exterior remodeling services for homes and businesses. From windows and doors to roofing and decks, our team delivers quality craftsmanship with military precision."
+      "RealRoof provides expert exterior remodeling services for homes and businesses. From windows and doors to roofing and decks, our team delivers quality craftsmanship with uncompromising precision."
     ],
     "stats": [
       {
@@ -332,8 +332,8 @@
           "Emergency Repairs"
         ],
         "slug": "residential-roofing",
-        "tagline": "Military Grade Protection",
-        "overview": "Professional residential roofing services that combine military precision with architectural excellence. We specialize in high-performance asphalt shingles, architectural roofing systems, and durable weather-proofing solutions tailored for Missouri's diverse climate.",
+        "tagline": "commercial grade Protection",
+        "overview": "Professional residential roofing services that combine uncompromising precision with architectural excellence. We specialize in high-performance asphalt shingles, architectural roofing systems, and durable weather-proofing solutions tailored for Missouri's diverse climate.",
         "stats": [
           {
             "value": "50",
@@ -365,7 +365,7 @@
           {
             "icon": "Award",
             "title": "Certified Experts",
-            "description": "IKO Certified Pro and CertainTeed Certified Shingle Masters executing with battlefield discipline."
+            "description": "IKO Certified Pro and CertainTeed Certified Shingle Masters executing with uncompromising discipline."
           },
           {
             "icon": "CheckCircle",
@@ -578,8 +578,8 @@
           "Covered Decks"
         ],
         "slug": "custom-decks",
-        "tagline": "Professional windows & doors services with military precision and architectural excellence.",
-        "overview": "<p>Transform your backyard into a luxury retreat. We offer two premium decking paths: Low-Maintenance Composite for wood-like aesthetics with zero upkeep, and Structural PVC Decking for ultimate durability, moisture resistance, and lighter color retention. Both systems are designed to withstand the elements while providing elegance for your family. We bring military-grade discipline and architectural beauty to every project. Our mission is your property's long-term protection and value enhancement.</p>",
+        "tagline": "Professional windows & doors services with uncompromising precision and architectural excellence.",
+        "overview": "<p>Transform your backyard into a luxury retreat. We offer two premium decking paths: Low-Maintenance Composite for wood-like aesthetics with zero upkeep, and Structural PVC Decking for ultimate durability, moisture resistance, and lighter color retention. Both systems are designed to withstand the elements while providing elegance for your family. We bring commercial-grade discipline and architectural beauty to every project. Our mission is your property's long-term protection and value enhancement.</p>",
         "stats": [
           {
             "value": "50",
@@ -1204,7 +1204,7 @@
         "slug": "pvc-decking",
         "tagline": "Premium Decking",
         "description": "<p>100% synthetic decking engineered for superior moisture resistance and lighter, cooler surfaces.</p>",
-        "heroDescription": "Professional pvc decking services with military precision and architectural excellence.",
+        "heroDescription": "Professional pvc decking services with uncompromising precision and architectural excellence.",
         "breadcrumbText": "",
         "overviewTitlePrefix": "Craftsmanship",
         "overviewTitleHighlight": "Without Compromise.",
@@ -1213,13 +1213,13 @@
         "benefitsTitleHighlight": "Outlast",
         "benefitsTitleSuffix": "",
         "benefitsBadge": "The RealRoof Edge",
-        "benefitsDescription": "Experience the difference with our unwavering commitment to military-grade excellence.",
+        "benefitsDescription": "Experience the difference with our unwavering commitment to commercial-grade excellence.",
         "processTitlePrefix": "Precision in",
         "processTitleHighlight": "Every Detail",
         "processTitleSuffix": "",
         "processBadge": "The RealRoof Edge",
-        "processDescription": "Experience the difference with our unwavering commitment to military-grade excellence.",
-        "overview": "<p><span style=\"color: rgb(115, 115, 115);\">Our PVC decking solutions represent the pinnacle of synthetic deck technology. Unlike composite which contains wood flour, cellular PVC is 100% polymer. This provides unparalleled resistance to moisture, rot, and insects. It is the ideal solution for pool surrounds, heavily shaded lots, or homeowners who prefer lighter, cooler deck colors that never absorb water. We bring military-grade discipline and architectural beauty to every project. Our mission is your property's long-term protection and value enhancement.</span></p>",
+        "processDescription": "Experience the difference with our unwavering commitment to commercial-grade excellence.",
+        "overview": "<p><span style=\"color: rgb(115, 115, 115);\">Our PVC decking solutions represent the pinnacle of synthetic deck technology. Unlike composite which contains wood flour, cellular PVC is 100% polymer. This provides unparalleled resistance to moisture, rot, and insects. It is the ideal solution for pool surrounds, heavily shaded lots, or homeowners who prefer lighter, cooler deck colors that never absorb water. We bring commercial-grade discipline and architectural beauty to every project. Our mission is your property's long-term protection and value enhancement.</span></p>",
         "overviewImage": "",
         "overviewStats": [
           {
@@ -1363,8 +1363,8 @@
         "suffix": "Company"
       },
       "description": [
-        "RealRoof provides expert exterior remodeling services for homes and businesses. From windows and doors to roofing and decks, our team delivers quality craftsmanship with military precision.",
-        "<span class=\"font-semibold text-primary\">Veteran Owned ΓÇó Licensed ΓÇó Bonded & Insured</span>"
+        "RealRoof provides expert exterior remodeling services for homes and businesses. From windows and doors to roofing and decks, our team delivers quality craftsmanship with uncompromising precision.",
+        "<span class=\"font-semibold text-primary\">Locally owned ΓÇó Licensed ΓÇó Bonded & Insured</span>"
       ]
     },
     "statsSection": {
@@ -1375,36 +1375,36 @@
     "gridSection": {
       "badge": "Expertise",
       "headline": "World Class <span class=\"text-primary\">Capabilities</span>",
-      "description": "Every detail matters when it comes to structural integrity. Our team brings military-grade standards to every project across the St. Louis area."
+      "description": "Every detail matters when it comes to structural integrity. Our team brings commercial-grade standards to every project across the St. Louis area."
     },
-    "highlightText": "Veteran Owned • Licensed • Bonded & Insured"
+    "highlightText": "Locally owned • Licensed • Bonded & Insured"
   },
   "leadership": {
     "section": {
       "badge": "Our Leadership",
-      "headline": "Veteran-Owned & <span class=\"font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80\">Mission-Driven</span>",
-      "description": "Battlefield discipline meets boardroom precision. RealRoof brings honor, integrity, and craftsmanship back to the remodeling industry."
+      "headline": "Locally-Owned & <span class=\"font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80\">Mission-Driven</span>",
+      "description": "uncompromising discipline meets executive precision. RealRoof brings honor, integrity, and craftsmanship back to the remodeling industry."
     },
     "ceo": {
-      "name": "Brandon Anderson",
-      "title": "Founder ΓÇó U.S. Army Veteran ΓÇó Globally Licensed Combat Sports Official",
-      "image": "brandon",
-      "alt": "Brandon Anderson - Founder, RealRoof",
+      "name": "Elisha Sellers",
+      "title": "Founder & CEO",
+      "image": "elisha",
+      "alt": "Elisha Sellers - Founder, RealRoof",
       "badges": {
-        "top": "VETERAN OWNED",
+        "top": "LOCALLY OWNED",
         "bottom": "ProVia ΓÇó IKO ΓÇó CertainTeed ΓÇó Wolf"
       },
       "quotes": [
         "RealRoof was built to be more than just a remodeling company. It was built to lead a movement."
       ],
       "description": [
-        "Based in O'Fallon, Missouri, RealRoof was founded by Brandon Anderson, an Army veteran and globally licensed combat sports official who brings discipline, precision, and accountability to every project. With years of leadership experience at some of the largest home improvement companies in North America, Brandon saw firsthand how the industry had shifted away from homeowners and toward profits, leaving people with high prices, poor communication, and broken trust.",
-        "He knew it didn't have to be that way. RealRoof was created to restore what the industry lostΓÇötrust, craftsmanship, and doing the job right the first time. Today, we stand as a local company built to compete with the biggest names in the country, not through gimmicks, but through transparency, quality work, and a relentless commitment to our customers.",
-        "Our systems are built for precision, but our strength is our peopleΓÇödriven professionals who take ownership, communicate clearly, and treat every home like their own."
+        "Based in O'Fallon, Missouri, RealRoof was founded by Elisha Sellers, a seasoned home improvement professional who brings discipline, precision, and accountability to every project. With years of leadership experience at some of the largest home improvement companies in North America, Elisha saw firsthand how the industry had shifted away from homeowners and toward profits, leaving people with high prices, poor communication, and broken trust.",
+        "Elisha knew it didn't have to be that way. RealRoof was created to restore what the industry lost—trust, craftsmanship, and doing the job right the first time. Today, we stand as a local company built to compete with the biggest names in the country, not through gimmicks, but through transparency, quality work, and a relentless commitment to our customers.",
+        "Our systems are built for precision, but our strength is our people—driven professionals who take ownership, communicate clearly, and treat every home like their own."
       ],
       "social": {
         "linkedin": "#",
-        "email": "banderson@RealRoof.com"
+        "email": "esellers@RealRoof.com"
       }
     }
   },
@@ -1416,16 +1416,16 @@
     },
     "members": [
       {
-        "id": "brandon-anderson",
-        "name": "Brandon Anderson",
+        "id": "elisha-sellers",
+        "name": "Elisha Sellers",
         "role": "Founder & CEO",
-        "image": "BrandonAnderson",
+        "image": "ElishaSellers",
         "badge1": "FOUNDER & CEO",
-        "badge2": "VISION ΓÇó INTEGRITY",
+        "badge2": "VISION • INTEGRITY",
         "description": [
-          "Originally from Nashville, Tennessee, Brandon was raised in Southern Illinois. Growing up in a difficult home environment, he faced challenges that forced him to mature quickly. Later, his grandparents stepped in to raise him and his two brothers, teaching him what it truly means to show up for family and build something stronger than what you were given.",
-          "Brandon carried those lessons into his service in the United States Army, where he developed discipline, resilience, and the ability to perform under pressure. The military reinforced a mindset that still defines him today. No excuses. No shortcuts. Just execution.",
-          "After his service, he pursued a career in high-performance environments, earning multiple promotions and working with top-tier organizations."
+          "Originally from Nashville, Tennessee, Elisha was raised in Southern Illinois. Growing up in a challenging environment, Elisha faced obstacles that inspired a strong work ethic early on. Later, Elisha's grandparents stepped in to teach what it truly means to show up for family and build something stronger than what you were given.",
+          "Elisha carried those lessons into professional leadership in the home improvement industry, developing discipline, resilience, and the ability to perform under pressure. This experience reinforced a mindset that still defines Elisha today. No excuses. No shortcuts. Just execution.",
+          "After years of leadership at top-tier home improvement organizations, Elisha founded RealRoof to bring trust, transparency, and elite craftsmanship back to homeowners."
         ]
       },
       {
@@ -1459,14 +1459,14 @@
       },
       {
         "id": "brandon-sales",
-        "name": "Brandon",
+        "name": "Elisha",
         "role": "Construction Sales Professional",
         "image": "BrandonSales",
         "badge1": "SALES PROFESSIONAL",
         "badge2": "KNOWLEDGE ΓÇó HONESTY",
         "description": [
-          "Brandon is a construction sales professional with over 12 years of experience specializing in windows, doors, and roofing. He's known for his straightforward approach, strong product knowledge, and commitment to helping customers find the right solutions for their homes.",
-          "As an Illinois resident, Brandon takes pride in serving his local community with honesty and dependable service. Outside of work, Brandon is a dedicated softball dad and enjoys spending his free time on the golf course."
+          "Elisha is a construction sales professional with over 12 years of experience specializing in windows, doors, and roofing. He's known for his straightforward approach, strong product knowledge, and commitment to helping customers find the right solutions for their homes.",
+          "As an Illinois resident, Elisha takes pride in serving his local community with honesty and dependable service. Outside of work, Elisha is a dedicated softball dad and enjoys spending his free time on the golf course."
         ]
       }
     ]
@@ -1478,14 +1478,14 @@
         "line2": "BEYOND",
         "line3": "EXPECTATIONS."
       },
-      "description": "Born in O'Fallon, Missouri. Built on military precision. Driven by integrity.",
+      "description": "Born in O'Fallon, Missouri. Built on uncompromising precision. Driven by integrity.",
       "cta": "Contact Now",
       "phone": "636-449-9714",
       "phoneLabel": "Call for Free Estimate",
       "trustLabel": "Trusted by 500+ Homeowners",
       "stats": [
         {
-          "label": "Veteran Owned",
+          "label": "Locally owned",
           "val": "USA",
           "icon": "ShieldCheck"
         },
@@ -1506,7 +1506,7 @@
       "IKO Pro",
       "Shingle Master",
       "TimberTech",
-      "Veteran Owned",
+      "Locally owned",
       "Contractor Excellence",
       "Wolf Home Products Certified"
     ],
@@ -1514,23 +1514,23 @@
       "badge": "Our Story",
       "headline": "Soaring Beyond Expectations",
       "highlight": "Expectations",
-      "description": "Born in O'Fallon, Missouri. Built on military precision. Driven by integrity.",
+      "description": "Born in O'Fallon, Missouri. Built on uncompromising precision. Driven by integrity.",
       "portrait": {
-        "badgeLeft": "VETERAN OWNED",
+        "badgeLeft": "LOCALLY OWNED",
         "badgeRight": "ProVia ΓÇó IKO ΓÇó CertainTeed ΓÇó Wolf"
       },
       "founder": {
-        "name": "Brandon Anderson",
-        "title": "Founder ΓÇó U.S. Army Veteran ΓÇó Globally Licensed Combat Sports Official",
+        "name": "Elisha Sellers",
+        "title": "Founder & CEO",
         "quote": "RealRoof was built to be more than just a remodeling company. It was built to lead a movement.",
         "bio": [
-          "Based in O'Fallon, Missouri, RealRoof was founded by Brandon Anderson, an Army veteran and globally licensed combat sports official who brings discipline, precision, and accountability to every project. With years of leadership experience at some of the largest home improvement companies in North America, Brandon saw firsthand how the industry had shifted away from homeowners and toward profits, leaving people with high prices, poor communication, and broken trust.",
-          "He knew it didn't have to be that way. RealRoof was created to restore what the industry lostΓÇötrust, craftsmanship, and doing the job right the first time. Today, we stand as a local company built to compete with the biggest names in the country, not through gimmicks, but through transparency, quality work, and a relentless commitment to our customers.",
-          "Our systems are built for precision, but our strength is our peopleΓÇödriven professionals who take ownership, communicate clearly, and treat every home like their own."
+          "Based in O'Fallon, Missouri, RealRoof was founded by Elisha Sellers, a seasoned home improvement professional who brings discipline, precision, and accountability to every project. With years of leadership experience at some of the largest home improvement companies in North America, Elisha saw firsthand how the industry had shifted away from homeowners and toward profits, leaving people with high prices, poor communication, and broken trust.",
+          "Elisha knew it didn't have to be that way. RealRoof was created to restore what the industry lost—trust, craftsmanship, and doing the job right the first time. Today, we stand as a local company built to compete with the biggest names in the country, not through gimmicks, but through transparency, quality work, and a relentless commitment to our customers.",
+          "Our systems are built for precision, but our strength is our people—driven professionals who take ownership, communicate clearly, and treat every home like their own."
         ],
         "secondaryQuote": "This is freedom in construction formΓÇöfreedom from overpriced corporate contractors, freedom from broken promises, and freedom to expect more from your remodeler.",
-        "footer": "ΓÇö Brandon Anderson, CEO",
-        "email": "banderson@RealRoof.com",
+        "footer": "— Elisha Sellers, CEO",
+        "email": "esellers@RealRoof.com",
         "social": {
           "linkedin": "https://www.linkedin.com/company/realroof/people/"
         }
@@ -1557,7 +1557,7 @@
         },
         {
           "value": 100,
-          "label": "Veteran Owned",
+          "label": "Locally owned",
           "suffix": "%",
           "icon": "BadgeCheck",
           "description": "Proudly serving our community"
@@ -1625,7 +1625,7 @@
         },
         {
           "title": "Precision",
-          "desc": "Military-grade accuracy in every detail. From initial measurements to final executionΓÇöwhere craftsmanship meets mathematical certainty.",
+          "desc": "commercial-grade accuracy in every detail. From initial measurements to final executionΓÇöwhere craftsmanship meets mathematical certainty.",
           "val": "04",
           "icon": "Target"
         }
@@ -1635,7 +1635,7 @@
       "badge": "RealRoof",
       "headline": "World Class Capabilities",
       "highlight": "Capabilities",
-      "description": "Every detail matters when it comes to structural integrity. Our team brings military-grade standards to every project across the St. Louis area.",
+      "description": "Every detail matters when it comes to structural integrity. Our team brings commercial-grade standards to every project across the St. Louis area.",
       "cta": "View All Services"
     },
     "values": {
@@ -1690,7 +1690,7 @@
       "badge": "Get Preapproved",
       "headline": "Ready to Start Your Revolution?",
       "highlight": "Revolution?",
-      "description": "Get preapproved in seconds and take the first step toward transforming your home with military precision and unwavering integrity.",
+      "description": "Get preapproved in seconds and take the first step toward transforming your home with uncompromising precision and unwavering integrity.",
       "features": [
         "No Obligation",
         "Free Estimate",
@@ -1858,7 +1858,7 @@
         "videoId": null,
         "duration": null,
         "views": null,
-        "text": "RealRoof did a great job at my house with over 30 window replacements. There was clear, transparent and timely communication through the entire process and the installation went really well. I will recommend Brandon and RealRoof to anyone looking for windows."
+        "text": "RealRoof did a great job at my house with over 30 window replacements. There was clear, transparent and timely communication through the entire process and the installation went really well. I will recommend Elisha and RealRoof to anyone looking for windows."
       },
       {
         "id": 4,
@@ -1869,7 +1869,7 @@
         "videoId": null,
         "duration": null,
         "views": null,
-        "text": "Brandon and his team replaced our roof after storm damage. They handled everything with the insurance company and made the process stress-free. The quality of work is outstanding and the new roof looks amazing!"
+        "text": "Elisha and his team replaced our roof after storm damage. They handled everything with the insurance company and made the process stress-free. The quality of work is outstanding and the new roof looks amazing!"
       },
       {
         "id": 5,
@@ -1894,13 +1894,13 @@
     "section": {
       "badge": "WHY CHOOSE RealRoof",
       "headline": "The Trusted Choice for <span class=\"text-primary\">Exterior Remodeling</span>",
-      "description": "Customers choose RealRoof for their exterior remodeling projects because they trust a local, veteran-owned and operated company that prioritizes quality and reliability."
+      "description": "Customers choose RealRoof for their exterior remodeling projects because they trust a local, Locally-Owned and operated company that prioritizes quality and reliability."
     },
     "features": [
       {
         "icon": "Veteran",
-        "title": "Veteran-Owned & Operated",
-        "description": "We bring military precision, discipline, and integrity to every job. Battlefield discipline meets boardroom precision."
+        "title": "Locally-Owned & Operated",
+        "description": "We bring uncompromising precision, discipline, and integrity to every job. uncompromising discipline meets executive precision."
       },
       {
         "icon": "Experience",
@@ -1955,7 +1955,7 @@
       "title": "Book Your Free Quote <span class=\"text-primary block mt-2\">By End of Month!</span>",
       "description": "Transform your home with St. Louis's expert builders. Contact us today for quality craftsmanship and unparalleled service.",
       "trustBadges": [
-        "Veteran Owned",
+        "Locally owned",
         "Licensed",
         "Bonded",
         "Insured"
@@ -2164,7 +2164,7 @@
     "section": {
       "badge": "GET PREAPPROVED IN SECONDS",
       "headline": "Request Your <span class=\"font-black text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-primary/80\">Free Estimate</span>",
-      "description": "Book your free consultation today and save 15% on your next project. Veteran-owned, quality guaranteed."
+      "description": "Book your free consultation today and save 15% on your next project. Locally-Owned, quality guaranteed."
     },
     "services": [
       {
@@ -2244,7 +2244,7 @@
         "label": "Future (6+ months)"
       }
     ],
-    "email": "banderson@RealRoof.com",
+    "email": "esellers@RealRoof.com",
     "success": {
       "title": "Request Received",
       "message": "Thank you for choosing RealRoof.",
@@ -2256,7 +2256,7 @@
     "company": {
       "name": "RealRoof",
       "tagline": "SOARING BEYOND EXPECTATIONS",
-      "description": "Veteran-owned and operated exterior remodeling company serving St. Louis and surrounding areas. We specialize in roofing, windows, doors, decks, and siding with premium materials and lifetime warranties."
+      "description": "Locally-Owned and operated exterior remodeling company serving St. Louis and surrounding areas. We specialize in roofing, windows, doors, decks, and siding with premium materials and lifetime warranties."
     },
     "services": {
       "title": "Our Services",
@@ -2316,7 +2316,7 @@
     },
     "contact": {
       "title": "Contact Us",
-      "email": "banderson@RealRoof.com",
+      "email": "esellers@RealRoof.com",
       "phone": "636-449-9714",
       "address": "1077 E Terra Ln, O'fallon, MO 63366",
       "emergency": "24/7 Emergency Service Available",
@@ -2324,9 +2324,9 @@
     },
     "certifications": [
       {
-        "cert": "Veteran Owned",
-        "number": "U.S. Army",
-        "icon": "Star"
+        "cert": "Locally Owned",
+        "number": "St. Charles, MO",
+        "icon": "Home"
       },
       {
         "cert": "ProVia",
@@ -2405,7 +2405,7 @@
     ],
     "bottom": {
       "copyright": "┬⌐ 2026 RealRoof",
-      "rights": "Veteran Owned & Operated. All rights reserved.",
+      "rights": "Locally Owned & Operated. All rights reserved.",
       "links": [
         {
           "label": "Privacy Policy",
@@ -2416,11 +2416,11 @@
           "href": "/terms"
         }
       ],
-      "tagline": "VETERAN OWNED ΓÇó INTEGRITY ΓÇó CRAFTSMANSHIP"
+      "tagline": "Locally owned ΓÇó INTEGRITY ΓÇó CRAFTSMANSHIP"
     },
     "marquee": {
       "texts": [
-        "VETERAN OWNED & OPERATED",
+        "Locally Owned & Operated",
         "SOARING BEYOND EXPECTATIONS",
         "50-YEAR TRANSFERABLE WARRANTIES",
         "FREE ESTIMATES"
@@ -2488,7 +2488,7 @@
       "home10": "/src/assets/portfolio4.jpg"
     },
     "team": {
-      "BrandonAnderson": "/src/assets/ownerupdatedimage.jpeg",
+      "ElishaSellers": "/src/assets/ownerupdatedimage.jpeg",
       "ChrissyLong": "/src/assets/Chrissyteam.jpeg",
       "Austin": "/src/assets/Austinteam.jpeg",
       "BrandonSales": "/src/assets/allenteam.jpeg",
@@ -2508,7 +2508,7 @@
   "loader": {
     "company": {
       "name": "RealRoof",
-      "tagline": "Veteran Owned & Operated"
+      "tagline": "Locally Owned & Operated"
     },
     "phases": {
       "simpleDark": 700,
@@ -2572,7 +2572,7 @@
         "icon": "Clock"
       },
       {
-        "text": "Veteran owned",
+        "text": "Locally owned",
         "icon": "Flag"
       }
     ]
@@ -2589,7 +2589,7 @@
         "type": "email",
         "title": "Email Us",
         "description": "Send us a message and we'll respond within 4-8 hours",
-        "value": "banderson@RealRoof.com",
+        "value": "esellers@RealRoof.com",
         "label": "24/7 Support Available",
         "icon": "Mail"
       },
@@ -2604,7 +2604,7 @@
       {
         "type": "location",
         "title": "Visit Us",
-        "description": "Veteran-owned and operated from the heart of Texas",
+        "description": "Locally-Owned and operated from the heart of Texas",
         "value": "OΓÇÖFallon, Missouri 63366",
         "label": "Virtual meetings available",
         "subLabel": "United States",
@@ -2622,7 +2622,7 @@
         "submitting": "Sending..."
       },
       "footer": {
-        "veteran": "Veteran owned & operated",
+        "veteran": "Locally Owned & Operated",
         "confidential": "100% confidential",
         "response": "Response within 4-8 hours"
       }
@@ -2883,7 +2883,7 @@
       "prefix": "REP THE",
       "highlight": "REVOLUTION"
     },
-    "description": "Premium hoodies ΓÇó Tees ΓÇó Hats ΓÇó Bags<br />Made to order ΓÇó Veteran owned"
+    "description": "Premium hoodies ΓÇó Tees ΓÇó Hats ΓÇó Bags<br />Made to order ΓÇó Locally owned"
   },
   "serviceDetailPage": {
     "trustBanner": {
@@ -2993,7 +2993,7 @@
       {
         "icon": "Shield",
         "title": "Lifetime Protection",
-        "description": "Industry-leading warranties backed by our military-grade installation",
+        "description": "Industry-leading warranties backed by our commercial-grade installation",
         "color": "from-green-500/20 to-emerald-500/10"
       }
     ]

@@ -279,7 +279,7 @@ export default function ServicesPageEditor() {
       const stats = [...(prev.services?.stats || [
         { value: "50", suffix: "+", label: "Years Combined Experience", description: "Industry expertise across our team", icon: "Clock" },
         { value: "1,000", suffix: "+", label: "Homes Transformed", description: "Satisfied homeowners", icon: "Home" },
-        { value: "100", suffix: "%", label: "Veteran Owned", description: "Proudly serving our community", icon: "BadgeCheck" },
+        { value: "100", suffix: "%", label: "Locally Owned", description: "Proudly serving our community", icon: "BadgeCheck" },
         { value: "10", suffix: "YR", label: "Year Workmanship Guarantee", description: "Peace of mind guaranteed", icon: "Shield" }
       ])];
       if (!stats[index]) stats[index] = {};
@@ -329,7 +329,7 @@ export default function ServicesPageEditor() {
     backgroundImage: "",
     breadcrumbText: "Services",
     title: "Our Services",
-    description: "Comprehensive home improvement solutions with military precision and architectural excellence."
+    description: "Comprehensive home improvement solutions with uncompromising discipline and architectural excellence."
   };
 
   const statsSection = data.services?.statsSection || {
@@ -346,14 +346,14 @@ export default function ServicesPageEditor() {
   const stats = data.services?.stats || [
     { value: "50", suffix: "+", label: "Years Combined Experience", description: "Industry expertise across our team", icon: "Clock" },
     { value: "1,000", suffix: "+", label: "Homes Transformed", description: "Satisfied homeowners", icon: "Home" },
-    { value: "100", suffix: "%", label: "Veteran Owned", description: "Proudly serving our community", icon: "BadgeCheck" },
+    { value: "100", suffix: "%", label: "Locally Owned", description: "Proudly serving our community", icon: "BadgeCheck" },
     { value: "10", suffix: "YR", label: "Year Workmanship Guarantee", description: "Peace of mind guaranteed", icon: "Shield" }
   ];
 
   const gridSection = data.services?.gridSection || {
     badge: "RealRoof",
     headline: "World Class <span class='text-primary'>Capabilities</span>",
-    description: "Every detail matters when it comes to structural integrity. Our team brings military-grade standards to every project across the St. Louis area."
+    description: "Every detail matters when it comes to structural integrity. Our team brings elite quality standards to every project across the St. Louis area."
   };
 
   const cta = data.services?.cta || {

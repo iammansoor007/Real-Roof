@@ -34,7 +34,7 @@ const AVAILABLE_ICONS = [
   { name: "Shield", label: "Storm Protection", icon: ShieldCheck },
   { name: "Award", label: "Elite / Quality", icon: Award },
   { name: "Clock", label: "Rapid Response", icon: Clock },
-  { name: "BadgeCheck", label: "Veteran Owned", icon: BadgeCheck },
+  { name: "BadgeCheck", label: "Locally Owned", icon: BadgeCheck },
   { name: "TrendingUp", label: "Energy Efficiency", icon: TrendingUp },
   { name: "Star", label: "5-Star Rating", icon: Star },
   { name: "Users", label: "Local Crew", icon: Users },
@@ -61,18 +61,18 @@ export default function ServiceAreaEditor({ pageId, data, setData }: { pageId: s
           ...data,
           hero: data.hero || {
             headline: data.hero?.headline || "Our Service Areas",
-            description: data.hero?.description || "Proudly serving St. Louis, St. Charles, and surrounding Missouri communities with elite, veteran-owned roofing and home improvements.",
+            description: data.hero?.description || "Proudly serving St. Louis, St. Charles, and surrounding Missouri communities with elite, locally-owned roofing and home improvements.",
             image: data.hero?.image || "/images/service-area-hero.jpg"
           },
           stats: data.stats || [
             { value: "15+", label: "Years of Local Expertise" },
             { value: "500+", label: "Premium Roofs Installed" },
-            { value: "100%", label: "Veteran-Owned & Operated" }
+            { value: "100%", label: "Locally-Owned & Operated" }
           ],
           process: data.process || data.processSteps || [
             { title: "Free Inspection", description: "We perform a highly detailed visual inspection of your entire roof, shingle layers, gutters, and attic structure." },
             { title: "Custom Quote", description: "Receive an itemized, fully transparent project quote detailing premium materials, scopes, and warranty parameters." },
-            { title: "Elite Install", description: "Our certified expert crews complete your roofing or siding replacement with ultimate military precision and focus." },
+            { title: "Elite Install", description: "Our certified expert crews complete your roofing or siding replacement with ultimate professional precision and focus." },
             { title: "Final Sign-Off", description: "We execute a deep ground clean-up and a final walkthrough with you to verify that our work exceeds your expectations." }
           ],
           processSection: data.processSection || {
@@ -98,7 +98,7 @@ export default function ServiceAreaEditor({ pageId, data, setData }: { pageId: s
           map: data.map || {
             headline: "Our Coverage Area",
             title: "Our Operational Coverage Map",
-            description: "Centrally dispatched to provide lightning-fast storm response, professional inspections, and veteran-grade roof installations across all primary Missouri counties.",
+            description: "Centrally dispatched to provide lightning-fast storm response, professional inspections, and premium-grade roof installations across all primary Missouri counties.",
             iframeUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d199426.6823901614!2d-90.3835467!3d38.6531004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sSt.+Louis%2C+MO!5e0!3m2!1sen!2sus!4v1700000000000",
             bullet1Title: "Primary Coverage Area",
             bullet1Text: "St. Louis, St. Charles, Jefferson & surrounding communities.",
@@ -132,13 +132,13 @@ export default function ServiceAreaEditor({ pageId, data, setData }: { pageId: s
             items: [
               { title: "Licensed & Fully Insured", description: "Complete compliance for your peace of mind. We hold full general liability, workers' comp, and active licensing across all service counties.", icon: "Shield" },
               { title: "Rapid Storm Dispatch", description: "Expedited emergency tarping and inspections. St. Louis storm damage requires immediate action, and our teams respond directly inside our operational radius.", icon: "Clock" },
-              { title: "Veteran Owned Standards", description: "Applying military precision, honor, and elite craftsmanship to every shingle repair, gutter build, and residential siding replacement.", icon: "Award" }
+              { title: "Elite Quality Standards", description: "Applying uncompromising precision, honor, and elite craftsmanship to every shingle repair, gutter build, and residential siding replacement.", icon: "Award" }
             ]
           },
           overview: data.overview || {
             headline: "Local Overview",
             title: "Elite Roofing & Restoration in This Community",
-            description: "<p>Proudly providing premium residential roofing, standing seam metal builds, siding updates, and gutter cleanups to Missouri homeowners. We combine veteran precision with durable local materials.</p>",
+            description: "<p>Proudly providing premium residential roofing, standing seam metal builds, siding updates, and gutter cleanups to Missouri homeowners. We combine premium precision with durable local materials.</p>",
             buttonText: "Schedule Free Inspection",
             buttonHref: "#contact",
             image: "/images/service-area-overview.jpg"
