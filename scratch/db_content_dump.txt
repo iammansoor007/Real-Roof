@@ -1,0 +1,838 @@
+=== HERO ===
+{
+  "badge": "Commercial & Residential Roofing Partners",
+  "headlines": [
+    {
+      "text": "Scalable Roofing & ",
+      "highlight": false
+    },
+    {
+      "text": "Storm Restoration",
+      "highlight": true
+    },
+    {
+      "text": " Experts",
+      "highlight": false
+    }
+  ],
+  "description": "A highly scalable, professionally managed, multi-state commercial and residential roofing contractor. Specializing in multi-family projects, insurance claims support, and installation partnerships across SC, NC, GA, and TN.",
+  "buttons": [
+    {
+      "text": "Schedule Free Inspection",
+      "primary": true,
+      "link": "/#booking"
+    },
+    {
+      "text": "Instant Estimate",
+      "primary": false,
+      "link": "/#quote"
+    }
+  ],
+  "stats": [
+    {
+      "value": "$10M+",
+      "label": "Saved in Claims"
+    },
+    {
+      "value": "20+",
+      "label": "Years Experience"
+    },
+    {
+      "value": "4",
+      "label": "States Covered"
+    }
+  ],
+  "images": {
+    "background": "/src/assets/bgfair.jpg"
+  },
+  "title": "Welcome to the New RealRoof Database!",
+  "subtitle": "This subtitle proves you are connected to the completely new MongoDB cluster."
+}
+
+=== ABOUT ===
+{
+  "section": {
+    "badge": "Since 2010",
+    "headline": "A Long-Term Strategic Partner",
+    "description": "Real Roof is not just a roofing company. We are a scalable commercial and residential roofing contractor capable of managing multiple installations simultaneously across multiple states."
+  },
+  "features": [
+    {
+      "title": "Insurance Claim Specialists",
+      "description": "Advocating for property owners since 2010 to navigate the complex insurance process."
+    },
+    {
+      "title": "Multi-State Operations",
+      "description": "Built to scale with operations across South Carolina, North Carolina, Georgia, and Tennessee."
+    }
+  ]
+}
+
+=== SERVICES ===
+{
+  "section": {
+    "badge": "Our Core Expertise",
+    "headline": "Large-Scale Capabilities. Premium Quality.",
+    "description": "From multi-family apartment complexes to residential storm restoration, we are operationally built to scale across the Southeast."
+  },
+  "services": [
+    {
+      "id": "commercial-roofing",
+      "title": "Commercial Roofing",
+      "icon": "BuildingOffice2Icon",
+      "description": "Flat roofing systems, TPO, EPDM, and commercial roof coatings designed for large-scale property management.",
+      "features": [
+        {
+          "text": "Flat Roofing Systems",
+          "icon": "CheckCircle"
+        },
+        {
+          "text": "TPO & EPDM",
+          "icon": "CheckCircle"
+        },
+        {
+          "text": "Commercial Coatings",
+          "icon": "CheckCircle"
+        },
+        {
+          "text": "Preventative Maintenance",
+          "icon": "CheckCircle"
+        }
+      ],
+      "slug": "commercial-roofing",
+      "status": "published",
+      "tag": "Roofing",
+      "overview": "Flat roofing systems, TPO, EPDM, and commercial roof coatings designed for large-scale property management.",
+      "tagline": "Expert Solutions",
+      "heroDescription": "Flat roofing systems, TPO, EPDM, and commercial roof coatings designed for large-scale property management.",
+      "breadcrumbText": "Commercial Roofing",
+      "overviewTitlePrefix": "Why Choose",
+      "overviewTitleHighlight": "Commercial Roofing",
+      "overviewTitleSuffix": "?",
+      "cta": {
+        "text": "Get a Quote",
+        "link": "/#quote"
+      },
+      "stats": [],
+      "benefits": [],
+      "process": [],
+      "faq": [],
+      "benefitsDescription": "",
+      "processDescription": "",
+      "overviewImage": "https://res.cloudinary.com/dytytwyp6/image/upload/v1780658900/blnonoikuqmr9ugf20js.jpg",
+      "seo": {},
+      "number": "05"
+    },
+    {
+      "id": "multi-family-roofing",
+      "title": "Multi-Family Roofing",
+      "icon": "HomeModernIcon",
+      "description": "Expert coordination for occupied properties, vendor management, and large-scale scheduling capabilities.",
+      "features": [
+        {
+          "text": "Tenant Coordination",
+          "icon": "CheckCircle"
+        },
+        {
+          "text": "Budget Planning",
+          "icon": "CheckCircle"
+        },
+        {
+          "text": "Large-Scale Scheduling",
+          "icon": "CheckCircle"
+        },
+        {
+          "text": "Fast Project Turnaround",
+          "icon": "CheckCircle"
+        }
+      ],
+      "slug": "multi-family-roofing",
+      "status": "published",
+      "tag": "Roofing",
+      "overview": "Expert coordination for occupied properties, vendor management, and large-scale scheduling capabilities.",
+      "tagline": "Expert Solutions",
+      "heroDescription": "Expert coordination for occupied properties, vendor management, and large-scale scheduling capabilities.",
+      "breadcrumbText": "Multi-Family Roofing",
+      "overviewTitlePrefix": "Why Choose",
+      "overviewTitleHighlight": "Multi-Family Roofing",
+      "overviewTitleSuffix": "?",
+      "cta": {
+        "text": "Get a Quote",
+        "link": "/#quote"
+      },
+      "stats": [],
+      "benefits": [],
+      "process": [],
+      "faq": [],
+      "benefitsDescription": "",
+      "processDescription": "",
+      "overviewImage": "https://res.cloudinary.com/dytytwyp6/image/upload/v1780658942/addtmyw3mpcoyypq2duq.jpg",
+      "seo": {},
+      "number": "05"
+    },
+    {
+      "id": "storm-restoration",
+      "title": "Storm Restoration & Claims",
+      "icon": "CloudIcon",
+      "description": "We've saved local property owners over $10 million in out-of-pocket expenses through insurance claims assistance.",
+      "features": [
+        {
+          "text": "Wind & Hail Damage",
+          "icon": "CheckCircle"
+        },
+        {
+          "text": "Insurance Process Support",
+          "icon": "CheckCircle"
+        },
+        {
+          "text": "Emergency Tarping",
+          "icon": "CheckCircle"
+        },
+        {
+          "text": "Claims Negotiation",
+          "icon": "CheckCircle"
+        }
+      ],
+      "slug": "storm-restoration",
+      "status": "published",
+      "tag": "Roofing",
+      "overview": "We've saved local property owners over $10 million in out-of-pocket expenses through insurance claims assistance.",
+      "tagline": "Expert Solutions",
+      "heroDescription": "We've saved local property owners over $10 million in out-of-pocket expenses through insurance claims assistance.",
+      "breadcrumbText": "Storm Restoration & Claims",
+      "overviewTitlePrefix": "Why Choose",
+      "overviewTitleHighlight": "Storm Restoration & Claims",
+      "overviewTitleSuffix": "?",
+      "cta": {
+        "text": "Get a Quote",
+        "link": "/#quote"
+      },
+      "stats": [],
+      "benefits": [],
+      "process": [],
+      "faq": [],
+      "benefitsDescription": "",
+      "processDescription": "",
+      "overviewImage": "https://res.cloudinary.com/dytytwyp6/image/upload/v1780658978/bzf3oj6ll89f7ktjzcro.jpg",
+      "seo": {},
+      "number": "05"
+    },
+    {
+      "id": "installation-partnerships",
+      "title": "Installation Partnerships",
+      "icon": "UserGroupIcon",
+      "description": "Providing white-label scalable installation solutions for other roofing and restoration companies.",
+      "features": [
+        {
+          "text": "Multi-State Scheduling",
+          "icon": "CheckCircle"
+        },
+        {
+          "text": "Licensed & Insured",
+          "icon": "CheckCircle"
+        },
+        {
+          "text": "Crew Management",
+          "icon": "CheckCircle"
+        },
+        {
+          "text": "Overflow Support",
+          "icon": "CheckCircle"
+        }
+      ],
+      "slug": "installation-partnerships",
+      "status": "published",
+      "tag": "Roofing",
+      "overview": "Providing white-label scalable installation solutions for other roofing and restoration companies.",
+      "tagline": "Expert Solutions",
+      "heroDescription": "Providing white-label scalable installation solutions for other roofing and restoration companies.",
+      "breadcrumbText": "Installation Partnerships",
+      "overviewTitlePrefix": "Why Choose",
+      "overviewTitleHighlight": "Installation Partnerships",
+      "overviewTitleSuffix": "?",
+      "cta": {
+        "text": "Get a Quote",
+        "link": "/#quote"
+      },
+      "stats": [],
+      "benefits": [],
+      "process": [],
+      "faq": [],
+      "benefitsDescription": "",
+      "processDescription": "",
+      "overviewImage": "https://res.cloudinary.com/dytytwyp6/image/upload/v1780658960/twyniclcplxsg9wegwus.jpg",
+      "seo": {},
+      "number": "05"
+    }
+  ]
+}
+
+=== LEADERSHIP ===
+{
+  "section": {
+    "badge": "Our Leadership",
+    "headline": "Locally-Owned & <span class=\"font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80\">Mission-Driven</span>",
+    "description": "uncompromising discipline meets executive precision. RealRoof brings honor, integrity, and craftsmanship back to the remodeling industry."
+  },
+  "ceo": {
+    "name": "Elisha Sellers",
+    "title": "Founder & CEO",
+    "image": "elisha",
+    "alt": "Elisha Sellers - Founder, RealRoof",
+    "badges": {
+      "top": "LOCALLY OWNED",
+      "bottom": "ProVia ΓÇó IKO ΓÇó CertainTeed ΓÇó Wolf"
+    },
+    "quotes": [
+      "RealRoof was built to be more than just a remodeling company. It was built to lead a movement."
+    ],
+    "description": [
+      "Based in O'Fallon, Missouri, RealRoof was founded by Elisha Sellers, a seasoned home improvement professional who brings discipline, precision, and accountability to every project. With years of leadership experience at some of the largest home improvement companies in North America, Elisha saw firsthand how the industry had shifted away from homeowners and toward profits, leaving people with high prices, poor communication, and broken trust.",
+      "Elisha knew it didn't have to be that way. RealRoof was created to restore what the industry lost—trust, craftsmanship, and doing the job right the first time. Today, we stand as a local company built to compete with the biggest names in the country, not through gimmicks, but through transparency, quality work, and a relentless commitment to our customers.",
+      "Our systems are built for precision, but our strength is our people—driven professionals who take ownership, communicate clearly, and treat every home like their own."
+    ],
+    "social": {
+      "linkedin": "#",
+      "email": "esellers@RealRoof.com"
+    }
+  }
+}
+
+=== WHY CHOOSE US ===
+{
+  "section": {
+    "badge": "WHY CHOOSE RealRoof",
+    "headline": "The Trusted Choice for <span class=\"text-primary\">Exterior Remodeling</span>",
+    "description": "Customers choose RealRoof for their exterior remodeling projects because they trust a local, Locally-Owned and operated company that prioritizes quality and reliability."
+  },
+  "features": [
+    {
+      "icon": "Veteran",
+      "title": "Locally-Owned & Operated",
+      "description": "We bring uncompromising precision, discipline, and integrity to every job. uncompromising discipline meets executive precision."
+    },
+    {
+      "icon": "Experience",
+      "title": "50+ Years Combined Experience",
+      "description": "Our leadership and crews deliver consistent excellence across every project with decades of industry expertise."
+    },
+    {
+      "icon": "Warranty",
+      "title": "Lifetime & Transferable Warranties",
+      "description": "Premium products backed by 50-year transferable warranties and a Ten-Year Workmanship Guarantee on every project."
+    },
+    {
+      "icon": "Financing",
+      "title": "Easy & Affordable Financing",
+      "description": "Flexible financing options and payment plans make high-quality exterior upgrades accessible for all homeowners."
+    },
+    {
+      "icon": "Certified",
+      "title": "Certified Expertise",
+      "description": "ProVia Certified Installer, IKO Certified Pro, CertainTeed Certified Shingle Master, and Wolf Home Products Certified Installers."
+    },
+    {
+      "icon": "Community",
+      "title": "Community Commitment",
+      "description": "We give back through local initiatives and donate a free roof every year to a family in need."
+    }
+  ],
+  "stats": [
+    {
+      "value": "500",
+      "suffix": "+",
+      "label": "Projects"
+    },
+    {
+      "value": "50",
+      "suffix": "+",
+      "label": "Years Combined"
+    },
+    {
+      "value": "100",
+      "suffix": "%",
+      "label": "Satisfaction"
+    },
+    {
+      "value": "Lifetime",
+      "suffix": "",
+      "label": "Warranty"
+    }
+  ],
+  "cta": {
+    "badge": "15% OFF",
+    "title": "Book Your Free Quote <span class=\"text-primary block mt-2\">By End of Month!</span>",
+    "description": "Transform your home with St. Louis's expert builders. Contact us today for quality craftsmanship and unparalleled service.",
+    "trustBadges": [
+      "Locally owned",
+      "Licensed",
+      "Bonded",
+      "Insured"
+    ],
+    "buttons": [
+      {
+        "text": "Get Free Estimate",
+        "href": "#contact",
+        "primary": true
+      },
+      {
+        "text": "View Gallery",
+        "href": "#portfolio",
+        "primary": false
+      }
+    ]
+  }
+}
+
+=== TESTIMONIALS ===
+{
+  "section": {
+    "badge": "Client Testimonials",
+    "headline": "What Our Clients Say",
+    "description": "Real stories from real clients about their experience with RealRoof",
+    "featured": "Rated on Google"
+  },
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Jason K.",
+      "position": "Homeowner",
+      "company": "St. Louis",
+      "avatar": "JK",
+      "videoId": null,
+      "duration": null,
+      "views": null,
+      "text": "RealRoof is top-notch. The owner is one of the hardest-working, most professional people you'll meet. His attention to detail and pride in his work really stand out ΓÇö you can tell he truly cares about doing things the right way. He's reliable, respectful, and easy to work with ΓÇö the kind of person you can trust to get the job done right."
+    },
+    {
+      "id": 2,
+      "name": "Nathan Gearing",
+      "position": "Homeowner",
+      "company": "St. Charles",
+      "avatar": "NG",
+      "videoId": null,
+      "duration": null,
+      "views": null,
+      "text": "I had the pleasure of working with RealRoof for a recent construction project, and I couldn't be more impressed with their professionalism, quality of work, and attention to detail. From the initial consultation to project completion, the team was communicative, punctual, and dedicated to getting the job done right."
+    },
+    {
+      "id": 3,
+      "name": "Lucas Barth",
+      "position": "Homeowner",
+      "company": "O'Fallon",
+      "avatar": "LB",
+      "videoId": null,
+      "duration": null,
+      "views": null,
+      "text": "RealRoof did a great job at my house with over 30 window replacements. There was clear, transparent and timely communication through the entire process and the installation went really well. I will recommend Elisha and RealRoof to anyone looking for windows."
+    },
+    {
+      "id": 4,
+      "name": "Sarah Mitchell",
+      "position": "Homeowner",
+      "company": "St. Louis County",
+      "avatar": "SM",
+      "videoId": null,
+      "duration": null,
+      "views": null,
+      "text": "Elisha and his team replaced our roof after storm damage. They handled everything with the insurance company and made the process stress-free. The quality of work is outstanding and the new roof looks amazing!"
+    },
+    {
+      "id": 5,
+      "name": "Mike Thompson",
+      "position": "Business Owner",
+      "company": "St. Peters",
+      "avatar": "MT",
+      "videoId": null,
+      "duration": null,
+      "views": null,
+      "text": "We hired RealRoof for a commercial TPO roof installation. Professional, on time, and within budget. Highly recommend their commercial roofing services."
+    }
+  ],
+  "videos": [],
+  "stats": {
+    "subscribers": "500+",
+    "views": "100K+",
+    "totalVideos": "50"
+  }
+}
+
+=== FAQ ===
+{
+  "section": {
+    "badge": "Knowledge Base",
+    "headline": "Frequently Asked Questions",
+    "description": "Answers to common questions about our exterior remodeling services in St. Louis."
+  },
+  "labels": {
+    "noResults": "No questions found matching your criteria.",
+    "clearFilters": "Clear filters",
+    "searchPlaceholder": "Search questions..."
+  },
+  "categories": [
+    {
+      "id": "all",
+      "label": "All Questions",
+      "icon": null
+    },
+    {
+      "id": "general",
+      "label": "General",
+      "icon": "Home"
+    },
+    {
+      "id": "roofing",
+      "label": "Roofing",
+      "icon": "Home"
+    },
+    {
+      "id": "windows",
+      "label": "Windows & Doors",
+      "icon": "Layout"
+    },
+    {
+      "id": "decks",
+      "label": "Decks",
+      "icon": "TreePine"
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "category": "general",
+      "question": "What services do you offer?",
+      "answer": "We offer a range of services including residential roofing, commercial roofing, vinyl windows, entry doors, custom decks, siding, soffit, fascia, and gutters. We're your complete exterior remodeling solution in St. Louis.",
+      "metadata": [
+        {
+          "label": "Services",
+          "value": "Roofing, Windows, Decks, Siding"
+        }
+      ],
+      "links": [
+        {
+          "label": "View all services",
+          "url": "/services"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "category": "general",
+      "question": "Do you provide free estimates?",
+      "answer": "Yes, we provide free inspections and estimates for all projects. Book your free quote today and get 15% off your project if you schedule by the end of the month!",
+      "metadata": [
+        {
+          "label": "Service",
+          "value": "Free estimates"
+        }
+      ],
+      "links": [
+        {
+          "label": "Get free estimate",
+          "url": "/estimate"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "category": "general",
+      "question": "Are you licensed and insured?",
+      "answer": "Absolutely. We are fully licensed, bonded, and insured to ensure you receive professional and secure services. We're also IKO Certified Pro, CertainTeed Certified Shingle Master, and ProVia Certified Installers.",
+      "metadata": [
+        {
+          "label": "Status",
+          "value": "Licensed  & Bonded & Insured"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": 4,
+      "category": "general",
+      "question": "Do you offer financing or payment plans?",
+      "answer": "Yes, we offer flexible financing options and convenient payment plans to make your project affordable and stress-free. We partner with some of the largest financing companies in the country to provide easy approval options.",
+      "metadata": [
+        {
+          "label": "Financing",
+          "value": "Available"
+        }
+      ],
+      "links": [
+        {
+          "label": "Get preapproved",
+          "url": "/financing"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "category": "roofing",
+      "question": "How long does a roof replacement take?",
+      "answer": "Most residential roof replacements are completed within 1-3 days, depending on the size of your home and weather conditions. Larger or commercial projects may take longer. We'll provide a detailed timeline during your free estimate.",
+      "metadata": [
+        {
+          "label": "Timeline",
+          "value": "1-3 days"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": 6,
+      "category": "roofing",
+      "question": "What warranties do you offer on roofing?",
+      "answer": "We install premium materials backed by 50-year transferable manufacturer warranties. Additionally, every project includes our Ten-Year Workmanship Guarantee, giving you peace of mind long after installation.",
+      "metadata": [
+        {
+          "label": "Warranty",
+          "value": "50-year + Workmanship"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": 7,
+      "category": "windows",
+      "question": "What types of windows do you install?",
+      "answer": "We install premium vinyl windows including double-hung, casement, sliding, and bay windows. As ProVia Certified Installers, we ensure professional installation and energy-efficient products that reduce your utility bills.",
+      "metadata": [
+        {
+          "label": "Types",
+          "value": "Vinyl, Double-hung, Casement"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": 8,
+      "category": "decks",
+      "question": "What decking materials do you use?",
+      "answer": "As  Wolf Home Products Certified installers, we specialize in premium composite decking that offers durability, low maintenance, and beautiful aesthetics. We also offer pressure-treated wood options for traditional decks.",
+      "metadata": [
+        {
+          "label": "Materials",
+          "value": "Composite, Wood"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": 9,
+      "category": "general",
+      "question": "What areas do you serve?",
+      "answer": "We serve Missouri (St. Louis County, St. Louis City, St. Charles County, Jefferson County, Franklin County) and Illinois (Saint Clair County, Monroe County, Madison County).",
+      "metadata": [
+        {
+          "label": "Service Area",
+          "value": "Greater St. Louis Region"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": 10,
+      "category": "general",
+      "question": "Can you handle large-scale projects?",
+      "answer": "Yes, we have the expertise and resources to handle both small and large-scale construction projects. We have a proven track record working with large federal roofing and construction projects.",
+      "metadata": [
+        {
+          "label": "Capacity",
+          "value": "Small to Large Scale"
+        }
+      ],
+      "links": []
+    }
+  ]
+}
+
+=== FOOTER ===
+{
+  "company": {
+    "name": "RealRoof",
+    "tagline": "SOARING BEYOND EXPECTATIONS",
+    "description": "Locally-Owned and operated exterior remodeling company serving St. Louis and surrounding areas. We specialize in roofing, windows, doors, decks, and siding with premium materials and lifetime warranties."
+  },
+  "services": {
+    "title": "Our Services",
+    "main": [
+      {
+        "label": "Residential Roofing",
+        "href": "/services/residential-roofing",
+        "icon": "Home"
+      },
+      {
+        "label": "Windows & Doors",
+        "href": "/services/windows-doors",
+        "icon": "Layout"
+      },
+      {
+        "label": "Custom Decks",
+        "href": "/services/custom-decks",
+        "icon": "TreePine"
+      },
+      {
+        "label": "Siding, Soffit & Fascia",
+        "href": "/services/siding-soffit-fascia",
+        "icon": "Building2"
+      },
+      {
+        "label": "Commercial Roofing",
+        "href": "/services/commercial-roofing",
+        "icon": "Building"
+      },
+      {
+        "label": "Gutters & Protection",
+        "href": "/services/gutters-protection",
+        "icon": "Droplets"
+      }
+    ],
+    "materials": {
+      "title": "Company",
+      "items": [
+        {
+          "label": "About Us",
+          "href": "/about"
+        },
+        {
+          "label": "Gallery",
+          "href": "/gallery"
+        },
+        {
+          "label": "Reviews",
+          "href": "/reviews"
+        },
+        {
+          "label": "FAQ",
+          "href": "/faq"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "email": "esellers@RealRoof.com",
+    "phone": "636-449-9714",
+    "address": "1077 E Terra Ln, O'fallon, MO 63366",
+    "emergency": "24/7 Emergency Service Available",
+    "areas": "Serving Missouri: St. Louis County, St. Louis City, St. Charles County, Jefferson County, Franklin County • Illinois: Saint Clair County, Monroe County, Madison County"
+  },
+  "certifications": [
+    {
+      "cert": "Locally Owned",
+      "number": "St. Charles, MO",
+      "icon": "Home"
+    },
+    {
+      "cert": "ProVia",
+      "number": "Certified Installer",
+      "icon": "Warranty"
+    },
+    {
+      "cert": "IKO",
+      "number": "Certified Pro",
+      "icon": "Warranty"
+    },
+    {
+      "cert": "CertainTeed",
+      "number": "SELECT ShingleMaster",
+      "icon": "Warranty"
+    },
+    {
+      "cert": "Wolf",
+      "number": "Home Products Certified",
+      "icon": "Warranty"
+    },
+    {
+      "cert": "NRCA",
+      "number": "Member",
+      "icon": "Warranty"
+    }
+  ],
+  "quickLinks": [
+    {
+      "label": "About Us",
+      "href": "/about",
+      "icon": "Users"
+    },
+    {
+      "label": "Gallery",
+      "href": "/gallery",
+      "icon": "Image"
+    },
+    {
+      "label": "Reviews",
+      "href": "/reviews",
+      "icon": "Star"
+    },
+    {
+      "label": "FAQ",
+      "href": "/faq",
+      "icon": "MessageSquare"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact",
+      "icon": "Phone"
+    }
+  ],
+  "social": [
+    {
+      "platform": "Facebook",
+      "icon": "Facebook",
+      "href": "https://www.facebook.com/profile.php?id=61564977483096"
+    },
+    {
+      "platform": "Instagram",
+      "icon": "Instagram",
+      "href": "https://www.instagram.com/eagle_revolutionllc"
+    },
+    {
+      "platform": "LinkedIn",
+      "icon": "Linkedin",
+      "href": "https://www.linkedin.com/company/realroof/people/"
+    },
+    {
+      "platform": "X (Twitter)",
+      "icon": "Twitter",
+      "href": "https://x.com/Eagle_Rev_LLC"
+    }
+  ],
+  "bottom": {
+    "copyright": "┬⌐ 2026 RealRoof",
+    "rights": "Locally Owned & Operated. All rights reserved.",
+    "links": [
+      {
+        "label": "Privacy Policy",
+        "href": "/privacy"
+      },
+      {
+        "label": "Terms of Service",
+        "href": "/terms"
+      }
+    ],
+    "tagline": "Locally owned ΓÇó INTEGRITY ΓÇó CRAFTSMANSHIP"
+  },
+  "marquee": {
+    "texts": [
+      "Locally Owned & Operated",
+      "SOARING BEYOND EXPECTATIONS",
+      "50-YEAR TRANSFERABLE WARRANTIES",
+      "FREE ESTIMATES"
+    ],
+    "speed": 30,
+    "repeats": 8
+  },
+  "newsletter": {
+    "placeholder": "Enter your email",
+    "buttonText": "Subscribe"
+  }
+}
+
+=== SETTINGS ===
+{
+  "siteTitle": "RealRoof",
+  "siteTemplate": "%s | RealRoof",
+  "favicon": "https://res.cloudinary.com/dytytwyp6/image/upload/v1780656566/r8zwiv99k2cy2rtbsywi.png",
+  "homepageId": "69fb1c081f5a51c8e483c600"
+}
+

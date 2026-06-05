@@ -211,7 +211,7 @@ export default function GalleryTemplate({ pageData, params }: { pageData?: any; 
           transition={{ delay: 0.2 }}
         >
           <RichTextRenderer
-            content={galleryPage?.header?.description || "Browse our completed projects across St. Louis."}
+            content={galleryPage?.header?.description || "Browse our completed projects across the Southeast."}
             className="text-muted-foreground text-lg max-w-2xl mx-auto"
           />
         </motion.div>

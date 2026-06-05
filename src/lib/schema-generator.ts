@@ -43,31 +43,27 @@ export function generateSchema(options: SchemaOptions) {
     "@id": `${BASE_URL}/#localbusiness`,
     "name": "RealRoof",
     "image": `${BASE_URL}/realrooflogo.webp`,
-    "telePhone": "636-449-9714",
+    "telePhone": "864-558-7663",
     "email": "esellers@RealRoof.com",
     "url": BASE_URL,
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "1077 E Terra Ln",
-      "addressLocality": "O'fallon",
-      "addressRegion": "MO",
-      "postalCode": "63366",
+      "streetAddress": "300 E McBee Ave",
+      "addressLocality": "Greenville",
+      "addressRegion": "SC",
+      "postalCode": "29601",
       "addressCountry": "US"
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 38.8105,
-      "longitude": -90.6998
+      "latitude": 34.8526,
+      "longitude": -82.3940
     },
     "areaServed": [
-      { "@type": "AdministrativeArea", "name": "St. Louis County" },
-      { "@type": "AdministrativeArea", "name": "St. Louis City" },
-      { "@type": "AdministrativeArea", "name": "St. Charles County" },
-      { "@type": "AdministrativeArea", "name": "Jefferson County" },
-      { "@type": "AdministrativeArea", "name": "Franklin County" },
-      { "@type": "AdministrativeArea", "name": "Saint Clair County" },
-      { "@type": "AdministrativeArea", "name": "Monroe County" },
-      { "@type": "AdministrativeArea", "name": "Madison County" }
+      { "@type": "AdministrativeArea", "name": "South Carolina" },
+      { "@type": "AdministrativeArea", "name": "North Carolina" },
+      { "@type": "AdministrativeArea", "name": "Georgia" },
+      { "@type": "AdministrativeArea", "name": "Tennessee" }
     ],
     "priceRange": "$$"
   };

@@ -649,7 +649,7 @@ export default function PageInlineFaqs({ faqs }: { faqs?: any[] }) {
             Frequently Asked Questions
           </h2>
           <p className="text-muted-foreground text-base md:text-lg">
-            Answers to common questions about our exterior remodeling services in St. Louis.
+            Answers to common questions about our commercial & residential roofing services.
           </p>
           <div className="w-16 h-0.5 bg-gradient-to-r from-primary to-primary/60 mx-auto mt-6 rounded-full" />
         </div>

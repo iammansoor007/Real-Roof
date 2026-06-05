@@ -42,7 +42,7 @@ const Mission = () => {
           <h2 className="heading-lg text-foreground mb-8 mission-headline">Soaring Beyond<br />Expectations.</h2>
           <div className="space-y-6">
             <p className="body-lg text-foreground/90 mission-copy">RealRoof was founded to do more than just build roofs, windows, decks, and siding. We are here to build a movement.</p>
-            <p className="body-sm text-muted-foreground mission-copy">Born in St. Charles, Missouri, RealRoof was launched by Elisha Sellers, a seasoned home improvement professional who brings uncompromising discipline and executive precision to every project.</p>
+            <p className="body-sm text-muted-foreground mission-copy">Headquartered in Greenville, South Carolina, RealRoof was launched by Elisha Sellers, a seasoned home improvement professional who brings uncompromising discipline and executive precision to every project.</p>
             <p className="body-sm text-muted-foreground mission-copy italic border-l-2 border-primary/30 pl-4">"We don't just build homes. We restore trust, craftsmanship, and honor to the remodeling industry."</p>
           </div>
         </div>

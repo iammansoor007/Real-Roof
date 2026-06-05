@@ -543,7 +543,7 @@ const Footer = () => {
               </h4>
               <div className="relative w-full aspect-square lg:aspect-auto lg:h-[350px] rounded-2xl overflow-hidden border border-border shadow-2xl group transition-all duration-500 hover:border-primary/30">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3109.2535729046463!2d-90.68510192536498!3d38.803742752226945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa84c3b8dec6bf3f%3A0x18a7936317172933!2sEagle%20Revolution!5e0!3m2!1sen!2s!4v1778495491394!5m2!1sen!2s" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d209673.86477042077!2d-82.4770281!3d34.8329618!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88582b6c9b58adcf%3A0x7d0ea3ef841cf434!2sGreenville%2C+SC!5e0!3m2!1sen!2sus!4v1700000000000" 
                   width="100%" 
                   height="100%" 
                   style={{ border: 0 }} 
@@ -555,7 +555,7 @@ const Footer = () => {
                 <div className="absolute inset-0 pointer-events-none border-[12px] border-background/20 rounded-2xl" />
               </div>
               <p className="text-[10px] text-muted-foreground font-mono mt-2">
-                1077 E Terra Ln, O&apos;Fallon, MO 63366
+                300 E McBee Ave, Greenville, SC 29601
               </p>
             </div>
           </div>

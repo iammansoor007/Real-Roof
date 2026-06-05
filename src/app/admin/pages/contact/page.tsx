@@ -150,7 +150,7 @@ export default function ContactEditor() {
                                 type="text"
                                 value={data.contactPage?.info?.address || ""}
                                 onChange={(e) => setData((prev: any) => ({ ...prev, contactPage: { ...(prev.contactPage || {}), info: { ...(prev.contactPage?.info || {}), address: e.target.value } } }))}
-                                placeholder="e.g. St. Louis, MO"
+                                placeholder="e.g. Greenville, SC"
                                 className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm focus:border-primary/50 focus:outline-none transition-all shadow-inner"
                             />
                         </div>

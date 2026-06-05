@@ -5,11 +5,7 @@ const nextConfig: NextConfig = {
   compress: true,
 
   images: {
-    // Serve modern formats (AVIF first, WebP fallback)
     formats: ["image/avif", "image/webp"],
-    // Good quality with smaller file size
-    quality: 80,
-    // Aggressive caching - 30 days
     minimumCacheTTL: 2592000,
     remotePatterns: [
       {
@@ -46,4 +42,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default nextConfig;

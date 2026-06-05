@@ -61,7 +61,7 @@ export default function ServiceAreaEditor({ pageId, data, setData }: { pageId: s
           ...data,
           hero: data.hero || {
             headline: data.hero?.headline || "Our Service Areas",
-            description: data.hero?.description || "Proudly serving St. Louis, St. Charles, and surrounding Missouri communities with elite, locally-owned roofing and home improvements.",
+            description: data.hero?.description || "Proudly serving Upstate South Carolina, Midlands South Carolina, and surrounding communities with elite, locally-owned commercial & residential roofing.",
             image: data.hero?.image || "/images/service-area-hero.jpg"
           },
           stats: data.stats || [
@@ -81,14 +81,19 @@ export default function ServiceAreaEditor({ pageId, data, setData }: { pageId: s
           },
           regions: data.regions || [
             {
-              name: "St. Louis County",
-              cities: ["Chesterfield", "Wildwood", "Ballwin", "Kirkwood", "Webster Groves", "Florissant", "Hazelwood", "Maryland Heights", "Eureka", "Fenton", "Ladue", "Clayton"],
-              zipcodes: ["63017", "63005", "63011", "63021", "63122", "63119", "63031", "63042", "63043", "63025", "63026", "63124", "63105"]
+              name: "Upstate South Carolina",
+              cities: ["Greenville", "Spartanburg", "Greer", "Anderson", "Clemson", "Easley", "Simpsonville", "Taylors", "Wade Hampton", "Mauldin"],
+              zipcodes: ["29601", "29602", "29603", "29604", "29605", "29607", "29609", "29615", "29301", "29302", "29303"]
             },
             {
-              name: "St. Charles County",
-              cities: ["St. Charles", "St. Peters", "O'Fallon", "Wentzville", "Lake St. Louis", "Cottleville", "Weldon Spring", "Defiance"],
-              zipcodes: ["63301", "63303", "63304", "63376", "63366", "63368", "63385", "63367"]
+              name: "Midlands South Carolina",
+              cities: ["Columbia", "Lexington", "Irmo", "Forest Acres", "Cayce", "West Columbia"],
+              zipcodes: ["29201", "29202", "29203", "29204", "29205", "29206", "29209", "29063", "29072"]
+            },
+            {
+              name: "Tennessee Region",
+              cities: ["Nashville", "Knoxville", "Chattanooga"],
+              zipcodes: ["37201", "37203", "37204", "37901", "37902", "37401", "37402"]
             }
           ],
           regionsSection: data.regionsSection || {
@@ -98,14 +103,14 @@ export default function ServiceAreaEditor({ pageId, data, setData }: { pageId: s
           map: data.map || {
             headline: "Our Coverage Area",
             title: "Our Operational Coverage Map",
-            description: "Centrally dispatched to provide lightning-fast storm response, professional inspections, and premium-grade roof installations across all primary Missouri counties.",
-            iframeUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d199426.6823901614!2d-90.3835467!3d38.6531004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sSt.+Louis%2C+MO!5e0!3m2!1sen!2sus!4v1700000000000",
+            description: "Centrally dispatched to provide lightning-fast storm response, professional inspections, and premium-grade roof installations across all primary Southeast regions.",
+            iframeUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d209673.86477042077!2d-82.4770281!3d34.8329618!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88582b6c9b58adcf%3A0x7d0ea3ef841cf434!2sGreenville%2C+SC!5e0!3m2!1sen!2sus!4v1700000000000",
             bullet1Title: "Primary Coverage Area",
-            bullet1Text: "St. Louis, St. Charles, Jefferson & surrounding communities.",
+            bullet1Text: "South Carolina, North Carolina, Georgia, & Tennessee.",
             bullet2Title: "Operation Hours",
             bullet2Text: "Mon - Sat: 7:00 AM - 6:00 PM (Emergency storm response 24/7)",
             bullet3Title: "Direct Office Hotline",
-            bullet3Text: "(636) 293-9977"
+            bullet3Text: "(864) 558-7663"
           },
           materials: data.materials || {
             headline: "Certified Excellence",
@@ -122,23 +127,23 @@ export default function ServiceAreaEditor({ pageId, data, setData }: { pageId: s
             title: "Services We Provide in This Area",
             items: [
               { title: "Residential Roofing", description: "Pristine asphalt shingle and standing seam metal roof replacements designed for ultimate local storm immunity.", buttonText: "Explore Service", buttonHref: "/services/residential-roofing", icon: "Home" },
-              { title: "Commercial Roofing", description: "Heavy-duty TPO, EPDM, and flat roof coatings configured for Missouri commercial properties and corporate facilities.", buttonText: "Explore Service", buttonHref: "/services/commercial-roofing", icon: "Building" },
+              { title: "Commercial Roofing", description: "Heavy-duty TPO, EPDM, and flat roof coatings configured for Southeast commercial properties and corporate facilities.", buttonText: "Explore Service", buttonHref: "/services/commercial-roofing", icon: "Building" },
               { title: "Seamless Gutters", description: "Custom on-site rolled high-capacity aluminum gutter installations to secure proper rain drainage controls.", buttonText: "Explore Service", buttonHref: "/services/seamless-gutters", icon: "Droplets" }
             ]
           },
           whyChoose: data.whyChoose || {
             headline: "Why Choose Us",
-            title: "Elite Missouri Roofing Quality",
+            title: "Elite Southeast Roofing Quality",
             items: [
               { title: "Licensed & Fully Insured", description: "Complete compliance for your peace of mind. We hold full general liability, workers' comp, and active licensing across all service counties.", icon: "Shield" },
-              { title: "Rapid Storm Dispatch", description: "Expedited emergency tarping and inspections. St. Louis storm damage requires immediate action, and our teams respond directly inside our operational radius.", icon: "Clock" },
-              { title: "Elite Quality Standards", description: "Applying uncompromising precision, honor, and elite craftsmanship to every shingle repair, gutter build, and residential siding replacement.", icon: "Award" }
+              { title: "Rapid Storm Dispatch", description: "Expedited emergency tarping and inspections. Storm damage requires immediate action, and our teams respond directly inside our operational radius.", icon: "Clock" },
+              { title: "Elite Quality Standards", description: "Applying uncompromising precision, honor, and elite craftsmanship to every shingle repair, gutter build, and replacement project.", icon: "Award" }
             ]
           },
           overview: data.overview || {
             headline: "Local Overview",
             title: "Elite Roofing & Restoration in This Community",
-            description: "<p>Proudly providing premium residential roofing, standing seam metal builds, siding updates, and gutter cleanups to Missouri homeowners. We combine premium precision with durable local materials.</p>",
+            description: "<p>Proudly providing premium residential roofing, standing seam metal builds, siding updates, and gutter cleanups to Southeast homeowners. We combine premium precision with durable local materials.</p>",
             buttonText: "Schedule Free Inspection",
             buttonHref: "#contact",
             image: "/images/service-area-overview.jpg"
@@ -914,7 +919,7 @@ export default function ServiceAreaEditor({ pageId, data, setData }: { pageId: s
                                 updateField("regions", null, newRegions);
                               }}
                               className={UI.input + " font-bold"}
-                              placeholder="e.g. St. Louis County"
+                              placeholder="e.g. Upstate South Carolina"
                             />
                           </div>
 
@@ -941,7 +946,7 @@ export default function ServiceAreaEditor({ pageId, data, setData }: { pageId: s
                               }}
                               className={UI.textarea}
                               rows={2}
-                              placeholder="63017, 63005, 63011, 63021"
+                              placeholder="29601, 29602, 29607, 29201"
                             />
                             <p className="text-[10px] text-slate-400 mt-1">Separate zip codes with commas. Used for coverage verification lookup.</p>
                           </div>
@@ -971,7 +976,7 @@ export default function ServiceAreaEditor({ pageId, data, setData }: { pageId: s
                       <label className={UI.label}>Section Main Title</label>
                       <input
                         type="text"
-                        value={data.whyChoose?.title || "Elite Missouri Roofing Quality"}
+                        value={data.whyChoose?.title || "Elite Southeast Roofing Quality"}
                         onChange={(e) => updateField("whyChoose", "title", e.target.value)}
                         className={UI.input}
                       />

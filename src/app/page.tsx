@@ -211,7 +211,7 @@ export default async function Index() {
   const homeData = content?.data?.home;
   const schema = generateSchema({
     title: settings?.siteTitle || "RealRoof",
-    description: homeData?.hero?.subheadline || "Locally-owned roofing & home improvement in St. Louis, MO.",
+    description: homeData?.hero?.subheadline || "Locally-owned commercial & residential roofing in Greenville, SC.",
     slug: "/",
     type: "WebPage",
     faqs: faqs,

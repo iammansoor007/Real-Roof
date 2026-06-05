@@ -24,14 +24,14 @@ export default function ContactEditor({ pageId, data, setData }: { pageId: strin
     if (data && Object.keys(data).length === 0) {
        setData({
          contactPage: {
-           header: { badge: "Contact Us", headline: "Expert hands with Visionary minds", description: "Get in touch with St. Louis's leading roofing and exterior specialists." },
+           header: { badge: "Contact Us", headline: "Expert hands with Visionary minds", description: "Get in touch with the Southeast's leading roofing and storm restoration specialists." },
            formFields: [
              { name: "name", label: "Full Name", type: "text", required: true, icon: "User" },
              { name: "email", label: "Email Address", type: "email", required: true, icon: "Mail" },
              { name: "phone", label: "Phone Number", type: "tel", required: false, icon: "Phone" },
              { name: "message", label: "Your Message", type: "textarea", required: true, icon: "MessageSquare" }
            ],
-           info: { address: "St. Louis, MO", phone: "314-XXX-XXXX", email: "info@RealRoof.com", hours: "Mon-Fri: 8am-6pm" },
+           info: { address: "Greenville, SC", phone: "864-558-7663", email: "info@RealRoof.com", hours: "Mon-Fri: 8am-6pm" },
            social: { facebook: "#", instagram: "#", linkedin: "#" }
          }
        });

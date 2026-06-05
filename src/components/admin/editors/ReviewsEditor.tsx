@@ -20,7 +20,7 @@ export default function ReviewsEditor({ data, setData }: { pageId: string, data:
     if (data && Object.keys(data).length === 0) {
        setData({
          testimonials: {
-           section: { badge: "Social Proof", headline: "What Our Customers Say", description: "Discover why homeowners across St. Louis trust RealRoof." },
+           section: { badge: "Social Proof", headline: "What Our Customers Say", description: "Discover why homeowners across the Southeast trust RealRoof." },
            testimonials: [],
            stats: { rating: 5.0, count: 500, label: "Google Reviews" }
          }

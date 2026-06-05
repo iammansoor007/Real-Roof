@@ -353,13 +353,13 @@ export default function ServicesPageEditor() {
   const gridSection = data.services?.gridSection || {
     badge: "RealRoof",
     headline: "World Class <span class='text-primary'>Capabilities</span>",
-    description: "Every detail matters when it comes to structural integrity. Our team brings elite quality standards to every project across the St. Louis area."
+    description: "Every detail matters when it comes to structural integrity. Our team brings elite quality standards to every project across the Southeast."
   };
 
   const cta = data.services?.cta || {
     ratingText: "500+ 5-Star Reviews",
     title: "Ready for Your Free Estimate?",
-    description: "Transform your home with St. Louis's expert builders. Contact us today for quality craftsmanship and unparalleled service.",
+    description: "Transform your property with the Southeast's premium roofing and storm restoration experts. Contact us today for quality craftsmanship and unparalleled service.",
     buttonText: "Get Free Estimate",
     buttonLink: "/contact"
   };

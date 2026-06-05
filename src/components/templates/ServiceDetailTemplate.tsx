@@ -643,8 +643,8 @@ export default function ServiceDetailTemplate({ pageData, params: syncParams }: 
                     <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                   </div>
                 </Link>
-                <a href="tel:636-449-9714" className="relative px-8 py-4 bg-white text-primary border-2 border-primary font-bold rounded-full shadow-sm hover:bg-primary hover:text-white hover:shadow-md transition-all duration-300 overflow-hidden flex items-center justify-center gap-2 mb-4" tabIndex={0}>
-                  <span className="relative z-10 flex items-center gap-2 text-sm md:text-base">Call Now: 636-449-9714<Phone className="w-4 h-4" /></span>
+                <a href="tel:864-558-7663" className="relative px-8 py-4 bg-white text-primary border-2 border-primary font-bold rounded-full shadow-sm hover:bg-primary hover:text-white hover:shadow-md transition-all duration-300 overflow-hidden flex items-center justify-center gap-2 mb-4" tabIndex={0}>
+                  <span className="relative z-10 flex items-center gap-2 text-sm md:text-base">Call Now: 864-558-7663<Phone className="w-4 h-4" /></span>
                 </a>
               </div>
             </div>
