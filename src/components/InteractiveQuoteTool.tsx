@@ -293,8 +293,8 @@ export default function InteractiveQuoteTool() {
                                 type="button"
                                 onClick={() => setFormData({ ...formData, sqft: preset.size })}
                                 className={`py-2 px-1 rounded-xl border text-center transition-all duration-300 ${formData.sqft === preset.size
-                                    ? 'border-primary bg-primary/5 text-primary font-bold'
-                                    : 'border-slate-100 text-slate-500 hover:border-slate-200 bg-slate-50/40 text-xs'
+                                  ? 'border-primary bg-primary/5 text-primary font-bold'
+                                  : 'border-slate-100 text-slate-500 hover:border-slate-200 bg-slate-50/40 text-xs'
                                   }`}
                               >
                                 <div className="text-[8px] font-bold uppercase tracking-wider text-slate-400">{preset.label}</div>
@@ -340,8 +340,8 @@ export default function InteractiveQuoteTool() {
                                   key={s.id}
                                   onClick={() => setFormData({ ...formData, service: s.id })}
                                   className={`p-2.5 rounded-xl border text-left transition-all duration-300 flex items-center gap-2.5 group/opt relative overflow-hidden ${formData.service === s.id
-                                      ? 'border-primary bg-gradient-to-br from-primary/5 to-transparent shadow-[0_8px_20px_-6px_rgba(30,93,154,0.12)] -translate-y-0.5'
-                                      : 'border-slate-100 text-slate-700 hover:border-slate-200 hover:bg-slate-50/80 bg-slate-50/50 hover:-translate-y-0.5 hover:shadow-sm'
+                                    ? 'border-primary bg-gradient-to-br from-primary/5 to-transparent shadow-[0_8px_20px_-6px_rgba(30,93,154,0.12)] -translate-y-0.5'
+                                    : 'border-slate-100 text-slate-700 hover:border-slate-200 hover:bg-slate-50/80 bg-slate-50/50 hover:-translate-y-0.5 hover:shadow-sm'
                                     }`}
                                 >
                                   {/* Left accent bar on hover/active */}
@@ -349,8 +349,8 @@ export default function InteractiveQuoteTool() {
                                     }`} />
 
                                   <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 ${formData.service === s.id
-                                      ? 'bg-gradient-to-br from-primary to-blue-600 text-white shadow-md shadow-primary/20 scale-105'
-                                      : 'bg-white text-slate-400 border border-slate-100 shadow-sm group-hover/opt:text-primary group-hover/opt:border-primary/25'
+                                    ? 'bg-gradient-to-br from-primary to-blue-600 text-white shadow-md shadow-primary/20 scale-105'
+                                    : 'bg-white text-slate-400 border border-slate-100 shadow-sm group-hover/opt:text-primary group-hover/opt:border-primary/25'
                                     }`}>
                                     <Icon name={s.icon} className="w-4 h-4" />
                                   </div>
@@ -359,8 +359,8 @@ export default function InteractiveQuoteTool() {
                                       }`}>{s.label}</h4>
 
                                     <div className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 transition-all duration-300 ${formData.service === s.id
-                                        ? 'bg-primary border-primary shadow-sm scale-110'
-                                        : 'border-slate-200 bg-white group-hover/opt:border-slate-300'
+                                      ? 'bg-primary border-primary shadow-sm scale-110'
+                                      : 'border-slate-200 bg-white group-hover/opt:border-slate-300'
                                       }`}>
                                       {formData.service === s.id ? (
                                         <Icon name="Check" className="w-2.5 h-2.5 text-white stroke-[3px]" />
@@ -386,8 +386,8 @@ export default function InteractiveQuoteTool() {
                                   key={r.id}
                                   onClick={() => setFormData({ ...formData, roofType: r.id })}
                                   className={`p-2.5 rounded-xl border text-left transition-all duration-300 flex items-center gap-2.5 group/opt relative overflow-hidden ${formData.roofType === r.id
-                                      ? 'border-primary bg-gradient-to-br from-primary/5 to-transparent shadow-[0_8px_20px_-6px_rgba(30,93,154,0.12)] -translate-y-0.5'
-                                      : 'border-slate-100 text-slate-700 hover:border-slate-200 hover:bg-slate-50/80 bg-slate-50/50 hover:-translate-y-0.5 hover:shadow-sm'
+                                    ? 'border-primary bg-gradient-to-br from-primary/5 to-transparent shadow-[0_8px_20px_-6px_rgba(30,93,154,0.12)] -translate-y-0.5'
+                                    : 'border-slate-100 text-slate-700 hover:border-slate-200 hover:bg-slate-50/80 bg-slate-50/50 hover:-translate-y-0.5 hover:shadow-sm'
                                     }`}
                                 >
                                   {/* Left accent bar on hover/active */}
@@ -395,8 +395,8 @@ export default function InteractiveQuoteTool() {
                                     }`} />
 
                                   <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 ${formData.roofType === r.id
-                                      ? 'bg-gradient-to-br from-primary to-blue-600 text-white shadow-md shadow-primary/20 scale-105'
-                                      : 'bg-white text-slate-400 border border-slate-100 shadow-sm group-hover/opt:text-primary group-hover/opt:border-primary/25'
+                                    ? 'bg-gradient-to-br from-primary to-blue-600 text-white shadow-md shadow-primary/20 scale-105'
+                                    : 'bg-white text-slate-400 border border-slate-100 shadow-sm group-hover/opt:text-primary group-hover/opt:border-primary/25'
                                     }`}>
                                     <Icon name={r.icon} className="w-4 h-4" />
                                   </div>
@@ -405,8 +405,8 @@ export default function InteractiveQuoteTool() {
                                       }`}>{r.label}</h4>
 
                                     <div className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 transition-all duration-300 ${formData.roofType === r.id
-                                        ? 'bg-primary border-primary shadow-sm scale-110'
-                                        : 'border-slate-200 bg-white group-hover/opt:border-slate-300'
+                                      ? 'bg-primary border-primary shadow-sm scale-110'
+                                      : 'border-slate-200 bg-white group-hover/opt:border-slate-300'
                                       }`}>
                                       {formData.roofType === r.id ? (
                                         <Icon name="Check" className="w-2.5 h-2.5 text-white stroke-[3px]" />
