@@ -715,21 +715,27 @@ const ServicesSection = ({ content: passedContent, featuredServices: passedFeatu
   const rawData = passedFeatured || aboutPage?.services || [];
   const featuredServicesRaw = Array.isArray(rawData) ? rawData : (rawData?.services || []);
 
-  // Resolve IDs to objects if necessary
+  // Resolve IDs or objects to current active master services
   const resolvedFeatured = (Array.isArray(featuredServicesRaw) ? featuredServicesRaw : []).map((s: any) => {
-    if (typeof s === 'string') {
+    const serviceKey = typeof s === 'string'
+      ? s
+      : s?._id || s?.id || s?.slug;
+
+    if (serviceKey) {
       const fullServiceList = Array.isArray(services) ? services : (services as any)?.services || [];
-      const fullService = fullServiceList.find((ps: any) => ps._id === s || ps.id === s || ps.slug === s);
-      return fullService || null;
+      return fullServiceList.find((ps: any) => ps._id === serviceKey || ps.id === serviceKey || ps.slug === serviceKey) || null;
     }
-    return s;
+    return null;
   }).filter(Boolean);
 
-  const servicesList = resolvedFeatured.length > 0
+  const activeMasterServices = (Array.isArray(services) ? services : (services as any)?.services || [])
+    .filter((s: any) => s.status === 'published' || s.status === undefined);
+
+  // If the resolved selected services are empty or contain mostly old/stale entries (fewer than 2 active matches),
+  // fall back to showing all active services.
+  const servicesList = resolvedFeatured.length >= 2
     ? resolvedFeatured
-    : (Array.isArray(services) ? services : (services as any)?.services || [])
-      .filter((s: any) => s.status === 'published' || s.status === undefined)
-      .slice(0, 6);
+    : activeMasterServices.slice(0, 6);
 
   return (
     <section className="py-16 md:py-24 px-6 lg:px-12 bg-transparent relative z-30">

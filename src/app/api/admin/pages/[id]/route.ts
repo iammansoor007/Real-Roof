@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import Page from '@/models/Page';
+import SiteContent from '@/models/Content';
 import { hasPermission, getSessionUser } from '@/lib/rbac';
 import { recordActivity } from '@/lib/logger';
 
@@ -34,22 +35,11 @@ export async function PATCH(
   try {
     const { id } = await params;
     const body = await req.json();
-    const { slug, title, template, status, seo, content, isTrashed } = body;
+    const { content, isTrashed } = body;
 
     await connectToDatabase();
     const oldPage = await Page.findById(id);
     if (!oldPage) return NextResponse.json({ error: 'Page not found' }, { status: 404 });
-
-    // Snapshot the old data before update
-    const beforeState: any = { 
-      title: oldPage.title, 
-      status: oldPage.status, 
-      slug: oldPage.slug,
-      template: oldPage.template,
-      seo: oldPage.seo,
-      content: oldPage.content,
-      isTrashed: oldPage.isTrashed
-    };
 
     const updateData = { ...body };
     if (body.isTrashed !== undefined) {
@@ -58,6 +48,40 @@ export async function PATCH(
     }
 
     const updatedPage = await Page.findByIdAndUpdate(id, updateData, { new: true });
+
+    // ====================================================================
+    // AUTO-SYNC: If this is the about-us page, sync all content sections
+    // to complete_data.data.aboutPage so the public /about page always
+    // shows the latest admin edits without needing a manual sync script.
+    // ====================================================================
+    const pageSlug = updatedPage?.slug || oldPage?.slug;
+    if (pageSlug === 'about-us' && content && typeof content === 'object') {
+      try {
+        const sectionsToSync = [
+          'hero', 'mission', 'story', 'values', 'capabilities',
+          'stats', 'ctaBanner', 'recognition', 'services', 'faqs', 'blogSection'
+        ];
+        const syncSet: Record<string, any> = {};
+
+        for (const section of sectionsToSync) {
+          if (content[section] !== undefined) {
+            syncSet[`data.aboutPage.${section}`] = content[section];
+          }
+        }
+
+        if (Object.keys(syncSet).length > 0) {
+          await SiteContent.updateOne(
+            { key: 'complete_data' },
+            { $set: { ...syncSet, lastUpdated: new Date() } },
+            { upsert: false }
+          );
+          console.log('[Pages API] Auto-synced about-us content to complete_data.data.aboutPage');
+        }
+      } catch (syncErr) {
+        // Don't fail the main save if sync fails — just log it
+        console.error('[Pages API] Failed to auto-sync about-us to complete_data:', syncErr);
+      }
+    }
 
     await recordActivity({
       user: (session as any).userId,
@@ -74,6 +98,7 @@ export async function PATCH(
         const { revalidatePath } = await import('next/cache');
         const pagePath = updatedPage.slug.startsWith('/') ? updatedPage.slug : `/${updatedPage.slug}`;
         revalidatePath(pagePath);
+        revalidatePath('/about');
         revalidatePath('/');
       } catch (err) {
         console.error('Failed to revalidate path:', err);
@@ -83,7 +108,7 @@ export async function PATCH(
     return NextResponse.json(updatedPage);
   } catch (error: any) {
     console.error('Page update error:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json({ error: 'Internal Server Error', details: error.message }, { status: 500 });
   }
 }
 
