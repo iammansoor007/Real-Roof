@@ -23,7 +23,22 @@ export const useContent = () => {
         services: (() => {
             const s = getSafe(completeData, 'services', { services: [] });
             // Normalize: if it's already an array, wrap it in the expected object structure
-            return Array.isArray(s) ? { services: s } : s;
+            const baseObj = Array.isArray(s) ? { services: s } : { ...s };
+
+            // Lift section fields to root if present
+            if (baseObj.section) {
+                const sec = baseObj.section;
+                if (sec.badge && !baseObj.badge) baseObj.badge = sec.badge;
+                if (sec.headline && !baseObj.headline) baseObj.headline = sec.headline;
+                if (sec.description && !baseObj.description) baseObj.description = sec.description;
+            }
+
+            // Standardize headline to { prefix, highlight, suffix } if it's a string
+            if (baseObj.headline && typeof baseObj.headline === 'string') {
+                baseObj.headline = { prefix: "", highlight: baseObj.headline, suffix: "" };
+            }
+
+            return baseObj;
         })(),
         leadership: getSafe(completeData, 'leadership', {
             section: { badge: "", headline: "", description: "" },
@@ -49,10 +64,16 @@ export const useContent = () => {
                 projects: selectedProjects
             };
         })(),
-        testimonials: getSafe(completeData, 'testimonials', {
-            section: { badge: "", headline: "", description: "" },
-            items: []
-        }),
+        testimonials: (() => {
+            const t = getSafe(completeData, 'testimonials', {
+                section: { badge: "", headline: "", description: "" },
+                testimonials: []
+            });
+            return {
+                ...t,
+                testimonials: Array.isArray(t.testimonials) ? t.testimonials : (Array.isArray(t.items) ? t.items : [])
+            };
+        })(),
         whyChooseUs: getSafe(completeData, 'whyChooseUs', {
             section: { badge: "", headline: "", description: "" },
             features: [],

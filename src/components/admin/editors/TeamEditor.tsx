@@ -181,8 +181,14 @@ export default function TeamEditor({ pageId, data, setData }: { pageId: string, 
                                   </div>
                                   <div className="space-y-1.5">
                                      <label className={UI.label}>Top Accent Badge</label>
-                                     <input type="text" value={member.badge1} onChange={(e) => {
+                                     <input type="text" value={member.badge1 || ""} onChange={(e) => {
                                        const newM = [...data.team.members]; newM[i].badge1 = e.target.value; updateTeam("members", null, newM);
+                                     }} className={UI.input + " text-[10px] font-bold uppercase"} />
+                                  </div>
+                                  <div className="space-y-1.5">
+                                     <label className={UI.label}>Bottom Accent Badge</label>
+                                     <input type="text" value={member.badge2 || ""} onChange={(e) => {
+                                       const newM = [...data.team.members]; newM[i].badge2 = e.target.value; updateTeam("members", null, newM);
                                      }} className={UI.input + " text-[10px] font-bold uppercase"} />
                                   </div>
                                </div>

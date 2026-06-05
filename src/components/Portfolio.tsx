@@ -86,7 +86,14 @@ const imageMap: Record<string, any> = {
   'door': door,
 };
 
-const MarqueeItem = ({ project }: { project: Project }) => {
+const resolveProjectImage = (imageKey: string) => {
+  if (imageKey && (imageKey.startsWith('http') || imageKey.startsWith('/uploads'))) {
+    return imageKey;
+  }
+  return imageMap[imageKey as keyof typeof imageMap] || imageKey;
+};
+
+const MarqueeItem = ({ project, onClick }: { project: Project; onClick: () => void }) => {
   const [isHovered, setIsHovered] = useState(false);
   const itemRef = useRef<HTMLDivElement>(null);
 
@@ -110,6 +117,9 @@ const MarqueeItem = ({ project }: { project: Project }) => {
     y.set(yPct);
   };
 
+  const resolvedImage = resolveProjectImage(project.image);
+  const isStringImage = typeof resolvedImage === 'string';
+
   return (
     <motion.div
       ref={itemRef}
@@ -120,6 +130,7 @@ const MarqueeItem = ({ project }: { project: Project }) => {
         y.set(0);
       }}
       onMouseMove={handleMouseMove}
+      onClick={onClick}
       style={{
         rotateX: isHovered ? rotateX : 0,
         rotateY: isHovered ? rotateY : 0,
@@ -129,9 +140,9 @@ const MarqueeItem = ({ project }: { project: Project }) => {
       className="relative w-[200px] sm:w-[240px] md:w-[280px] h-[280px] sm:h-[320px] md:h-[360px] flex-shrink-0 cursor-pointer will-change-transform transition-transform duration-300"
     >
       <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl shadow-gray-300/50">
-        {project.image && (project.image.startsWith('http') || project.image.startsWith('/uploads')) ? (
+        {isStringImage ? (
           <img
-            src={project.image}
+            src={resolvedImage}
             alt={project.title}
             className="w-full h-full object-cover"
             style={{
@@ -141,7 +152,7 @@ const MarqueeItem = ({ project }: { project: Project }) => {
           />
         ) : (
           <Image
-            src={imageMap[project.image as keyof typeof imageMap] || project.image}
+            src={resolvedImage}
             alt={project.title}
             className="object-cover"
             fill
@@ -241,10 +252,12 @@ const InfiniteMarquee = ({
   projects,
   direction = "left",
   speed = 45,
+  onItemClick,
 }: {
   projects: Project[];
   direction?: string;
   speed?: number;
+  onItemClick: (image: any) => void;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const marqueeRef = useRef<HTMLDivElement>(null);
@@ -320,7 +333,7 @@ const InfiniteMarquee = ({
         }}
       >
         {infiniteProjects.map((project, index) => (
-          <MarqueeItem key={`${project.number}-${index}`} project={project} />
+          <MarqueeItem key={`${project.number}-${index}`} project={project} onClick={() => onItemClick(resolveProjectImage(project.image))} />
         ))}
       </div>
     </div>
@@ -360,15 +373,23 @@ const PremiumLightbox = ({
         Close
       </motion.button>
 
-      <div className="relative max-w-full max-h-[90vh] aspect-video w-full px-4">
-        <Image
-          src={image}
-          alt="Project preview"
-          className="object-contain rounded-xl sm:rounded-2xl shadow-2xl"
-          fill
-          quality={85}
-          sizes="90vw"
-        />
+      <div className="relative max-w-full max-h-[90vh] aspect-video w-full px-4 flex items-center justify-center">
+        {typeof image === 'string' && (image.startsWith('http') || !image.startsWith('/')) ? (
+          <img
+            src={image}
+            alt="Project preview"
+            className="max-w-full max-h-[85vh] object-contain rounded-xl sm:rounded-2xl shadow-2xl"
+          />
+        ) : (
+          <Image
+            src={image}
+            alt="Project preview"
+            className="object-contain rounded-xl sm:rounded-2xl shadow-2xl"
+            fill
+            quality={85}
+            sizes="90vw"
+          />
+        )}
       </div>
     </motion.div>
   );
@@ -461,8 +482,8 @@ const Portfolio = () => {
 
         {/* MARQUEE SECTION */}
         <div className="space-y-1 sm:space-y-2 md:space-y-0">
-          {row1.length > 0 && <InfiniteMarquee projects={row1} direction="left" speed={45} />}
-          {row2.length > 0 && <InfiniteMarquee projects={row2} direction="right" speed={40} />}
+          {row1.length > 0 && <InfiniteMarquee projects={row1} direction="left" speed={45} onItemClick={setLightbox} />}
+          {row2.length > 0 && <InfiniteMarquee projects={row2} direction="right" speed={40} onItemClick={setLightbox} />}
         </div>
 
         <motion.div
