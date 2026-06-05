@@ -126,9 +126,9 @@ export default function InteractiveQuoteTool() {
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-[1.1] tracking-tight font-heading">
                 Instant Roof <br />
-                <span className="bg-gradient-to-r from-primary via-blue-600 to-primary bg-clip-text text-transparent relative inline-block">
+                <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent relative inline-block">
                   Estimator
-                  <span className="absolute bottom-1.5 left-0 right-0 h-1 bg-primary/10 -rotate-1 rounded-full" />
+                  <span className="absolute bottom-1.5 left-0 right-0 h-0.5 bg-primary/20 rounded-full" />
                 </span>
               </h2>
               <p className="text-slate-500 leading-relaxed font-medium text-sm sm:text-base max-w-md">
@@ -136,48 +136,88 @@ export default function InteractiveQuoteTool() {
               </p>
             </div>
 
-            {/* Premium Workflow Steps Checklist */}
+            {/* Premium Configuration Pipeline */}
             <div className="space-y-4">
+
+              {/* Header */}
               <div className="flex items-center justify-between">
-                <h4 className="text-xs font-black text-slate-800 uppercase tracking-widest flex items-center gap-2">
-                  <Icon name="ClipboardCheck" className="w-4 h-4 text-primary" />
+                <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.18em] flex items-center gap-2">
+                  <span className="w-4 h-4 rounded bg-primary/10 flex items-center justify-center">
+                    <Icon name="ClipboardCheck" className="w-2.5 h-2.5 text-primary" />
+                  </span>
                   Configuration Pipeline
                 </h4>
-                <span className="text-[9px] font-extrabold text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-                  Live Sync Active
+                <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full flex items-center gap-1">
+                  <span className="w-1 h-1 bg-emerald-500 rounded-full animate-pulse" />
+                  Live
                 </span>
               </div>
 
-              <div className="space-y-3">
-                {[
-                  { s: "01", t: "Dimensions", d: "Adjust the visual slider to select square footage.", icon: "Layout" },
-                  { s: "02", t: "Materials & Class", d: "Specify the material grade and service category.", icon: "Sparkles" },
-                  { s: "03", t: "Immediate Bracket", d: "Obtain a direct local budget cost projection.", icon: "TrendingUp" }
-                ].map((stepItem, i) => (
-                  <div
-                    key={i}
-                    className="group/step relative p-5 rounded-2xl bg-white border border-slate-100/80 hover:border-primary/20 hover:shadow-[0_12px_32px_rgba(30,93,154,0.04)] hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4 overflow-hidden"
-                  >
-                    {/* Left Accent line that expands on hover */}
-                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-slate-100 group-hover/step:w-1.5 group-hover/step:bg-primary transition-all duration-300" />
+              {/* Step Cards */}
+              <div className="relative">
+                {/* Connector line */}
+                <div className="absolute left-5 top-12 bottom-12 w-px bg-slate-100" />
 
-                    {/* Icon Badge container */}
-                    <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100/50 group-hover/step:bg-primary/5 group-hover/step:border-primary/25 transition-all duration-300">
-                      <Icon name={stepItem.icon} className="w-5 h-5 text-slate-400 group-hover/step:text-primary transition-colors duration-300" />
-                    </div>
+                <div className="space-y-2.5">
+                  {[
+                    { num: "01", t: "Dimensions",       d: "Set your roof square footage.",           icon: "Layout",     stepNum: 1 },
+                    { num: "02", t: "Material & Class",  d: "Pick material grade and service type.",   icon: "Layers",     stepNum: 2 },
+                    { num: "03", t: "Instant Estimate",  d: "Receive a live cost bracket instantly.",  icon: "TrendingUp", stepNum: 3 },
+                  ].map((si, i) => {
+                    const isActive    = step === si.stepNum;
+                    const isCompleted = step > si.stepNum;
+                    return (
+                      <div
+                        key={i}
+                        className={`relative flex items-center gap-4 px-4 py-3.5 rounded-2xl border transition-all duration-400 ${
+                          isActive
+                            ? "bg-primary/[0.04] border-primary/25 shadow-[0_4px_20px_rgba(30,93,154,0.10)]"
+                            : isCompleted
+                            ? "bg-slate-50 border-slate-150"
+                            : "bg-white border-slate-200/80"
+                        }`}
+                      >
+                        {/* Number / Check circle */}
+                        <div className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-400 ${
+                          isActive
+                            ? "bg-primary text-white shadow-[0_6px_16px_rgba(30,93,154,0.35)]"
+                            : isCompleted
+                            ? "bg-primary/10 text-primary"
+                            : "bg-primary/6 text-primary/50 border border-dashed border-primary/20"
+                        }`}>
+                          {isCompleted
+                            ? <Icon name="Check" className="w-4 h-4 stroke-[2.5px]" />
+                            : <span className="text-[11px] font-black">{si.num}</span>
+                          }
+                        </div>
 
-                    <div className="flex-1 min-w-0 pr-4">
-                      <div className="flex items-center justify-between">
-                        <h5 className="font-extrabold text-slate-900 text-sm tracking-tight group-hover/step:text-primary transition-colors duration-300">{stepItem.t}</h5>
-                        <span className="text-[9px] font-mono font-bold text-slate-300 group-hover/step:text-primary/30 transition-colors">Step {stepItem.s}</span>
+                        {/* Text */}
+                        <div className="flex-1 min-w-0">
+                          <h5 className={`text-sm font-extrabold tracking-tight leading-none mb-0.5 ${
+                            isActive ? "text-slate-900" : isCompleted ? "text-slate-700" : "text-slate-700"
+                          }`}>{si.t}</h5>
+                          <p className={`text-[11px] font-medium leading-relaxed ${
+                            isActive ? "text-slate-500" : isCompleted ? "text-slate-400" : "text-slate-400"
+                          }`}>{si.d}</p>
+                        </div>
+
+                        {/* Right badge */}
+                        {isActive && (
+                          <div className="shrink-0 w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                        )}
+                        {isCompleted && (
+                          <span className="shrink-0 text-[9px] font-extrabold text-primary bg-primary/8 px-2 py-0.5 rounded-full">Done</span>
+                        )}
+                        {!isActive && !isCompleted && (
+                          <span className="shrink-0 text-[9px] font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">Next</span>
+                        )}
                       </div>
-                      <p className="text-xs text-slate-400 mt-1 font-medium leading-relaxed">{stepItem.d}</p>
-                    </div>
-                  </div>
-                ))}
+                    );
+                  })}
+                </div>
               </div>
             </div>
+
 
             {/* Vetted Trust Indicators */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
