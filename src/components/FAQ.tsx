@@ -508,7 +508,7 @@ const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) => {
   );
 };
 
-const FAQ = ({ currentPage = "home", hideHeader = false }: { currentPage?: string, hideHeader?: boolean }) => {
+const FAQ = ({ currentPage = "home", hideHeader = false, hideBackground = false }: { currentPage?: string, hideHeader?: boolean, hideBackground?: boolean }) => {
   const { faq } = useContent();
   const sectionRef = useRef(null);
   const [isClient, setIsClient] = useState(false);
@@ -606,10 +606,10 @@ const FAQ = ({ currentPage = "home", hideHeader = false }: { currentPage?: strin
       {isClient && (
         <section
       ref={sectionRef}
-      className="relative bg-background py-16 md:py-24 lg:py-28 overflow-hidden"
+      className={`relative py-16 md:py-24 lg:py-28 overflow-hidden ${hideBackground ? 'bg-transparent' : 'bg-background'}`}
     >
-      <SubtleBackground />
-      <FloatingParticles />
+      {!hideBackground && <SubtleBackground />}
+      {!hideBackground && <FloatingParticles />}
 
       <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
         {!hideHeader && (
