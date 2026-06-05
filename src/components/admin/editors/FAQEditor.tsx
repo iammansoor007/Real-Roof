@@ -23,12 +23,13 @@ export default function FAQEditor({ pageId, data, setData }: { pageId: string, d
     if (data && !data.faq) {
        setData({
          faq: {
-           section: { headline: "Frequently Asked Questions", description: "Find answers to common questions about our services and process." },
+           section: { headline: "Frequently Asked Questions", description: "Find clear answers regarding our commercial, multi-family, storm restoration, and partner roofing services across the Southeast." },
            categories: [
              { id: "all", label: "All Questions" },
-             { id: "roofing", label: "Roofing" },
-             { id: "decks", label: "Decks" },
-             { id: "windows", label: "Windows" }
+             { id: "general", label: "General Info" },
+             { id: "commercial", label: "Commercial & Multi-Family" },
+             { id: "restoration", label: "Storm Restoration" },
+             { id: "partnerships", label: "B2B Partnerships" }
            ],
            items: []
          }
