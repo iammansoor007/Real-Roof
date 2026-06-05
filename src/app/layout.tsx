@@ -12,11 +12,15 @@ import ScriptInjector from "@/components/ScriptInjector";
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-heading",
+  display: "swap",
+  preload: true,
 });
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-body",
+  display: "swap",
+  preload: true,
 });
 
 
@@ -143,11 +147,12 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Site-wide schemas removed - handled dynamically by pages/services */}
-        {/* Preconnect to external origins for performance */}
+        {/* Preconnect + DNS-prefetch for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         {/* ── CMS-managed <head> scripts ── */}
         {headScripts.map((s) => (
           <ScriptInjector key={s.id} code={s.code} target="head" />
