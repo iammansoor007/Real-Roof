@@ -209,8 +209,8 @@ const MarqueeItem = ({ project }: { project: Project }) => {
                 transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="overflow-hidden"
               >
-                <RichTextRenderer 
-                  content={project.desc} 
+                <RichTextRenderer
+                  content={project.desc}
                   className="text-white/90 text-[8px] sm:text-[10px] leading-relaxed mb-1 sm:mb-2 line-clamp-2"
                 />
                 <div className="flex items-center justify-between">
@@ -309,11 +309,6 @@ const InfiniteMarquee = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="absolute left-0 top-0 bottom-0 w-16 xs:w-12 sm:w-16 md:w-24 lg:w-32 z-20 pointer-events-none bg-gradient-to-r from-background via-background/90 to-transparent" />
-      <div className="absolute right-0 top-0 bottom-0 w-16 xs:w-12 sm:w-16 md:w-24 lg:w-32 z-20 pointer-events-none bg-gradient-to-l from-background via-background/90 to-transparent" />
-
-      <div className="absolute inset-x-0 top-0 h-6 sm:h-8 md:h-12 z-20 pointer-events-none bg-gradient-to-b from-background to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-6 sm:h-8 md:h-12 z-20 pointer-events-none bg-gradient-to-t from-background to-transparent" />
 
       <div
         ref={marqueeRef}
@@ -429,7 +424,7 @@ const Portfolio = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-background overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24"
+      className="relative bg-background overflow-hidden py-16 md:py-24 lg:py-28"
     >
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-30" />
@@ -447,7 +442,7 @@ const Portfolio = () => {
         <div className="hidden sm:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[450px] md:w-[600px] h-[300px] sm:h-[450px] md:h-[600px] bg-primary/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
         <motion.div style={{ y: headerParallax }} className="text-center mb-8 sm:mb-12 md:mb-16">
           <div className="flex items-center justify-center gap-2 sm:gap-3 mb-2 sm:mb-3 md:mb-4">
             <div className="w-8 sm:w-10 md:w-12 h-0.5 bg-gradient-to-r from-primary to-primary/60" />
@@ -456,10 +451,10 @@ const Portfolio = () => {
             </span>
             <div className="w-8 sm:w-10 md:w-12 h-0.5 bg-gradient-to-l from-primary to-primary/60" />
           </div>
-          <h2 
+          <h2
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-[1.1] tracking-tight px-2"
-            dangerouslySetInnerHTML={{ 
-              __html: section.headline || "Featured Projects" 
+            dangerouslySetInnerHTML={{
+              __html: section.headline || "Featured Projects"
             }}
           />
         </motion.div>

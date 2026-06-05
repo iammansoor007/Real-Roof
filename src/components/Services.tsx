@@ -41,7 +41,7 @@ const ServiceCard = ({ service, index }: { service: any; index: number }) => {
 
       {/* === FANCY GRAPHIC ACCENTS === */}
       {/* Interactive mouse follow radial spotlight */}
-      <div 
+      <div
         className="absolute inset-0 pointer-events-none transition-opacity duration-300 opacity-0 group-hover:opacity-100 rounded-[2.5rem] z-0"
         style={{
           background: `radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(30, 93, 154, 0.08), transparent 80%)`
@@ -92,7 +92,7 @@ const ServiceCard = ({ service, index }: { service: any; index: number }) => {
 
       {/* Card Content Block */}
       <div className="px-3 pt-8 pb-3 flex flex-col flex-1 relative z-10">
-        
+
         {/* Category Pill Tag with Vertical Line Accents */}
         <div className="flex items-center gap-2.5 mb-3.5 h-5">
           <div className="h-3.5 w-[2px] bg-primary rounded-full origin-center group-hover:scale-y-[1.4] transition-transform duration-300" />
@@ -156,13 +156,13 @@ const Services = () => {
     }));
 
   return (
-    <section ref={sectionRef} className="relative bg-white py-24 lg:py-36 overflow-hidden">
+    <section ref={sectionRef} className="relative bg-white py-16 md:py-24 lg:py-28 overflow-hidden">
       {/* Background accents */}
       <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
       <div className="absolute -bottom-40 -left-40 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[60px] pointer-events-none" />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
-        
+      <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
+
         {/* Premium split header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-20">
           <div className="max-w-2xl">

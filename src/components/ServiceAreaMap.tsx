@@ -78,7 +78,7 @@ export default function ServiceAreaMap() {
         fillOpacity: 0.04,
         weight: 1.5,
         dashArray: '6, 6',
-        radius: 320000 
+        radius: 320000
       }).addTo(map);
 
       // Add markers & save instances
@@ -126,9 +126,9 @@ export default function ServiceAreaMap() {
   };
 
   return (
-    <section 
+    <section
       onMouseMove={handleMouseMove}
-      className="py-12 sm:py-20 lg:py-32 bg-slate-50/50 relative border-b border-slate-100 group overflow-hidden"
+      className="py-16 md:py-24 lg:py-28 bg-slate-50/50 relative border-b border-slate-100 group overflow-hidden"
       style={{
         '--mouse-x': `${coords.x}px`,
         '--mouse-y': `${coords.y}px`
@@ -137,25 +137,25 @@ export default function ServiceAreaMap() {
       {/* ── Background Decors ── */}
       <div className="absolute inset-0 bg-white pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(30,93,154,0.05)_1.5px,transparent_1.5px)] [background-size:28px_28px] pointer-events-none" />
-      
+
       {/* Spotlight overlay */}
-      <div 
+      <div
         className="absolute inset-0 pointer-events-none transition-opacity duration-500 opacity-0 group-hover:opacity-100"
         style={{
           background: `radial-gradient(600px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(30, 93, 154, 0.05), transparent 80%)`
         }}
       />
-      
+
       <div className="absolute -top-48 -right-48 w-96 h-96 bg-primary/[0.04] rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute -bottom-48 -left-48 w-96 h-96 bg-primary/[0.04] rounded-full blur-[90px] pointer-events-none" />
 
-      <div className="container mx-auto px-4 max-w-7xl relative z-10">
-        
+      <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
+
         {/* Swapped layout container */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-stretch">
-          
+
           {/* Left Column: Map visualization (Swapped to Left) */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -164,14 +164,14 @@ export default function ServiceAreaMap() {
           >
             <div className="absolute inset-0 bg-slate-50 animate-pulse pointer-events-none" />
             <div ref={mapContainerRef} className="w-full h-full absolute inset-0 z-0 bg-white" />
-            
+
             {/* Elegant Map Vignette */}
             <div className="absolute inset-0 shadow-[inset_0_0_50px_rgba(0,0,0,0.06)] pointer-events-none border border-slate-100 rounded-3xl sm:rounded-[2.5rem]" />
           </motion.div>
 
           {/* Right Column: High-End Flight Coordination List Board (Swapped to Right) */}
           <div className="lg:col-span-5 flex flex-col justify-between py-2 order-1 lg:order-2 space-y-6 lg:space-y-8">
-            
+
             <div className="space-y-4 lg:space-y-5">
               <span className="inline-flex items-center gap-2 bg-primary/8 border border-primary/20 text-primary text-xs font-extrabold uppercase tracking-[0.2em] px-5 py-2 rounded-full">
                 <span className="w-1.5 h-1.5 bg-primary rounded-full animate-ping" />
@@ -192,21 +192,18 @@ export default function ServiceAreaMap() {
                 <button
                   key={idx}
                   onClick={() => handleLocationClick(idx)}
-                  className={`w-full text-left p-3.5 sm:p-4 rounded-2xl border transition-all duration-350 flex items-center gap-3 sm:gap-4 group/item relative overflow-hidden bg-white/70 backdrop-blur-sm ${
-                    activeLocIndex === idx
-                      ? 'border-primary bg-primary/5 shadow-[0_12px_28px_-10px_rgba(30,93,154,0.15)] ring-1 ring-primary/10 -translate-y-0.5'
-                      : 'border-slate-100/80 hover:border-primary/25 hover:bg-slate-50/50 hover:shadow-sm'
-                  }`}
+                  className={`w-full text-left p-3.5 sm:p-4 rounded-2xl border transition-all duration-350 flex items-center gap-3 sm:gap-4 group/item relative overflow-hidden bg-white/70 backdrop-blur-sm ${activeLocIndex === idx
+                    ? 'border-primary bg-primary/5 shadow-[0_12px_28px_-10px_rgba(30,93,154,0.15)] ring-1 ring-primary/10 -translate-y-0.5'
+                    : 'border-slate-100/80 hover:border-primary/25 hover:bg-slate-50/50 hover:shadow-sm'
+                    }`}
                 >
                   {/* Status Indicator Dot */}
-                  <span className={`absolute top-3.5 right-4 w-1.5 h-1.5 rounded-full ${
-                    activeLocIndex === idx ? 'bg-primary animate-pulse' : 'bg-emerald-400'
-                  }`} />
+                  <span className={`absolute top-3.5 right-4 w-1.5 h-1.5 rounded-full ${activeLocIndex === idx ? 'bg-primary animate-pulse' : 'bg-emerald-400'
+                    }`} />
 
                   {/* Left Icon badge */}
-                  <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
-                    activeLocIndex === idx ? 'bg-primary text-white shadow-sm' : 'bg-slate-100 text-slate-500'
-                  }`}>
+                  <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${activeLocIndex === idx ? 'bg-primary text-white shadow-sm' : 'bg-slate-100 text-slate-500'
+                    }`}>
                     <Icon name="MapPin" className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
                   </div>
 
@@ -215,11 +212,10 @@ export default function ServiceAreaMap() {
                       <h4 className="font-extrabold text-slate-900 text-[11px] sm:text-xs tracking-tight truncate">{loc.name}</h4>
                       <span className="text-[8px] sm:text-[9px] font-mono text-slate-400 font-bold shrink-0 hidden sm:inline-block">{loc.coordsStr}</span>
                     </div>
-                    
+
                     <div className="flex items-center justify-between mt-1 sm:mt-1.5 gap-2">
-                      <span className={`text-[7px] sm:text-[8px] font-extrabold uppercase tracking-wide px-1.5 py-0.5 rounded-md shrink-0 ${
-                        activeLocIndex === idx ? 'bg-primary/10 text-primary' : 'bg-slate-100 text-slate-400'
-                      }`}>
+                      <span className={`text-[7px] sm:text-[8px] font-extrabold uppercase tracking-wide px-1.5 py-0.5 rounded-md shrink-0 ${activeLocIndex === idx ? 'bg-primary/10 text-primary' : 'bg-slate-100 text-slate-400'
+                        }`}>
                         {loc.status}
                       </span>
                       <span className="text-[9px] sm:text-[10px] text-slate-400 truncate font-medium flex-1 text-right sm:text-left">{loc.details}</span>
@@ -246,7 +242,8 @@ export default function ServiceAreaMap() {
             {/* Live activity ticker at the bottom */}
             <div className="bg-slate-100/50 border border-slate-200/50 p-3 rounded-2xl flex items-center gap-3 overflow-hidden">
               <span className="w-2 h-2 bg-emerald-400 rounded-full shrink-0 animate-pulse relative z-10" />
-              <style dangerouslySetInnerHTML={{__html: `
+              <style dangerouslySetInnerHTML={{
+                __html: `
                 @keyframes marquee {
                   0% { transform: translateX(0); }
                   100% { transform: translateX(-50%); }

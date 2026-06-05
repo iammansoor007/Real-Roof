@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRef, useEffect, useState, memo } from "react";
 import { useContent } from "../hooks/useContent";
 import Link from "next/link";
-import EagleAboutImg from "@/assets/fairabout.png";
+import EagleAboutImg from "../../public/realrooflogo.webp";
 import RichTextRenderer from "./ui/RichTextRenderer";
 import { Icon } from "../config/icons";
 
@@ -88,21 +88,21 @@ export default function AboutSection() {
     return (
         <section
             ref={sectionRef}
-            className="relative bg-slate-50 dark:bg-slate-950 py-24 md:py-32 overflow-x-clip"
+            className="relative bg-slate-50 dark:bg-slate-950 py-16 md:py-24 lg:py-28 overflow-x-clip"
             aria-label="About RealRoof"
         >
             {/* Background elements */}
             <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-            
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+            <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
                 <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
-                    
+
                     {/* Image Column */}
                     <div className="w-full lg:w-5/12 relative">
                         <div className="relative pb-12 sm:pb-16 max-w-md lg:max-w-none mx-auto">
                             {/* Accent border frame - mirrors the exact dimensions of the image */}
                             <div className="absolute top-4 left-4 right-[-16px] bottom-[32px] md:top-6 md:left-6 md:right-[-24px] md:bottom-[40px] border-2 border-primary rounded-3xl pointer-events-none" />
-                            
+
                             {/* Main Image Container */}
                             <div className="relative w-full aspect-[4/5] bg-slate-200 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl z-10 border border-slate-200/50 dark:border-slate-800/50">
                                 {isDynamicImage ? (
@@ -126,8 +126,8 @@ export default function AboutSection() {
                                     />
                                 )}
                             </div>
-                            
-                             {/* Floating Stats Card — styled as a premium light-themed seal */}
+
+                            {/* Floating Stats Card — styled as a premium light-themed seal */}
                             {stats && stats.length > 0 && (
                                 <div className="absolute bottom-0 right-4 sm:-right-4 bg-white dark:bg-slate-900 text-slate-900 dark:text-white px-6 py-5 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.3)] z-20 flex flex-col items-center justify-center border border-slate-100 dark:border-slate-800 min-w-[150px]">
                                     <div className="w-10 h-10 rounded-full bg-primary/10 dark:bg-primary/5 flex items-center justify-center text-primary mb-2.5">
@@ -199,14 +199,13 @@ export default function AboutSection() {
                         {/* Buttons */}
                         <div className="flex flex-wrap items-center gap-4">
                             {buttons?.map((btn: any, i: number) => (
-                                <Link 
-                                    key={i} 
+                                <Link
+                                    key={i}
                                     href={btn.link}
-                                    className={`px-8 py-4 font-bold text-sm uppercase tracking-widest transition-all duration-300 ${
-                                        btn.primary 
-                                        ? "bg-primary text-white hover:bg-primary/90 shadow-lg hover:shadow-primary/25" 
+                                    className={`px-8 py-4 font-bold text-sm uppercase tracking-widest transition-all duration-300 ${btn.primary
+                                        ? "bg-primary text-white hover:bg-primary/90 shadow-lg hover:shadow-primary/25"
                                         : "bg-transparent text-slate-900 dark:text-white border-2 border-slate-200 dark:border-slate-800 hover:border-primary hover:text-primary"
-                                    }`}
+                                        }`}
                                 >
                                     {btn.text}
                                 </Link>

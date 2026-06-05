@@ -84,10 +84,10 @@ export default function InteractiveQuoteTool() {
   ];
 
   return (
-    <section 
-      id="quote" 
+    <section
+      id="quote"
       onMouseMove={handleMouseMove}
-      className="relative py-12 sm:py-20 lg:py-32 overflow-hidden bg-white group"
+      className="relative py-16 md:py-24 lg:py-28 overflow-hidden bg-white group"
       style={{
         '--mouse-x': `${coords.x}px`,
         '--mouse-y': `${coords.y}px`
@@ -103,16 +103,16 @@ export default function InteractiveQuoteTool() {
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 pointer-events-none" />
       {/* Dot grid */}
       <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(30,93,154,0.06)_1.5px,transparent_1.5px)] [background-size:28px_28px] pointer-events-none" />
-      
+
       {/* Interactive mouse follow radial spotlight */}
-      <div 
+      <div
         className="absolute inset-0 pointer-events-none transition-opacity duration-300 opacity-0 group-hover:opacity-100"
         style={{
           background: `radial-gradient(600px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(30, 93, 154, 0.06), transparent 80%)`
         }}
       />
 
-      <div className="container mx-auto px-4 max-w-7xl relative z-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
 
         {/* Dynamic Split Screen Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
@@ -148,20 +148,20 @@ export default function InteractiveQuoteTool() {
                   Live Sync Active
                 </span>
               </div>
-              
+
               <div className="space-y-3">
                 {[
                   { s: "01", t: "Dimensions", d: "Adjust the visual slider to select square footage.", icon: "Layout" },
                   { s: "02", t: "Materials & Class", d: "Specify the material grade and service category.", icon: "Sparkles" },
                   { s: "03", t: "Immediate Bracket", d: "Obtain a direct local budget cost projection.", icon: "TrendingUp" }
                 ].map((stepItem, i) => (
-                  <div 
-                    key={i} 
+                  <div
+                    key={i}
                     className="group/step relative p-5 rounded-2xl bg-white border border-slate-100/80 hover:border-primary/20 hover:shadow-[0_12px_32px_rgba(30,93,154,0.04)] hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4 overflow-hidden"
                   >
                     {/* Left Accent line that expands on hover */}
                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-slate-100 group-hover/step:w-1.5 group-hover/step:bg-primary transition-all duration-300" />
-                    
+
                     {/* Icon Badge container */}
                     <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100/50 group-hover/step:bg-primary/5 group-hover/step:border-primary/25 transition-all duration-300">
                       <Icon name={stepItem.icon} className="w-5 h-5 text-slate-400 group-hover/step:text-primary transition-colors duration-300" />
@@ -202,10 +202,10 @@ export default function InteractiveQuoteTool() {
           {/* Right Column: Interactive Estimator Form Card (7 Cols) */}
           <div className="lg:col-span-7">
             <div className="relative bg-slate-50/50 p-1 sm:p-1.5 rounded-3xl sm:rounded-[2.5rem] border border-slate-100/80 shadow-[0_32px_64px_-24px_rgba(30,93,154,0.18)]">
-              
+
               {/* Main Card */}
               <div className="relative bg-white border border-slate-100 rounded-2xl sm:rounded-[2.2rem] overflow-hidden">
-                
+
                 {/* Elegant Header Progress Stripe */}
                 <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent" />
 
@@ -228,10 +228,9 @@ export default function InteractiveQuoteTool() {
                   <div className="flex gap-2">
                     {[1, 2, 3].map((s) => (
                       <div key={s} className="flex-1 h-2 rounded-full overflow-hidden bg-slate-200/60 relative">
-                        <div 
-                          className={`absolute inset-y-0 left-0 bg-primary rounded-full transition-all duration-700 ${
-                            step >= s ? 'w-full' : 'w-0'
-                          }`}
+                        <div
+                          className={`absolute inset-y-0 left-0 bg-primary rounded-full transition-all duration-700 ${step >= s ? 'w-full' : 'w-0'
+                            }`}
                         />
                       </div>
                     ))}
@@ -263,10 +262,10 @@ export default function InteractiveQuoteTool() {
                         {/* Sliding Tape Measure Rule */}
                         <div className="space-y-4">
                           <div className="relative pt-4">
-                            <input 
-                              type="range" 
-                              min="500" 
-                              max="8000" 
+                            <input
+                              type="range"
+                              min="500"
+                              max="8000"
                               step="100"
                               value={formData.sqft || '2500'}
                               onChange={(e) => setFormData({ ...formData, sqft: e.target.value })}
@@ -293,11 +292,10 @@ export default function InteractiveQuoteTool() {
                                 key={i}
                                 type="button"
                                 onClick={() => setFormData({ ...formData, sqft: preset.size })}
-                                className={`py-2 px-1 rounded-xl border text-center transition-all duration-300 ${
-                                  formData.sqft === preset.size
+                                className={`py-2 px-1 rounded-xl border text-center transition-all duration-300 ${formData.sqft === preset.size
                                     ? 'border-primary bg-primary/5 text-primary font-bold'
                                     : 'border-slate-100 text-slate-500 hover:border-slate-200 bg-slate-50/40 text-xs'
-                                }`}
+                                  }`}
                               >
                                 <div className="text-[8px] font-bold uppercase tracking-wider text-slate-400">{preset.label}</div>
                                 <div className="text-xs font-black mt-0.5">{preset.size}</div>
@@ -341,34 +339,29 @@ export default function InteractiveQuoteTool() {
                                 <button
                                   key={s.id}
                                   onClick={() => setFormData({ ...formData, service: s.id })}
-                                  className={`p-2.5 rounded-xl border text-left transition-all duration-300 flex items-center gap-2.5 group/opt relative overflow-hidden ${
-                                    formData.service === s.id
+                                  className={`p-2.5 rounded-xl border text-left transition-all duration-300 flex items-center gap-2.5 group/opt relative overflow-hidden ${formData.service === s.id
                                       ? 'border-primary bg-gradient-to-br from-primary/5 to-transparent shadow-[0_8px_20px_-6px_rgba(30,93,154,0.12)] -translate-y-0.5'
                                       : 'border-slate-100 text-slate-700 hover:border-slate-200 hover:bg-slate-50/80 bg-slate-50/50 hover:-translate-y-0.5 hover:shadow-sm'
-                                  }`}
+                                    }`}
                                 >
                                   {/* Left accent bar on hover/active */}
-                                  <div className={`absolute left-0 top-0 bottom-0 w-1 transition-all duration-300 ${
-                                    formData.service === s.id ? 'bg-primary' : 'bg-transparent group-hover/opt:bg-slate-200'
-                                  }`} />
+                                  <div className={`absolute left-0 top-0 bottom-0 w-1 transition-all duration-300 ${formData.service === s.id ? 'bg-primary' : 'bg-transparent group-hover/opt:bg-slate-200'
+                                    }`} />
 
-                                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 ${
-                                    formData.service === s.id 
-                                      ? 'bg-gradient-to-br from-primary to-blue-600 text-white shadow-md shadow-primary/20 scale-105' 
+                                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 ${formData.service === s.id
+                                      ? 'bg-gradient-to-br from-primary to-blue-600 text-white shadow-md shadow-primary/20 scale-105'
                                       : 'bg-white text-slate-400 border border-slate-100 shadow-sm group-hover/opt:text-primary group-hover/opt:border-primary/25'
-                                  }`}>
+                                    }`}>
                                     <Icon name={s.icon} className="w-4 h-4" />
                                   </div>
                                   <div className="flex-1 min-w-0 flex items-center justify-between pl-1">
-                                    <h4 className={`font-extrabold text-xs sm:text-sm tracking-tight truncate pr-2 transition-colors duration-300 ${
-                                      formData.service === s.id ? 'text-slate-900' : 'text-slate-700 group-hover/opt:text-slate-900'
-                                    }`}>{s.label}</h4>
-                                    
-                                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 transition-all duration-300 ${
-                                      formData.service === s.id 
-                                        ? 'bg-primary border-primary shadow-sm scale-110' 
+                                    <h4 className={`font-extrabold text-xs sm:text-sm tracking-tight truncate pr-2 transition-colors duration-300 ${formData.service === s.id ? 'text-slate-900' : 'text-slate-700 group-hover/opt:text-slate-900'
+                                      }`}>{s.label}</h4>
+
+                                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 transition-all duration-300 ${formData.service === s.id
+                                        ? 'bg-primary border-primary shadow-sm scale-110'
                                         : 'border-slate-200 bg-white group-hover/opt:border-slate-300'
-                                    }`}>
+                                      }`}>
                                       {formData.service === s.id ? (
                                         <Icon name="Check" className="w-2.5 h-2.5 text-white stroke-[3px]" />
                                       ) : (
@@ -392,34 +385,29 @@ export default function InteractiveQuoteTool() {
                                 <button
                                   key={r.id}
                                   onClick={() => setFormData({ ...formData, roofType: r.id })}
-                                  className={`p-2.5 rounded-xl border text-left transition-all duration-300 flex items-center gap-2.5 group/opt relative overflow-hidden ${
-                                    formData.roofType === r.id
+                                  className={`p-2.5 rounded-xl border text-left transition-all duration-300 flex items-center gap-2.5 group/opt relative overflow-hidden ${formData.roofType === r.id
                                       ? 'border-primary bg-gradient-to-br from-primary/5 to-transparent shadow-[0_8px_20px_-6px_rgba(30,93,154,0.12)] -translate-y-0.5'
                                       : 'border-slate-100 text-slate-700 hover:border-slate-200 hover:bg-slate-50/80 bg-slate-50/50 hover:-translate-y-0.5 hover:shadow-sm'
-                                  }`}
+                                    }`}
                                 >
                                   {/* Left accent bar on hover/active */}
-                                  <div className={`absolute left-0 top-0 bottom-0 w-1 transition-all duration-300 ${
-                                    formData.roofType === r.id ? 'bg-primary' : 'bg-transparent group-hover/opt:bg-slate-200'
-                                  }`} />
+                                  <div className={`absolute left-0 top-0 bottom-0 w-1 transition-all duration-300 ${formData.roofType === r.id ? 'bg-primary' : 'bg-transparent group-hover/opt:bg-slate-200'
+                                    }`} />
 
-                                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 ${
-                                    formData.roofType === r.id 
-                                      ? 'bg-gradient-to-br from-primary to-blue-600 text-white shadow-md shadow-primary/20 scale-105' 
+                                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 ${formData.roofType === r.id
+                                      ? 'bg-gradient-to-br from-primary to-blue-600 text-white shadow-md shadow-primary/20 scale-105'
                                       : 'bg-white text-slate-400 border border-slate-100 shadow-sm group-hover/opt:text-primary group-hover/opt:border-primary/25'
-                                  }`}>
+                                    }`}>
                                     <Icon name={r.icon} className="w-4 h-4" />
                                   </div>
                                   <div className="flex-1 min-w-0 flex items-center justify-between pl-1">
-                                    <h4 className={`font-extrabold text-xs sm:text-sm tracking-tight truncate pr-2 transition-colors duration-300 ${
-                                      formData.roofType === r.id ? 'text-slate-900' : 'text-slate-700 group-hover/opt:text-slate-900'
-                                    }`}>{r.label}</h4>
-                                    
-                                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 transition-all duration-300 ${
-                                      formData.roofType === r.id 
-                                        ? 'bg-primary border-primary shadow-sm scale-110' 
+                                    <h4 className={`font-extrabold text-xs sm:text-sm tracking-tight truncate pr-2 transition-colors duration-300 ${formData.roofType === r.id ? 'text-slate-900' : 'text-slate-700 group-hover/opt:text-slate-900'
+                                      }`}>{r.label}</h4>
+
+                                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 transition-all duration-300 ${formData.roofType === r.id
+                                        ? 'bg-primary border-primary shadow-sm scale-110'
                                         : 'border-slate-200 bg-white group-hover/opt:border-slate-300'
-                                    }`}>
+                                      }`}>
                                       {formData.roofType === r.id ? (
                                         <Icon name="Check" className="w-2.5 h-2.5 text-white stroke-[3px]" />
                                       ) : (
@@ -522,14 +510,14 @@ export default function InteractiveQuoteTool() {
                         <div className="relative bg-gradient-to-br from-primary/5 via-white to-primary/[0.08] border border-primary/20 rounded-2xl p-5 my-4 max-w-md mx-auto overflow-hidden shadow-sm">
                           {/* decorative overlay grid */}
                           <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(30,93,154,0.03)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
-                          
+
                           <div className="relative z-10">
                             <p className="text-[9px] font-extrabold text-primary/60 uppercase tracking-[0.2em] mb-1">Projected Budget Bracket</p>
-                            
+
                             <div className="text-3xl sm:text-4xl font-black text-primary tracking-tight">
                               ${(estimate.min / 1000).toFixed(1)}k <span className="text-lg font-bold text-slate-400 tracking-normal mx-0.5">/</span> ${(estimate.max / 1000).toFixed(1)}k
                             </div>
-                            
+
                             {/* Detailed parameter checklist */}
                             <div className="mt-4 pt-4 border-t border-primary/10 text-xs text-slate-600 text-left space-y-2">
                               <div className="flex items-center justify-between">
@@ -559,7 +547,7 @@ export default function InteractiveQuoteTool() {
                             <span className="relative z-10">Schedule Inspection</span>
                             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
                           </a>
-                          
+
                           <button
                             onClick={() => { setStep(1); setFormData({ ...formData, sqft: '', roofType: '', service: '' }); setEstimate(null); }}
                             className="flex-1 text-primary font-bold text-xs uppercase tracking-wider px-6 py-4 rounded-xl border border-primary/30 hover:bg-primary/5 transition-all duration-300"

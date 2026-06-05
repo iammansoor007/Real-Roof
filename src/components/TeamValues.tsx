@@ -23,7 +23,7 @@ export default function TeamValues() {
   if (!valuesData.items || valuesData.items.length === 0) return null;
 
   return (
-    <section className="relative py-24 bg-gradient-to-b from-background via-muted/30 to-background overflow-hidden">
+    <section className="relative py-8 lg:py-12 bg-gradient-to-b from-background via-muted/30 to-background overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-4">
         <div className="text-center mb-20">
           <h2 className="text-4xl lg:text-7xl font-bold tracking-tight mb-6">

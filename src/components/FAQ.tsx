@@ -606,12 +606,12 @@ const FAQ = ({ currentPage = "home", hideHeader = false }: { currentPage?: strin
       {isClient && (
         <section
       ref={sectionRef}
-      className="relative bg-background py-20 md:py-24 lg:py-28 overflow-hidden"
+      className="relative bg-background py-16 md:py-24 lg:py-28 overflow-hidden"
     >
       <SubtleBackground />
       <FloatingParticles />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
         {!hideHeader && (
           <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16 faq-reveal">
             <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3 block">

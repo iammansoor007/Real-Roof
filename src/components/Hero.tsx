@@ -8,6 +8,7 @@ import RichTextRenderer from "./ui/RichTextRenderer";
 import bbblogo from '../assets/bbblogo.png'
 import goodcontracterlist from '../assets/goodcontracterlist.png'
 import bgfair from "../assets/bgfair.jpg";
+import videowrapper from "../assets/videowrapper.png";
 
 const Hero = () => {
   const { hero } = useContent();
@@ -56,7 +57,7 @@ const Hero = () => {
             muted
             playsInline
             preload="metadata"
-            poster="/realrooflogo.webp"
+            poster={videowrapper.src}
             className="w-full h-full object-cover object-center"
           >
             <source src="/RealRoof.mp4" type="video/mp4" />
@@ -64,8 +65,14 @@ const Hero = () => {
             Your browser does not support the video tag.
           </video>
         ) : (
-          <div className="w-full h-full bg-slate-950 flex items-center justify-center">
-            <img src="/realrooflogo.webp" alt="RealRoof Logo" className="w-48 h-auto object-contain opacity-25 animate-pulse" />
+          <div className="w-full h-full relative">
+            <Image
+              src={videowrapper}
+              alt="RealRoof Hero Background"
+              fill
+              priority
+              className="object-cover object-center"
+            />
           </div>
         )}
       </div>
@@ -160,7 +167,7 @@ const Hero = () => {
               </div>
 
               <a
-                href="https://www.greensky.com/prequal/gs/prequalify-for-loan?merchant=81115616&channel=External-Button-Prequal"
+                href=""
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group"

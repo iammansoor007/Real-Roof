@@ -533,7 +533,7 @@ const AwardCTABanner = () => {
                         quality={85}
                         priority
                     />
-                    <div className="absolute inset-0 bg-slate-950/45 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/85 via-slate-900/40 to-slate-950/90 z-10" />
                 </div>
 
                 <div className="absolute inset-0 overflow-hidden z-20 pointer-events-none">
@@ -574,8 +574,8 @@ const AwardCTABanner = () => {
                                 transition={{ delay: 0.4 }}
                                 className="flex items-center gap-2 mb-4"
                             >
-                                <span className="w-8 h-[2px] bg-primary" />
-                                <span className="text-lg font-bold tracking-[0.3em] uppercase text-primary">
+                                <span className="w-8 h-[2px] bg-sky-400" />
+                                <span className="text-lg font-bold tracking-[0.3em] uppercase text-sky-400">
                                     {cta.badge}
                                 </span>
                             </motion.div>
@@ -685,7 +685,7 @@ const WhyChooseUs = () => {
     return (
         <section
             ref={sectionRef}
-            className="relative bg-background py-20 md:py-24 lg:py-32 overflow-hidden"
+            className="relative bg-background py-16 md:py-24 lg:py-28 overflow-hidden"
             aria-label="Why Choose RealRoof"
         >
             <CinematicBackground isClient={isClient} />
