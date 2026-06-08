@@ -76,7 +76,7 @@ const Testimonials = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="flex flex-wrap items-center justify-center lg:justify-between gap-8 mb-20 p-8 bg-slate-50 rounded-3xl border border-slate-100"
+          className="grid grid-cols-2 md:flex md:flex-wrap lg:flex-nowrap items-center justify-items-center md:justify-center lg:justify-between gap-6 sm:gap-8 mb-20 p-6 sm:p-8 bg-slate-50 rounded-3xl border border-slate-100 w-full"
         >
           {[
             { value: "500+", label: "Happy Clients", icon: "Users" },

@@ -277,8 +277,8 @@ export default function InteractiveQuoteTool() {
                   </div>
                 </div>
 
-                {/* Step Panel Wrapper with locked fixed height to prevent layout jumps between wizard steps */}
-                <div className="p-4 sm:p-6 md:p-8 relative h-[920px] sm:h-[640px] lg:h-[600px] flex flex-col justify-between overflow-y-auto sm:overflow-y-visible">
+                {/* Step Panel Wrapper with dynamic height to prevent overflow on mobile while maintaining limits */}
+                <div className="p-4 sm:p-6 md:p-8 relative h-auto min-h-[500px] sm:h-[640px] lg:h-[600px] flex flex-col justify-between overflow-y-auto sm:overflow-y-visible pb-6">
 
                   {/* ── STEP 1 ── */}
                   {step === 1 && (
@@ -374,7 +374,7 @@ export default function InteractiveQuoteTool() {
                               <span className="w-1 h-1 bg-primary rounded-full" />
                               Service Class Selection <span className="text-primary">*</span>
                             </label>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            <div className="grid grid-cols-1 min-[450px]:grid-cols-2 gap-2.5">
                               {services.map(s => (
                                 <button
                                   key={s.id}
@@ -420,7 +420,7 @@ export default function InteractiveQuoteTool() {
                               <span className="w-1 h-1 bg-primary rounded-full" />
                               Material System Specification <span className="text-primary">*</span>
                             </label>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            <div className="grid grid-cols-1 min-[450px]:grid-cols-2 gap-2.5">
                               {roofTypes.map(r => (
                                 <button
                                   key={r.id}

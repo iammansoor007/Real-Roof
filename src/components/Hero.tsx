@@ -44,7 +44,7 @@ const Hero = () => {
   } = hero || {};
 
   return (
-    <section ref={sectionRef} className="relative min-h-[85vh] lg:min-h-[90vh] flex flex-col md:pt-8 lg:pt-12 ">
+    <section ref={sectionRef} className="relative min-h-[85vh] lg:min-h-[90vh] flex flex-col pt-24 sm:pt-28 md:pt-8 lg:pt-12 ">
 
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0">
@@ -81,7 +81,7 @@ const Hero = () => {
         <div className="max-w-3xl">
 
           <motion.div
-            className="inline-flex items-center gap-2 bg-primary px-4 py-1 mb-6"
+            className="inline-flex flex-wrap max-w-full items-center gap-2 bg-primary px-4 py-1.5 mb-6 text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -146,37 +146,40 @@ const Hero = () => {
       {/* Trust & Financing Bar */}
       <div className="relative z-20 bg-slate-900 border-t border-slate-800">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center justify-between py-6 gap-6">
+          <div className="flex flex-col py-6 gap-6">
 
-            {/* Stats */}
-            <div className="flex items-center gap-8 md:gap-12 flex-wrap justify-center lg:justify-start">
+            {/* Stats (Line 1) */}
+            <div className="grid grid-cols-3 gap-4 w-full max-w-3xl mx-auto lg:mx-0 justify-items-center lg:justify-items-start">
               {stats.map((stat: any, idx: number) => (
                 <div key={idx} className="text-center lg:text-left">
-                  <span className="block text-3xl font-extrabold text-white">{stat.value}</span>
-                  <span className="block text-sm font-bold text-primary uppercase tracking-wider">{stat.label}</span>
+                  <span className="block text-2xl sm:text-3xl font-extrabold text-white">{stat.value}</span>
+                  <span className="block text-[10px] sm:text-sm font-bold text-primary uppercase tracking-wider">{stat.label}</span>
                 </div>
               ))}
             </div>
 
-            {/* Trust Badges & Financing */}
-            <div className="flex flex-col sm:flex-row items-center gap-6 lg:gap-10">
-              <div className="flex items-center gap-6 opacity-80 mix-blend-screen">
-                <Image src={bbblogo} alt="BBB A+" className="h-10 w-auto object-contain brightness-0 invert" />
-                <Image src={goodcontracterlist} alt="Good Contractors" className="h-10 w-auto object-contain brightness-0 invert" />
+            {/* Separator line */}
+            <div className="h-px bg-slate-800/80 w-full" />
+
+            {/* Trust Badges & Financing (Line 2) */}
+            <div className="flex flex-row items-center justify-between gap-3 sm:gap-4 w-full flex-nowrap">
+              <div className="flex items-center gap-3 sm:gap-6 opacity-80 mix-blend-screen shrink-0">
+                <Image src={bbblogo} alt="BBB A+" className="h-7 sm:h-10 w-auto object-contain brightness-0 invert" />
+                <Image src={goodcontracterlist} alt="Good Contractors" className="h-7 sm:h-10 w-auto object-contain brightness-0 invert" />
               </div>
 
               <a
                 href=""
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group"
+                className="group shrink-0 text-center"
               >
-                <div className="flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-colors px-6 py-3 border border-white/20">
+                <div className="flex items-center justify-center gap-2 sm:gap-3 bg-white/10 hover:bg-white/20 transition-colors px-3 py-2 sm:px-6 sm:py-3 border border-white/20">
                   <div className="text-white text-left">
-                    <span className="block text-sm font-bold">Flexible Financing</span>
-                    <span className="block text-xs text-slate-300">Prequalify in minutes</span>
+                    <span className="block text-xs sm:text-sm font-bold">Flexible Financing</span>
+                    <span className="block text-[10px] sm:text-xs text-slate-300">Prequalify in minutes</span>
                   </div>
-                  <Icon name="ArrowRight" className="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform" />
+                  <Icon name="ArrowRight" className="w-4 h-4 sm:w-5 sm:h-5 text-primary group-hover:translate-x-1 transition-transform" />
                 </div>
               </a>
             </div>
